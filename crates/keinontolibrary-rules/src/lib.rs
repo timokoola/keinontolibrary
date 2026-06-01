@@ -102,10 +102,11 @@ mod tests {
     #[test]
     fn unsupported_class_yields_none() {
         let r = RuleEngine::new();
+        // tn46 (tuhat) has neither a rule arm nor a registry entry.
         assert!(r
             .generate(
-                "kevät",
-                &ParadigmRef::new(None, 44),
+                "tuhat",
+                &ParadigmRef::new(None, 46),
                 Number::Singular,
                 Case::Genitive
             )

@@ -60,7 +60,7 @@ async fn about(State(st): State<Arc<AppState>>) -> impl IntoResponse {
         "attribution": {
             "kotus": st.meta.kotus_source,
             "reference_corpus": st.meta.reference_source,
-            "tools": "Reference forms generated with Voikko (https://voikko.puimula.org/).",
+            "tools": "Corpus collected by us; forms labeled with Voikko (https://voikko.puimula.org/).",
             "license": "Source code MIT. Data: Kotus Nykysuomen sanalista 2024 (CC BY 4.0); \
                         see LICENSING.md for the reference-corpus redistribution terms.",
         },

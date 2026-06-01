@@ -116,8 +116,8 @@ for i, (big, small) in enumerate(stats):
 
 # ---- footer ----
 fig.text(0.04, 0.025,
-         "Rust · github.com/timokoola/keinontolibrary   |   "
-         "Data: Kotus Nykysuomen sanalista 2024 (CC BY 4.0); reference corpus generated with Voikko",
+         "Built in Rust   |   Data: Kotus Nykysuomen sanalista 2024 (CC BY 4.0); "
+         "~400k-form corpus collected over 3 years, morphologically labeled with Voikko",
          fontsize=9.5, color=GREY)
 
 out = HERE / "keinontolibrary-accuracy.png"

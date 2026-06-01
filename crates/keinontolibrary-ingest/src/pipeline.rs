@@ -319,8 +319,8 @@ pub fn run(config: &Config) -> Result<Report> {
     let meta = Meta {
         version: config.version.clone(),
         kotus_source: "Kotus Nykysuomen sanalista 2024 (CC BY 4.0)".into(),
-        reference_source: "keinontolibrary reference corpus (generated with the Voikko tool)"
-            .into(),
+        reference_source:
+            "keinontolibrary reference corpus (collected over 3 years, labeled with Voikko)".into(),
         n_lemmas: u32::try_from(records.len()).unwrap_or(u32::MAX),
         n_forms: report.total_forms,
     };

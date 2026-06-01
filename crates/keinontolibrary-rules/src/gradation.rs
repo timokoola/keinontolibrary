@@ -53,8 +53,8 @@ fn pair(av: char) -> Option<(&'static str, &'static str)> {
         'B' => ("pp", "p"),
         'C' => ("tt", "t"),
         'D' => ("k", ""),
-        'E' => ("t", "d"),
-        'F' => ("p", "v"),
+        'E' => ("p", "v"),
+        'F' => ("t", "d"),
         'G' => ("nk", "ng"),
         'H' => ("mp", "mm"),
         'I' => ("lt", "ll"),
@@ -131,8 +131,8 @@ mod tests {
         assert_eq!(weaken("kaappi", Some('B')), "kaapi");
         assert_eq!(weaken("kortti", Some('C')), "korti");
         assert_eq!(weaken("reikä", Some('D')), "reiä");
-        assert_eq!(weaken("pöytä", Some('E')), "pöydä");
-        assert_eq!(weaken("leipä", Some('F')), "leivä");
+        assert_eq!(weaken("leipä", Some('E')), "leivä"); // E = p:v
+        assert_eq!(weaken("pöytä", Some('F')), "pöydä"); // F = t:d
         assert_eq!(weaken("kenkä", Some('G')), "kengä");
         assert_eq!(weaken("kampa", Some('H')), "kamma");
         assert_eq!(weaken("valta", Some('I')), "valla");

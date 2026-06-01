@@ -1,6 +1,6 @@
 [package]
 name = "keinontolibrary-ffi"
-description = "FFI bindings scaffold (UniFFI / wasm / PyO3) for keinontolibrary."
+description = "FFI bindings scaffold (Rust API + C ABI; UniFFI/wasm/PyO3 to follow) for keinontolibrary."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -9,9 +9,14 @@ repository.workspace = true
 authors.workspace = true
 
 [lib]
-crate-type = ["lib"]
+name = "keinontolibrary_ffi"
+# `lib` for Rust consumers; `cdylib`/`staticlib` for C/Swift/Python/wasm linkers.
+crate-type = ["lib", "cdylib", "staticlib"]
 
 [dependencies]
+keinontolibrary-core = { workspace = true, features = ["serde"] }
+keinontolibrary-data = { workspace = true }
+serde_json = { workspace = true }
 
 [lints]
 workspace = true

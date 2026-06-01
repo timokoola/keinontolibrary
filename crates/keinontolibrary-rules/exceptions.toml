@@ -867,3 +867,198 @@ number = "plural"
 case = "instructive"
 forms = ["veitsin"]
 reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+# --- lämmin (Kotus tn 35) ---
+# tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän).
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "singular"
+case = "nominative"
+forms = ["lämmin"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "singular"
+case = "genitive"
+forms = ["lämpimän"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "singular"
+case = "partitive"
+forms = ["lämmintä", "lämpimää"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "singular"
+case = "inessive"
+forms = ["lämpimässä"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "singular"
+case = "elative"
+forms = ["lämpimästä"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "singular"
+case = "illative"
+forms = ["lämpimään"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "singular"
+case = "adessive"
+forms = ["lämpimällä"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "singular"
+case = "ablative"
+forms = ["lämpimältä"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "singular"
+case = "allative"
+forms = ["lämpimälle"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "singular"
+case = "essive"
+forms = ["lämpimänä"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "singular"
+case = "translative"
+forms = ["lämpimäksi"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "singular"
+case = "abessive"
+forms = ["lämpimättä"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "plural"
+case = "nominative"
+forms = ["lämpimät"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "plural"
+case = "genitive"
+forms = ["lämpimien"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "plural"
+case = "partitive"
+forms = ["lämpimiä"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "plural"
+case = "inessive"
+forms = ["lämpimissä"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "plural"
+case = "elative"
+forms = ["lämpimistä"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "plural"
+case = "illative"
+forms = ["lämpimiin"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "plural"
+case = "adessive"
+forms = ["lämpimillä"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "plural"
+case = "ablative"
+forms = ["lämpimiltä"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "plural"
+case = "allative"
+forms = ["lämpimille"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "plural"
+case = "essive"
+forms = ["lämpiminä"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "plural"
+case = "translative"
+forms = ["lämpimiksi"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"
+
+[[exception]]
+lemma = "lämmin"
+tn = 35
+number = "plural"
+case = "instructive"
+forms = ["lämpimin"]
+reason = "tn35 lämmin — -in adjective/noun with -pime- oblique stem (lämpimän)"

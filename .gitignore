@@ -1,0 +1,19 @@
+# Rust build output
+/target
+**/*.rs.bk
+*.profraw
+
+# Large source data — never committed (Kotus list + Voikko JSONL shards, ~194 MB)
+/data/sources/
+
+# Generated ingest report
+/ingest-report.txt
+ingest-report.txt
+
+# Large generated artifacts (the packed lookup blob may be checked in only if small;
+# big intermediate blobs stay local)
+/data/artifact/*.tmp
+
+# OS / editor cruft
+.DS_Store
+*.swp

@@ -1,0 +1,18 @@
+[package]
+name = "keinontolibrary-server"
+description = "axum HTTP service exposing declension lookups (the container deployment)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[[bin]]
+name = "keinontolibrary-server"
+path = "src/main.rs"
+
+[dependencies]
+
+[lints]
+workspace = true

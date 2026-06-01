@@ -1,0 +1,17 @@
+[package]
+name = "keinontolibrary-ffi"
+description = "FFI bindings scaffold (UniFFI / wasm / PyO3) for keinontolibrary."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lib]
+crate-type = ["lib"]
+
+[dependencies]
+
+[lints]
+workspace = true

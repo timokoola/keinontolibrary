@@ -398,6 +398,7 @@ version = "0.1.0"
 dependencies = [
  "bincode",
  "keinontolibrary-core",
+ "keinontolibrary-rules",
  "serde",
  "serde_json",
 ]
@@ -426,6 +427,10 @@ dependencies = [
 [[package]]
 name = "keinontolibrary-rules"
 version = "0.1.0"
+dependencies = [
+ "keinontolibrary-core",
+ "keinontolibrary-data",
+]
 
 [[package]]
 name = "keinontolibrary-server"

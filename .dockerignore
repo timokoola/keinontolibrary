@@ -1,0 +1,7 @@
+# Keep the build context small. The artifact under data/artifact IS needed (copied in).
+target
+.git
+data/sources
+**/*.jsonl
+ingest-report.txt
+data/overlay.jsonl

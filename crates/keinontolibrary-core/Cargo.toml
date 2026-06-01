@@ -9,6 +9,14 @@ repository.workspace = true
 authors.workspace = true
 
 [dependencies]
+unicode-normalization = { workspace = true }
+thiserror = { workspace = true }
+serde = { workspace = true, optional = true }
+
+[features]
+default = []
+# Derive serde (De)Serialize on the public types (used by the server/CLI for JSON).
+serde = ["dep:serde"]
 
 [lints]
 workspace = true

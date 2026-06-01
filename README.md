@@ -6,7 +6,7 @@ A fast, embeddable Rust library that declines **simple Finnish nouns**.
 decline("hevonen", Number::Singular, Case::Inessive) -> ["hevosessa"]
 ```
 
-It is **data-backed** (precomputed forms from our reference corpus, generated with Voikko) with a
+It is **data-backed** (precomputed forms from our reference corpus — collected over 3 years and labeled with Voikko) with a
 **rule-based fallback** for the Kotus declension classes (taivutustyypit 1–49 with
 consonant gradation), and is validated against a ~400k-form corpus so test coverage is
 near-exhaustive by construction.
@@ -56,7 +56,7 @@ cargo run -p keinontolibrary-ingest    # Kotus + reference corpus -> data/artifa
 ```
 
 - **Kotus list** (CC BY 4.0): <https://kaino.kotus.fi/lataa/nykysuomensanalista2024.txt>
-- **Reference corpus** (JSONL, generated with Voikko): bucket `gs://REDACTED-CORPUS-BUCKET/` (1201 shards).
+- **Reference corpus** (JSONL; collected by us, labeled with Voikko): bucket `gs://REDACTED-CORPUS-BUCKET/` (1201 shards).
 
 ## Running
 
@@ -108,7 +108,7 @@ docker run -p 8080:8080 keinontolibrary
 ## Data provenance & attribution
 
 This project bundles data from the Kotus *Nykysuomen sanalista 2024* (CC BY 4.0) and our
-reference corpus generated with Voikko. See [`LICENSING.md`](LICENSING.md) for full attribution and the open question
+reference corpus (collected over 3 years, labeled with Voikko). See [`LICENSING.md`](LICENSING.md) for full attribution and the open question
 about redistributing our (Voikko-generated) reference corpus.
 
 ## License

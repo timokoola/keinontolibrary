@@ -27,8 +27,7 @@ The result — **keinontolibrary**, validated by declining all **25 694** Kotus 
 
 The corpus was the hard, human part — 3 years of judgment. The implementation became the easy part. That inversion is new.
 
-Data: Kotus *Nykysuomen sanalista 2024* (CC BY 4.0); reference forms generated with Voikko (voikko.puimula.org).
-Code: github.com/timokoola/keinontolibrary
+Data: Kotus *Nykysuomen sanalista 2024* (CC BY 4.0). The ~400k-form corpus was collected over 3 years and morphologically labeled with Voikko (voikko.puimula.org).
 
 What's the project *you've* been waiting to build because the implementation was the bottleneck?
 

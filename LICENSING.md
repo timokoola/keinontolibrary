@@ -22,15 +22,15 @@ homonym number `hn`) come from the Kotus *Nykysuomen sanalista 2024*.
 > (<https://creativecommons.org/licenses/by/4.0/>). Modified: filtered to simple nouns and
 > repackaged into a lookup artifact.
 
-## Our reference corpus (generated with Voikko)
+## Our reference corpus (collected by us, labeled with Voikko)
 
 The precomputed surface forms (the `BOOKWORD` values keyed by lemma/number/case) are **our
-reference corpus**, which we generated using [Voikko](https://voikko.puimula.org/) as a
-morphology tool and store as JSONL. The corpus is ours; Voikko is the tool that produced
-the forms.
+reference corpus**, which we **collected over three years** and morphologically **labeled**
+using [Voikko](https://voikko.puimula.org/), stored as JSONL. The corpus is ours; Voikko is
+the labeling tool.
 
 > ⚠️ **OPEN ACTION ITEM (must be resolved before publishing).** Because the forms were
-> generated *with* Voikko, confirm that Voikko's dictionary license (Voikko is GPL/LGPL; the
+> labeled *with* Voikko, confirm that Voikko's dictionary license (Voikko is GPL/LGPL; the
 > morphology dictionary has its own terms) permits redistributing the resulting form set
 > inside the package. If redistribution is not permitted, options are: (a) ship only the rule
 > engine + Kotus metadata and generate forms on the consumer's machine, or (b) obtain/

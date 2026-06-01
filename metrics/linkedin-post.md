@@ -1,8 +1,22 @@
 # LinkedIn post — draft
 
-> Attach `keinontolibrary-accuracy.png`. Numbers are from `metrics/metrics.json`.
-> Written in your voice — edit freely. A longer "capability note" follows for the comments
-> or a follow-up post.
+> Two images: (1) `keinontolibrary-accuracy.png`, (2) your screenshot of one of the project
+> issues. Alt-text for both is in the "Image alt-text" section below.
+> Written in your voice — edit freely. A longer "capability note" follows for the comments.
+
+## Image alt-text
+
+**Image 1 — accuracy chart (`keinontolibrary-accuracy.png`):**
+> Bar chart titled "Declining every Finnish noun — in Rust." For each of the 15 Finnish
+> grammatical cases, two bars show the engine's agreement with the reference corpus in
+> singular and plural — all between 92% and 100%. A side panel highlights 98.0% overall
+> agreement, 25 694 nouns, 166k forms checked, 99.5% coverage, 34 declension types, and a
+> sub-10 MB container.
+
+**Image 2 — GitHub issue screenshot:**
+> Screenshot of one of the project's issues, tagged "rule-engine", "needs-examples" and
+> "linguistics", documenting a Finnish declension edge case the engine doesn't yet cover and
+> asking a native speaker for reference paradigms with consonant-gradation examples.
 
 ---
 

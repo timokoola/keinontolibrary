@@ -11,8 +11,11 @@ It is **data-backed** (precomputed forms from a Voikko-generated corpus) with a
 consonant gradation), and is validated against a ~400k-form corpus so test coverage is
 near-exhaustive by construction.
 
-> **Status:** under construction. The working/repo name is `keinontolibrary`
-> (`keinonto` = the instructive case). The crate prefix is `keinontolibrary-*`.
+> **Status:** the data-backed lookup path is complete and runnable — library, CLI,
+> HTTP service, overlay, and a <10 MB container all work. The rule-engine fallback
+> (Kotus classes 1–49) and the Cloudflare Workers target are the remaining work (see
+> [Roadmap](#roadmap)). The working/repo name is `keinontolibrary` (`keinonto` = the
+> instructive case); the crate prefix is `keinontolibrary-*`.
 
 ## Workspace layout
 
@@ -54,6 +57,47 @@ cargo run -p keinontolibrary-ingest    # Kotus + Voikko -> data/artifact/
 
 - **Kotus list** (CC BY 4.0): <https://kaino.kotus.fi/lataa/nykysuomensanalista2024.txt>
 - **Voikko JSONL corpus**: bucket `gs://suomiqueriestimokoolacom/` (1201 shards).
+
+## Running
+
+The CLI and server read the artifact at `data/artifact/keinontolibrary.bin` (override with
+`KEINONTO_ARTIFACT`) and an overlay at `data/overlay.jsonl` (`KEINONTO_OVERLAY`).
+
+```sh
+# CLI
+cargo run -p keinontolibrary-cli -- decline hevonen --number singular --case inessive
+cargo run -p keinontolibrary-cli -- paradigm talo
+cargo run -p keinontolibrary-cli -- add --lemma uudissana --tn 9 \
+    --number singular --case inessive --forms uudissanassa
+cargo run -p keinontolibrary-cli -- validate
+
+# HTTP service
+cargo run -p keinontolibrary-server          # listens on 0.0.0.0:8080
+curl 'localhost:8080/decline?word=hevonen&number=singular&case=inessive'
+curl 'localhost:8080/paradigm?word=talo'
+```
+
+Endpoints: `GET /decline`, `GET /paradigm` (both accept `&hn=&tn=` to disambiguate
+homonyms), `GET /healthz`, `GET /about`, and bearer-auth `POST /admin/add` &
+`POST /admin/override` (enabled only when `KEINONTO_ADMIN_TOKEN` is set).
+
+### Container
+
+```sh
+cargo run -p keinontolibrary-ingest          # produce data/artifact/keinontolibrary.bin
+docker build -t keinontolibrary .            # ~10 MB static-musl scratch image
+docker run -p 8080:8080 keinontolibrary
+```
+
+## Roadmap
+
+- ✅ Data-backed lookup: core API, ingest, packed artifact, corpus round-trip gate, CLI,
+  HTTP service, overlay, container, FFI scaffold.
+- ⬜ **Rule engine** (`keinontolibrary-rules`): Kotus classes 1–49 + gradation A–M, the
+  fallback for the ~11% of in-scope lemmas the corpus subset doesn't cover.
+- ⬜ **Cloudflare Workers target** (`keinontolibrary-worker`): edge deployment backed by
+  KV/D1/R2. The storage abstraction it needs already exists as the `FormStore` trait in
+  `keinontolibrary-core`.
 
 ## Data provenance & attribution
 

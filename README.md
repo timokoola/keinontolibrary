@@ -96,10 +96,11 @@ docker run -p 8080:8080 keinontolibrary
 - 🟡 **Rule engine** (`keinontolibrary-rules`): 34 Kotus classes (1–15, 17–20, 23, 24,
   26–28, 32–34, 38–41, 43, 47, 48) + gradation A–M (incl. reverse gradation), wired in as
   the live fallback behind the lookup. **98.0% rule↔corpus parity** (`--test parity`),
-  covering ~99.4% of all corpus slots. An **exception registry** (`exceptions.toml`)
-  overrides the generator for documented irregulars (e.g. `aie → aikeen`) and is CI-capped.
-  Remaining: the last ~15 tiny/irregular classes (numerals, comparatives, `mies`, `kevät`,
-  dual-stem `askel`) and the long tail (loanword harmony, the 39/40 `-Us` boundary).
+  covering ~99.4% of all corpus slots. An **exception registry** (`exceptions.toml`,
+  CI-capped) overrides the generator for documented irregulars: the `aie` k-insertion
+  family plus the singleton/irregular classes `mies` (42), `kevät` (44), `lapsi` (29),
+  `veitsi` (30) — all at 100% parity. Remaining: a few numerals/comparatives, the dual-stem
+  `askel` (49), and the long tail (loanword harmony, the 39/40 `-Us` boundary).
 - ⬜ **Cloudflare Workers target** (`keinontolibrary-worker`): edge deployment backed by
   KV/D1/R2. The storage abstraction it needs already exists as the `FormStore` trait in
   `keinontolibrary-core`.

@@ -111,3 +111,759 @@ number = "plural"
 case = "illative"
 forms = ["aikeisiin", "aikeihin"]
 reason = "k-insertion oblique stem aikee-"
+
+# --- mies (Kotus tn 42) ---
+# tn42 mies — irregular -s/-h- stem, singleton class.
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "singular"
+case = "nominative"
+forms = ["mies"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "singular"
+case = "genitive"
+forms = ["miehen"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "singular"
+case = "partitive"
+forms = ["miestä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "singular"
+case = "inessive"
+forms = ["miehessä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "singular"
+case = "elative"
+forms = ["miehestä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "singular"
+case = "illative"
+forms = ["mieheen"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "singular"
+case = "adessive"
+forms = ["miehellä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "singular"
+case = "ablative"
+forms = ["mieheltä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "singular"
+case = "allative"
+forms = ["miehelle"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "singular"
+case = "essive"
+forms = ["miehenä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "singular"
+case = "translative"
+forms = ["mieheksi"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "singular"
+case = "abessive"
+forms = ["miehettä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "nominative"
+forms = ["miehet"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "genitive"
+forms = ["miesten", "miehien"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "partitive"
+forms = ["miehiä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "inessive"
+forms = ["miehissä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "elative"
+forms = ["miehistä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "illative"
+forms = ["miehiin"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "adessive"
+forms = ["miehillä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "ablative"
+forms = ["miehiltä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "allative"
+forms = ["miehille"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "essive"
+forms = ["miehinä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "translative"
+forms = ["miehiksi"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "abessive"
+forms = ["miehittä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "comitative"
+forms = ["miehineen", "miehinensä"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+[[exception]]
+lemma = "mies"
+tn = 42
+number = "plural"
+case = "instructive"
+forms = ["miehin"]
+reason = "tn42 mies — irregular -s/-h- stem, singleton class"
+
+# --- kevät (Kotus tn 44) ---
+# tn44 kevät — -t nominative with -ää- long-vowel oblique stem.
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "nominative"
+forms = ["kevät"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "genitive"
+forms = ["kevään"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "partitive"
+forms = ["kevättä"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "inessive"
+forms = ["keväässä"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "elative"
+forms = ["keväästä"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "illative"
+forms = ["kevääseen"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "adessive"
+forms = ["keväällä"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "ablative"
+forms = ["keväältä"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "allative"
+forms = ["keväälle"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "essive"
+forms = ["keväänä"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "translative"
+forms = ["kevääksi"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "nominative"
+forms = ["keväät"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "genitive"
+forms = ["keväiden", "keväitten"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "partitive"
+forms = ["keväitä"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "elative"
+forms = ["keväistä"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "illative"
+forms = ["keväisiin", "keväihin"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "adessive"
+forms = ["keväillä"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "essive"
+forms = ["keväinä"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "comitative"
+forms = ["keväineen"]
+reason = "tn44 kevät — -t nominative with -ää- long-vowel oblique stem"
+
+# --- lapsi (Kotus tn 29) ---
+# tn29 lapsi — -psi noun, assimilating weak stem (lasten).
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "nominative"
+forms = ["lapsi"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "genitive"
+forms = ["lapsen"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "inessive"
+forms = ["lapsessa"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "elative"
+forms = ["lapsesta"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "illative"
+forms = ["lapseen"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "adessive"
+forms = ["lapsella"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "ablative"
+forms = ["lapselta"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "allative"
+forms = ["lapselle"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "essive"
+forms = ["lapsena"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "translative"
+forms = ["lapseksi"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "abessive"
+forms = ["lapsetta"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "nominative"
+forms = ["lapset"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "genitive"
+forms = ["lasten", "lapsien"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "partitive"
+forms = ["lapsia"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "inessive"
+forms = ["lapsissa"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "elative"
+forms = ["lapsista"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "illative"
+forms = ["lapsiin"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "adessive"
+forms = ["lapsilla"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "ablative"
+forms = ["lapsilta"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "allative"
+forms = ["lapsille"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "essive"
+forms = ["lapsina"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "translative"
+forms = ["lapsiksi"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "comitative"
+forms = ["lapsineen", "lapsinensa"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "instructive"
+forms = ["lapsin"]
+reason = "tn29 lapsi — -psi noun, assimilating weak stem (lasten)"
+
+# --- veitsi (Kotus tn 30) ---
+# tn30 veitsi — -tsi noun, weak stem veis-/veitse-.
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "nominative"
+forms = ["veitsi"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "genitive"
+forms = ["veitsen"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "partitive"
+forms = ["veistä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "inessive"
+forms = ["veitsessä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "elative"
+forms = ["veitsestä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "illative"
+forms = ["veitseen"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "adessive"
+forms = ["veitsellä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "ablative"
+forms = ["veitseltä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "allative"
+forms = ["veitselle"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "essive"
+forms = ["veitsenä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "translative"
+forms = ["veitseksi"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "abessive"
+forms = ["veitsettä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "nominative"
+forms = ["veitset"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "genitive"
+forms = ["veitsien", "veisten"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "partitive"
+forms = ["veitsiä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "inessive"
+forms = ["veitsissä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "elative"
+forms = ["veitsistä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "illative"
+forms = ["veitsiin"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "adessive"
+forms = ["veitsillä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "allative"
+forms = ["veitsille"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "essive"
+forms = ["veitsinä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "translative"
+forms = ["veitsiksi"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "comitative"
+forms = ["veitsineen", "veitsinensä"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "instructive"
+forms = ["veitsin"]
+reason = "tn30 veitsi — -tsi noun, weak stem veis-/veitse-"

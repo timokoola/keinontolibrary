@@ -1,36 +1,49 @@
 # LinkedIn post — draft
 
-> Attach `keinontolibrary-accuracy.png`. Numbers below are from `metrics/metrics.json`
-> (regenerate with `keinontolibrary-metrics`). Edit freely — this is a starting point.
+> Attach `keinontolibrary-accuracy.png`. Numbers are from `metrics/metrics.json`.
+> Written in your voice — edit freely. A longer "capability note" follows for the comments
+> or a follow-up post.
 
 ---
 
-I taught a Rust program to decline every Finnish noun. Here's how it did. 🇫🇮🦀
+I spent **3 years** collecting a 400 000-form test corpus for Finnish.
+The program it was waiting for took an **afternoon**.
 
-Finnish nouns are a beautiful headache: 15 grammatical cases × singular/plural ≈ 30 forms per word, 49 declension classes, and consonant gradation that turns *katu* into *kadun*, *kauppa* into *kaupan*, *kenkä* into *kengän*. Getting it right by hand is hard; doing it for the **whole language** is a systems problem.
+Here's the story — and why I think it says something about the last 12 months.
 
-So I built **keinontolibrary** — a small, embeddable declension engine:
+Finnish nouns are gloriously hard: 15 grammatical cases × singular/plural ≈ 30 forms per word, 49 declension classes, and consonant gradation that bends *katu → kadun*, *kauppa → kaupan*, *kenkä → kengän*. I'd slowly built a ~400k-form corpus to *test* an inflection engine — but the engine itself never got built.
 
-• A **data-backed lookup** over a reference corpus of inflected forms (which I generated using the excellent Voikko tool), and
-• A **rule engine** that derives forms from the Kotus declension class + gradation pattern when the lookup doesn't have them.
+**A year ago I tried to generate it with an LLM. No model could.** They'd write a plausible single function, then fall apart on the real thing: 49 interacting classes, gradation, vowel harmony, a multi-crate Rust workspace, and a 400k-row oracle to validate against. Too big to hold in its head, too stateful to iterate on.
 
-Then I tested it the honest way: take the **25 694 simple nouns** from the Kotus word list, generate **all singular and plural cases**, and check every form against the reference corpus.
+**This week I tried again with Opus 4.8. It was a matter of hours.** Not autocomplete — an agent that planned the architecture, wrote the whole workspace (engine + rules + ingest + HTTP server + CLI), ran the test suite, read the failures, and *fixed itself*. At one point the corpus caught a bug where two gradation letters were swapped (E = p:v, F = t:d); the model diagnosed it from the failing forms and the fix lifted accuracy ~2.4 points.
 
-The results:
+The result — **keinontolibrary**, validated by declining all **25 694** Kotus nouns into every case and checking against my corpus:
 
-✅ **98.0%** of generated forms agree with the reference corpus
-✅ **166k** forms generated and checked, across **34 declension types**
-✅ **99.5%** slot coverage
-✅ Ships as a **< 10 MB** static container, with **microsecond** lookups
+✅ **98.0%** agreement with the reference corpus
+✅ **166k** forms generated & checked across **34 declension types**
+✅ **99.5%** slot coverage · **< 10 MB** static container · **µs** lookups
 
-The corpus made a brutally effective oracle. It caught a bug where I'd swapped two gradation letters (E = p:v, F = t:d) — one fix lifted accuracy by ~2.4 points across the board. The single hardest case to get right? The **plural partitive** (*kissoja*, *omenoita*, *ristejä*) — its `-ja / -ita / -a` variation is where most of the remaining misses live.
+**What actually changed in a year?** Three things, together: context windows big enough to hold a whole project *and* its test data; genuine long-horizon agency (plan → build → test → debug → repeat for hours without losing the thread); and reliability on multi-file, stateful code instead of just snippets. Independent coding benchmarks tell the same story — on real-world "fix this GitHub issue" tasks, frontier models went from solving a small fraction to solving the majority. But the qualitative jump is the headline: work that was "no model can do this" became "done before lunch."
 
-Stack: Rust workspace (core + rules + ingest + axum HTTP server + CLI + FFI), clippy-pedantic and `-D warnings` throughout, the corpus round-trip as a CI gate.
+The corpus was the hard, human part — 3 years of judgment. The implementation became the easy part. That inversion is new.
 
 Data: Kotus *Nykysuomen sanalista 2024* (CC BY 4.0); reference forms generated with Voikko (voikko.puimula.org).
-
 Code: github.com/timokoola/keinontolibrary
 
-What would you want a fast, embeddable Finnish morphology engine for?
+What's the project *you've* been waiting to build because the implementation was the bottleneck?
 
-#Rust #NLP #Finnish #ComputationalLinguistics #OpenSource #SoftwareEngineering
+#Rust #NLP #Finnish #LLM #AICoding #SoftwareEngineering #OpenSource
+
+---
+
+## Capability note (longer cut — for the comments or a follow-up)
+
+A year ago, frontier LLMs were excellent at *local* code: a function, a regex, a class, a tricky algorithm you could describe in a paragraph. Where they fell down was **scale and statefulness** — anything that needed to (a) hold a large codebase plus its data in working memory, (b) make many coordinated edits across files, and (c) keep going through a long plan-build-test-debug loop without drifting.
+
+Over the last ~12 months three capabilities crossed a threshold at roughly the same time:
+
+1. **Context** — windows grew to hundreds of thousands of tokens (Opus 4.8 ran this in a 1M-token context), enough to keep an entire multi-crate workspace *and* the linguistic reference data in view at once.
+2. **Long-horizon agency** — models became dependable across long tool-using sessions: read files, run the compiler and tests, interpret failures, edit, re-run — for hours, toward a measurable target (here: ≥ a parity threshold against the corpus).
+3. **Reliability on real software** — fewer hallucinated APIs, better at large refactors and at *finding their own bugs* (the swapped gradation letters were caught by the data, then fixed).
+
+The honest framing: this isn't "AI writes code now" — it's that the **bottleneck moved**. The scarce, valuable thing was the 3-year corpus and the judgment in it. The 49-class engine — previously a multi-week specialist project — became the cheap part. When implementation gets cheap, *what you choose to build and how you validate it* becomes the whole game.

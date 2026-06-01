@@ -4,9 +4,11 @@
 //! [`store`] loads it and serves forms via [`keinontolibrary_core::FormStore`].
 
 pub mod artifact;
+pub mod overlay;
 pub mod store;
 
 pub use artifact::{
     slot_index, slot_parts, Artifact, LemmaRecord, Meta, ParadigmRecord, SlotRecord,
 };
-pub use store::{load_engine, LookupData};
+pub use overlay::{Overlay, OverlayEntry};
+pub use store::{build_engine, load_engine, EngineBundle, LookupData};

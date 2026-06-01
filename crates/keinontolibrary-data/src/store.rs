@@ -123,6 +123,41 @@ pub fn load_engine(path: impl AsRef<Path>) -> io::Result<Engine> {
         .build())
 }
 
+/// An [`Engine`] plus a handle to its overlay and the artifact metadata, for surfaces
+/// (CLI/server) that both query the engine and mutate the overlay.
+#[derive(Debug)]
+pub struct EngineBundle {
+    /// The query engine (overlay → lookup → [rule fallback]).
+    pub engine: Engine,
+    /// A shared handle to the overlay, for admin add/override.
+    pub overlay: crate::overlay::Overlay,
+    /// Artifact provenance/metadata.
+    pub meta: Meta,
+}
+
+/// Build an engine backed by the artifact at `artifact_path` plus a persistent overlay at
+/// `overlay_path`.
+///
+/// # Errors
+/// Returns an error if the artifact or overlay cannot be loaded.
+pub fn build_engine(
+    artifact_path: impl AsRef<Path>,
+    overlay_path: impl AsRef<Path>,
+) -> io::Result<EngineBundle> {
+    let lookup = LookupData::load(artifact_path)?;
+    let meta = lookup.meta().clone();
+    let overlay = crate::overlay::Overlay::open(overlay_path)?;
+    let engine = Engine::builder()
+        .lookup(Box::new(lookup))
+        .overlay(Box::new(overlay.clone()))
+        .build();
+    Ok(EngineBundle {
+        engine,
+        overlay,
+        meta,
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

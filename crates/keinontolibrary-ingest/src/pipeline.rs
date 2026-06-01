@@ -1,7 +1,7 @@
 //! The end-to-end ingest: join the Kotus inventory with the Voikko corpus and emit the
 //! packed [`Artifact`] plus a human-readable report.
 
-use std::collections::HashMap;
+use std::collections::{BTreeMap, HashMap};
 use std::fmt::Write as _;
 use std::path::{Path, PathBuf};
 
@@ -51,6 +51,10 @@ pub struct Report {
     pub av_mismatches: usize,
     /// Distinct (lemma, paradigm, slot, variant) forms in the artifact.
     pub total_forms: u64,
+    /// Form count per case (indexed by [`Case::index`]).
+    pub forms_per_case: [u64; 15],
+    /// Number of lemmas that have at least one attested form, per declension class `tn`.
+    pub lemmas_per_class: BTreeMap<u8, usize>,
 }
 
 impl Report {
@@ -95,6 +99,21 @@ impl Report {
             self.av_mismatches
         );
         let _ = writeln!(s, "Total forms in artifact:          {}", self.total_forms);
+
+        let _ = writeln!(s, "\nForms per case:");
+        for case in Case::ALL {
+            let _ = writeln!(
+                s,
+                "  {:<12} {}",
+                case.name(),
+                self.forms_per_case[case.index()]
+            );
+        }
+
+        let _ = writeln!(s, "\nLemmas with forms per class (tn):");
+        for (tn, n) in &self.lemmas_per_class {
+            let _ = writeln!(s, "  tn {tn:<3} {n}");
+        }
         s
     }
 }
@@ -272,6 +291,11 @@ pub fn run(config: &Config) -> Result<Report> {
             let (slots, n) = build_slots(groups.get(&key));
             if !slots.is_empty() {
                 had_forms = true;
+                *report.lemmas_per_class.entry(p.tn).or_default() += 1;
+                for slot in &slots {
+                    let (_, case) = slot_parts(slot.slot);
+                    report.forms_per_case[case.index()] += slot.variants.len() as u64;
+                }
             }
             report.total_forms += n;
             paradigm_records.push(ParadigmRecord {

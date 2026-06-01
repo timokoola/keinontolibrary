@@ -141,7 +141,7 @@ fn run(cli: Cli) -> anyhow::Result<()> {
             println!("lemmas:        {}", m.n_lemmas);
             println!("forms:         {}", m.n_forms);
             println!("kotus source:  {}", m.kotus_source);
-            println!("voikko source: {}", m.voikko_source);
+            println!("reference:     {}", m.reference_source);
         }
     }
     Ok(())

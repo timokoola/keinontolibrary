@@ -441,6 +441,7 @@ dependencies = [
  "anyhow",
  "keinontolibrary-core",
  "keinontolibrary-data",
+ "keinontolibrary-rules",
  "rayon",
  "serde",
  "serde_json",

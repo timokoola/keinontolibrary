@@ -1,5 +1,5 @@
-//! The corpus round-trip gate: for every cleaned `(lemma, number, case, variant)` in the
-//! Voikko corpus, assert `decline_with` returns it among the variants.
+//! The corpus round-trip gate: for every cleaned `(lemma, number, case, variant)` in our
+//! reference corpus, assert `decline_with` returns it among the variants.
 //!
 //! This is the near-exhaustive coverage test. It requires the local source data and the
 //! built artifact, both of which are gitignored, so it **skips gracefully** when they are

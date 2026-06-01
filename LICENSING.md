@@ -22,21 +22,24 @@ homonym number `hn`) come from the Kotus *Nykysuomen sanalista 2024*.
 > (<https://creativecommons.org/licenses/by/4.0/>). Modified: filtered to simple nouns and
 > repackaged into a lookup artifact.
 
-## Voikko-derived form database
+## Our reference corpus (generated with Voikko)
 
-The precomputed surface forms (`BOOKWORD` values keyed by lemma/number/case) are generated
-with [Voikko](https://voikko.puimula.org/) and stored as JSONL.
+The precomputed surface forms (the `BOOKWORD` values keyed by lemma/number/case) are **our
+reference corpus**, which we generated using [Voikko](https://voikko.puimula.org/) as a
+morphology tool and store as JSONL. The corpus is ours; Voikko is the tool that produced
+the forms.
 
-> ⚠️ **OPEN ACTION ITEM (must be resolved before publishing).** Confirm that Voikko's
-> dictionary license (Voikko is GPL/LGPL; the morphology dictionary has its own terms)
-> permits redistributing this *derived form database* inside the package. If redistribution
-> is not permitted, options are: (a) ship only the rule engine + Kotus metadata and generate
-> forms on the consumer's machine, or (b) obtain/relicense the dictionary. Record the final
-> conclusion and the basis for it here.
+> ⚠️ **OPEN ACTION ITEM (must be resolved before publishing).** Because the forms were
+> generated *with* Voikko, confirm that Voikko's dictionary license (Voikko is GPL/LGPL; the
+> morphology dictionary has its own terms) permits redistributing the resulting form set
+> inside the package. If redistribution is not permitted, options are: (a) ship only the rule
+> engine + Kotus metadata and generate forms on the consumer's machine, or (b) obtain/
+> relicense the dictionary. Record the final conclusion and the basis for it here.
 
-**Status:** UNRESOLVED. Do not publish bundled Voikko-derived forms until this is settled.
+**Status:** UNRESOLVED. Do not publish the bundled reference corpus until this is settled.
 
 ## Raw source files
 
-The raw Kotus list and Voikko JSONL shards live under `data/sources/` and are **gitignored**
-(see [`.gitignore`](.gitignore)) — they are fetched at build time, not committed.
+The raw Kotus list and the reference-corpus JSONL shards (Voikko-format) live under
+`data/sources/` and are **gitignored** (see [`.gitignore`](.gitignore)) — they are fetched
+at build time, not committed.

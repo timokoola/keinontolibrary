@@ -4,7 +4,7 @@
 //! the plural `-i-` stem, and the class-specific partitive/illative/genitive-plural forms;
 //! then assemble each slot with the uniform case endings and the grade table.
 //!
-//! Coverage is the pragmatic high-frequency set: classes 1-15, 17-20, 23, 24, 26-28, 32-34, 38-41, 47, 48 (33 in all). Other classes return `None` (no generation; the lookup/overlay still answer).
+//! Coverage is the pragmatic high-frequency set: classes 1-15, 17-20, 23, 24, 26-28, 32-34, 38-41, 43, 47, 48 (34 in all). Other classes return `None` (no generation; the lookup/overlay still answer).
 
 use keinontolibrary_core::{Case, Number};
 
@@ -456,6 +456,27 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
                 pl_weak: pl,
             })
         }
+        // ohut: -Ut -> -Ue- (ohut -> ohuen, ohutta, ohueen, ohuita).
+        43 => {
+            let base = lemma.strip_suffix('t')?;
+            let sg = format!("{base}e");
+            let pl = pluralize(&sg, tn);
+            Some(Stems {
+                part_sg: vec![format!("{lemma}t{a}")],
+                illat_sg: vec![format!("{sg}en")],
+                gen_pl: vec![format!("{pl}den"), format!("{pl}tten")],
+                part_pl: vec![format!("{pl}t{a}")],
+                illat_pl: plural_illative(&pl),
+                essive_stem: sg.clone(),
+                sg_strong: sg.clone(),
+                sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // tn49 askel/askele is intentionally NOT generated: it has free variation between a
+        // short stem (askelen, askelessa) and a long -ee- stem (askeleen, askeleessa) that a
+        // single generated stem can't reproduce, so the corpus lookup answers it instead.
         // nainen: nen -> se- (oblique), nais- (consonant stem).
         38 => {
             let base = lemma.strip_suffix("nen")?;
@@ -932,6 +953,14 @@ mod tests {
         assert_eq!(
             one("suo", 19, None, Number::Plural, Case::Genitive),
             "soiden"
+        );
+        assert_eq!(
+            one("ohut", 43, None, Number::Singular, Case::Genitive),
+            "ohuen"
+        );
+        assert_eq!(
+            one("ohut", 43, None, Number::Plural, Case::Partitive),
+            "ohuita"
         );
     }
 

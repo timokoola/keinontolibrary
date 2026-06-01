@@ -96,7 +96,7 @@ axr = fig.add_subplot(gs[1])
 axr.axis("off")
 axr.text(0.0, 0.99, f"{overall:.1f}%", fontsize=68, fontweight="bold", color=BLUE,
          va="top")
-axr.text(0.02, 0.78, "of generated forms agree\nwith the reference corpus",
+axr.text(0.02, 0.78, "of produced forms agree\nwith the reference corpus",
          fontsize=13, color=INK, va="top")
 
 stats = [

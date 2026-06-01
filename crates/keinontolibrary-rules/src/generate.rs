@@ -4,7 +4,7 @@
 //! the plural `-i-` stem, and the class-specific partitive/illative/genitive-plural forms;
 //! then assemble each slot with the uniform case endings and the grade table.
 //!
-//! Coverage is the pragmatic high-frequency set: classes 1-7, 9, 10, 12-14, 33, 38-41, 48. Other classes return `None` (no generation; the lookup/overlay still answer).
+//! Coverage is the pragmatic high-frequency set: classes 1-7, 9, 10, 12-14, 17, 18, 26, 32, 33, 38-41, 48. Other classes return `None` (no generation; the lookup/overlay still answer).
 
 use keinontolibrary_core::{Case, Number};
 
@@ -195,6 +195,84 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
                 ],
                 part_pl: vec![format!("{pl}t{a}")],
                 illat_pl: vec![format!("{pl}siin"), format!("{pl}hin")],
+                essive_stem: sg.clone(),
+                sg_strong: sg.clone(),
+                sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // vapaa: a vowel-final long-vowel stem (no -s to drop); partitive -ta, illative
+        // -seen, plural drops one vowel before -i- (vapaa -> vapai-).
+        17 => {
+            let sg = lemma.to_owned();
+            let pl = format!("{}i", drop_last(&sg));
+            Some(Stems {
+                part_sg: vec![format!("{sg}t{a}")],
+                illat_sg: vec![format!("{sg}seen")],
+                gen_pl: vec![format!("{pl}den"), format!("{pl}tten")],
+                part_pl: vec![format!("{pl}t{a}")],
+                illat_pl: vec![format!("{pl}siin"), format!("{pl}hin")],
+                essive_stem: sg.clone(),
+                sg_strong: sg.clone(),
+                sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // maa: monosyllabic long vowel; illative is -hVn (maa -> maahan).
+        18 => {
+            let sg = lemma.to_owned();
+            let last = last_char(&sg)?;
+            let pl = format!("{}i", drop_last(&sg));
+            Some(Stems {
+                part_sg: vec![format!("{sg}t{a}")],
+                illat_sg: vec![format!("{sg}h{last}n")],
+                gen_pl: vec![format!("{pl}den"), format!("{pl}tten")],
+                part_pl: vec![format!("{pl}t{a}")],
+                illat_pl: vec![format!("{pl}hin")],
+                essive_stem: sg.clone(),
+                sg_strong: sg.clone(),
+                sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // pieni: -i -> -e- oblique, but partitive/genitive-plural use the consonant stem
+        // (pieni -> pienen, pientä, pienten).
+        26 => {
+            let cons = lemma.strip_suffix('i')?.to_owned();
+            let sg = format!("{cons}e");
+            let sg_weak = weaken(&sg, av);
+            let pl = pluralize(&sg, tn);
+            let pl_weak = pluralize(&sg_weak, tn);
+            Some(Stems {
+                part_sg: vec![format!("{cons}t{a}")],
+                illat_sg: vec![format!("{sg}en")],
+                gen_pl: vec![format!("{cons}ten"), format!("{pl}en")],
+                part_pl: vec![format!("{pl}{a}")],
+                illat_pl: plural_illative(&pl),
+                essive_stem: sg.clone(),
+                sg_strong: sg,
+                sg_weak,
+                pl_strong: pl,
+                pl_weak,
+            })
+        }
+        // sisar: -r consonant stem; oblique adds -e- (sisar -> sisaren, sisarta). The
+        // -tAr subtype is reverse-gradating (aallotar -> aallottaren), and the gradating
+        // consonant sits before the final -r, so strengthen the body before re-adding it.
+        32 => {
+            let cons = last_char(lemma)?;
+            let body = strengthen(&drop_last(lemma), av);
+            let sg = format!("{body}{cons}e");
+            let pl = pluralize(&sg, tn);
+            Some(Stems {
+                part_sg: vec![format!("{lemma}t{a}")],
+                illat_sg: vec![format!("{sg}en")],
+                gen_pl: vec![format!("{lemma}ten"), format!("{pl}en")],
+                part_pl: vec![format!("{pl}{a}")],
+                illat_pl: plural_illative(&pl),
                 essive_stem: sg.clone(),
                 sg_strong: sg.clone(),
                 sg_weak: sg,
@@ -544,6 +622,51 @@ mod tests {
         assert_eq!(
             one("vieras", 41, None, Number::Plural, Case::Partitive),
             "vieraita"
+        );
+    }
+
+    #[test]
+    fn vapaa_18_maa_long_vowel() {
+        assert_eq!(
+            one("vapaa", 17, None, Number::Singular, Case::Partitive),
+            "vapaata"
+        );
+        assert_eq!(
+            one("vapaa", 17, None, Number::Singular, Case::Illative),
+            "vapaaseen"
+        );
+        assert_eq!(
+            one("maa", 18, None, Number::Singular, Case::Illative),
+            "maahan"
+        );
+        assert_eq!(
+            one("maa", 18, None, Number::Plural, Case::Partitive),
+            "maita"
+        );
+    }
+
+    #[test]
+    fn pieni_26_and_sisar_32() {
+        assert_eq!(
+            one("pieni", 26, None, Number::Singular, Case::Genitive),
+            "pienen"
+        );
+        assert_eq!(
+            one("pieni", 26, None, Number::Singular, Case::Partitive),
+            "pientä"
+        );
+        assert_eq!(
+            one("sisar", 32, None, Number::Singular, Case::Genitive),
+            "sisaren"
+        );
+        assert_eq!(
+            one("sisar", 32, None, Number::Singular, Case::Partitive),
+            "sisarta"
+        );
+        // -tAr reverse gradation: aallotar -> aallottaren
+        assert_eq!(
+            one("aallotar", 32, Some('C'), Number::Singular, Case::Genitive),
+            "aallottaren"
         );
     }
 

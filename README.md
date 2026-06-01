@@ -93,11 +93,12 @@ docker run -p 8080:8080 keinontolibrary
 
 - ✅ Data-backed lookup: core API, ingest, packed artifact, corpus round-trip gate, CLI,
   HTTP service, overlay, container, FFI scaffold.
-- 🟡 **Rule engine** (`keinontolibrary-rules`): high-frequency classes (1, 2, 5, 6, 9, 10,
-  12, 38, 39, 40, 48) + gradation A–M, wired in as the live fallback behind the lookup.
-  **95.8% rule↔corpus parity** on those classes (`--test parity`). Remaining: the other
-  classes and the long tail (loanword harmony, `-ain` variants, an exception registry) to
-  reach the ≥99.9% gate.
+- 🟡 **Rule engine** (`keinontolibrary-rules`): 22 Kotus classes (1–7, 9, 10, 12–14, 17,
+  18, 26, 32, 33, 38–41, 48) + gradation A–M (incl. reverse gradation), wired in as the
+  live fallback behind the lookup. **98.0% rule↔corpus parity** on those classes
+  (`--test parity`), covering ~98% of all corpus slots. Remaining: the rarer classes and
+  the long tail (loanword harmony, 39/40 boundary words, an exception registry) to reach
+  the ≥99.9% gate.
 - ⬜ **Cloudflare Workers target** (`keinontolibrary-worker`): edge deployment backed by
   KV/D1/R2. The storage abstraction it needs already exists as the `FormStore` trait in
   `keinontolibrary-core`.

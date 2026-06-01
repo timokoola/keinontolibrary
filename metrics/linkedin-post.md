@@ -45,6 +45,8 @@ Data: Kotus *Nykysuomen sanalista 2024* (CC BY 4.0). The ~400k-form corpus was c
 
 What's the project *you've* been waiting to build because the implementation was the bottleneck?
 
+P.S. Yes, open-sourcing is in the plans — I just want to run it through a couple of real websites first.
+
 ---
 
 ## Capability note (longer cut — for the comments or a follow-up)

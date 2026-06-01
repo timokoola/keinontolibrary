@@ -9,6 +9,10 @@ repository.workspace = true
 authors.workspace = true
 
 [dependencies]
+keinontolibrary-core = { workspace = true }
+
+[dev-dependencies]
+keinontolibrary-data = { workspace = true }
 
 [lints]
 workspace = true

@@ -150,6 +150,7 @@ pub fn build_engine(
     let engine = Engine::builder()
         .lookup(Box::new(lookup))
         .overlay(Box::new(overlay.clone()))
+        .generator(Box::new(keinontolibrary_rules::RuleEngine::new()))
         .build();
     Ok(EngineBundle {
         engine,

@@ -40,6 +40,8 @@ struct RawRow {
     sijamuoto: Option<String>,
     #[serde(rename = "BOOKWORD")]
     bookword: Option<String>,
+    #[serde(rename = "FSTOUTPUT")]
+    fstoutput: Option<String>,
     #[serde(rename = "COMPARISON")]
     comparison: Option<String>,
     #[serde(rename = "PARTICIPLE")]
@@ -97,10 +99,13 @@ fn number_from(token: &str) -> Option<Number> {
 impl RawRow {
     /// Apply all filters and map to a [`CleanForm`], or `None` if the row is out of scope.
     fn clean(self) -> Option<CleanForm> {
-        // Nouns only.
+        // Nouns only. Minimal rows (the clean base forms, e.g. `talo`) carry no CLASS
+        // field at all and must be kept; only reject rows that are explicitly a non-noun
+        // class (adjective/verb/numeral/pronoun/...). Non-noun lemmas are dropped anyway
+        // at the Kotus join.
         match self.class.as_deref() {
-            Some("nimisana" | "nimisana_laatusana") => {}
-            _ => return None,
+            None | Some("nimisana" | "nimisana_laatusana") => {}
+            Some(_) => return None,
         }
         // Drop comparison (non-positive), participles, and verb features.
         if self.comparison.as_deref().is_some_and(|c| c != "positive") {
@@ -114,8 +119,17 @@ impl RawRow {
         {
             return None;
         }
-        // Drop enclitics (focus -kin/-kaan, question -ko/-kö).
+        // Drop enclitics. The `-kin/-kaan` and `-ko/-kö` clitics set FOCUS/KYSYMYSLIITE,
+        // but `-han/-hän/-pa/-pä/-s` are only marked by the `[Ef]` enclitic-focus tag in
+        // FSTOUTPUT, so check all three signals.
         if self.focus.is_some() || self.kysymysliite.is_some() {
+            return None;
+        }
+        if self
+            .fstoutput
+            .as_deref()
+            .is_some_and(|f| f.contains("[Ef]"))
+        {
             return None;
         }
 
@@ -232,6 +246,25 @@ mod tests {
         let sti = r#"{"BASEFORM":"nopea","tn":10,"CLASS":"nimisana",
             "NUMBER":"singular","SIJAMUOTO":"kerrontosti","BOOKWORD":"nopeasti"}"#;
         assert!(clean_one(sti).is_none());
+    }
+
+    #[test]
+    fn keeps_minimal_base_row_without_class() {
+        // The clean nominative citation rows carry no CLASS/FSTOUTPUT.
+        let row = r#"{"av":"_","tn":1,"word":"talo","BASEFORM":"talo","BOOKWORD":"talo",
+            "SIJAMUOTO":"nimento","NUMBER":"singular"}"#;
+        let f = clean_one(row).unwrap();
+        assert_eq!(f.form, "talo");
+        assert_eq!(f.case, Case::Nominative);
+    }
+
+    #[test]
+    fn drops_focus_clitic_marked_only_in_fstoutput() {
+        // `talohan` has no FOCUS field; the clitic is marked solely by `[Ef]` in FSTOUTPUT.
+        let row = r#"{"av":"_","tn":1,"word":"talo","BASEFORM":"talo","BOOKWORD":"talohan",
+            "CLASS":"nimisana","FSTOUTPUT":"[Ln][Xp]talo[X]talo[Sn][Ny]han[Ef]",
+            "SIJAMUOTO":"nimento","NUMBER":"singular"}"#;
+        assert!(clean_one(row).is_none());
     }
 
     #[test]

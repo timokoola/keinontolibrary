@@ -4,7 +4,7 @@
 //! the plural `-i-` stem, and the class-specific partitive/illative/genitive-plural forms;
 //! then assemble each slot with the uniform case endings and the grade table.
 //!
-//! Coverage is the pragmatic high-frequency set: classes 1-7, 9, 10, 12-14, 17, 18, 26, 32, 33, 38-41, 48. Other classes return `None` (no generation; the lookup/overlay still answer).
+//! Coverage is the pragmatic high-frequency set: classes 1-14, 17, 18, 23, 24, 26, 32, 33, 38-41, 48 (25 in all). Other classes return `None` (no generation; the lookup/overlay still answer).
 
 use keinontolibrary_core::{Case, Number};
 
@@ -238,9 +238,29 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
                 pl_weak: pl,
             })
         }
-        // pieni: -i -> -e- oblique, but partitive/genitive-plural use the consonant stem
-        // (pieni -> pienen, pientä, pienten).
-        26 => {
+        // nalle: foreign -e words; the -e is kept before the plural -i- (nalle -> nallei-)
+        // and the plural uses -j-.
+        8 => {
+            let sg = lemma.to_owned();
+            let last = last_char(&sg)?;
+            let pl = format!("{sg}i");
+            let pl_body = drop_last(&pl);
+            Some(Stems {
+                part_sg: vec![format!("{sg}{a}")],
+                illat_sg: vec![format!("{sg}{last}n")],
+                gen_pl: vec![format!("{pl_body}jen")],
+                part_pl: vec![format!("{pl_body}j{a}")],
+                illat_pl: plural_illative(&pl),
+                essive_stem: sg.clone(),
+                sg_strong: sg.clone(),
+                sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // tiili/uni/pieni: -i -> -e- oblique, but partitive/genitive-plural use the
+        // consonant stem (pieni -> pienen, pientä, pienten; tiili -> tiiltä; uni -> unta).
+        23 | 24 | 26 => {
             let cons = lemma.strip_suffix('i')?.to_owned();
             let sg = format!("{cons}e");
             let sg_weak = weaken(&sg, av);
@@ -667,6 +687,30 @@ mod tests {
         assert_eq!(
             one("aallotar", 32, Some('C'), Number::Singular, Case::Genitive),
             "aallottaren"
+        );
+    }
+
+    #[test]
+    fn nalle_8_tiili_23_uni_24() {
+        assert_eq!(
+            one("nalle", 8, None, Number::Singular, Case::Partitive),
+            "nallea"
+        );
+        assert_eq!(
+            one("nalle", 8, None, Number::Plural, Case::Genitive),
+            "nallejen"
+        );
+        assert_eq!(
+            one("tiili", 23, None, Number::Singular, Case::Partitive),
+            "tiiltä"
+        );
+        assert_eq!(
+            one("uni", 24, None, Number::Singular, Case::Genitive),
+            "unen"
+        );
+        assert_eq!(
+            one("uni", 24, None, Number::Singular, Case::Partitive),
+            "unta"
         );
     }
 

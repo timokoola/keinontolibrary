@@ -13,8 +13,22 @@
 use std::collections::BTreeMap;
 use std::path::Path;
 
+use keinontolibrary_core::{Generator, ParadigmRef};
 use keinontolibrary_data::{slot_parts, Artifact};
-use keinontolibrary_rules::generate;
+use keinontolibrary_rules::{Exceptions, RuleEngine};
+
+/// CI cap on the exception registry: it must stay a small, justified set.
+const EXCEPTION_CAP: usize = 200;
+
+#[test]
+fn exception_registry_within_cap() {
+    let n = Exceptions::load().len();
+    eprintln!("exception registry: {n} entries (cap {EXCEPTION_CAP})");
+    assert!(
+        n <= EXCEPTION_CAP,
+        "exception registry has {n} entries, over the cap of {EXCEPTION_CAP}"
+    );
+}
 
 #[derive(Default, Clone, Copy)]
 struct Tally {
@@ -34,6 +48,8 @@ fn rule_lookup_parity() {
         return;
     }
     let artifact = Artifact::read_from(&artifact_path).expect("load artifact");
+    // Generate through the RuleEngine so the exception registry is applied.
+    let engine = RuleEngine::new();
 
     let mut per_class: BTreeMap<u8, Tally> = BTreeMap::new();
     let mut overall = Tally::default();
@@ -48,9 +64,11 @@ fn rule_lookup_parity() {
                 }
                 let (number, case) = slot_parts(slot.slot);
                 let attested = &slot.variants[0]; // corpus primary
-                match generate(&lemma.lemma, paradigm.tn, paradigm.av, number, case) {
+                let reference = ParadigmRef::new(None, paradigm.tn).with_av(paradigm.av);
+                match engine.generate(&lemma.lemma, &reference, number, case) {
                     None => unsupported_slots += 1,
-                    Some(generated) => {
+                    Some(forms) => {
+                        let generated = &forms.variants;
                         let t = per_class.entry(paradigm.tn).or_default();
                         t.total += 1;
                         overall.total += 1;

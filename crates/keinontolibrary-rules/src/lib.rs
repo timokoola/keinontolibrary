@@ -6,23 +6,41 @@
 //! behind the corpus lookup: [`RuleEngine`] implements [`keinontolibrary_core::Generator`],
 //! so the engine only calls it for slots the lookup/overlay don't already answer.
 
+mod exceptions;
 mod generate;
 mod gradation;
 mod harmony;
 
+pub use exceptions::Exceptions;
 pub use generate::generate;
 
 use keinontolibrary_core::{Case, Forms, Generator, Number, ParadigmRef, Source};
 
-/// The rule-based fallback generator.
-#[derive(Debug, Default, Clone, Copy)]
-pub struct RuleEngine;
+/// The rule-based fallback generator, including the exception registry.
+#[derive(Debug, Clone)]
+pub struct RuleEngine {
+    exceptions: Exceptions,
+}
+
+impl Default for RuleEngine {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
 impl RuleEngine {
-    /// Construct the rule engine.
+    /// Construct the rule engine, loading the exception registry.
     #[must_use]
     pub fn new() -> Self {
-        Self
+        Self {
+            exceptions: Exceptions::load(),
+        }
+    }
+
+    /// The exception registry this engine consults.
+    #[must_use]
+    pub fn exceptions(&self) -> &Exceptions {
+        &self.exceptions
     }
 }
 
@@ -34,6 +52,10 @@ impl Generator for RuleEngine {
         number: Number,
         case: Case,
     ) -> Option<Forms> {
+        // The exception registry overrides the rule generator for documented irregulars.
+        if let Some(forms) = self.exceptions.get(lemma, reference.tn, number, case) {
+            return Some(Forms::present(forms.to_vec(), Source::Generated));
+        }
         let variants = generate::generate(lemma, reference.tn, reference.av, number, case)?;
         if variants.is_empty() {
             return None;
@@ -58,6 +80,22 @@ mod tests {
             )
             .unwrap();
         assert_eq!(forms.primary(), Some("valossa"));
+        assert_eq!(forms.source, Source::Generated);
+    }
+
+    #[test]
+    fn exception_registry_overrides_rules() {
+        let r = RuleEngine::new();
+        // The rule generator would produce "aieen"; the registry corrects it to "aikeen".
+        let forms = r
+            .generate(
+                "aie",
+                &ParadigmRef::new(None, 48),
+                Number::Singular,
+                Case::Genitive,
+            )
+            .unwrap();
+        assert_eq!(forms.primary(), Some("aikeen"));
         assert_eq!(forms.source, Source::Generated);
     }
 

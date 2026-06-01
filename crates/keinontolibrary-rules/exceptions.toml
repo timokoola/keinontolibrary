@@ -1,0 +1,113 @@
+# Exception registry — genuinely irregular forms the rule engine does not model.
+#
+# Each entry overrides one (lemma, number, case) slot. The corpus lookup already serves
+# these for attested words; the registry makes the rule *fallback* correct for them too,
+# documents them, and lets the parity harness count them as handled.
+#
+# Keep this SMALL and justified: it is a registry of true irregularities, not a dumping
+# ground for systematic rule gaps. CI fails if it grows past the cap in tests/parity.rs.
+#
+# Fields: lemma, number (singular|plural), case (English name), forms (primary first),
+# reason. Optional: tn (to disambiguate a homonym).
+
+# --- aie (Kotus tn 48) -----------------------------------------------------------------
+# A -e word whose oblique stem inserts a k: aie -> aikee- (aikeen, aikeessa, ...). This
+# is lexical (cf. regular hame -> hamee-) and not predictable from the lemma, so the rule
+# engine produces aiee-; the registry corrects the affected slots.
+[[exception]]
+lemma = "aie"
+number = "singular"
+case = "genitive"
+forms = ["aikeen"]
+reason = "k-insertion oblique stem aikee- (tn48 lexical irregular)"
+
+[[exception]]
+lemma = "aie"
+number = "singular"
+case = "inessive"
+forms = ["aikeessa"]
+reason = "k-insertion oblique stem aikee-"
+
+[[exception]]
+lemma = "aie"
+number = "singular"
+case = "elative"
+forms = ["aikeesta"]
+reason = "k-insertion oblique stem aikee-"
+
+[[exception]]
+lemma = "aie"
+number = "singular"
+case = "illative"
+forms = ["aikeeseen"]
+reason = "k-insertion oblique stem aikee-"
+
+[[exception]]
+lemma = "aie"
+number = "singular"
+case = "adessive"
+forms = ["aikeella"]
+reason = "k-insertion oblique stem aikee-"
+
+[[exception]]
+lemma = "aie"
+number = "singular"
+case = "ablative"
+forms = ["aikeelta"]
+reason = "k-insertion oblique stem aikee-"
+
+[[exception]]
+lemma = "aie"
+number = "singular"
+case = "allative"
+forms = ["aikeelle"]
+reason = "k-insertion oblique stem aikee-"
+
+[[exception]]
+lemma = "aie"
+number = "singular"
+case = "essive"
+forms = ["aikeena"]
+reason = "k-insertion oblique stem aikee-"
+
+[[exception]]
+lemma = "aie"
+number = "singular"
+case = "translative"
+forms = ["aikeeksi"]
+reason = "k-insertion oblique stem aikee-"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "nominative"
+forms = ["aikeet"]
+reason = "k-insertion oblique stem aikee-"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "genitive"
+forms = ["aikeiden", "aikeitten"]
+reason = "k-insertion oblique stem aikee-"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "partitive"
+forms = ["aikeita"]
+reason = "k-insertion oblique stem aikee-"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "inessive"
+forms = ["aikeissa"]
+reason = "k-insertion oblique stem aikee-"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "illative"
+forms = ["aikeisiin", "aikeihin"]
+reason = "k-insertion oblique stem aikee-"

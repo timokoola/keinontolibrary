@@ -2,7 +2,7 @@
 //! classes with consonant gradation (astevaihtelu).
 //!
 //! The engine generates forms from `(lemma, tn, av)` for the pragmatic high-frequency set
-//! (classes 1, 2, 5, 6, 9, 10, 12, 38, 39, 40, 48). It is wired in as the rule **fallback**
+//! (classes 1-7, 9, 10, 12-14, 33, 38-41, 48). It is wired in as the rule **fallback**
 //! behind the corpus lookup: [`RuleEngine`] implements [`keinontolibrary_core::Generator`],
 //! so the engine only calls it for slots the lookup/overlay don't already answer.
 

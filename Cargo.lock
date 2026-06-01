@@ -405,6 +405,11 @@ dependencies = [
 [[package]]
 name = "keinontolibrary-ffi"
 version = "0.1.0"
+dependencies = [
+ "keinontolibrary-core",
+ "keinontolibrary-data",
+ "serde_json",
+]
 
 [[package]]
 name = "keinontolibrary-ingest"

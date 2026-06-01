@@ -20,6 +20,16 @@ pub fn aa(word: &str) -> &'static str {
     }
 }
 
+/// The harmonic `o`/`ö` for a word (used in the plural `-oi-`/`-öi-` stem).
+#[must_use]
+pub fn oo(word: &str) -> char {
+    if is_back(word) {
+        'o'
+    } else {
+        'ö'
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

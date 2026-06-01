@@ -4,12 +4,12 @@
 //! the plural `-i-` stem, and the class-specific partitive/illative/genitive-plural forms;
 //! then assemble each slot with the uniform case endings and the grade table.
 //!
-//! Coverage is the pragmatic high-frequency set: classes 1-14, 17, 18, 23, 24, 26, 32, 33, 38-41, 48 (25 in all). Other classes return `None` (no generation; the lookup/overlay still answer).
+//! Coverage is the pragmatic high-frequency set: classes 1-15, 17, 18, 20, 23, 24, 26, 27, 32, 33, 38-41, 48 (29 in all). Other classes return `None` (no generation; the lookup/overlay still answer).
 
 use keinontolibrary_core::{Case, Number};
 
 use crate::gradation::{grade, strengthen, weaken, Grade};
-use crate::harmony::aa;
+use crate::harmony::{aa, oo};
 
 /// The derived stems and irregular slots for one word.
 #[derive(Debug, Clone)]
@@ -202,9 +202,9 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
                 pl_weak: pl,
             })
         }
-        // vapaa: a vowel-final long-vowel stem (no -s to drop); partitive -ta, illative
-        // -seen, plural drops one vowel before -i- (vapaa -> vapai-).
-        17 => {
+        // vapaa / filee: a vowel-final long-vowel stem (no -s to drop); partitive -ta,
+        // illative -seen, plural drops one vowel before -i- (vapaa -> vapai-, filee -> filei-).
+        17 | 20 => {
             let sg = lemma.to_owned();
             let pl = format!("{}i", drop_last(&sg));
             Some(Stems {
@@ -292,6 +292,74 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
                 illat_sg: vec![format!("{sg}en")],
                 gen_pl: vec![format!("{lemma}ten"), format!("{pl}en")],
                 part_pl: vec![format!("{pl}{a}")],
+                illat_pl: plural_illative(&pl),
+                essive_stem: sg.clone(),
+                sg_strong: sg.clone(),
+                sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // korkea: -eA; partitive -a or -ta, plural drops the final -a before -i-
+        // (korkea -> korkei-, korkeita).
+        15 => {
+            let sg = lemma.to_owned();
+            let last = last_char(&sg).unwrap_or('a');
+            let pl = format!("{}i", drop_last(&sg)); // korkea -> korkei
+            let body = drop_last(&sg);
+            Some(Stems {
+                part_sg: vec![format!("{sg}{a}"), format!("{sg}t{a}")],
+                illat_sg: vec![format!("{sg}{last}n")],
+                gen_pl: vec![
+                    format!("{pl}den"),
+                    format!("{pl}tten"),
+                    format!("{body}{a}in"),
+                ],
+                part_pl: vec![format!("{pl}t{a}")],
+                illat_pl: plural_illative(&pl),
+                essive_stem: sg.clone(),
+                sg_strong: sg.clone(),
+                sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // käsi: -si alternates with -te- (strong) / -de- (weak); partitive -ttA on the
+        // bare root; plural keeps the -s- (käsi -> käden, kättä, käteen, käsiä).
+        27 => {
+            let base = lemma.strip_suffix("si")?;
+            let strong = format!("{base}te");
+            let weak = format!("{base}de");
+            let pl = format!("{base}si");
+            Some(Stems {
+                part_sg: vec![format!("{base}tt{a}")],
+                illat_sg: vec![format!("{strong}en")],
+                gen_pl: vec![format!("{pl}en"), format!("{base}tten")],
+                part_pl: vec![format!("{pl}{a}")],
+                illat_pl: plural_illative(&pl),
+                essive_stem: strong.clone(),
+                sg_strong: strong,
+                sg_weak: weak,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // omena: 3-syllable -A with a dual plural (-i- and -oi-). Primary uses -i-; the
+        // -oi- and -Ain forms are offered as variants.
+        11 => {
+            let sg = lemma.to_owned();
+            let last = last_char(&sg).unwrap_or('a');
+            let body = drop_last(&sg);
+            let pl = format!("{body}i"); // omena -> omeni
+            Some(Stems {
+                part_sg: vec![format!("{sg}{a}")],
+                illat_sg: vec![format!("{sg}{last}n")],
+                gen_pl: vec![
+                    format!("{body}{a}in"),
+                    format!("{body}{}iden", oo(&sg)),
+                    format!("{pl}en"),
+                ],
+                part_pl: vec![format!("{pl}{a}"), format!("{body}{}it{a}", oo(&sg))],
                 illat_pl: plural_illative(&pl),
                 essive_stem: sg.clone(),
                 sg_strong: sg.clone(),
@@ -711,6 +779,35 @@ mod tests {
         assert_eq!(
             one("uni", 24, None, Number::Singular, Case::Partitive),
             "unta"
+        );
+    }
+
+    #[test]
+    fn korkea_15_and_kasi_27() {
+        assert_eq!(
+            one("korkea", 15, None, Number::Singular, Case::Genitive),
+            "korkean"
+        );
+        assert_eq!(
+            one("korkea", 15, None, Number::Plural, Case::Partitive),
+            "korkeita"
+        );
+        // käsi: si -> de (weak) / te (strong), partitive kättä
+        assert_eq!(
+            one("käsi", 27, None, Number::Singular, Case::Genitive),
+            "käden"
+        );
+        assert_eq!(
+            one("käsi", 27, None, Number::Singular, Case::Partitive),
+            "kättä"
+        );
+        assert_eq!(
+            one("käsi", 27, None, Number::Singular, Case::Illative),
+            "käteen"
+        );
+        assert_eq!(
+            one("käsi", 27, None, Number::Singular, Case::Essive),
+            "kätenä"
         );
     }
 

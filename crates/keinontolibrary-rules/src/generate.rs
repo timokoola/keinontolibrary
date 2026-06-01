@@ -4,8 +4,7 @@
 //! the plural `-i-` stem, and the class-specific partitive/illative/genitive-plural forms;
 //! then assemble each slot with the uniform case endings and the grade table.
 //!
-//! Coverage is the pragmatic high-frequency set: classes 1, 2, 5, 6, 9, 10, 12, 38, 39,
-//! 40, 48. Other classes return `None` (no generation; the lookup/overlay still answer).
+//! Coverage is the pragmatic high-frequency set: classes 1-7, 9, 10, 12-14, 33, 38-41, 48. Other classes return `None` (no generation; the lookup/overlay still answer).
 
 use keinontolibrary_core::{Case, Number};
 
@@ -86,10 +85,15 @@ fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
     let pl_body = drop_last(&pl_strong);
     let body = drop_last(&sg_strong);
 
+    let part_sg = match tn {
+        3 => vec![format!("{sg_strong}t{a}")], // valtiota (diphthong stem)
+        _ => vec![format!("{sg_strong}{a}")],
+    };
     let part_pl = match tn {
         1 | 5 | 9 => vec![format!("{pl_body}j{a}")], // valoja, ristejä, kaloja
-        2 | 6 | 12 => vec![format!("{pl_strong}t{a}")], // palveluita, papereita, kulkijoita
-        _ => vec![format!("{pl_strong}{a}")],        // koiria
+        10 => vec![format!("{pl_strong}{a}")],       // koiria
+        4 | 14 => vec![format!("{pl_weak}t{a}"), format!("{pl_body}j{a}")], // laatikoita, laatikkoja
+        _ => vec![format!("{pl_strong}t{a}")], // 2,3,6,12,13: palveluita, valtioita, ...
     };
     let gen_pl = match tn {
         1 => vec![format!("{pl_body}jen")],
@@ -97,16 +101,23 @@ fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
         2 => vec![format!("{pl_body}jen"), format!("{pl_strong}den")],
         5 | 6 => vec![format!("{sg_strong}en")],
         10 => vec![format!("{body}ien"), format!("{body}{a}in")], // koirien, koirain
-        12 => vec![
+        12 | 13 => vec![
             format!("{pl_strong}den"),
             format!("{pl_strong}tten"),
             format!("{body}{a}in"),
         ],
+        3 => vec![format!("{pl_strong}den"), format!("{pl_strong}tten")], // valtioiden, valtioitten
+        4 => vec![
+            format!("{pl_body}jen"),
+            format!("{pl_weak}den"),
+            format!("{pl_weak}tten"),
+        ],
+        14 => vec![format!("{body}{a}in"), format!("{pl_weak}den")], // solakkain, solakoiden
         _ => vec![format!("{pl_strong}en")],
     };
 
     Stems {
-        part_sg: vec![format!("{sg_strong}{a}")],
+        part_sg,
         illat_sg: vec![format!("{sg_strong}{last}n")],
         illat_pl: plural_illative(&pl_strong),
         essive_stem: sg_strong.clone(),
@@ -119,13 +130,78 @@ fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
     }
 }
 
+// A per-class dispatch: each arm is compact but there are many of them.
+#[allow(clippy::too_many_lines)]
 fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
     let a = aa(lemma);
-    if matches!(tn, 1 | 2 | 5 | 6 | 9 | 10 | 12) {
+    if matches!(tn, 1 | 2 | 3 | 4 | 5 | 6 | 9 | 10 | 12 | 13 | 14) {
         return Some(analyze_vowel_stem(lemma, tn, av, a));
     }
 
     match tn {
+        // ovi: the oblique stem replaces final -i with -e (ovi -> ove-, kurki -> kurje-).
+        7 => {
+            let sg_strong = format!("{}e", lemma.strip_suffix('i')?);
+            let sg_weak = weaken(&sg_strong, av);
+            let pl_strong = pluralize(&sg_strong, tn);
+            let pl_weak = pluralize(&sg_weak, tn);
+            Some(Stems {
+                part_sg: vec![format!("{sg_strong}{a}")],
+                illat_sg: vec![format!("{sg_strong}en")],
+                gen_pl: vec![format!("{pl_strong}en")],
+                part_pl: vec![format!("{pl_strong}{a}")],
+                illat_pl: plural_illative(&pl_strong),
+                essive_stem: sg_strong.clone(),
+                sg_strong,
+                sg_weak,
+                pl_strong,
+                pl_weak,
+            })
+        }
+        // kytkin: -in -> -ime- oblique; partitive on the consonant stem (the lemma). Often
+        // reverse-gradating on the root consonant (ahdin -> ahtimen), so strengthen the
+        // base before appending -me-.
+        33 => {
+            let base = strengthen(lemma.strip_suffix('n')?, av);
+            let sg = format!("{base}me");
+            let pl = pluralize(&sg, tn);
+            Some(Stems {
+                part_sg: vec![format!("{lemma}t{a}")],
+                illat_sg: vec![format!("{sg}en")],
+                gen_pl: vec![format!("{pl}en")],
+                part_pl: vec![format!("{pl}{a}")],
+                illat_pl: plural_illative(&pl),
+                essive_stem: sg.clone(),
+                sg_strong: sg.clone(),
+                sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // vieras: -s drops and the preceding vowel lengthens (viera+a); long-vowel stem like
+        // hame. Often reverse-gradating (rakas -> rakkaan).
+        41 => {
+            let dropped = lemma.strip_suffix('s')?;
+            let last = last_char(dropped)?;
+            let sg = strengthen(&format!("{dropped}{last}"), av);
+            let pl = format!("{}i", drop_last(&sg)); // vieraa -> vierai
+            Some(Stems {
+                part_sg: vec![format!("{lemma}t{a}")],
+                illat_sg: vec![format!("{sg}seen")],
+                gen_pl: vec![
+                    format!("{pl}den"),
+                    format!("{pl}tten"),
+                    format!("{lemma}ten"),
+                ],
+                part_pl: vec![format!("{pl}t{a}")],
+                illat_pl: vec![format!("{pl}siin"), format!("{pl}hin")],
+                essive_stem: sg.clone(),
+                sg_strong: sg.clone(),
+                sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
         // nainen: nen -> se- (oblique), nais- (consonant stem).
         38 => {
             let base = lemma.strip_suffix("nen")?;
@@ -371,6 +447,103 @@ mod tests {
         assert_eq!(
             one("hame", 48, None, Number::Singular, Case::Illative),
             "hameeseen"
+        );
+    }
+
+    #[test]
+    fn valtio_class_3_partitive_ta() {
+        assert_eq!(
+            one("valtio", 3, None, Number::Singular, Case::Partitive),
+            "valtiota"
+        );
+        assert_eq!(
+            one("valtio", 3, None, Number::Singular, Case::Illative),
+            "valtioon"
+        );
+        assert_eq!(
+            one("valtio", 3, None, Number::Plural, Case::Partitive),
+            "valtioita"
+        );
+    }
+
+    #[test]
+    fn laatikko_class_4_gradation() {
+        assert_eq!(
+            one("laatikko", 4, Some('A'), Number::Singular, Case::Genitive),
+            "laatikon"
+        );
+        assert_eq!(
+            one("laatikko", 4, Some('A'), Number::Singular, Case::Partitive),
+            "laatikkoa"
+        );
+        assert_eq!(
+            one("laatikko", 4, Some('A'), Number::Plural, Case::Nominative),
+            "laatikot"
+        );
+    }
+
+    #[test]
+    fn ovi_class_7_i_to_e() {
+        assert_eq!(
+            one("ovi", 7, None, Number::Singular, Case::Genitive),
+            "oven"
+        );
+        assert_eq!(
+            one("ovi", 7, None, Number::Singular, Case::Partitive),
+            "ovea"
+        );
+        assert_eq!(
+            one("ovi", 7, None, Number::Singular, Case::Illative),
+            "oveen"
+        );
+        assert_eq!(
+            one("ovi", 7, None, Number::Plural, Case::Inessive),
+            "ovissa"
+        );
+        // direct gradation: kurki -> kurjen
+        assert_eq!(
+            one("kurki", 7, Some('L'), Number::Singular, Case::Genitive),
+            "kurjen"
+        );
+        assert_eq!(
+            one("kurki", 7, Some('L'), Number::Singular, Case::Partitive),
+            "kurkea"
+        );
+    }
+
+    #[test]
+    fn kytkin_class_33() {
+        assert_eq!(
+            one("kytkin", 33, None, Number::Singular, Case::Genitive),
+            "kytkimen"
+        );
+        assert_eq!(
+            one("kytkin", 33, None, Number::Singular, Case::Partitive),
+            "kytkintä"
+        );
+        assert_eq!(
+            one("kytkin", 33, None, Number::Plural, Case::Partitive),
+            "kytkimiä"
+        );
+    }
+
+    #[test]
+    fn vieras_class_41() {
+        assert_eq!(
+            one("vieras", 41, None, Number::Singular, Case::Genitive),
+            "vieraan"
+        );
+        assert_eq!(
+            one("vieras", 41, None, Number::Singular, Case::Partitive),
+            "vierasta"
+        );
+        assert_eq!(
+            one("vieras", 41, None, Number::Singular, Case::Illative),
+            "vieraaseen"
+        );
+        assert_eq!(
+            one("vieras", 41, None, Number::Plural, Case::Partitive),
+            "vieraita"
         );
     }
 

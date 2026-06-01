@@ -1,0 +1,482 @@
+{
+  "kotus_noun_lemmas": 25694,
+  "total_attested_forms": 166637,
+  "engine_supported_forms": 165731,
+  "engine_matched_forms": 162460,
+  "by_case_number": [
+    {
+      "case": "nominative",
+      "number": "singular",
+      "attested": 22973,
+      "supported": 22778,
+      "matched": 22770
+    },
+    {
+      "case": "genitive",
+      "number": "singular",
+      "attested": 12314,
+      "supported": 12274,
+      "matched": 11966
+    },
+    {
+      "case": "partitive",
+      "number": "singular",
+      "attested": 10678,
+      "supported": 10648,
+      "matched": 10468
+    },
+    {
+      "case": "accusative",
+      "number": "singular",
+      "attested": 12314,
+      "supported": 12269,
+      "matched": 11960
+    },
+    {
+      "case": "inessive",
+      "number": "singular",
+      "attested": 6194,
+      "supported": 6168,
+      "matched": 6071
+    },
+    {
+      "case": "elative",
+      "number": "singular",
+      "attested": 7900,
+      "supported": 7868,
+      "matched": 7682
+    },
+    {
+      "case": "illative",
+      "number": "singular",
+      "attested": 7383,
+      "supported": 7351,
+      "matched": 7290
+    },
+    {
+      "case": "adessive",
+      "number": "singular",
+      "attested": 6631,
+      "supported": 6601,
+      "matched": 6464
+    },
+    {
+      "case": "ablative",
+      "number": "singular",
+      "attested": 3530,
+      "supported": 3508,
+      "matched": 3449
+    },
+    {
+      "case": "allative",
+      "number": "singular",
+      "attested": 4963,
+      "supported": 4941,
+      "matched": 4892
+    },
+    {
+      "case": "essive",
+      "number": "singular",
+      "attested": 4414,
+      "supported": 4392,
+      "matched": 4342
+    },
+    {
+      "case": "translative",
+      "number": "singular",
+      "attested": 4356,
+      "supported": 4333,
+      "matched": 4263
+    },
+    {
+      "case": "abessive",
+      "number": "singular",
+      "attested": 859,
+      "supported": 840,
+      "matched": 830
+    },
+    {
+      "case": "nominative",
+      "number": "plural",
+      "attested": 8434,
+      "supported": 8398,
+      "matched": 8270
+    },
+    {
+      "case": "genitive",
+      "number": "plural",
+      "attested": 7323,
+      "supported": 7291,
+      "matched": 6991
+    },
+    {
+      "case": "partitive",
+      "number": "plural",
+      "attested": 7464,
+      "supported": 7431,
+      "matched": 6862
+    },
+    {
+      "case": "accusative",
+      "number": "plural",
+      "attested": 8434,
+      "supported": 8393,
+      "matched": 8264
+    },
+    {
+      "case": "inessive",
+      "number": "plural",
+      "attested": 3458,
+      "supported": 3433,
+      "matched": 3366
+    },
+    {
+      "case": "elative",
+      "number": "plural",
+      "attested": 5142,
+      "supported": 5114,
+      "matched": 5001
+    },
+    {
+      "case": "illative",
+      "number": "plural",
+      "attested": 4112,
+      "supported": 4089,
+      "matched": 4012
+    },
+    {
+      "case": "adessive",
+      "number": "plural",
+      "attested": 3962,
+      "supported": 3931,
+      "matched": 3841
+    },
+    {
+      "case": "ablative",
+      "number": "plural",
+      "attested": 1920,
+      "supported": 1903,
+      "matched": 1854
+    },
+    {
+      "case": "allative",
+      "number": "plural",
+      "attested": 2999,
+      "supported": 2974,
+      "matched": 2928
+    },
+    {
+      "case": "essive",
+      "number": "plural",
+      "attested": 2062,
+      "supported": 2044,
+      "matched": 2008
+    },
+    {
+      "case": "translative",
+      "number": "plural",
+      "attested": 1918,
+      "supported": 1906,
+      "matched": 1872
+    },
+    {
+      "case": "abessive",
+      "number": "plural",
+      "attested": 369,
+      "supported": 366,
+      "matched": 363
+    },
+    {
+      "case": "comitative",
+      "number": "plural",
+      "attested": 2543,
+      "supported": 2525,
+      "matched": 2472
+    },
+    {
+      "case": "instructive",
+      "number": "plural",
+      "attested": 1988,
+      "supported": 1962,
+      "matched": 1909
+    }
+  ],
+  "by_class": [
+    {
+      "tn": 1,
+      "attested": 18948,
+      "supported": 18948,
+      "matched": 18804
+    },
+    {
+      "tn": 2,
+      "attested": 8094,
+      "supported": 8094,
+      "matched": 7835
+    },
+    {
+      "tn": 3,
+      "attested": 3136,
+      "supported": 3136,
+      "matched": 3133
+    },
+    {
+      "tn": 4,
+      "attested": 2249,
+      "supported": 2249,
+      "matched": 2220
+    },
+    {
+      "tn": 5,
+      "attested": 26808,
+      "supported": 26808,
+      "matched": 25982
+    },
+    {
+      "tn": 6,
+      "attested": 8729,
+      "supported": 8729,
+      "matched": 8347
+    },
+    {
+      "tn": 7,
+      "attested": 2361,
+      "supported": 2357,
+      "matched": 2275
+    },
+    {
+      "tn": 8,
+      "attested": 277,
+      "supported": 277,
+      "matched": 260
+    },
+    {
+      "tn": 9,
+      "attested": 12694,
+      "supported": 12694,
+      "matched": 11924
+    },
+    {
+      "tn": 10,
+      "attested": 17044,
+      "supported": 17044,
+      "matched": 16915
+    },
+    {
+      "tn": 11,
+      "attested": 309,
+      "supported": 309,
+      "matched": 270
+    },
+    {
+      "tn": 12,
+      "attested": 8548,
+      "supported": 8548,
+      "matched": 8519
+    },
+    {
+      "tn": 13,
+      "attested": 1140,
+      "supported": 1140,
+      "matched": 1104
+    },
+    {
+      "tn": 14,
+      "attested": 1765,
+      "supported": 1765,
+      "matched": 1696
+    },
+    {
+      "tn": 15,
+      "attested": 363,
+      "supported": 363,
+      "matched": 357
+    },
+    {
+      "tn": 16,
+      "attested": 1,
+      "supported": 0,
+      "matched": 0
+    },
+    {
+      "tn": 17,
+      "attested": 365,
+      "supported": 365,
+      "matched": 365
+    },
+    {
+      "tn": 18,
+      "attested": 495,
+      "supported": 495,
+      "matched": 493
+    },
+    {
+      "tn": 19,
+      "attested": 158,
+      "supported": 158,
+      "matched": 158
+    },
+    {
+      "tn": 20,
+      "attested": 149,
+      "supported": 149,
+      "matched": 147
+    },
+    {
+      "tn": 21,
+      "attested": 68,
+      "supported": 0,
+      "matched": 0
+    },
+    {
+      "tn": 22,
+      "attested": 29,
+      "supported": 0,
+      "matched": 0
+    },
+    {
+      "tn": 23,
+      "attested": 183,
+      "supported": 183,
+      "matched": 182
+    },
+    {
+      "tn": 24,
+      "attested": 212,
+      "supported": 212,
+      "matched": 212
+    },
+    {
+      "tn": 25,
+      "attested": 179,
+      "supported": 0,
+      "matched": 0
+    },
+    {
+      "tn": 26,
+      "attested": 964,
+      "supported": 964,
+      "matched": 945
+    },
+    {
+      "tn": 27,
+      "attested": 342,
+      "supported": 342,
+      "matched": 339
+    },
+    {
+      "tn": 28,
+      "attested": 286,
+      "supported": 286,
+      "matched": 285
+    },
+    {
+      "tn": 29,
+      "attested": 64,
+      "supported": 24,
+      "matched": 24
+    },
+    {
+      "tn": 30,
+      "attested": 44,
+      "supported": 24,
+      "matched": 24
+    },
+    {
+      "tn": 31,
+      "attested": 19,
+      "supported": 0,
+      "matched": 0
+    },
+    {
+      "tn": 32,
+      "attested": 1054,
+      "supported": 1054,
+      "matched": 1040
+    },
+    {
+      "tn": 33,
+      "attested": 1903,
+      "supported": 1894,
+      "matched": 1844
+    },
+    {
+      "tn": 34,
+      "attested": 31,
+      "supported": 31,
+      "matched": 31
+    },
+    {
+      "tn": 35,
+      "attested": 26,
+      "supported": 24,
+      "matched": 24
+    },
+    {
+      "tn": 36,
+      "attested": 2,
+      "supported": 0,
+      "matched": 0
+    },
+    {
+      "tn": 38,
+      "attested": 5470,
+      "supported": 5411,
+      "matched": 5405
+    },
+    {
+      "tn": 39,
+      "attested": 18623,
+      "supported": 18599,
+      "matched": 18567
+    },
+    {
+      "tn": 40,
+      "attested": 12544,
+      "supported": 12544,
+      "matched": 12509
+    },
+    {
+      "tn": 41,
+      "attested": 2473,
+      "supported": 2467,
+      "matched": 2372
+    },
+    {
+      "tn": 42,
+      "attested": 28,
+      "supported": 26,
+      "matched": 26
+    },
+    {
+      "tn": 43,
+      "attested": 94,
+      "supported": 94,
+      "matched": 86
+    },
+    {
+      "tn": 44,
+      "attested": 21,
+      "supported": 19,
+      "matched": 19
+    },
+    {
+      "tn": 47,
+      "attested": 28,
+      "supported": 27,
+      "matched": 27
+    },
+    {
+      "tn": 48,
+      "attested": 7878,
+      "supported": 7878,
+      "matched": 7695
+    },
+    {
+      "tn": 49,
+      "attested": 439,
+      "supported": 0,
+      "matched": 0
+    }
+  ]
+}

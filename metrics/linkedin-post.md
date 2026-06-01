@@ -20,7 +20,7 @@ Finnish nouns are gloriously hard: 15 grammatical cases × singular/plural ≈ 3
 The result — **keinontolibrary**, validated by declining all **25 694** Kotus nouns into every case and checking against my corpus:
 
 ✅ **98.0%** agreement with the reference corpus
-✅ **166k** forms generated & checked across **34 declension types**
+✅ **166k** forms produced & checked across **34 declension types**
 ✅ **99.5%** slot coverage · **< 10 MB** static container · **µs** lookups
 
 **What actually changed in a year?** Three things, together: context windows big enough to hold a whole project *and* its test data; genuine long-horizon agency (plan → build → test → debug → repeat for hours without losing the thread); and reliability on multi-file, stateful code instead of just snippets. Independent coding benchmarks tell the same story — on real-world "fix this GitHub issue" tasks, frontier models went from solving a small fraction to solving the majority. But the qualitative jump is the headline: work that was "no model can do this" became "done before lunch."
@@ -30,8 +30,6 @@ The corpus was the hard, human part — 3 years of judgment. The implementation 
 Data: Kotus *Nykysuomen sanalista 2024* (CC BY 4.0). The ~400k-form corpus was collected over 3 years and morphologically labeled with Voikko (voikko.puimula.org).
 
 What's the project *you've* been waiting to build because the implementation was the bottleneck?
-
-#Rust #NLP #Finnish #LLM #AICoding #SoftwareEngineering #OpenSource
 
 ---
 

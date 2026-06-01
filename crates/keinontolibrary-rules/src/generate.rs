@@ -4,7 +4,7 @@
 //! the plural `-i-` stem, and the class-specific partitive/illative/genitive-plural forms;
 //! then assemble each slot with the uniform case endings and the grade table.
 //!
-//! Coverage is the pragmatic high-frequency set: classes 1-15, 17, 18, 20, 23, 24, 26, 27, 32, 33, 38-41, 48 (29 in all). Other classes return `None` (no generation; the lookup/overlay still answer).
+//! Coverage is the pragmatic high-frequency set: classes 1-15, 17-20, 23, 24, 26-28, 32-34, 38-41, 47, 48 (33 in all). Other classes return `None` (no generation; the lookup/overlay still answer).
 
 use keinontolibrary_core::{Case, Number};
 
@@ -364,6 +364,94 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
                 essive_stem: sg.clone(),
                 sg_strong: sg.clone(),
                 sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // kynsi: -si with assimilating weak stem (kynsi -> kynnen, varsi -> varren);
+        // strong -te-, partitive -ttA, plural keeps -s-.
+        28 => {
+            let base = lemma.strip_suffix("si")?;
+            let lastc = last_char(base)?;
+            let strong = format!("{base}te");
+            let weak = format!("{base}{lastc}e"); // kyn -> kynne, var -> varre
+            let pl = format!("{base}si");
+            Some(Stems {
+                part_sg: vec![format!("{base}tt{a}")],
+                illat_sg: vec![format!("{strong}en")],
+                gen_pl: vec![format!("{pl}en"), format!("{base}tten")],
+                part_pl: vec![format!("{pl}{a}")],
+                illat_pl: plural_illative(&pl),
+                essive_stem: strong.clone(),
+                sg_strong: strong,
+                sg_weak: weak,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // onneton: -tOn -> -ttOmA- (onneton -> onnettoman, onnetonta, onnettomaan).
+        34 => {
+            let base = lemma
+                .strip_suffix("ton")
+                .or_else(|| lemma.strip_suffix("tön"))?;
+            let o = oo(lemma);
+            let stem = format!("{base}tt{o}m{a}"); // onnettoma / työttömä
+            let pl = format!("{base}tt{o}mi");
+            let last = last_char(&stem)?;
+            Some(Stems {
+                part_sg: vec![format!("{lemma}t{a}")],
+                illat_sg: vec![format!("{stem}{last}n")],
+                gen_pl: vec![format!("{pl}en"), format!("{pl}den")],
+                part_pl: vec![format!("{pl}{a}")],
+                illat_pl: plural_illative(&pl),
+                essive_stem: stem.clone(),
+                sg_strong: stem.clone(),
+                sg_weak: stem,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // kuollut: -Ut participle -> -ee- (kuollut -> kuolleen, kuollutta, kuolleeseen).
+        47 => {
+            let base = lemma
+                .strip_suffix("ut")
+                .or_else(|| lemma.strip_suffix("yt"))?;
+            let stem = format!("{base}ee");
+            let pl = format!("{}i", drop_last(&stem)); // kuollee -> kuollei
+            let pl_body = drop_last(&pl);
+            Some(Stems {
+                part_sg: vec![format!("{lemma}t{a}")],
+                illat_sg: vec![format!("{stem}seen")],
+                gen_pl: vec![format!("{pl}den"), format!("{pl}tten")],
+                part_pl: vec![format!("{pl}t{a}")],
+                illat_pl: vec![format!("{pl}hin"), format!("{pl_body}isiin")],
+                essive_stem: stem.clone(),
+                sg_strong: stem.clone(),
+                sg_weak: stem,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // suo: monosyllabic diphthong; illative -hVn (suo -> suohon) and the plural reverses
+        // the diphthong before -i- (suo -> soi-, tie -> tei-).
+        19 => {
+            let chars: Vec<char> = lemma.chars().collect();
+            let last = *chars.last()?;
+            let pl = if chars.len() >= 2 {
+                let prefix: String = chars[..chars.len() - 2].iter().collect();
+                format!("{prefix}{last}i")
+            } else {
+                format!("{lemma}i")
+            };
+            Some(Stems {
+                part_sg: vec![format!("{lemma}t{a}")],
+                illat_sg: vec![format!("{lemma}h{last}n")],
+                gen_pl: vec![format!("{pl}den"), format!("{pl}tten")],
+                part_pl: vec![format!("{pl}t{a}")],
+                illat_pl: vec![format!("{pl}hin")],
+                essive_stem: lemma.to_owned(),
+                sg_strong: lemma.to_owned(),
+                sg_weak: lemma.to_owned(),
                 pl_strong: pl.clone(),
                 pl_weak: pl,
             })
@@ -812,7 +900,44 @@ mod tests {
     }
 
     #[test]
+    fn kynsi_28_onneton_34_kuollut_47_suo_19() {
+        assert_eq!(
+            one("kynsi", 28, None, Number::Singular, Case::Genitive),
+            "kynnen"
+        );
+        assert_eq!(
+            one("kynsi", 28, None, Number::Singular, Case::Partitive),
+            "kynttä"
+        );
+        assert_eq!(
+            one("onneton", 34, None, Number::Singular, Case::Genitive),
+            "onnettoman"
+        );
+        assert_eq!(
+            one("onneton", 34, None, Number::Singular, Case::Partitive),
+            "onnetonta"
+        );
+        assert_eq!(
+            one("kuollut", 47, None, Number::Singular, Case::Genitive),
+            "kuolleen"
+        );
+        assert_eq!(
+            one("kuollut", 47, None, Number::Plural, Case::Partitive),
+            "kuolleita"
+        );
+        assert_eq!(
+            one("suo", 19, None, Number::Singular, Case::Illative),
+            "suohon"
+        );
+        assert_eq!(
+            one("suo", 19, None, Number::Plural, Case::Genitive),
+            "soiden"
+        );
+    }
+
+    #[test]
     fn unsupported_class_returns_none() {
+        // tn44 (kevät) is still unsupported.
         assert!(generate("kevät", 44, None, Number::Singular, Case::Genitive).is_none());
     }
 }

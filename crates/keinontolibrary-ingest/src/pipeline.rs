@@ -1,4 +1,4 @@
-//! The end-to-end ingest: join the Kotus inventory with the Voikko corpus and emit the
+//! The end-to-end ingest: join the Kotus inventory with the reference corpus and emit the
 //! packed [`Artifact`] plus a human-readable report.
 
 use std::collections::{BTreeMap, HashMap};
@@ -20,7 +20,7 @@ use crate::voikko::{self, CleanForm};
 pub struct Config {
     /// Path to the Kotus `nykysuomensanalista2024.txt`.
     pub kotus_path: PathBuf,
-    /// Directory of Voikko `*.jsonl` shards.
+    /// Directory of reference-corpus `*.jsonl` shards (Voikko-format).
     pub voikko_dir: PathBuf,
     /// Output path for the packed artifact.
     pub artifact_path: PathBuf,
@@ -39,15 +39,15 @@ pub struct Report {
     pub kotus_dropped_compounds: usize,
     /// Kotus rows skipped as non-nouns.
     pub kotus_skipped_non_nouns: usize,
-    /// Total Voikko forms surviving filters.
-    pub voikko_forms_kept: usize,
-    /// Voikko forms whose lemma is not in the Kotus noun inventory (ignored).
-    pub voikko_forms_not_in_kotus: usize,
+    /// Total reference-corpus forms surviving filters.
+    pub reference_forms_kept: usize,
+    /// Reference forms whose lemma is not in the Kotus noun inventory (ignored).
+    pub reference_forms_not_in_kotus: usize,
     /// Kotus lemmas with at least one attested corpus form.
     pub lemmas_with_forms: usize,
     /// Kotus lemmas with no corpus forms at all (left for the rule fallback).
     pub lemmas_without_forms: usize,
-    /// `(lemma, tn)` groups where the Voikko gradation letter disagreed with Kotus.
+    /// `(lemma, tn)` groups where the reference-corpus gradation letter disagreed with Kotus.
     pub av_mismatches: usize,
     /// Distinct (lemma, paradigm, slot, variant) forms in the artifact.
     pub total_forms: u64,
@@ -75,13 +75,13 @@ impl Report {
         );
         let _ = writeln!(
             s,
-            "Voikko forms kept:                {}",
-            self.voikko_forms_kept
+            "Reference forms kept:            {}",
+            self.reference_forms_kept
         );
         let _ = writeln!(
             s,
-            "Voikko forms not in Kotus:        {}",
-            self.voikko_forms_not_in_kotus
+            "Reference forms not in Kotus:    {}",
+            self.reference_forms_not_in_kotus
         );
         let _ = writeln!(
             s,
@@ -95,7 +95,7 @@ impl Report {
         );
         let _ = writeln!(
             s,
-            "av mismatches (Kotus vs Voikko):  {}",
+            "av mismatches (Kotus vs corpus):  {}",
             self.av_mismatches
         );
         let _ = writeln!(s, "Total forms in artifact:          {}", self.total_forms);
@@ -122,7 +122,7 @@ impl Report {
 type SlotMap = HashMap<u8, Vec<String>>;
 /// Attested forms grouped by `(lemma, tn)`.
 type Groups = HashMap<(String, u8), SlotMap>;
-/// The Voikko gradation letter seen per `(lemma, tn)` group, for cross-checking Kotus.
+/// The reference-corpus gradation letter seen per `(lemma, tn)` group, for cross-checking Kotus.
 type AvSeen = HashMap<(String, u8), Option<char>>;
 
 /// Push a variant preserving first-occurrence order and dropping duplicates.
@@ -164,7 +164,7 @@ fn parse_all(shards: &[PathBuf]) -> Vec<CleanForm> {
 
 /// Group surviving forms by `(lemma, tn)`, keeping only lemmas in the Kotus inventory.
 ///
-/// Returns the grouping, the Voikko gradation letter seen per group (for cross-check), and
+/// Returns the grouping, the reference-corpus gradation letter seen per group (for cross-check), and
 /// the count of forms whose lemma was not in Kotus.
 fn group_forms(inv: &Inventory, forms: Vec<CleanForm>) -> (Groups, AvSeen, usize) {
     let mut groups: Groups = HashMap::new();
@@ -258,7 +258,7 @@ pub fn run(config: &Config) -> Result<Report> {
 
     let shards = list_shards(&config.voikko_dir)?;
     let forms = parse_all(&shards);
-    let voikko_forms_kept = forms.len();
+    let reference_forms_kept = forms.len();
 
     let (groups, av_seen, not_in_kotus) = group_forms(&inv, forms);
 
@@ -266,8 +266,8 @@ pub fn run(config: &Config) -> Result<Report> {
         kotus_lemmas: inv.len(),
         kotus_dropped_compounds: inv.dropped_compounds,
         kotus_skipped_non_nouns: inv.skipped_non_nouns,
-        voikko_forms_kept,
-        voikko_forms_not_in_kotus: not_in_kotus,
+        reference_forms_kept,
+        reference_forms_not_in_kotus: not_in_kotus,
         ..Report::default()
     };
 
@@ -319,7 +319,8 @@ pub fn run(config: &Config) -> Result<Report> {
     let meta = Meta {
         version: config.version.clone(),
         kotus_source: "Kotus Nykysuomen sanalista 2024 (CC BY 4.0)".into(),
-        voikko_source: "Voikko-generated JSONL corpus".into(),
+        reference_source: "keinontolibrary reference corpus (generated with the Voikko tool)"
+            .into(),
         n_lemmas: u32::try_from(records.len()).unwrap_or(u32::MAX),
         n_forms: report.total_forms,
     };

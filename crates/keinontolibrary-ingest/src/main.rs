@@ -38,9 +38,9 @@ fn main() -> Result<()> {
 
 fn report_to_string(report: &keinontolibrary_ingest::Report) -> String {
     format!(
-        "kotus lemmas: {}\nvoikko forms kept: {}\nlemmas with forms: {}\nlemmas without forms: {}\ntotal forms: {}\n",
+        "kotus lemmas: {}\nreference forms kept: {}\nlemmas with forms: {}\nlemmas without forms: {}\ntotal forms: {}\n",
         report.kotus_lemmas,
-        report.voikko_forms_kept,
+        report.reference_forms_kept,
         report.lemmas_with_forms,
         report.lemmas_without_forms,
         report.total_forms,

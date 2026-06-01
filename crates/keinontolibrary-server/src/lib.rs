@@ -59,9 +59,10 @@ async fn about(State(st): State<Arc<AppState>>) -> impl IntoResponse {
         "forms": st.meta.n_forms,
         "attribution": {
             "kotus": st.meta.kotus_source,
-            "voikko": st.meta.voikko_source,
+            "reference_corpus": st.meta.reference_source,
+            "tools": "Reference forms generated with Voikko (https://voikko.puimula.org/).",
             "license": "Source code MIT. Data: Kotus Nykysuomen sanalista 2024 (CC BY 4.0); \
-                        see LICENSING.md for the Voikko-derived-data terms.",
+                        see LICENSING.md for the reference-corpus redistribution terms.",
         },
     }))
 }

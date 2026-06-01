@@ -44,8 +44,8 @@ pub struct Meta {
     pub version: String,
     /// Description of the Kotus source (name + license).
     pub kotus_source: String,
-    /// Description of the Voikko source.
-    pub voikko_source: String,
+    /// Description of the reference corpus (our generated form set, and the tool used).
+    pub reference_source: String,
     /// Number of lemmas in the artifact.
     pub n_lemmas: u32,
     /// Number of distinct (lemma, paradigm, slot, variant) forms.

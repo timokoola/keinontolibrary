@@ -19,10 +19,15 @@ path = "src/main.rs"
 [dependencies]
 keinontolibrary-core = { workspace = true }
 keinontolibrary-data = { workspace = true }
+keinontolibrary-rules = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 anyhow = { workspace = true }
 rayon = { workspace = true }
+
+[[bin]]
+name = "keinontolibrary-metrics"
+path = "src/bin/metrics.rs"
 
 [lints]
 workspace = true

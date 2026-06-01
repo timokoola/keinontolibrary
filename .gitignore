@@ -10,8 +10,10 @@
 /ingest-report.txt
 ingest-report.txt
 
-# Large generated artifacts (the packed lookup blob may be checked in only if small;
-# big intermediate blobs stay local)
+# Generated lookup artifact. NOT committed: it embeds Voikko-derived forms whose
+# redistribution license is still unresolved (see LICENSING.md). Reproduce locally with
+# `cargo run -p keinontolibrary-ingest`.
+/data/artifact/*.bin
 /data/artifact/*.tmp
 
 # OS / editor cruft

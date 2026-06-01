@@ -8,11 +8,21 @@ license.workspace = true
 repository.workspace = true
 authors.workspace = true
 
+[lib]
+name = "keinontolibrary_ingest"
+path = "src/lib.rs"
+
 [[bin]]
 name = "keinontolibrary-ingest"
 path = "src/main.rs"
 
 [dependencies]
+keinontolibrary-core = { workspace = true }
+keinontolibrary-data = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+rayon = { workspace = true }
 
 [lints]
 workspace = true

@@ -4,11 +4,329 @@
 # these for attested words; the registry makes the rule *fallback* correct for them too,
 # documents them, and lets the parity harness count them as handled.
 #
-# Keep this SMALL and justified: it is a registry of true irregularities, not a dumping
-# ground for systematic rule gaps. CI fails if it grows past the cap in tests/parity.rs.
+# Keep this justified: it is a registry of true irregularities, not a dumping ground for
+# systematic rule gaps. CI caps the number of distinct irregular *lemmas* (not rows) in
+# tests/parity.rs — a genuine irregular legitimately needs many slots; many *lemmas* is the
+# smell that means "fix the rule instead".
 #
 # Fields: lemma, number (singular|plural), case (English name), forms (primary first),
 # reason. Optional: tn (to disambiguate a homonym).
+
+# --- aika (Kotus tn 9) / poika (Kotus tn 10): k:j gradation ---------------------------
+# The two classic k:j irregulars. Kotus tags both gradation D (k:∅, like vika->vian,
+# reikä->reiän), but their weak grade is k:j: aika->aja-, poika->poja-. The difference is
+# lexical (vian vs ajan are both "Vika"), so the rule engine — which faithfully applies D —
+# produces aian/poian. We override every weak-grade slot; the strong-grade slots
+# (nominative, partitive, illative, essive sg; partitive/illative/essive/comitative pl)
+# are already correct from the rule.
+
+# aika, singular weak-grade slots (aja-)
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "singular"
+case = "genitive"
+forms = ["ajan"]
+reason = "k:j gradation aika->aja- (Kotus marks D)"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "singular"
+case = "accusative"
+forms = ["ajan"]
+reason = "k:j gradation aika->aja-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "singular"
+case = "inessive"
+forms = ["ajassa"]
+reason = "k:j gradation aika->aja-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "singular"
+case = "elative"
+forms = ["ajasta"]
+reason = "k:j gradation aika->aja-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "singular"
+case = "adessive"
+forms = ["ajalla"]
+reason = "k:j gradation aika->aja-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "singular"
+case = "ablative"
+forms = ["ajalta"]
+reason = "k:j gradation aika->aja-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "singular"
+case = "allative"
+forms = ["ajalle"]
+reason = "k:j gradation aika->aja-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "singular"
+case = "translative"
+forms = ["ajaksi"]
+reason = "k:j gradation aika->aja-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "singular"
+case = "abessive"
+forms = ["ajatta"]
+reason = "k:j gradation aika->aja-"
+
+# aika, plural weak-grade slots (ajoi-)
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "plural"
+case = "nominative"
+forms = ["ajat"]
+reason = "k:j gradation aika->ajoi-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "plural"
+case = "accusative"
+forms = ["ajat"]
+reason = "k:j gradation aika->ajoi-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "plural"
+case = "inessive"
+forms = ["ajoissa"]
+reason = "k:j gradation aika->ajoi-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "plural"
+case = "elative"
+forms = ["ajoista"]
+reason = "k:j gradation aika->ajoi-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "plural"
+case = "adessive"
+forms = ["ajoilla"]
+reason = "k:j gradation aika->ajoi-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "plural"
+case = "ablative"
+forms = ["ajoilta"]
+reason = "k:j gradation aika->ajoi-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "plural"
+case = "allative"
+forms = ["ajoille"]
+reason = "k:j gradation aika->ajoi-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "plural"
+case = "translative"
+forms = ["ajoiksi"]
+reason = "k:j gradation aika->ajoi-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "plural"
+case = "abessive"
+forms = ["ajoitta"]
+reason = "k:j gradation aika->ajoi-"
+
+[[exception]]
+lemma = "aika"
+tn = 9
+number = "plural"
+case = "instructive"
+forms = ["ajoin"]
+reason = "k:j gradation aika->ajoi-"
+
+# poika, singular weak-grade slots (poja-)
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "singular"
+case = "genitive"
+forms = ["pojan"]
+reason = "k:j gradation poika->poja- (Kotus marks D)"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "singular"
+case = "accusative"
+forms = ["pojan"]
+reason = "k:j gradation poika->poja-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "singular"
+case = "inessive"
+forms = ["pojassa"]
+reason = "k:j gradation poika->poja-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "singular"
+case = "elative"
+forms = ["pojasta"]
+reason = "k:j gradation poika->poja-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "singular"
+case = "adessive"
+forms = ["pojalla"]
+reason = "k:j gradation poika->poja-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "singular"
+case = "ablative"
+forms = ["pojalta"]
+reason = "k:j gradation poika->poja-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "singular"
+case = "allative"
+forms = ["pojalle"]
+reason = "k:j gradation poika->poja-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "singular"
+case = "translative"
+forms = ["pojaksi"]
+reason = "k:j gradation poika->poja-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "singular"
+case = "abessive"
+forms = ["pojatta"]
+reason = "k:j gradation poika->poja-"
+
+# poika, plural weak-grade slots (poji-)
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "plural"
+case = "nominative"
+forms = ["pojat"]
+reason = "k:j gradation poika->poji-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "plural"
+case = "accusative"
+forms = ["pojat"]
+reason = "k:j gradation poika->poji-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "plural"
+case = "inessive"
+forms = ["pojissa"]
+reason = "k:j gradation poika->poji-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "plural"
+case = "elative"
+forms = ["pojista"]
+reason = "k:j gradation poika->poji-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "plural"
+case = "adessive"
+forms = ["pojilla"]
+reason = "k:j gradation poika->poji-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "plural"
+case = "ablative"
+forms = ["pojilta"]
+reason = "k:j gradation poika->poji-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "plural"
+case = "allative"
+forms = ["pojille"]
+reason = "k:j gradation poika->poji-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "plural"
+case = "translative"
+forms = ["pojiksi"]
+reason = "k:j gradation poika->poji-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "plural"
+case = "abessive"
+forms = ["pojitta"]
+reason = "k:j gradation poika->poji-"
+
+[[exception]]
+lemma = "poika"
+tn = 10
+number = "plural"
+case = "instructive"
+forms = ["pojin"]
+reason = "k:j gradation poika->poji-"
 
 # --- aie (Kotus tn 48) -----------------------------------------------------------------
 # A -e word whose oblique stem inserts a k: aie -> aikee- (aikeen, aikeessa, ...). This

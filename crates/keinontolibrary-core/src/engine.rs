@@ -81,7 +81,10 @@ impl Engine {
         let norm = normalize(lemma);
         let refs = self.resolve(&norm);
         match refs.as_slice() {
-            [] => Err(Error::UnknownWord(norm)),
+            // Unknown as a whole: it may be a compound whose final component is known.
+            [] => self
+                .compound_slot(&norm, number, case)
+                .ok_or(Error::UnknownWord(norm)),
             [only] => self.resolve_slot(&norm, only, number, case),
             _ => Err(Error::Ambiguous {
                 lemma: norm,
@@ -111,7 +114,9 @@ impl Engine {
         let norm = normalize(lemma);
         let refs = self.resolve(&norm);
         match refs.as_slice() {
-            [] => Err(Error::UnknownWord(norm)),
+            [] => self
+                .compound_paradigm(&norm)
+                .ok_or(Error::UnknownWord(norm)),
             [only] => Ok(self.build_paradigm(&norm, only)),
             _ => Err(Error::Ambiguous {
                 lemma: norm,
@@ -194,6 +199,75 @@ impl Engine {
             self.slot(norm, reference, number, case)
                 .unwrap_or_else(Forms::missing)
         })
+    }
+
+    // --- compound-noun support --------------------------------------------------------
+    //
+    // A word absent from the inventory may be a compound whose final component is known.
+    // Finnish compounds inflect on the final component only; the modifier prefix is fixed.
+    // Declining the bare component also makes vowel harmony follow it
+    // (koira + keksi -> koirankeksissä, not -ssa, because `keksi` is front-harmonic).
+
+    /// The longest suffix of `norm` that is a known lemma, as `(prefix, component)`.
+    /// Char-boundary safe (Finnish ä/ö are multibyte); requires a prefix of >= 2 and a
+    /// component of >= 3 chars to avoid spurious splits on tiny coincidental suffixes.
+    fn split_compound(&self, norm: &str) -> Option<(String, String)> {
+        const MIN_PREFIX_CHARS: usize = 2;
+        const MIN_COMPONENT_CHARS: usize = 3;
+        let offsets: Vec<usize> = norm.char_indices().map(|(i, _)| i).collect();
+        let n = offsets.len();
+        if n < MIN_PREFIX_CHARS + MIN_COMPONENT_CHARS {
+            return None;
+        }
+        // Grow the prefix; the first known suffix found is the longest one. `at` is the byte
+        // offset where the candidate final component starts.
+        for &at in &offsets[MIN_PREFIX_CHARS..=(n - MIN_COMPONENT_CHARS)] {
+            if !self.resolve(&norm[at..]).is_empty() {
+                return Some((norm[..at].to_owned(), norm[at..].to_owned()));
+            }
+        }
+        None
+    }
+
+    /// `(prefix, component, chosen paradigm)` for a compound, or `None`. If the component is
+    /// ambiguous the first paradigm is used — a lemma's paradigms share the same vowels, so
+    /// the harmony (a/ä) choice is unaffected.
+    fn compound_parts(&self, norm: &str) -> Option<(String, String, ParadigmRef)> {
+        let (prefix, component) = self.split_compound(norm)?;
+        let chosen = self.resolve(&component).into_iter().next()?;
+        Some((prefix, component, chosen))
+    }
+
+    /// Build one slot of a compound by declining its final component and re-attaching the
+    /// fixed prefix to every variant.
+    fn compound_slot(&self, norm: &str, number: Number, case: Case) -> Option<Forms> {
+        let (prefix, component, chosen) = self.compound_parts(norm)?;
+        let mut forms = self.slot(&component, &chosen, number, case)?;
+        if forms.is_missing() {
+            return None;
+        }
+        forms.variants = forms
+            .variants
+            .iter()
+            .map(|v| format!("{prefix}{v}"))
+            .collect();
+        Some(forms)
+    }
+
+    /// Build the whole paradigm of a compound from its final component (prefix re-attached).
+    fn compound_paradigm(&self, norm: &str) -> Option<Paradigm> {
+        let (prefix, component, chosen) = self.compound_parts(norm)?;
+        Some(Paradigm::build(norm, chosen.clone(), |number, case| {
+            let mut forms = self
+                .slot(&component, &chosen, number, case)
+                .unwrap_or_else(Forms::missing);
+            forms.variants = forms
+                .variants
+                .iter()
+                .map(|v| format!("{prefix}{v}"))
+                .collect();
+            forms
+        }))
     }
 }
 
@@ -466,5 +540,72 @@ mod tests {
         assert!(p.get(Number::Singular, Case::Inessive).status == crate::forms::Status::Present);
         // A slot the store never populated is reported as Missing, not an error.
         assert!(p.get(Number::Plural, Case::Abessive).is_missing());
+    }
+
+    #[test]
+    fn compound_inflects_on_final_component() {
+        // `koirankeksi` is unknown as a whole; its final component `keksi` is known. The
+        // compound declines on `keksi` and re-attaches the fixed prefix `koiran` — so
+        // harmony follows `keksi` (front: -ssä), not the back vowels of `koira`.
+        let mut store = MemoryStore::new();
+        store.insert(
+            "keksi",
+            ParadigmRef::new(None, 5),
+            Number::Singular,
+            Case::Inessive,
+            Forms::present(vec!["keksissä".into()], Source::Lookup),
+        );
+        let e = Engine::builder().lookup(Box::new(store)).build();
+        let f = e
+            .decline("koirankeksi", Number::Singular, Case::Inessive)
+            .unwrap();
+        assert_eq!(f.primary(), Some("koirankeksissä"));
+    }
+
+    #[test]
+    fn compound_paradigm_prefixes_all_slots() {
+        let mut store = MemoryStore::new();
+        let r = ParadigmRef::new(None, 5);
+        store.insert(
+            "viini",
+            r.clone(),
+            Number::Singular,
+            Case::Inessive,
+            Forms::present(vec!["viinissä".into()], Source::Lookup),
+        );
+        store.insert(
+            "viini",
+            r,
+            Number::Plural,
+            Case::Inessive,
+            Forms::present(vec!["viineissä".into()], Source::Lookup),
+        );
+        let e = Engine::builder().lookup(Box::new(store)).build();
+        let p = e.paradigm("beaujolaisviini").unwrap();
+        assert_eq!(
+            p.get(Number::Singular, Case::Inessive).primary(),
+            Some("beaujolaisviinissä")
+        );
+        assert_eq!(
+            p.get(Number::Plural, Case::Inessive).primary(),
+            Some("beaujolaisviineissä")
+        );
+    }
+
+    #[test]
+    fn unknown_without_known_component_stays_unknown() {
+        let mut store = MemoryStore::new();
+        store.insert(
+            "keksi",
+            ParadigmRef::new(None, 5),
+            Number::Singular,
+            Case::Inessive,
+            Forms::present(vec!["keksissä".into()], Source::Lookup),
+        );
+        let e = Engine::builder().lookup(Box::new(store)).build();
+        assert!(matches!(
+            e.decline("xyzzy", Number::Singular, Case::Inessive),
+            Err(Error::UnknownWord(_))
+        ));
     }
 }

@@ -74,36 +74,41 @@ async function fetchNewReports() {
 }
 
 function renderIssue(r) {
-  const correction = r.correction ? `\`${r.correction}\`` : '_(none given)_';
-  const meta = r.meta ? '```json\n' + JSON.stringify(r.meta, null, 2) + '\n```' : '_(none)_';
+  const code = (v) => (v ? `\`${v}\`` : "_(n/a)_");
+  const meta = r.meta ? "```json\n" + JSON.stringify(r.meta, null, 2) + "\n```" : "_(none)_";
+  const fields = [
+    ["shown word/form", code(r.word)],
+    ["lemma", code(r.lemma)],
+    ["suggested correction", r.correction ? code(r.correction) : "_(none given)_"],
+    ["verdict", r.verdict],
+    ["project", r.project],
+    ["country", r.country || "_(n/a)_"],
+    ["reported at", r.created_at],
+    ["report id", code(r.id)],
+  ];
   const title = `Accuracy: "${r.word}" reported wrong (${r.project})`;
   const body = [
     `A user reported a form as **wrong** via \`${r.project}\`.`,
-    '',
-    `| field | value |`,
-    `| --- | --- |`,
-    `| shown word/form | \`${r.word}\` |`,
-    `| lemma | ${r.lemma ? `\`${r.lemma}\`` : '_(n/a)_'} |`,
-    `| suggested correction | ${correction} |`,
-    `| verdict | ${r.verdict} |`,
-    `| project | ${r.project} |`,
-    `| country | ${r.country || '_(n/a)_'} |`,
-    `| reported at | ${r.created_at} |`,
-    `| report id | \`${r.id}\` |`,
-    '',
-    `**meta**`,
+    "",
+    "| field | value |",
+    "| --- | --- |",
+    ...fields.map(([k, v]) => `| ${k} | ${v} |`),
+    "",
+    "**meta**",
     meta,
-    '',
-    '<sub>Imported automatically from the keinonto-web reports-api.</sub>',
-  ].join('\n');
+    "",
+    "<sub>Imported automatically from the keinonto-web reports-api.</sub>",
+  ].join("\n");
   return { title, body };
 }
 
 async function createIssue(title, body) {
   // Try with labels; if any label doesn't exist GitHub returns 422 — retry without them.
-  let res = await ghPost(`/repos/${REPO}/issues`, { title, body, labels: LABELS });
+  const payload = { title, body, labels: LABELS };
+  let res = await ghPost(`/repos/${REPO}/issues`, payload);
   if (res.status === 422 && LABELS.length) {
-    res = await ghPost(`/repos/${REPO}/issues`, { title, body });
+    delete payload.labels;
+    res = await ghPost(`/repos/${REPO}/issues`, payload);
   }
   if (!res.ok) throw new Error(`GitHub POST issues ${res.status}: ${await res.text()}`);
   return res.json();

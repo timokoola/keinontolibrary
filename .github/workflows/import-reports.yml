@@ -40,6 +40,5 @@ jobs:
           REPORTS_API_URL: ${{ secrets.REPORTS_API_URL }}
           REPORTS_ADMIN_TOKEN: ${{ secrets.REPORTS_ADMIN_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROJECT: ""
           DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
         run: node scripts/import-reports.mjs

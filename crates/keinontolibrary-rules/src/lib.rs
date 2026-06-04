@@ -99,6 +99,138 @@ mod tests {
         assert_eq!(forms.source, Source::Generated);
     }
 
+    // aika/poika are the classic k:j irregulars. Kotus marks them gradation D (k:∅, like
+    // vika->vian), but their weak grade is k:j: aika->ajan, poika->pojan. The rule engine
+    // applies D and produces aian/poian; the exception registry must correct the weak slots
+    // while leaving the strong-grade slots (partitive, illative, essive) untouched.
+    fn prim(r: &RuleEngine, lemma: &str, tn: u8, n: Number, c: Case) -> String {
+        r.generate(lemma, &ParadigmRef::new(None, tn).with_av(Some('D')), n, c)
+            .unwrap()
+            .primary()
+            .unwrap()
+            .to_string()
+    }
+
+    #[test]
+    fn aika_kj_gradation_singular() {
+        let r = RuleEngine::new();
+        // weak grade -> aja-
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Singular, Case::Genitive),
+            "ajan"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Singular, Case::Inessive),
+            "ajassa"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Singular, Case::Elative),
+            "ajasta"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Singular, Case::Adessive),
+            "ajalla"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Singular, Case::Ablative),
+            "ajalta"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Singular, Case::Allative),
+            "ajalle"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Singular, Case::Translative),
+            "ajaksi"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Singular, Case::Abessive),
+            "ajatta"
+        );
+        // strong grade kept
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Singular, Case::Partitive),
+            "aikaa"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Singular, Case::Illative),
+            "aikaan"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Singular, Case::Essive),
+            "aikana"
+        );
+    }
+
+    #[test]
+    fn aika_kj_gradation_plural() {
+        let r = RuleEngine::new();
+        // weak grade -> ajoi-
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Plural, Case::Nominative),
+            "ajat"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Plural, Case::Inessive),
+            "ajoissa"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Plural, Case::Elative),
+            "ajoista"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Plural, Case::Adessive),
+            "ajoilla"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Plural, Case::Allative),
+            "ajoille"
+        );
+        // strong grade kept
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Plural, Case::Partitive),
+            "aikoja"
+        );
+        assert_eq!(
+            prim(&r, "aika", 9, Number::Plural, Case::Illative),
+            "aikoihin"
+        );
+    }
+
+    #[test]
+    fn poika_kj_gradation() {
+        let r = RuleEngine::new();
+        assert_eq!(
+            prim(&r, "poika", 10, Number::Singular, Case::Genitive),
+            "pojan"
+        );
+        assert_eq!(
+            prim(&r, "poika", 10, Number::Singular, Case::Inessive),
+            "pojassa"
+        );
+        assert_eq!(
+            prim(&r, "poika", 10, Number::Singular, Case::Allative),
+            "pojalle"
+        );
+        assert_eq!(
+            prim(&r, "poika", 10, Number::Plural, Case::Nominative),
+            "pojat"
+        );
+        assert_eq!(
+            prim(&r, "poika", 10, Number::Plural, Case::Inessive),
+            "pojissa"
+        );
+        // strong grade kept
+        assert_eq!(
+            prim(&r, "poika", 10, Number::Singular, Case::Partitive),
+            "poikaa"
+        );
+        assert_eq!(
+            prim(&r, "poika", 10, Number::Plural, Case::Illative),
+            "poikiin"
+        );
+    }
+
     #[test]
     fn unsupported_class_yields_none() {
         let r = RuleEngine::new();

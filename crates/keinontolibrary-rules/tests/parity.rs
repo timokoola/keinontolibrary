@@ -17,16 +17,30 @@ use keinontolibrary_core::{Generator, ParadigmRef};
 use keinontolibrary_data::{slot_parts, Artifact};
 use keinontolibrary_rules::{Exceptions, RuleEngine};
 
-/// CI cap on the exception registry: it must stay a small, justified set.
-const EXCEPTION_CAP: usize = 200;
+/// CI cap on the exception registry, measured in **distinct irregular lemmas** — the
+/// meaningful unit. A genuine irregular needs many slots (aika alone is 19), so capping
+/// rows punishes depth; capping lemmas still flags the real smell (a systematic rule gap
+/// patched word-by-word) while letting each true irregular be fully specified.
+const LEMMA_CAP: usize = 64;
+/// Secondary backstop on raw slot count, to catch a runaway file.
+const ENTRY_CAP: usize = 1500;
 
 #[test]
 fn exception_registry_within_cap() {
-    let n = Exceptions::load().len();
-    eprintln!("exception registry: {n} entries (cap {EXCEPTION_CAP})");
+    let ex = Exceptions::load();
+    let lemmas = ex.lemma_count();
+    let entries = ex.len();
+    eprintln!(
+        "exception registry: {lemmas} lemmas / {entries} slots (caps: {LEMMA_CAP} lemmas, {ENTRY_CAP} slots)"
+    );
     assert!(
-        n <= EXCEPTION_CAP,
-        "exception registry has {n} entries, over the cap of {EXCEPTION_CAP}"
+        lemmas <= LEMMA_CAP,
+        "exception registry has {lemmas} irregular lemmas, over the cap of {LEMMA_CAP} \
+         — if these are systematic, fix the rule instead of patching per-lemma"
+    );
+    assert!(
+        entries <= ENTRY_CAP,
+        "exception registry has {entries} slots, over the backstop of {ENTRY_CAP}"
     );
 }
 

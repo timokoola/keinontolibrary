@@ -82,10 +82,22 @@ impl Exceptions {
             .map(Vec::as_slice)
     }
 
-    /// Number of registered slots (used by the parity-gate cap).
+    /// Number of registered slots (raw row count; backstop for the parity gate).
     #[must_use]
     pub fn len(&self) -> usize {
         self.count
+    }
+
+    /// Number of distinct irregular lemmas. This is the meaningful cap unit: a genuine
+    /// irregular needs many slots (aika alone is 19), so counting lemmas flags systematic
+    /// rule-gap dumping rather than punishing fully specifying one true irregular.
+    #[must_use]
+    pub fn lemma_count(&self) -> usize {
+        self.by_slot
+            .keys()
+            .map(|(lemma, ..)| lemma.as_str())
+            .collect::<std::collections::HashSet<_>>()
+            .len()
     }
 
     /// Whether the registry is empty.

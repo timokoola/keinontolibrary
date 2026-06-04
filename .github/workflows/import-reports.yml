@@ -1,0 +1,41 @@
+name: Import accuracy reports
+
+# Pulls "wrong form" reports from the keinonto-web reports-api and opens a GitHub issue
+# for each, then marks them exported. Runs on a schedule and can be triggered manually.
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily at 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print what would be imported without creating issues"
+        type: boolean
+        default: false
+
+permissions:
+  issues: write
+  contents: read
+
+concurrency:
+  group: import-reports
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Import reports -> issues
+        env:
+          REPORTS_API_URL: ${{ secrets.REPORTS_API_URL }}
+          REPORTS_ADMIN_TOKEN: ${{ secrets.REPORTS_ADMIN_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROJECT: ""
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
+        run: node scripts/import-reports.mjs

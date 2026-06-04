@@ -1,0 +1,44 @@
+name: Import accuracy reports
+
+# Pulls "wrong form" reports from the keinonto-web reports-api and opens a GitHub issue
+# for each, then marks them exported. Runs on a schedule and can be triggered manually.
+
+on:
+  schedule:
+    # Daily at 09:17 UTC — deep night across US time zones (~1-2 AM PT / 4-5 AM ET,
+    # year-round incl. DST), when the dominant source of GitHub Actions load is asleep.
+    # The :17 minute avoids the congested top of the hour, which GitHub delays under load.
+    # This import is low-priority, so a little scheduling slack is fine regardless.
+    - cron: "17 9 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print what would be imported without creating issues"
+        type: boolean
+        default: false
+
+permissions:
+  issues: write
+  contents: read
+
+concurrency:
+  group: import-reports
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Import reports -> issues
+        env:
+          REPORTS_API_URL: ${{ secrets.REPORTS_API_URL }}
+          REPORTS_ADMIN_TOKEN: ${{ secrets.REPORTS_ADMIN_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
+        run: node scripts/import-reports.mjs

@@ -31,10 +31,14 @@ near-exhaustive by construction.
 
 ## Scope (v1.0)
 
-- **In:** simple (non-compound) nouns, declension classes 1–49 with gradation, all 15
-  cases, both numbers, multi-paradigm homonyms.
-- **Out:** verbs, comparison, compound nouns (Kotus types 50/51), a general
-  possessive-suffix system, adjectives, class inference for unlisted words.
+- **In:** simple nouns, declension classes 1–49 with gradation, all 15 cases, both numbers,
+  multi-paradigm homonyms; and **compound nouns** declined on their final component (the
+  modifier prefix is fixed), which also makes vowel harmony follow the final component
+  (`koirankeksi` → `koirankeksissä`). Full Kotus 50/51 handling and its test-data plan are
+  designed in [`docs/compound-nouns.md`](docs/compound-nouns.md).
+- **Out:** verbs, comparison, a general possessive-suffix system, adjectives, class
+  inference for unlisted *simple* words, and compounds whose modifier also inflects (rare
+  for nouns; see the design doc).
 
 ## Building
 

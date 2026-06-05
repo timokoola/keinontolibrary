@@ -85,6 +85,12 @@ impl Engine {
             [] => self
                 .compound_slot(&norm, number, case)
                 .ok_or(Error::UnknownWord(norm)),
+            // A tn51 compound: both parts inflect (isoveli -> isoissaveljissä). Falls back to
+            // the head-only reading (the accepted tn50 variant), then the normal path.
+            [only] if only.tn == COMPOUND_BOTH_TN => self
+                .compound_both_slot(&norm, number, case)
+                .or_else(|| self.compound_slot(&norm, number, case))
+                .map_or_else(|| self.resolve_slot(&norm, only, number, case), Ok),
             // A Kotus-listed compound (tn50): decline on the final component, modifier frozen
             // (so harmony follows the head). Falls through if it can't be segmented.
             [only] if only.tn == COMPOUND_TN => self
@@ -127,6 +133,10 @@ impl Engine {
             [] => self
                 .compound_paradigm(&norm)
                 .ok_or(Error::UnknownWord(norm)),
+            [only] if only.tn == COMPOUND_BOTH_TN => Ok(self
+                .compound_both_paradigm(&norm)
+                .or_else(|| self.compound_paradigm(&norm))
+                .unwrap_or_else(|| self.build_paradigm(&norm, only))),
             [only] if only.tn == COMPOUND_TN => Ok(self
                 .compound_paradigm(&norm)
                 .unwrap_or_else(|| self.build_paradigm(&norm, only))),
@@ -306,6 +316,33 @@ impl Engine {
         matches!(prefix.strip_suffix('n'), Some(stem) if !self.resolve(stem).is_empty())
     }
 
+    /// Build one slot of a tn51 compound where **both parts inflect**: decline the modifier
+    /// and the head in the same number/case and concatenate (`iso` + `veli` @ plural inessive
+    /// → `isoissa` + `veljissä` → `isoissaveljissä`). Both parts must be known, declinable
+    /// lemmas; returns `None` otherwise (the caller falls back to the head-only reading).
+    fn compound_both_slot(&self, norm: &str, number: Number, case: Case) -> Option<Forms> {
+        let (modifier, component) = self.split_compound(norm)?;
+        let mod_ref = self.resolve(&modifier).into_iter().next()?;
+        let head_ref = self.resolve(&component).into_iter().next()?;
+        let modf = self.slot(&modifier, &mod_ref, number, case)?;
+        let head = self.slot(&component, &head_ref, number, case)?;
+        if modf.is_missing() || head.is_missing() {
+            return None;
+        }
+        let (m, h) = (modf.variants.first()?, head.variants.first()?);
+        Some(Forms::present(vec![format!("{m}{h}")], head.source))
+    }
+
+    /// The whole paradigm of a tn51 both-parts-inflect compound.
+    fn compound_both_paradigm(&self, norm: &str) -> Option<Paradigm> {
+        let (_, component) = self.split_compound(norm)?;
+        let head_ref = self.resolve(&component).into_iter().next()?;
+        Some(Paradigm::build(norm, head_ref, |number, case| {
+            self.compound_both_slot(norm, number, case)
+                .unwrap_or_else(Forms::missing)
+        }))
+    }
+
     /// Should we override a *known* word's harmony because it's really a compound whose final
     /// component flips harmony? Conservative: the split must exist, the **prefix must be a known
     /// modifier** (a lemma bare or genitive-linked — so `punaviini` = puna+viini and
@@ -336,6 +373,10 @@ impl Engine {
 /// Kotus class for head-inflecting compounds: declined on the final component with the
 /// modifier frozen, so it is routed to the compound decliner rather than a rule arm.
 const COMPOUND_TN: u8 = 50;
+
+/// Kotus class for compounds where *both* parts inflect (`isoveli` → `isoissaveljissä`):
+/// the modifier and head are declined in the same slot and concatenated.
+const COMPOUND_BOTH_TN: u8 = 51;
 
 /// Whether a word takes back-vowel harmony (contains any of a/o/u). Mirrors the rule
 /// engine's harmony test; used only to detect a compound flipping harmony.
@@ -736,6 +777,39 @@ mod tests {
             .decline("aitokana", Number::Plural, Case::Inessive)
             .unwrap();
         assert_eq!(f.primary(), Some("aitokanoissa"));
+    }
+
+    #[test]
+    fn tn51_compound_inflects_both_parts() {
+        // isoveli (tn51): the modifier `iso` and the head `veli` both inflect and join —
+        // isoissa + veljissä -> isoissaveljissä, not the frozen isoveljissä.
+        let mut store = MemoryStore::new();
+        store.insert(
+            "isoveli",
+            ParadigmRef::new(None, 51),
+            Number::Singular,
+            Case::Nominative,
+            Forms::present(vec!["isoveli".into()], Source::Lookup),
+        );
+        store.insert(
+            "iso",
+            ParadigmRef::new(None, 1),
+            Number::Plural,
+            Case::Inessive,
+            Forms::present(vec!["isoissa".into()], Source::Lookup),
+        );
+        store.insert(
+            "veli",
+            ParadigmRef::new(None, 7),
+            Number::Plural,
+            Case::Inessive,
+            Forms::present(vec!["veljissä".into()], Source::Lookup),
+        );
+        let e = Engine::builder().lookup(Box::new(store)).build();
+        let f = e
+            .decline("isoveli", Number::Plural, Case::Inessive)
+            .unwrap();
+        assert_eq!(f.primary(), Some("isoissaveljissä"));
     }
 
     #[test]

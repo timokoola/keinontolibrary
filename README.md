@@ -40,15 +40,18 @@ near-exhaustive by construction.
   the rule generator. Plus the **special numeral classes**: the productive **ordinals** (tn 45
   — `kolmas → kolmannen`, `kymmenes`, `neljäs`, … incl. the pronominal `mones`) via a rule
   arm, and the singletons `kaksi`/`yksi` (tn 31) and `tuhat` (tn 46) from the registry. Plus
-  **compound nouns** declined on their final component (modifier prefix fixed), which makes
-  vowel harmony follow the final component (`koirankeksi` → `koirankeksissä`, `punaviini` →
-  `punaviiniä`). Full Kotus 50/51 handling and its test-data plan:
+  **head-inflecting compounds** — the Kotus **tn 50** class and any productive compound whose
+  final component is a known lemma — declined on that final component with the modifier frozen,
+  so vowel harmony follows the head (`koirankeksi` → `koirankeksissä`, `punaviini` →
+  `punaviiniä`, `halpakauppa` → `halpakaupoissa`). Segmentation prefers a split where both
+  parts are known lemmas. Design and test-data plan:
   [`docs/compound-nouns.md`](docs/compound-nouns.md).
 - **Out:** verbs; adjective **comparison** (comparative/superlative); the **interrogative /
   relative pronouns** (`kuka/mikä/kumpi/joka` — irregular oblique stems, tracked separately);
   a general possessive-suffix system; class inference for unlisted *simple* words; and
-  compounds whose modifier also inflects (rare; including the compound ordinals like
-  `kahdeskymmenes` — only the tail declines; see the design doc).
+  **compounds whose modifier also inflects** (Kotus **tn 51**, `isoveli` → `isoissaveljissä`,
+  and the compound ordinals like `kahdeskymmenes` — for now only the head declines; see the
+  design doc).
 
 ## Building
 

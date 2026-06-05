@@ -3298,3 +3298,93 @@ case = "translative"
 forms = ["veljiksi"]
 reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
 
+
+# --- häät (tn18 plurale tantum; base 'hää', listed in plural) — Voikko-verified --------
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "nominative"
+forms = ["häät"]
+reason = "tn18 häät — plurale tantum (base hää), listed in plural form"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "genitive"
+forms = ["häiden"]
+reason = "tn18 häät — plurale tantum (base hää), listed in plural form"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "partitive"
+forms = ["häitä"]
+reason = "tn18 häät — plurale tantum (base hää), listed in plural form"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "inessive"
+forms = ["häissä"]
+reason = "tn18 häät — plurale tantum (base hää), listed in plural form"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "elative"
+forms = ["häistä"]
+reason = "tn18 häät — plurale tantum (base hää), listed in plural form"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "illative"
+forms = ["häihin"]
+reason = "tn18 häät — plurale tantum (base hää), listed in plural form"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "adessive"
+forms = ["häillä"]
+reason = "tn18 häät — plurale tantum (base hää), listed in plural form"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "ablative"
+forms = ["häiltä"]
+reason = "tn18 häät — plurale tantum (base hää), listed in plural form"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "allative"
+forms = ["häille"]
+reason = "tn18 häät — plurale tantum (base hää), listed in plural form"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "essive"
+forms = ["häinä"]
+reason = "tn18 häät — plurale tantum (base hää), listed in plural form"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "translative"
+forms = ["häiksi"]
+reason = "tn18 häät — plurale tantum (base hää), listed in plural form"
+

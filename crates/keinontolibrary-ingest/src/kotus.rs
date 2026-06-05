@@ -3,10 +3,11 @@
 //! Columns: `Hakusana \t Homonymia \t Sanaluokka \t Taivutustiedot`. We keep an entry iff
 //! it is tagged a **nominal** — substantiivi, adjektiivi, numeraali or pronomini, which all
 //! decline through the same case system — and has at least one in-scope `tn`: the regular
-//! classes 1–49, or the pronouns' irregular tn 101 (whose forms come from the exception
-//! registry, not the rule generator). Compound types 50/51 and empty-`tn` rows (whose final
-//! component is itself listed) are dropped. Paradigms are deduplicated by `(tn, av)` across
-//! homonyms, since `hn` does not affect declension.
+//! classes 1–49, the pronouns' irregular tn 101 (whose forms come from the exception
+//! registry, not the rule generator), or the compound class tn 50 (head-inflecting compounds,
+//! which the engine routes to the compound decliner). tn 51 (both parts inflect) and empty-`tn`
+//! rows are dropped. Paradigms are deduplicated by `(tn, av)` across homonyms, since `hn` does
+//! not affect declension.
 
 use std::collections::HashMap;
 
@@ -18,7 +19,8 @@ const NOMINALS: [&str; 4] = ["substantiivi", "adjektiivi", "numeraali", "pronomi
 /// One declension paradigm parsed from the `Taivutustiedot` field.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct KotusParadigm {
-    /// Declension class (taivutusnumero): 1–49 for regular nominals, or 101 for pronouns.
+    /// Declension class (taivutusnumero): 1–49 for regular nominals, 50 for head-inflecting
+    /// compounds, or 101 for pronouns.
     pub tn: u8,
     /// Gradation letter (astevaihtelu), if any.
     pub av: Option<char>,
@@ -61,14 +63,24 @@ fn parse_token(token: &str) -> Option<KotusParadigm> {
     Some(KotusParadigm { tn, av, rare })
 }
 
-/// Parse the whole `Taivutustiedot` field (comma-separated tokens) into paradigms,
-/// keeping the regular nominal classes 1–49 plus the pronoun class 101.
+/// Parse the whole `Taivutustiedot` field (comma-separated tokens) into paradigms, keeping
+/// the regular nominal classes 1–49, the pronoun class 101, and the compound class 50.
+///
+/// tn50 marks a compound that declines on its final component (modifier frozen); the engine
+/// routes it to the compound decliner. When a row carries tn50 *alongside* a regular class
+/// (e.g. `villiviini` → `5, 50`), that regular class already declines the whole word
+/// correctly, so we drop the tn50 — keeping it would only create a spurious ambiguity. tn51
+/// (both parts inflect) is still out.
 fn parse_paradigms(field: &str) -> Vec<KotusParadigm> {
-    field
+    let mut ps: Vec<KotusParadigm> = field
         .split(',')
         .filter_map(parse_token)
-        .filter(|p| (1..=49).contains(&p.tn) || p.tn == 101)
-        .collect()
+        .filter(|p| (1..=49).contains(&p.tn) || p.tn == 50 || p.tn == 101)
+        .collect();
+    if ps.iter().any(|p| (1..=49).contains(&p.tn)) {
+        ps.retain(|p| p.tn != 50);
+    }
+    ps
 }
 
 /// Merge a row's paradigms into a lemma's accumulated list, deduplicating by `(tn, av)`.
@@ -197,8 +209,20 @@ mod tests {
     }
 
     #[test]
-    fn drops_compound_classes_50_51_and_verbs() {
-        assert!(parse_paradigms("50").is_empty());
+    fn keeps_tn50_compounds_drops_tn51_and_verbs() {
+        let tn = |n| KotusParadigm {
+            tn: n,
+            av: None,
+            rare: false,
+        };
+        // tn50 (head-inflecting compound) is kept and routed to the compound decliner...
+        assert_eq!(parse_paradigms("50"), vec![tn(50)]);
+        // ...even when co-listed with tn51 (which itself stays out).
+        assert_eq!(parse_paradigms("51, 50"), vec![tn(50)]);
+        // ...but a co-listed *regular* class wins (villiviini `5, 50` declines as tn5),
+        // so the tn50 is dropped to avoid a spurious ambiguity.
+        assert_eq!(parse_paradigms("5, 50"), vec![tn(5)]);
+        // tn51 alone (both parts inflect), verbs and indeclinables are still dropped.
         assert!(parse_paradigms("51").is_empty());
         assert!(parse_paradigms("53*C").is_empty()); // verb class
         assert!(parse_paradigms("99").is_empty()); // indeclinable

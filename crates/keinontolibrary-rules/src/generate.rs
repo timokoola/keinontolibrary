@@ -84,10 +84,11 @@ fn ends_in_diphthong(pl: &str) -> bool {
 /// Classes 1, 2, 5, 6, 9, 10, 12: the vowel stem is the lemma itself; gradation and the
 /// plural `-i-` stem do the work.
 fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
-    // Consonant-final tn5 loanwords (epsilon, nylon, stadion) inflect on an epenthetic -i-
-    // stem (epsilon -> epsiloni-: epsilonin, epsiloneissa). The nominative stays the bare
-    // lemma. Native tn5 words already end in -i, so this only affects the loanwords.
-    let sg_strong = if tn == 5 && !ends_with_vowel(lemma) {
+    // Consonant-final tn5/tn6 loanwords (epsilon, nylon, stadion; agar, tomaatti-less -r/-n
+    // borrowings) inflect on an epenthetic -i- stem (epsilon -> epsiloni-: epsilonin,
+    // epsiloneissa; agar -> agari-: agarin, agareissa). The nominative stays the bare lemma;
+    // native tn5/tn6 words already end in -i, so this only affects the loanwords.
+    let sg_strong = if matches!(tn, 5 | 6) && !ends_with_vowel(lemma) {
         format!("{lemma}i")
     } else {
         lemma.to_owned()
@@ -745,6 +746,23 @@ mod tests {
         assert_eq!(
             one("viini", 5, None, Number::Singular, Case::Partitive),
             "viiniä"
+        );
+    }
+
+    #[test]
+    fn agar_consonant_final_tn6() {
+        // Consonant-final tn6 loanword (agar): same epenthetic -i- stem, bare nominative —
+        // agari-: agarin / agaria / agarissa / agareissa (not the bare agarn / agarssa).
+        let g = |n, c| one("agar", 6, None, n, c);
+        assert_eq!(g(Number::Singular, Case::Nominative), "agar");
+        assert_eq!(g(Number::Singular, Case::Genitive), "agarin");
+        assert_eq!(g(Number::Singular, Case::Partitive), "agaria");
+        assert_eq!(g(Number::Singular, Case::Inessive), "agarissa");
+        assert_eq!(g(Number::Plural, Case::Inessive), "agareissa");
+        // Regression: vowel-final tn6 unchanged.
+        assert_eq!(
+            one("paperi", 6, None, Number::Plural, Case::Inessive),
+            "papereissa"
         );
     }
 

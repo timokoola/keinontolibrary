@@ -85,7 +85,12 @@ impl Engine {
             [] => self
                 .compound_slot(&norm, number, case)
                 .ok_or(Error::UnknownWord(norm)),
-            [only] => self.resolve_slot(&norm, only, number, case),
+            // Known word, but a known compound whose final component flips harmony
+            // (punaviini -> punaviiniä, not -nia): override with the component's harmony.
+            [only] => match self.compound_harmony_slot(&norm, number, case) {
+                Some(forms) => Ok(forms),
+                None => self.resolve_slot(&norm, only, number, case),
+            },
             _ => Err(Error::Ambiguous {
                 lemma: norm,
                 paradigms: refs,
@@ -117,7 +122,9 @@ impl Engine {
             [] => self
                 .compound_paradigm(&norm)
                 .ok_or(Error::UnknownWord(norm)),
-            [only] => Ok(self.build_paradigm(&norm, only)),
+            [only] => Ok(self
+                .compound_harmony_paradigm(&norm)
+                .unwrap_or_else(|| self.build_paradigm(&norm, only))),
             _ => Err(Error::Ambiguous {
                 lemma: norm,
                 paradigms: refs,
@@ -269,6 +276,37 @@ impl Engine {
             forms
         }))
     }
+
+    /// Should we override a *known* word's harmony because it's really a compound whose final
+    /// component flips harmony? Conservative: the split must exist, the **prefix must itself be
+    /// a known lemma** (so `punaviini` = puna+viini qualifies but `laviini` — `la` is not a
+    /// lemma — does not), and the whole-word vs component harmony must actually differ.
+    fn compound_harmony_ok(&self, norm: &str) -> bool {
+        let Some((prefix, component, _)) = self.compound_parts(norm) else {
+            return false;
+        };
+        !self.resolve(&prefix).is_empty() && is_back(norm) != is_back(&component)
+    }
+
+    fn compound_harmony_slot(&self, norm: &str, number: Number, case: Case) -> Option<Forms> {
+        if !self.compound_harmony_ok(norm) {
+            return None;
+        }
+        self.compound_slot(norm, number, case)
+    }
+
+    fn compound_harmony_paradigm(&self, norm: &str) -> Option<Paradigm> {
+        if !self.compound_harmony_ok(norm) {
+            return None;
+        }
+        self.compound_paradigm(norm)
+    }
+}
+
+/// Whether a word takes back-vowel harmony (contains any of a/o/u). Mirrors the rule
+/// engine's harmony test; used only to detect a compound flipping harmony.
+fn is_back(s: &str) -> bool {
+    s.chars().any(|c| matches!(c, 'a' | 'o' | 'u'))
 }
 
 /// Append `incoming` refs into `out`, skipping any with a `(hn, tn)` already present.

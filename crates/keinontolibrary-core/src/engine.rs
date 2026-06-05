@@ -277,15 +277,27 @@ impl Engine {
         }))
     }
 
+    /// Whether `prefix` is a valid compound modifier: a known lemma either bare (the
+    /// nominative linker, `puna`+viini) or in its genitive-singular linking form (`koira`+n =
+    /// `koiran`, as in `koiran`+keksi). The genitive `-n` is Finnish's most common linker, so
+    /// without this `koirankeksi` would not be recognized as a compound.
+    fn is_known_modifier(&self, prefix: &str) -> bool {
+        if !self.resolve(prefix).is_empty() {
+            return true;
+        }
+        matches!(prefix.strip_suffix('n'), Some(stem) if !self.resolve(stem).is_empty())
+    }
+
     /// Should we override a *known* word's harmony because it's really a compound whose final
-    /// component flips harmony? Conservative: the split must exist, the **prefix must itself be
-    /// a known lemma** (so `punaviini` = puna+viini qualifies but `laviini` — `la` is not a
-    /// lemma — does not), and the whole-word vs component harmony must actually differ.
+    /// component flips harmony? Conservative: the split must exist, the **prefix must be a known
+    /// modifier** (a lemma bare or genitive-linked — so `punaviini` = puna+viini and
+    /// `koirankeksi` = koiran+keksi qualify, but `laviini` — `la` is not a lemma — does not),
+    /// and the whole-word vs component harmony must actually differ.
     fn compound_harmony_ok(&self, norm: &str) -> bool {
         let Some((prefix, component, _)) = self.compound_parts(norm) else {
             return false;
         };
-        !self.resolve(&prefix).is_empty() && is_back(norm) != is_back(&component)
+        self.is_known_modifier(&prefix) && is_back(norm) != is_back(&component)
     }
 
     fn compound_harmony_slot(&self, norm: &str, number: Number, case: Case) -> Option<Forms> {
@@ -598,6 +610,44 @@ mod tests {
             .decline("koirankeksi", Number::Singular, Case::Inessive)
             .unwrap();
         assert_eq!(f.primary(), Some("koirankeksissä"));
+    }
+
+    #[test]
+    fn known_compound_overrides_harmony_via_genitive_linker() {
+        // `koirankeksi` is itself a known Kotus lemma (tn5), so it takes the known-word path
+        // and its stored (back-harmonic) form would otherwise win. Its genitive-linked prefix
+        // `koiran` (koira + n) must still be recognized as a modifier so harmony follows the
+        // front-harmonic component `keksi`: koirankeksi -> koirankekseissä, not -ssa.
+        let mut store = MemoryStore::new();
+        let r = ParadigmRef::new(None, 5);
+        store.insert(
+            "koirankeksi",
+            r.clone(),
+            Number::Plural,
+            Case::Inessive,
+            Forms::present(vec!["koirankekseissa".into()], Source::Lookup),
+        );
+        // The modifier base `koira` is known (but the linking form `koiran` is not a lemma)...
+        store.insert(
+            "koira",
+            ParadigmRef::new(None, 10),
+            Number::Singular,
+            Case::Nominative,
+            Forms::present(vec!["koira".into()], Source::Lookup),
+        );
+        // ...and the final component `keksi` declines front.
+        store.insert(
+            "keksi",
+            r,
+            Number::Plural,
+            Case::Inessive,
+            Forms::present(vec!["kekseissä".into()], Source::Lookup),
+        );
+        let e = Engine::builder().lookup(Box::new(store)).build();
+        let f = e
+            .decline("koirankeksi", Number::Plural, Case::Inessive)
+            .unwrap();
+        assert_eq!(f.primary(), Some("koirankekseissä"));
     }
 
     #[test]

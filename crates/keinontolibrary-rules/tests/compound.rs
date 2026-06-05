@@ -60,7 +60,8 @@ fn compound_harmony_follows_final_component() {
     );
 }
 
-/// Engine that knows punaviini/puna/viini/laviini as plain tn lemmas — but NOT "la".
+/// Engine that knows punaviini/puna/viini/laviini and koira/keksi/koirankeksi as plain tn
+/// lemmas — but NOT "la" and NOT the linking form "koiran".
 fn engine_known() -> Engine {
     let mut store = MemoryStore::new();
     for (lemma, tn) in [
@@ -68,6 +69,9 @@ fn engine_known() -> Engine {
         ("viini", 5),
         ("punaviini", 5),
         ("laviini", 5),
+        ("koira", 10),
+        ("keksi", 5),
+        ("koirankeksi", 5),
     ] {
         store.insert(
             lemma,
@@ -95,6 +99,22 @@ fn known_compound_harmony_is_overridden() {
     assert_eq!(
         form(&e, "punaviini", Number::Plural, Case::Inessive),
         "punaviineissä"
+    );
+}
+
+#[test]
+fn genitive_linked_known_compound_is_overridden() {
+    // koirankeksi is a known tn5 lemma whose modifier links with the genitive -n ("koiran").
+    // "koiran" is not itself a lemma, but stripping the linker yields "koira", which is — so
+    // harmony must follow the front-harmonic "keksi": koirankeksi -> koirankekse(i)ssä, not -ssa.
+    let e = engine_known();
+    assert_eq!(
+        form(&e, "koirankeksi", Number::Singular, Case::Inessive),
+        "koirankeksissä"
+    );
+    assert_eq!(
+        form(&e, "koirankeksi", Number::Plural, Case::Inessive),
+        "koirankekseissä"
     );
 }
 

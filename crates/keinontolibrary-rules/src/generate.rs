@@ -46,6 +46,13 @@ fn last_char(s: &str) -> Option<char> {
     s.chars().next_back()
 }
 
+fn ends_with_vowel(s: &str) -> bool {
+    matches!(
+        last_char(s),
+        Some('a' | 'e' | 'i' | 'o' | 'u' | 'y' | 'ä' | 'ö')
+    )
+}
+
 /// Form the plural `-i-` stem from a singular vowel stem, per class.
 fn pluralize(stem: &str, tn: u8) -> String {
     let body = drop_last(stem);
@@ -77,7 +84,14 @@ fn ends_in_diphthong(pl: &str) -> bool {
 /// Classes 1, 2, 5, 6, 9, 10, 12: the vowel stem is the lemma itself; gradation and the
 /// plural `-i-` stem do the work.
 fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
-    let sg_strong = lemma.to_owned();
+    // Consonant-final tn5 loanwords (epsilon, nylon, stadion) inflect on an epenthetic -i-
+    // stem (epsilon -> epsiloni-: epsilonin, epsiloneissa). The nominative stays the bare
+    // lemma. Native tn5 words already end in -i, so this only affects the loanwords.
+    let sg_strong = if tn == 5 && !ends_with_vowel(lemma) {
+        format!("{lemma}i")
+    } else {
+        lemma.to_owned()
+    };
     let sg_weak = weaken(&sg_strong, av);
     let pl_strong = pluralize(&sg_strong, tn);
     let pl_weak = pluralize(&sg_weak, tn);
@@ -650,6 +664,29 @@ mod tests {
         assert_eq!(
             one("valo", 1, None, Number::Plural, Case::Inessive),
             "valoissa"
+        );
+    }
+
+    #[test]
+    fn epsilon_consonant_final_tn5() {
+        // Consonant-final tn5 loanword: epenthetic -i- stem, bare nominative.
+        let g = |n, c| one("epsilon", 5, None, n, c);
+        assert_eq!(g(Number::Singular, Case::Nominative), "epsilon");
+        assert_eq!(g(Number::Singular, Case::Genitive), "epsilonin");
+        assert_eq!(g(Number::Singular, Case::Inessive), "epsilonissa");
+        assert_eq!(g(Number::Plural, Case::Nominative), "epsilonit");
+        assert_eq!(g(Number::Plural, Case::Genitive), "epsilonien");
+        assert_eq!(g(Number::Plural, Case::Partitive), "epsiloneja");
+        assert_eq!(g(Number::Plural, Case::Inessive), "epsiloneissa");
+        assert_eq!(g(Number::Plural, Case::Illative), "epsiloneihin");
+        // Regression: vowel-final tn5 unchanged.
+        assert_eq!(
+            one("risti", 5, None, Number::Plural, Case::Inessive),
+            "risteissä"
+        );
+        assert_eq!(
+            one("viini", 5, None, Number::Singular, Case::Partitive),
+            "viiniä"
         );
     }
 

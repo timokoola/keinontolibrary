@@ -3120,3 +3120,181 @@ case = "translative"
 forms = ["haaksiksi"]
 reason = "tn31 irregular numeral, Voikko-verified"
 
+
+# --- veli (tn7, irregular -lj- stem) — Voikko-verified --------------------------------
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "genitive"
+forms = ["veljen"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "partitive"
+forms = ["veljeä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "inessive"
+forms = ["veljessä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "elative"
+forms = ["veljestä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "illative"
+forms = ["veljeen"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "adessive"
+forms = ["veljellä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "ablative"
+forms = ["veljeltä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "allative"
+forms = ["veljelle"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "essive"
+forms = ["veljenä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "translative"
+forms = ["veljeksi"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "abessive"
+forms = ["veljettä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "nominative"
+forms = ["veljet"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "genitive"
+forms = ["veljien"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "partitive"
+forms = ["veljiä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "inessive"
+forms = ["veljissä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "elative"
+forms = ["veljistä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "illative"
+forms = ["veljiin"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "adessive"
+forms = ["veljillä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "ablative"
+forms = ["veljiltä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "allative"
+forms = ["veljille"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "essive"
+forms = ["veljinä"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "translative"
+forms = ["veljiksi"]
+reason = "tn7 veli — irregular -lj- oblique stem (veljen)"
+

@@ -37,13 +37,13 @@ async function main() {
   let created = 0;
   let failed = 0;
   for (const r of reports) {
-    const { title, body } = renderIssue(r);
+    const { title, body, labels } = renderIssue(r);
     if (DRY_RUN) {
-      console.log(`\n--- DRY RUN issue for report ${r.id} ---\n${title}\n${body}\n`);
+      console.log(`\n--- DRY RUN issue for report ${r.id} [${labels.join(', ')}] ---\n${title}\n${body}\n`);
       continue;
     }
     try {
-      const issue = await createIssue(title, body);
+      const issue = await createIssue(title, body, labels);
       await markExported(r.id, issue.html_url);
       console.log(`✓ ${r.id} -> ${issue.html_url}`);
       created++;
@@ -76,19 +76,27 @@ async function fetchNewReports() {
 function renderIssue(r) {
   const code = (v) => (v ? `\`${v}\`` : "_(n/a)_");
   const meta = r.meta ? "```json\n" + JSON.stringify(r.meta, null, 2) + "\n```" : "_(none)_";
+  // A "missing word" suggestion (from /puuttuvat) is also stored as verdict=wrong, but it is
+  // a form for a word the engine can't yet decline — not a correction to a shown form.
+  const isMissing = Boolean(r.meta && r.meta.missing);
   const fields = [
-    ["shown word/form", code(r.word)],
+    [isMissing ? "word (no form yet)" : "shown word/form", code(r.word)],
     ["lemma", code(r.lemma)],
-    ["suggested correction", r.correction ? code(r.correction) : "_(none given)_"],
+    ["suggested form", r.correction ? code(r.correction) : "_(none given)_"],
     ["verdict", r.verdict],
     ["project", r.project],
     ["country", r.country || "_(n/a)_"],
     ["reported at", r.created_at],
     ["report id", code(r.id)],
   ];
-  const title = `Accuracy: "${r.word}" reported wrong (${r.project})`;
+  const title = isMissing
+    ? `Missing form: ${r.word}${r.correction ? ` → ${r.correction}` : ""} (${r.project})`
+    : `Accuracy: "${r.word}" reported wrong (${r.project})`;
+  const intro = isMissing
+    ? `A user suggested the plural inessive for **${r.word}**, a word the engine cannot yet decline (flagged via \`/puuttuvat\`).`
+    : `A user reported a form as **wrong** via \`${r.project}\`.`;
   const body = [
-    `A user reported a form as **wrong** via \`${r.project}\`.`,
+    intro,
     "",
     "| field | value |",
     "| --- | --- |",
@@ -99,14 +107,15 @@ function renderIssue(r) {
     "",
     "<sub>Imported automatically from the keinonto-web reports-api.</sub>",
   ].join("\n");
-  return { title, body };
+  const labels = isMissing ? [...new Set([...LABELS, "missing-form"])] : LABELS;
+  return { title, body, labels };
 }
 
-async function createIssue(title, body) {
+async function createIssue(title, body, labels) {
   // Try with labels; if any label doesn't exist GitHub returns 422 — retry without them.
-  const payload = { title, body, labels: LABELS };
+  const payload = { title, body, labels };
   let res = await ghPost(`/repos/${REPO}/issues`, payload);
-  if (res.status === 422 && LABELS.length) {
+  if (res.status === 422 && labels.length) {
     delete payload.labels;
     res = await ghPost(`/repos/${REPO}/issues`, payload);
   }

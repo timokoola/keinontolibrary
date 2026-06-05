@@ -19,3 +19,6 @@ ingest-report.txt
 # OS / editor cruft
 .DS_Store
 *.swp
+
+# Wiktionary fetch cache (finnish-testgen)
+.cache/

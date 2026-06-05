@@ -2,10 +2,11 @@
 //!
 //! Columns: `Hakusana \t Homonymia \t Sanaluokka \t Taivutustiedot`. We keep an entry iff
 //! it is tagged a **nominal** — substantiivi, adjektiivi, numeraali or pronomini, which all
-//! decline through the same case system — and has at least one nominal `tn` in 1–49.
-//! Compound types 50/51 and empty-`tn` rows (whose final component is itself listed) are
-//! dropped, as are pronouns' irregular tn 101 (handled elsewhere). Paradigms are
-//! deduplicated by `(tn, av)` across homonyms, since `hn` does not affect declension.
+//! decline through the same case system — and has at least one in-scope `tn`: the regular
+//! classes 1–49, or the pronouns' irregular tn 101 (whose forms come from the exception
+//! registry, not the rule generator). Compound types 50/51 and empty-`tn` rows (whose final
+//! component is itself listed) are dropped. Paradigms are deduplicated by `(tn, av)` across
+//! homonyms, since `hn` does not affect declension.
 
 use std::collections::HashMap;
 
@@ -17,7 +18,7 @@ const NOMINALS: [&str; 4] = ["substantiivi", "adjektiivi", "numeraali", "pronomi
 /// One declension paradigm parsed from the `Taivutustiedot` field.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct KotusParadigm {
-    /// Declension class (taivutusnumero), 1–49 for in-scope nouns.
+    /// Declension class (taivutusnumero): 1–49 for regular nominals, or 101 for pronouns.
     pub tn: u8,
     /// Gradation letter (astevaihtelu), if any.
     pub av: Option<char>,
@@ -31,8 +32,8 @@ pub struct KotusParadigm {
 pub struct Inventory {
     /// Normalized lemma → paradigms.
     pub lemmas: HashMap<String, Vec<KotusParadigm>>,
-    /// Count of noun rows whose `Taivutustiedot` had no in-scope (1–49) class — i.e.
-    /// compounds and indeclinables that were dropped.
+    /// Count of nominal rows whose `Taivutustiedot` had no in-scope class (1–49 or 101) —
+    /// i.e. compounds and indeclinables that were dropped.
     pub dropped_compounds: usize,
     /// Count of non-noun rows skipped.
     pub skipped_non_nouns: usize,
@@ -61,12 +62,12 @@ fn parse_token(token: &str) -> Option<KotusParadigm> {
 }
 
 /// Parse the whole `Taivutustiedot` field (comma-separated tokens) into paradigms,
-/// keeping only nominal classes 1–49.
+/// keeping the regular nominal classes 1–49 plus the pronoun class 101.
 fn parse_paradigms(field: &str) -> Vec<KotusParadigm> {
     field
         .split(',')
         .filter_map(parse_token)
-        .filter(|p| (1..=49).contains(&p.tn))
+        .filter(|p| (1..=49).contains(&p.tn) || p.tn == 101)
         .collect()
 }
 
@@ -104,8 +105,8 @@ impl Inventory {
             if word.is_empty() {
                 continue;
             }
-            // Keep all nominals — they share the declension classes. (Pronouns are nominals
-            // too but carry the irregular tn 101, which the tn 1–49 filter drops below.)
+            // Keep all nominals — they share the declension classes. Pronouns are nominals
+            // too, carrying the irregular tn 101 that `parse_paradigms` keeps alongside 1–49.
             if !sanaluokka.split([',', ' ']).any(|w| NOMINALS.contains(&w)) {
                 inv.skipped_non_nouns += 1;
                 continue;
@@ -204,6 +205,19 @@ mod tests {
     }
 
     #[test]
+    fn keeps_pronoun_class_101() {
+        // Pronouns carry the irregular tn 101 (registry-backed), kept alongside 1–49.
+        assert_eq!(
+            parse_paradigms("101"),
+            vec![KotusParadigm {
+                tn: 101,
+                av: None,
+                rare: false
+            }]
+        );
+    }
+
+    #[test]
     fn inventory_keeps_all_nominals_and_dedups_homonyms() {
         let tsv = "Hakusana\tHomonymia\tSanaluokka\tTaivutustiedot\n\
                    talo\t\tsubstantiivi\t1\n\
@@ -228,10 +242,17 @@ mod tests {
         // Adjectives and numerals are nominals -> kept (they share the declension classes).
         assert!(inv.lemmas.contains_key("nopea"));
         assert!(inv.lemmas.contains_key("kolmas"));
-        // Verb skipped (non-nominal); pronoun kept-as-nominal but its tn 101 is out of 1–49
-        // so it has no paradigm; compound (empty tn) dropped.
+        // Pronouns are nominals too; tn 101 is in scope (registry-backed) -> kept.
+        assert_eq!(
+            inv.lemmas["tämä"],
+            vec![KotusParadigm {
+                tn: 101,
+                av: None,
+                rare: false
+            }]
+        );
+        // Verb skipped (non-nominal); compound (empty tn) dropped.
         assert!(!inv.lemmas.contains_key("juosta"));
-        assert!(!inv.lemmas.contains_key("tämä"));
         assert!(!inv.lemmas.contains_key("aakkosjärjestys"));
         assert_eq!(inv.skipped_non_nouns, 1); // only the verb
     }

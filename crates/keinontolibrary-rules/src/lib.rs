@@ -244,4 +244,39 @@ mod tests {
             )
             .is_none());
     }
+
+    // Pronouns (tn 101) are irregular and have no rule arm; the engine serves them entirely
+    // from the exception registry, keyed on tn 101 and their inherent number (minä is
+    // singular, me/ne plural). Suppletive obliques (minun, meidän, niiden) come straight from
+    // the registry.
+    #[test]
+    fn pronouns_resolve_via_registry() {
+        let r = RuleEngine::new();
+        let pron = |lemma, n, c| {
+            r.generate(lemma, &ParadigmRef::new(None, 101), n, c)
+                .and_then(|f| f.primary().map(str::to_string))
+        };
+        assert_eq!(
+            pron("minä", Number::Singular, Case::Genitive).as_deref(),
+            Some("minun")
+        );
+        assert_eq!(
+            pron("hän", Number::Singular, Case::Partitive).as_deref(),
+            Some("häntä")
+        );
+        assert_eq!(
+            pron("me", Number::Plural, Case::Inessive).as_deref(),
+            Some("meissä")
+        );
+        assert_eq!(
+            pron("ne", Number::Plural, Case::Genitive).as_deref(),
+            Some("niiden")
+        );
+        assert_eq!(
+            pron("tämä", Number::Singular, Case::Illative).as_deref(),
+            Some("tähän")
+        );
+        // A pronoun's non-inherent number is suppletive/absent — no rule arm fills it.
+        assert!(pron("minä", Number::Plural, Case::Genitive).is_none());
+    }
 }

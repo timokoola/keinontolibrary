@@ -34,14 +34,21 @@ near-exhaustive by construction.
 - **In:** all **nominals** — substantives, **adjectives**, and **numerals** — in declension
   classes 1–49 with gradation, all 15 cases, both numbers, multi-paradigm homonyms. Nominals
   share the declension classes, so the class-driven engine handles them uniformly (the ingest
-  keeps every nominal word class, not just `substantiivi`). Plus **compound nouns** declined
-  on their final component (modifier prefix fixed), which makes vowel harmony follow the final
-  component (`koirankeksi` → `koirankeksissä`, `punaviini` → `punaviiniä`). Full Kotus 50/51
-  handling and its test-data plan: [`docs/compound-nouns.md`](docs/compound-nouns.md).
-- **Out:** verbs; adjective **comparison** (comparative/superlative); **pronouns** (Kotus tn
-  101 — irregular, tracked separately); the special numeral classes 31/45/46; a general
-  possessive-suffix system; class inference for unlisted *simple* words; and compounds whose
-  modifier also inflects (rare; see the design doc).
+  keeps every nominal word class, not just `substantiivi`). Plus the **core pronouns** (Kotus
+  tn 101 — irregular: the personal `minä/sinä/hän/me/te/he` and the demonstratives
+  `se/tämä/tuo/nämä/nuo/ne`), served from the Voikko-verified exception registry rather than
+  the rule generator. Plus the **special numeral classes**: the productive **ordinals** (tn 45
+  — `kolmas → kolmannen`, `kymmenes`, `neljäs`, … incl. the pronominal `mones`) via a rule
+  arm, and the singletons `kaksi`/`yksi` (tn 31) and `tuhat` (tn 46) from the registry. Plus
+  **compound nouns** declined on their final component (modifier prefix fixed), which makes
+  vowel harmony follow the final component (`koirankeksi` → `koirankeksissä`, `punaviini` →
+  `punaviiniä`). Full Kotus 50/51 handling and its test-data plan:
+  [`docs/compound-nouns.md`](docs/compound-nouns.md).
+- **Out:** verbs; adjective **comparison** (comparative/superlative); the **interrogative /
+  relative pronouns** (`kuka/mikä/kumpi/joka` — irregular oblique stems, tracked separately);
+  a general possessive-suffix system; class inference for unlisted *simple* words; and
+  compounds whose modifier also inflects (rare; including the compound ordinals like
+  `kahdeskymmenes` — only the tail declines; see the design doc).
 
 ## Building
 

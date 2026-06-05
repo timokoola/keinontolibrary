@@ -85,6 +85,11 @@ impl Engine {
             [] => self
                 .compound_slot(&norm, number, case)
                 .ok_or(Error::UnknownWord(norm)),
+            // A Kotus-listed compound (tn50): decline on the final component, modifier frozen
+            // (so harmony follows the head). Falls through if it can't be segmented.
+            [only] if only.tn == COMPOUND_TN => self
+                .compound_slot(&norm, number, case)
+                .map_or_else(|| self.resolve_slot(&norm, only, number, case), Ok),
             // Known word, but a known compound whose final component flips harmony
             // (punaviini -> punaviiniä, not -nia): override with the component's harmony.
             [only] => match self.compound_harmony_slot(&norm, number, case) {
@@ -122,6 +127,9 @@ impl Engine {
             [] => self
                 .compound_paradigm(&norm)
                 .ok_or(Error::UnknownWord(norm)),
+            [only] if only.tn == COMPOUND_TN => Ok(self
+                .compound_paradigm(&norm)
+                .unwrap_or_else(|| self.build_paradigm(&norm, only))),
             [only] => Ok(self
                 .compound_harmony_paradigm(&norm)
                 .unwrap_or_else(|| self.build_paradigm(&norm, only))),
@@ -214,8 +222,12 @@ impl Engine {
     // Finnish compounds inflect on the final component only; the modifier prefix is fixed.
     // Declining the bare component also makes vowel harmony follow it
     // (koira + keksi -> koirankeksissä, not -ssa, because `keksi` is front-harmonic).
+    // Kotus-listed compounds carry tn50 (see COMPOUND_TN) and are routed here explicitly.
 
-    /// The longest suffix of `norm` that is a known lemma, as `(prefix, component)`.
+    /// Split `norm` into `(prefix, component)` where the component is a known lemma. Scans from
+    /// the longest component down and **prefers a split whose prefix is itself a known modifier**
+    /// (a real two-word compound, `koiran`+keksi), falling back to the longest known component
+    /// when no part-of-the-prefix is known (a frozen/foreign modifier, `beaujolais`+viini).
     /// Char-boundary safe (Finnish ä/ö are multibyte); requires a prefix of >= 2 and a
     /// component of >= 3 chars to avoid spurious splits on tiny coincidental suffixes.
     fn split_compound(&self, norm: &str) -> Option<(String, String)> {
@@ -226,14 +238,20 @@ impl Engine {
         if n < MIN_PREFIX_CHARS + MIN_COMPONENT_CHARS {
             return None;
         }
-        // Grow the prefix; the first known suffix found is the longest one. `at` is the byte
-        // offset where the candidate final component starts.
+        // `at` is the byte offset where the candidate final component starts; the loop visits
+        // the longest component first (shortest prefix).
+        let mut fallback: Option<(String, String)> = None;
         for &at in &offsets[MIN_PREFIX_CHARS..=(n - MIN_COMPONENT_CHARS)] {
-            if !self.resolve(&norm[at..]).is_empty() {
-                return Some((norm[..at].to_owned(), norm[at..].to_owned()));
+            if self.resolve(&norm[at..]).is_empty() {
+                continue;
             }
+            let split = (norm[..at].to_owned(), norm[at..].to_owned());
+            if self.is_known_modifier(&split.0) {
+                return Some(split);
+            }
+            fallback.get_or_insert(split);
         }
-        None
+        fallback
     }
 
     /// `(prefix, component, chosen paradigm)` for a compound, or `None`. If the component is
@@ -314,6 +332,10 @@ impl Engine {
         self.compound_paradigm(norm)
     }
 }
+
+/// Kotus class for head-inflecting compounds: declined on the final component with the
+/// modifier frozen, so it is routed to the compound decliner rather than a rule arm.
+const COMPOUND_TN: u8 = 50;
 
 /// Whether a word takes back-vowel harmony (contains any of a/o/u). Mirrors the rule
 /// engine's harmony test; used only to detect a compound flipping harmony.
@@ -678,6 +700,42 @@ mod tests {
             p.get(Number::Plural, Case::Inessive).primary(),
             Some("beaujolaisviineissä")
         );
+    }
+
+    #[test]
+    fn tn50_known_compound_declines_on_head() {
+        // aitokana is a known Kotus lemma tagged tn50 (compound). It must route to the
+        // compound decliner — decline the head `kana`, freeze the modifier `aito` — rather
+        // than try a (nonexistent) tn50 rule.
+        let mut store = MemoryStore::new();
+        store.insert(
+            "aitokana",
+            ParadigmRef::new(None, 50),
+            Number::Singular,
+            Case::Nominative,
+            Forms::present(vec!["aitokana".into()], Source::Lookup),
+        );
+        // The modifier base `aito` is known (so the split is taken as aito+kana)...
+        store.insert(
+            "aito",
+            ParadigmRef::new(None, 1),
+            Number::Singular,
+            Case::Nominative,
+            Forms::present(vec!["aito".into()], Source::Lookup),
+        );
+        // ...and the head `kana` supplies the inflected form.
+        store.insert(
+            "kana",
+            ParadigmRef::new(None, 9),
+            Number::Plural,
+            Case::Inessive,
+            Forms::present(vec!["kanoissa".into()], Source::Lookup),
+        );
+        let e = Engine::builder().lookup(Box::new(store)).build();
+        let f = e
+            .decline("aitokana", Number::Plural, Case::Inessive)
+            .unwrap();
+        assert_eq!(f.primary(), Some("aitokanoissa"));
     }
 
     #[test]

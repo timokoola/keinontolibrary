@@ -2430,3 +2430,693 @@ case = "translative"
 forms = ["niiksi"]
 reason = "pronoun (tn 101), irregular"
 
+
+# --- irregular numeral singletons (Kotus tn 31 kaksi/yksi, tn 46 tuhat) — Voikko-verified
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "nominative"
+forms = ["kaksi"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "genitive"
+forms = ["kahden"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "partitive"
+forms = ["kahta"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "inessive"
+forms = ["kahdessa"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "elative"
+forms = ["kahdesta"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "illative"
+forms = ["kahteen"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "adessive"
+forms = ["kahdella"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "ablative"
+forms = ["kahdelta"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "allative"
+forms = ["kahdelle"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "essive"
+forms = ["kahtena"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "translative"
+forms = ["kahdeksi"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "genitive"
+forms = ["kaksien"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "partitive"
+forms = ["kaksia"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "inessive"
+forms = ["kaksissa"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "elative"
+forms = ["kaksista"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "illative"
+forms = ["kaksiin"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "adessive"
+forms = ["kaksilla"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "ablative"
+forms = ["kaksilta"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "allative"
+forms = ["kaksille"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "essive"
+forms = ["kaksina"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "translative"
+forms = ["kaksiksi"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "nominative"
+forms = ["yksi"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "genitive"
+forms = ["yhden"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "partitive"
+forms = ["yhtä"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "inessive"
+forms = ["yhdessä"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "elative"
+forms = ["yhdestä"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "illative"
+forms = ["yhteen"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "adessive"
+forms = ["yhdellä"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "ablative"
+forms = ["yhdeltä"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "allative"
+forms = ["yhdelle"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "essive"
+forms = ["yhtenä"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "translative"
+forms = ["yhdeksi"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "nominative"
+forms = ["yhdet"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "genitive"
+forms = ["yksien"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "partitive"
+forms = ["yksiä"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "inessive"
+forms = ["yksissä"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "elative"
+forms = ["yksistä"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "illative"
+forms = ["yksiin"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "adessive"
+forms = ["yksillä"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "ablative"
+forms = ["yksiltä"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "allative"
+forms = ["yksille"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "essive"
+forms = ["yksinä"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "translative"
+forms = ["yksiksi"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "nominative"
+forms = ["tuhat"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "genitive"
+forms = ["tuhannen"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "partitive"
+forms = ["tuhatta"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "inessive"
+forms = ["tuhannessa"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "elative"
+forms = ["tuhannesta"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "illative"
+forms = ["tuhanteen"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "adessive"
+forms = ["tuhannella"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "ablative"
+forms = ["tuhannelta"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "allative"
+forms = ["tuhannelle"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "essive"
+forms = ["tuhantena"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "translative"
+forms = ["tuhanneksi"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "nominative"
+forms = ["tuhannet"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "genitive"
+forms = ["tuhansien"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "partitive"
+forms = ["tuhansia"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "inessive"
+forms = ["tuhansissa"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "elative"
+forms = ["tuhansista"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "illative"
+forms = ["tuhansiin"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "adessive"
+forms = ["tuhansilla"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "ablative"
+forms = ["tuhansilta"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "allative"
+forms = ["tuhansille"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "essive"
+forms = ["tuhansina"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "translative"
+forms = ["tuhansiksi"]
+reason = "tn46 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "nominative"
+forms = ["haaksi"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "genitive"
+forms = ["haahden"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "partitive"
+forms = ["haahta"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "inessive"
+forms = ["haahdessa"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "elative"
+forms = ["haahdesta"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "illative"
+forms = ["haahteen"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "adessive"
+forms = ["haahdella"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "ablative"
+forms = ["haahdelta"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "allative"
+forms = ["haahdelle"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "essive"
+forms = ["haahtena"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "translative"
+forms = ["haahdeksi"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "nominative"
+forms = ["haahdet"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "genitive"
+forms = ["haaksien"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "partitive"
+forms = ["haaksia"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "inessive"
+forms = ["haaksissa"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "elative"
+forms = ["haaksista"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "adessive"
+forms = ["haaksilla"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "ablative"
+forms = ["haaksilta"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "allative"
+forms = ["haaksille"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "essive"
+forms = ["haaksina"]
+reason = "tn31 irregular numeral, Voikko-verified"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "translative"
+forms = ["haaksiksi"]
+reason = "tn31 irregular numeral, Voikko-verified"
+

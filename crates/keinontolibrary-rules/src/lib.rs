@@ -234,11 +234,11 @@ mod tests {
     #[test]
     fn unsupported_class_yields_none() {
         let r = RuleEngine::new();
-        // tn46 (tuhat) has neither a rule arm nor a registry entry.
+        // tn16 (the comparative -mpi class) has neither a rule arm nor a registry entry.
         assert!(r
             .generate(
-                "tuhat",
-                &ParadigmRef::new(None, 46),
+                "pienempi",
+                &ParadigmRef::new(None, 16),
                 Number::Singular,
                 Case::Genitive
             )
@@ -278,5 +278,32 @@ mod tests {
         );
         // A pronoun's non-inherent number is suppletive/absent — no rule arm fills it.
         assert!(pron("minä", Number::Plural, Case::Genitive).is_none());
+    }
+
+    // kaksi/yksi (tn 31) and tuhat (tn 46) are one-off irregulars served from the registry.
+    // (The productive ordinals, tn 45, go through the rule generator instead.)
+    #[test]
+    fn irregular_numerals_resolve_via_registry() {
+        let r = RuleEngine::new();
+        let num = |lemma, tn, n, c| {
+            r.generate(lemma, &ParadigmRef::new(None, tn), n, c)
+                .and_then(|f| f.primary().map(str::to_string))
+        };
+        assert_eq!(
+            num("kaksi", 31, Number::Singular, Case::Genitive).as_deref(),
+            Some("kahden")
+        );
+        assert_eq!(
+            num("yksi", 31, Number::Singular, Case::Partitive).as_deref(),
+            Some("yhtä")
+        );
+        assert_eq!(
+            num("tuhat", 46, Number::Singular, Case::Inessive).as_deref(),
+            Some("tuhannessa")
+        );
+        assert_eq!(
+            num("tuhat", 46, Number::Plural, Case::Inessive).as_deref(),
+            Some("tuhansissa")
+        );
     }
 }

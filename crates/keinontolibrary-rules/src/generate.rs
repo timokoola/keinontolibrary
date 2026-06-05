@@ -566,6 +566,28 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
                 essive_stem: sg,
             })
         }
+        // Ordinals (kolmas, kymmenes, neljäs, ...): the -s nominative inflects on a -nne-
+        // (weak) / -nte- (strong) oblique stem with a -nsi- plural; partitive is -tta. So
+        // kolmas -> kolmannen (gen), kolmatta (part), kolmanteen (illat), kolmantena (ess),
+        // kolmansissa (pl ine). Also covers the pronominal ordinal `mones`.
+        45 => {
+            let base = lemma.strip_suffix('s')?;
+            let nne = format!("{base}nne");
+            let nte = format!("{base}nte");
+            let pl = format!("{base}nsi");
+            Some(Stems {
+                sg_strong: nte.clone(),
+                sg_weak: nne,
+                pl_strong: pl.clone(),
+                pl_weak: pl.clone(),
+                part_sg: vec![format!("{base}tt{a}")],
+                illat_sg: vec![format!("{nte}en")],
+                gen_pl: vec![format!("{pl}en")], // kolmansien (ordinals take -nsien, not -sten)
+                part_pl: vec![format!("{pl}{a}")],
+                illat_pl: plural_illative(&pl),
+                essive_stem: nte,
+            })
+        }
         _ => None,
     }
 }
@@ -645,6 +667,42 @@ mod tests {
 
     fn one(lemma: &str, tn: u8, av: Option<char>, n: Number, c: Case) -> String {
         generate(lemma, tn, av, n, c).unwrap()[0].clone()
+    }
+
+    // Ordinals (tn45): -nne-/-nte- oblique stems, -nsi- plural, -tta partitive. All forms
+    // below were cross-checked against Voikko. Harmony follows the base (neljäs -> neljättä).
+    #[test]
+    fn ordinal_class_45() {
+        let g = |l, n, c| one(l, 45, None, n, c);
+        // kolmas: weak nne- (gen/ine), strong nte- (illat/essive), -tta partitive.
+        assert_eq!(g("kolmas", Number::Singular, Case::Genitive), "kolmannen");
+        assert_eq!(g("kolmas", Number::Singular, Case::Partitive), "kolmatta");
+        assert_eq!(g("kolmas", Number::Singular, Case::Inessive), "kolmannessa");
+        assert_eq!(g("kolmas", Number::Singular, Case::Illative), "kolmanteen");
+        assert_eq!(g("kolmas", Number::Singular, Case::Essive), "kolmantena");
+        assert_eq!(g("kolmas", Number::Plural, Case::Nominative), "kolmannet");
+        assert_eq!(g("kolmas", Number::Plural, Case::Genitive), "kolmansien");
+        assert_eq!(g("kolmas", Number::Plural, Case::Inessive), "kolmansissa");
+        assert_eq!(g("kolmas", Number::Plural, Case::Partitive), "kolmansia");
+        // kymmenes: longer base, same shape.
+        assert_eq!(
+            g("kymmenes", Number::Singular, Case::Genitive),
+            "kymmenennen"
+        );
+        assert_eq!(
+            g("kymmenes", Number::Singular, Case::Illative),
+            "kymmenenteen"
+        );
+        assert_eq!(
+            g("kymmenes", Number::Plural, Case::Inessive),
+            "kymmenensissä"
+        );
+        // neljäs: front-harmony base -> -ttä, -nä, -ä.
+        assert_eq!(g("neljäs", Number::Singular, Case::Partitive), "neljättä");
+        assert_eq!(g("neljäs", Number::Singular, Case::Essive), "neljäntenä");
+        assert_eq!(g("neljäs", Number::Plural, Case::Partitive), "neljänsiä");
+        // mones (pronominal ordinal) declines through the same arm.
+        assert_eq!(g("mones", Number::Singular, Case::Genitive), "monennen");
     }
 
     #[test]

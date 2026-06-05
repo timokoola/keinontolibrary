@@ -59,3 +59,56 @@ fn compound_harmony_follows_final_component() {
         "keksissä"
     );
 }
+
+/// Engine that knows punaviini/puna/viini/laviini as plain tn lemmas — but NOT "la".
+fn engine_known() -> Engine {
+    let mut store = MemoryStore::new();
+    for (lemma, tn) in [
+        ("puna", 10u8),
+        ("viini", 5),
+        ("punaviini", 5),
+        ("laviini", 5),
+    ] {
+        store.insert(
+            lemma,
+            ParadigmRef::new(None, tn),
+            Number::Singular,
+            Case::Nominative,
+            Forms::present(vec![lemma.into()], Source::Lookup),
+        );
+    }
+    Engine::builder()
+        .lookup(Box::new(store))
+        .generator(Box::new(RuleEngine::new()))
+        .build()
+}
+
+#[test]
+fn known_compound_harmony_is_overridden() {
+    // punaviini is a known tn5 lemma; the whole-word rule would back-harmonize (puna), but
+    // the final component viini is front. Prefix "puna" IS a known lemma, so we override.
+    let e = engine_known();
+    assert_eq!(
+        form(&e, "punaviini", Number::Singular, Case::Partitive),
+        "punaviiniä"
+    );
+    assert_eq!(
+        form(&e, "punaviini", Number::Plural, Case::Inessive),
+        "punaviineissä"
+    );
+}
+
+#[test]
+fn non_compound_ending_in_known_word_is_left_alone() {
+    // laviini ends in "viini" but is NOT a compound — "la" is not a known lemma — so harmony
+    // stays back (the rule's result). This is the laviini false-positive guard.
+    let e = engine_known();
+    assert_eq!(
+        form(&e, "laviini", Number::Singular, Case::Partitive),
+        "laviinia"
+    );
+    assert_eq!(
+        form(&e, "laviini", Number::Plural, Case::Inessive),
+        "laviineissa"
+    );
+}

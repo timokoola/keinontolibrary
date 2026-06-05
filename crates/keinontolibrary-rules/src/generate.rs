@@ -691,6 +691,32 @@ mod tests {
     }
 
     #[test]
+    fn nominals_decline_via_shared_classes() {
+        // Adjectives and numerals are nominals using the same Kotus classes as nouns; the
+        // generator is class-driven, so it declines them with no word-class awareness.
+        assert_eq!(
+            one("nopea", 15, None, Number::Singular, Case::Inessive),
+            "nopeassa"
+        ); // adjective, tn15
+        assert_eq!(
+            one("nopea", 15, None, Number::Plural, Case::Inessive),
+            "nopeissa"
+        );
+        assert_eq!(
+            one("kaunis", 41, None, Number::Singular, Case::Inessive),
+            "kauniissa"
+        ); // adjective, tn41
+        assert_eq!(
+            one("ensimmäinen", 38, None, Number::Singular, Case::Inessive),
+            "ensimmäisessä"
+        ); // numeral, tn38
+        assert_eq!(
+            one("biljoona", 10, None, Number::Singular, Case::Inessive),
+            "biljoonassa"
+        ); // numeral, tn10
+    }
+
+    #[test]
     fn gradation_kortti_class_5() {
         assert_eq!(
             one("kortti", 5, Some('C'), Number::Singular, Case::Genitive),

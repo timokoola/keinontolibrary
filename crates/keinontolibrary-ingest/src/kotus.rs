@@ -1,14 +1,18 @@
 //! Parsing the Kotus *Nykysuomen sanalista 2024* TSV into the lemma inventory.
 //!
 //! Columns: `Hakusana \t Homonymia \t Sanaluokka \t Taivutustiedot`. We keep an entry iff
-//! it is tagged a noun (`substantiivi`) and has at least one nominal `tn` in 1–49.
+//! it is tagged a **nominal** — substantiivi, adjektiivi, numeraali or pronomini, which all
+//! decline through the same case system — and has at least one nominal `tn` in 1–49.
 //! Compound types 50/51 and empty-`tn` rows (whose final component is itself listed) are
-//! dropped. Paradigms are deduplicated by `(tn, av)` across homonyms, since `hn` does not
-//! affect declension.
+//! dropped, as are pronouns' irregular tn 101 (handled elsewhere). Paradigms are
+//! deduplicated by `(tn, av)` across homonyms, since `hn` does not affect declension.
 
 use std::collections::HashMap;
 
 use keinontolibrary_core::normalize;
+
+/// Nominal word classes we keep — they all decline through the same case system.
+const NOMINALS: [&str; 4] = ["substantiivi", "adjektiivi", "numeraali", "pronomini"];
 
 /// One declension paradigm parsed from the `Taivutustiedot` field.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -100,7 +104,9 @@ impl Inventory {
             if word.is_empty() {
                 continue;
             }
-            if !sanaluokka.split([',', ' ']).any(|w| w == "substantiivi") {
+            // Keep all nominals — they share the declension classes. (Pronouns are nominals
+            // too but carry the irregular tn 101, which the tn 1–49 filter drops below.)
+            if !sanaluokka.split([',', ' ']).any(|w| NOMINALS.contains(&w)) {
                 inv.skipped_non_nouns += 1;
                 continue;
             }
@@ -198,12 +204,15 @@ mod tests {
     }
 
     #[test]
-    fn inventory_filters_nouns_and_dedups_homonyms() {
+    fn inventory_keeps_all_nominals_and_dedups_homonyms() {
         let tsv = "Hakusana\tHomonymia\tSanaluokka\tTaivutustiedot\n\
                    talo\t\tsubstantiivi\t1\n\
                    aarnio\t1\tsubstantiivi\t3\n\
                    aarnio\t2\tsubstantiivi\t3\n\
                    nopea\t\tadjektiivi\t10\n\
+                   kolmas\t\tnumeraali\t45\n\
+                   juosta\t\tverbi\t74\n\
+                   tämä\t\tpronomini\t101\n\
                    aakkosjärjestys\t\tsubstantiivi\t\n";
         let inv = Inventory::parse_str(tsv);
         assert_eq!(
@@ -216,10 +225,14 @@ mod tests {
         );
         // Two homonyms, same tn=3 -> collapsed to one paradigm.
         assert_eq!(inv.lemmas["aarnio"].len(), 1);
-        // Adjective dropped, compound (empty tn) dropped.
-        assert!(!inv.lemmas.contains_key("nopea"));
+        // Adjectives and numerals are nominals -> kept (they share the declension classes).
+        assert!(inv.lemmas.contains_key("nopea"));
+        assert!(inv.lemmas.contains_key("kolmas"));
+        // Verb skipped (non-nominal); pronoun kept-as-nominal but its tn 101 is out of 1–49
+        // so it has no paradigm; compound (empty tn) dropped.
+        assert!(!inv.lemmas.contains_key("juosta"));
+        assert!(!inv.lemmas.contains_key("tämä"));
         assert!(!inv.lemmas.contains_key("aakkosjärjestys"));
-        assert_eq!(inv.dropped_compounds, 1);
-        assert_eq!(inv.skipped_non_nouns, 1);
+        assert_eq!(inv.skipped_non_nouns, 1); // only the verb
     }
 }

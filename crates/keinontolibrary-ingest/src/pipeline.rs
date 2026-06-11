@@ -277,7 +277,8 @@ pub fn run(config: &Config) -> Result<Report> {
 
     let mut records = Vec::with_capacity(lemmas.len());
     for lemma in lemmas {
-        let paradigms = &inv.lemmas[lemma];
+        let entry = &inv.lemmas[lemma];
+        let paradigms = &entry.paradigms;
         let mut had_forms = false;
         let mut paradigm_records = Vec::with_capacity(paradigms.len());
         for p in paradigms {
@@ -312,6 +313,7 @@ pub fn run(config: &Config) -> Result<Report> {
         }
         records.push(LemmaRecord {
             lemma: lemma.clone(),
+            adjective: entry.adjective,
             paradigms: paradigm_records,
         });
     }
@@ -350,11 +352,14 @@ mod tests {
         let mut inv = Inventory::default();
         inv.lemmas.insert(
             lemma.to_owned(),
-            vec![KotusParadigm {
-                tn,
-                av: None,
-                rare: false,
-            }],
+            crate::kotus::KotusLemma {
+                paradigms: vec![KotusParadigm {
+                    tn,
+                    av: None,
+                    rare: false,
+                }],
+                adjective: false,
+            },
         );
         inv
     }

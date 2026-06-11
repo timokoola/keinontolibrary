@@ -78,7 +78,9 @@ fn main() -> std::io::Result<()> {
             let mut out = String::new();
             let mut counts = Counts::default();
             for paradigm in &lemma.paradigms {
-                let reference = ParadigmRef::new(None, paradigm.tn).with_av(paradigm.av);
+                let reference = ParadigmRef::new(None, paradigm.tn)
+                    .with_av(paradigm.av)
+                    .with_adjective(lemma.adjective);
                 for number in Number::ALL {
                     for case in Case::ALL {
                         counts.slots += 1;

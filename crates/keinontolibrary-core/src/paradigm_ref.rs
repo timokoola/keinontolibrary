@@ -18,6 +18,11 @@ pub struct ParadigmRef {
     pub tn: u8,
     /// Optional consonant-gradation letter (`av`), e.g. `'C'`.
     pub av: Option<char>,
+    /// Whether every reading of the lemma is a modifier (adjective/numeral). Modifiers
+    /// take the bare `-ine` plural comitative (`punaisine`); only head nouns carry the
+    /// possessive citation `-ineen`/`-inensA` (`taloineen`).
+    #[cfg_attr(feature = "serde", serde(default))]
+    pub adjective: bool,
     /// Optional human-readable gloss, surfaced only in error messages.
     pub gloss: Option<String>,
 }
@@ -29,6 +34,7 @@ impl ParadigmRef {
             hn,
             tn,
             av: None,
+            adjective: false,
             gloss: None,
         }
     }
@@ -37,6 +43,13 @@ impl ParadigmRef {
     #[must_use]
     pub fn with_av(mut self, av: Option<char>) -> Self {
         self.av = av;
+        self
+    }
+
+    /// Builder-style setter for the modifier (adjective/numeral) flag.
+    #[must_use]
+    pub fn with_adjective(mut self, adjective: bool) -> Self {
+        self.adjective = adjective;
         self
     }
 

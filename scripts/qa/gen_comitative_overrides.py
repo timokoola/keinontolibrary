@@ -37,8 +37,21 @@ def main():
             for a in v.analyze(form)
         )
 
-    n = 0
-    with open(args.dump, encoding="utf-8") as fh, open(args.out, "w", encoding="utf-8") as out:
+    # Sticky like the harmony minting: probe BOTH styles symmetrically; an existing
+    # override is kept when the probe has no signal (Voikko silent on both), so the
+    # set is stable regardless of which style the current dump happens to serve.
+    existing = {}
+    try:
+        with open(args.out, encoding="utf-8") as fh:
+            for line in fh:
+                if line.strip():
+                    row = json.loads(line)
+                    existing[row["lemma"]] = row["bare"]
+    except FileNotFoundError:
+        pass
+
+    decided = dict(existing)
+    with open(args.dump, encoding="utf-8") as fh:
         for line in fh:
             row = json.loads(line)
             if row["case"] != "comitative" or row["number"] != "plural":
@@ -47,22 +60,29 @@ def main():
             if not rules or not rules["variants"]:
                 continue
             lemma, primary = row["lemma"], rules["variants"][0]
-            # Derive the opposite style from the served shape.
             if primary.endswith("neen"):
-                served_bare, other = False, primary[:-2]  # taloineen -> taloine
+                bare_form, poss_form = primary[:-2], primary  # taloine, taloineen
             elif primary.endswith("ne"):
-                served_bare, other = True, primary + "en"  # punaisine -> punaisineen
+                bare_form, poss_form = primary, primary + "en"
             else:
                 continue
-            if comitative_ok(primary, lemma):
-                continue  # served style is fine
-            if comitative_ok(other, lemma):
-                out.write(
-                    json.dumps({"lemma": lemma, "bare": not served_bare}, ensure_ascii=False)
-                    + "\n"
-                )
-                n += 1
-    print(f"{n} comitative overrides -> {args.out}", file=sys.stderr)
+            bare_ok = comitative_ok(bare_form, lemma)
+            poss_ok = comitative_ok(poss_form, lemma)
+            if bare_ok == poss_ok:
+                if bare_ok:
+                    decided.pop(lemma, None)  # both fine: the Kotus default is safe
+                continue  # neither known: no signal, keep any existing override
+            decided[lemma] = bare_ok
+
+    with open(args.out, "w", encoding="utf-8") as out:
+        for lemma in sorted(decided):
+            out.write(
+                json.dumps({"lemma": lemma, "bare": decided[lemma]}, ensure_ascii=False) + "\n"
+            )
+    print(
+        f"{len(decided)} comitative overrides ({len(existing)} carried) -> {args.out}",
+        file=sys.stderr,
+    )
 
 
 if __name__ == "__main__":

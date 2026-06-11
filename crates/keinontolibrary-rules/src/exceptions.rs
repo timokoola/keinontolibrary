@@ -154,11 +154,11 @@ mod tests {
     }
 
     #[test]
-    fn aie_genitive_is_registered() {
+    fn peitsi_genitive_is_registered() {
         let ex = Exceptions::load();
         assert_eq!(
-            ex.get("aie", 48, Number::Singular, Case::Genitive),
-            Some(["aikeen".to_string()].as_slice())
+            ex.get("peitsi", 30, Number::Singular, Case::Genitive),
+            Some(["peitsen".to_string()].as_slice())
         );
         // An unregistered slot returns None.
         assert!(ex

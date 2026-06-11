@@ -105,17 +105,7 @@ fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
     // koon (long vowel) but plural ko'oissa (the pair re-opens before -i-). All
     // Voikko-verified. So: drop any apostrophe before forming the plural stem, then
     // re-add it only when an identical pair survives before the plural -i-.
-    let elided = sg_weak.chars().count() + 1 == sg_strong.chars().count();
-    let mut pl_weak = pluralize(&sg_weak.replace('\'', ""), tn);
-    if elided {
-        let cs: Vec<char> = pl_weak.chars().collect();
-        if let [.., x, y, 'i'] = cs[..] {
-            if x == y && matches!(x, 'a' | 'e' | 'i' | 'o' | 'u' | 'y' | 'ä' | 'ö') {
-                let body: String = cs[..cs.len() - 2].iter().collect();
-                pl_weak = format!("{body}'{y}i");
-            }
-        }
-    }
+    let pl_weak = weak_plural_stem(&sg_strong, &sg_weak, tn);
     let last = last_char(&sg_strong).unwrap_or('a');
     let pl_body = drop_last(&pl_strong);
     let body = drop_last(&sg_strong);
@@ -168,6 +158,36 @@ fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
         gen_pl,
         part_pl,
     }
+}
+
+/// The weak plural `-i-` stem, with k-elision apostrophe orthography. The apostrophe is
+/// surface spelling between IDENTICAL vowels only: singular `vaa'an` but plural
+/// `vaaoissa` (rounding differentiates), singular `koon` (long vowel) but plural
+/// `ko'oissa`; the pair can also be formed WITH the plural -i- (`hiki → hi'issä`,
+/// `ikä → i'issä`) — all Voikko-verified. Any apostrophe in the weak singular stem is
+/// dropped before pluralizing and re-added only where an identical pair survives.
+fn weak_plural_stem(sg_strong: &str, sg_weak: &str, tn: u8) -> String {
+    let elided = sg_weak.chars().count() + 1 == sg_strong.chars().count();
+    let mut pl_weak = pluralize(&sg_weak.replace('\'', ""), tn);
+    if elided {
+        let cs: Vec<char> = pl_weak.chars().collect();
+        let is_v = |c: char| matches!(c, 'a' | 'e' | 'i' | 'o' | 'u' | 'y' | 'ä' | 'ö');
+        if let [.., x, y, 'i'] = cs[..] {
+            if x == y && is_v(x) {
+                let body: String = cs[..cs.len() - 2].iter().collect();
+                pl_weak = format!("{body}'{y}i");
+            } else if y == 'i' {
+                let body: String = cs[..cs.len() - 1].iter().collect();
+                pl_weak = format!("{body}'i");
+            }
+        } else if let [.., y, 'i'] = cs[..] {
+            if y == 'i' {
+                let body: String = cs[..cs.len() - 1].iter().collect();
+                pl_weak = format!("{body}'i");
+            }
+        }
+    }
+    pl_weak
 }
 
 /// The harmonic `a`/`ä` for endings, honoring a lexical override (see [`generate`]).
@@ -241,7 +261,7 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> Option
             let sg_strong = format!("{}e", lemma.strip_suffix('i')?);
             let sg_weak = weaken(&sg_strong, av);
             let pl_strong = pluralize(&sg_strong, tn);
-            let pl_weak = pluralize(&sg_weak, tn);
+            let pl_weak = weak_plural_stem(&sg_strong, &sg_weak, tn);
             Some(Stems {
                 part_sg: vec![format!("{sg_strong}{a}")],
                 illat_sg: vec![format!("{sg_strong}en")],
@@ -338,9 +358,13 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> Option
         // nalle: foreign -e words; the -e is kept before the plural -i- (nalle -> nallei-)
         // and the plural uses -j-.
         8 => {
+            // nukke gradates like any vowel stem: nuken, nukeissa (Voikko-verified;
+            // the strong grade stays in the j-forms nukkeja/nukkejen).
             let sg = lemma.to_owned();
+            let sg_weak = weaken(&sg, av);
             let last = last_char(&sg)?;
             let pl = format!("{sg}i");
+            let pl_weak = format!("{sg_weak}i");
             let pl_body = drop_last(&pl);
             Some(Stems {
                 part_sg: vec![format!("{sg}{a}")],
@@ -349,10 +373,10 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> Option
                 part_pl: vec![format!("{pl_body}j{a}")],
                 illat_pl: plural_illative(&pl),
                 essive_stem: sg.clone(),
-                sg_strong: sg.clone(),
-                sg_weak: sg,
-                pl_strong: pl.clone(),
-                pl_weak: pl,
+                sg_strong: sg,
+                sg_weak,
+                pl_strong: pl,
+                pl_weak,
             })
         }
         // tiili/uni/pieni: -i -> -e- oblique, but partitive/genitive-plural use the
@@ -726,6 +750,11 @@ pub fn generate(
     number: Number,
     case: Case,
 ) -> Option<Vec<String>> {
+    // tn48 plurale tantum citations (alkeet, harteet) have no singular at all —
+    // Voikko rejects *alkeen; the corpus marks the slots missing.
+    if tn == 48 && number == Number::Singular && lemma.ends_with("eet") {
+        return None;
+    }
     let s = analyze(lemma, tn, av, front)?;
     let a = harmony_a(front, lemma);
     let g = grade(number, case);
@@ -925,6 +954,11 @@ mod tests {
         assert_eq!(g("reikä", 9, Number::Singular, Case::Genitive), "reiän");
         assert_eq!(g("haku", 1, Number::Plural, Case::Inessive), "hauissa");
         assert_eq!(g("haka", 9, Number::Plural, Case::Inessive), "haoissa");
+        // The pair can also be formed WITH the plural -i- (hiki -> hi'issä, ikä -> i'issä).
+        assert_eq!(g("hiki", 7, Number::Plural, Case::Inessive), "hi'issä");
+        assert_eq!(g("ikä", 10, Number::Plural, Case::Inessive), "i'issä");
+        // mäki's pair differs (ä+i) -> plain mäissä.
+        assert_eq!(g("mäki", 7, Number::Plural, Case::Inessive), "mäissä");
         // The apostrophe is singular-only for the vaaka type: rounding differentiates
         // the vowels in the plural (vaa'an but vaaoissa — Voikko-verified).
         assert_eq!(g("raaka", 9, Number::Plural, Case::Inessive), "raaoissa");
@@ -966,6 +1000,27 @@ mod tests {
             Case::Genitive
         )
         .is_none());
+    }
+
+    // Reverse D-gradation is k-insertion before the final long vowel (Voikko-verified:
+    // kokeen, kiukaassa, ikeen, okaita; previously only the registry knew aie). Found
+    // by the QA loop.
+    #[test]
+    fn reverse_d_gradation_inserts_k() {
+        let g = |l, tn, n, c| one(l, tn, Some('D'), n, c);
+        assert_eq!(g("koe", 48, Number::Singular, Case::Genitive), "kokeen");
+        assert_eq!(g("jae", 48, Number::Plural, Case::Inessive), "jakeissa");
+        assert_eq!(g("aie", 48, Number::Singular, Case::Genitive), "aikeen");
+        assert_eq!(
+            g("kiuas", 41, Number::Singular, Case::Inessive),
+            "kiukaassa"
+        );
+        assert_eq!(g("ies", 41, Number::Singular, Case::Genitive), "ikeen");
+        assert_eq!(g("oas", 41, Number::Plural, Case::Partitive), "okaita");
+        // Nominatives and consonant-stem forms stay on the citation.
+        assert_eq!(g("koe", 48, Number::Singular, Case::Nominative), "koe");
+        assert_eq!(g("koe", 48, Number::Singular, Case::Partitive), "koetta");
+        assert_eq!(g("kiuas", 41, Number::Singular, Case::Partitive), "kiuasta");
     }
 
     // The -tOn suffix doubles its t only after a vowel (Voikko rejects *alasttoman).

@@ -94,6 +94,11 @@ def classify(row, verdicts):
 
     if v == "ok":
         return "pass_voikko", None
+    # A rare secondary paradigm (parenthesized in Kotus, e.g. koiras "41, (39)") that
+    # the corpus never attests is routinely absent from Voikko's lexicon too — the
+    # oracle cannot judge it, so a rejection is not a finding.
+    if row.get("rare") and v in ("misspelled", "wrong_analysis"):
+        return "rare_unverified", None
     if v == "misspelled":
         return "suspect_misspelled", {"form": rp}
     if v == "wrong_analysis":
@@ -106,6 +111,7 @@ def main():
     ap.add_argument("--dump", default="qa/generated.jsonl")
     ap.add_argument("--verdicts", default="qa/voikko-verdicts.jsonl")
     ap.add_argument("--baseline", default="qa/baseline.json")
+    ap.add_argument("--accepted", default="qa/accepted.jsonl")
     ap.add_argument("--out-json", default="qa/report.json")
     ap.add_argument("--out-md", default="qa/report.md")
     ap.add_argument("--update-baseline", action="store_true")
@@ -113,6 +119,18 @@ def main():
     args = ap.parse_args()
 
     verdicts = load_verdicts(args.verdicts)
+    # Documented-accepted slots: per-lemma patterns ("lemma|tn" or "lemma|tn|number|case")
+    # with a reason — for failures the oracle cannot judge fairly (Voikko lacks the
+    # lemma's inflections, corpus casing, homonym paradigms outside Voikko's lexicon).
+    accepted = {}
+    try:
+        with open(args.accepted, encoding="utf-8") as fh:
+            for line in fh:
+                if line.strip():
+                    row = json.loads(line)
+                    accepted[row["match"]] = row["reason"]
+    except FileNotFoundError:
+        pass
     # Lemmas the verifier actually covered (sample mode covers a subset); slots for other
     # lemmas get corpus-only classification, which is fine, but served_misspelled and the
     # suspect tiers only fire where Voikko looked.
@@ -128,6 +146,10 @@ def main():
             row = json.loads(line)
             slot_id = f"{row['lemma']}|{row['tn']}|{row['number']}|{row['case']}"
             category, detail = classify(row, verdicts)
+            if category in FAILING and (
+                f"{row['lemma']}|{row['tn']}" in accepted or slot_id in accepted
+            ):
+                category, detail = "accepted", None
             counts[category] += 1
             by_tn[row["tn"]][category] += 1
             by_case[f"{row['number']} {row['case']}"][category] += 1
@@ -140,6 +162,8 @@ def main():
                     samples[category].append({"slot": slot_id, **(detail or {})})
 
             engine = row.get("engine")
+            if category == "accepted":
+                engine = None  # accepted lemmas don't re-enter via served variants
             if engine and engine["variants"]:
                 for variant in engine["variants"]:
                     if (

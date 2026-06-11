@@ -91,11 +91,28 @@ fn split(stem: &str) -> Option<(String, String, String)> {
 }
 
 /// Replace the trailing `from` of the gradating cluster with `to`.
+///
+/// Orthography for full elision (D `k:∅`, leaving no consonant): when the gap sits
+/// between identical vowels AND a vowel precedes it, the syllable boundary is written
+/// with an apostrophe — `ruoko → ruo'on`, `vaaka → vaa'an` — but after a consonant the
+/// vowels merge into a long vowel: `koko → koon`, `rako → raon` (all Voikko-verified).
 fn regrade(stem: &str, from: &str, to: &str) -> String {
     let Some((prefix, cluster, trailing)) = split(stem) else {
         return stem.to_owned();
     };
     match cluster.strip_suffix(from) {
+        Some(head) if to.is_empty() && head.is_empty() => {
+            let mut left = prefix.chars().rev();
+            let apostrophe = match (left.next(), left.next(), trailing.chars().next()) {
+                (Some(l), Some(before), Some(r)) => l == r && is_vowel(before),
+                _ => false,
+            };
+            if apostrophe {
+                format!("{prefix}'{trailing}")
+            } else {
+                format!("{prefix}{trailing}")
+            }
+        }
         Some(head) => format!("{prefix}{head}{to}{trailing}"),
         None => stem.to_owned(),
     }

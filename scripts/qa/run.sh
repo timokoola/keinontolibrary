@@ -38,10 +38,13 @@ sync() {
   echo "sources: $(wc -l < data/sources/nykysuomensanalista2024.txt) Kotus lines, $(ls data/sources/voikko | wc -l | tr -d ' ') shards"
 }
 
-harmony() { $PY scripts/qa/gen_harmony_overrides.py; }
+harmony() {
+  # Voikko-probed per-lemma overrides (harmony + comitative style), minted from the
+  # QA dump; committed in data/. Regenerate after rule changes, then re-ingest.
+  $PY scripts/qa/gen_harmony_overrides.py
+  $PY scripts/qa/gen_comitative_overrides.py
+}
 ingest()  {
-  # Vowel-harmony overrides (Voikko segmentation) feed the artifact; regenerate when
-  # possible, but a missing file only means no overrides.
   if [[ -x $PY && ! -s data/harmony-overrides.jsonl ]]; then harmony; fi
   cargo run --release -p keinontolibrary-ingest
 }

@@ -52,9 +52,16 @@ impl Generator for RuleEngine {
         number: Number,
         case: Case,
     ) -> Option<Forms> {
-        // The exception registry overrides the rule generator for documented irregulars.
+        // The exception registry overrides the rule generator for documented irregulars,
+        // including compounds whose head is a registered irregular (adventtiaika → ajan).
         if let Some(forms) = self.exceptions.get(lemma, reference.tn, number, case) {
             return Some(Forms::present(forms.to_vec(), Source::Generated));
+        }
+        if let Some(forms) = self
+            .exceptions
+            .get_compound(lemma, reference.tn, number, case)
+        {
+            return Some(Forms::present(forms, Source::Generated));
         }
         let variants = generate::generate(
             lemma,
@@ -116,6 +123,57 @@ mod tests {
             .primary()
             .unwrap()
             .to_string()
+    }
+
+    // Compounds ending in a registered irregular head decline the head the same way:
+    // adventtiaika -> adventtiajan (not *adventtiaian), koulupoika -> koulupojan.
+    // Strong-grade slots stay with the rule generator (adventtiaikaa). Found by the QA loop.
+    #[test]
+    fn compound_heads_inherit_lexical_exceptions() {
+        let r = RuleEngine::new();
+        assert_eq!(
+            prim(&r, "adventtiaika", 9, Number::Singular, Case::Genitive),
+            "adventtiajan"
+        );
+        assert_eq!(
+            prim(&r, "adventtiaika", 9, Number::Plural, Case::Inessive),
+            "adventtiajoissa"
+        );
+        assert_eq!(
+            prim(&r, "koulupoika", 10, Number::Singular, Case::Genitive),
+            "koulupojan"
+        );
+        // Strong grade is regular and not in the registry.
+        assert_eq!(
+            prim(&r, "adventtiaika", 9, Number::Singular, Case::Partitive),
+            "adventtiaikaa"
+        );
+        // The shortest real modifiers are two-letter compounds...
+        assert_eq!(
+            prim(&r, "yöaika", 9, Number::Singular, Case::Genitive),
+            "yöajan"
+        );
+        // ...while taika is t+aika only by spelling: its own lemma, regular k-elision.
+        assert_eq!(
+            prim(&r, "taika", 9, Number::Singular, Case::Genitive),
+            "taian"
+        );
+    }
+
+    // The registry now covers every irregular aie slot, including the derived accusative.
+    #[test]
+    fn aie_accusative_uses_k_insertion_stem() {
+        let r = RuleEngine::new();
+        let f = |n, c| {
+            r.generate("aie", &ParadigmRef::new(None, 48), n, c)
+                .unwrap()
+                .primary()
+                .unwrap()
+                .to_string()
+        };
+        assert_eq!(f(Number::Singular, Case::Accusative), "aikeen");
+        assert_eq!(f(Number::Plural, Case::Elative), "aikeista");
+        assert_eq!(f(Number::Plural, Case::Comitative), "aikeineen");
     }
 
     #[test]

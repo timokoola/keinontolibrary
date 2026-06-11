@@ -158,6 +158,15 @@ fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
 // A per-class dispatch: each arm is compact but there are many of them.
 #[allow(clippy::too_many_lines)]
 fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
+    // Letter-words with no vowel (cd, tv, dvd, www) decline on the pronounced letter
+    // names with a colon (cd:n, tv:ssä) — the vowel-stem machinery can only produce
+    // non-words (*tvn) for them, so decline generation (the lookup still answers).
+    if !lemma
+        .chars()
+        .any(|c| matches!(c, 'a' | 'e' | 'i' | 'o' | 'u' | 'y' | 'ä' | 'ö'))
+    {
+        return None;
+    }
     let a = aa(lemma);
     if matches!(tn, 1 | 2 | 3 | 4 | 5 | 6 | 9 | 10 | 12 | 13 | 14) {
         return Some(analyze_vowel_stem(lemma, tn, av, a));
@@ -561,9 +570,25 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
         // hame (-e): stem doubles to -ee; partitive -tta; illative -seen. Many -e words
         // have *reverse* gradation (nominative weak, oblique strong): aarre -> aarteen.
         48 => {
-            let sg = strengthen(&format!("{lemma}e"), av);
+            // Plurale tantum citations (alkeet, harteet, kamppeet) already carry the
+            // long oblique stem with its grade: strip the -t (alkeet -> alkee-).
+            // Treating them as hame-singulars appended a spurious -e (*alkeetihin).
+            let stripped = lemma.strip_suffix('t').filter(|s| s.ends_with("ee"));
+            let tantum = stripped.is_some();
+            let sg = match stripped {
+                Some(stem) => stem.to_owned(),
+                None => strengthen(&format!("{lemma}e"), av),
+            };
             let pl = pluralize(&sg, tn);
             let pl_body = drop_last(&pl);
+            // -isiin is the attested primary plural illative (hameisiin, alkeisiin);
+            // -ihin is a valid secondary for the singular-citation words only (hameihin
+            // — Voikko rejects *alkeihin for the plurale tantum set).
+            let illat_pl = if tantum {
+                vec![format!("{pl_body}isiin")]
+            } else {
+                vec![format!("{pl_body}isiin"), format!("{pl}hin")]
+            };
             Some(Stems {
                 sg_strong: sg.clone(),
                 sg_weak: sg.clone(),
@@ -573,7 +598,7 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
                 illat_sg: vec![format!("{sg}seen")],
                 gen_pl: vec![format!("{pl_body}iden"), format!("{pl_body}itten")],
                 part_pl: vec![format!("{pl}t{a}")],
-                illat_pl: vec![format!("{pl}hin"), format!("{pl_body}isiin")],
+                illat_pl,
                 essive_stem: sg,
             })
         }
@@ -724,6 +749,31 @@ mod tests {
             one("palvelu", 2, None, Number::Plural, Case::Partitive),
             "palveluita"
         );
+    }
+
+    // tn48 plurale tantum citations (alkeet) already carry the long stem: alkeisiin,
+    // alkeilla — not the hame-template garbage *alkeetihin. Voikko-verified. Found by
+    // the QA loop.
+    #[test]
+    fn tn48_plurale_tantum_strips_citation_t() {
+        let g = |c| one("alkeet", 48, None, Number::Plural, c);
+        assert_eq!(g(Case::Illative), "alkeisiin");
+        assert_eq!(g(Case::Adessive), "alkeilla");
+        assert_eq!(g(Case::Partitive), "alkeita");
+        // The normal hame template is unaffected.
+        assert_eq!(
+            one("hame", 48, None, Number::Plural, Case::Illative),
+            "hameisiin"
+        );
+    }
+
+    // Letter-words with no vowel (cd, tv, www) decline on pronounced letter names with
+    // a colon (cd:n); the stem machinery would only produce non-words (*tvn), so it
+    // declines to generate. Found by the QA loop.
+    #[test]
+    fn vowel_less_letter_words_are_not_generated() {
+        assert!(generate("tv", 18, None, false, Number::Singular, Case::Genitive).is_none());
+        assert!(generate("dvd", 18, None, false, Number::Plural, Case::Inessive).is_none());
     }
 
     // Modifiers (adjectives/numerals) take the bare -ine plural comitative; only head

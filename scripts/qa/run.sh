@@ -38,7 +38,13 @@ sync() {
   echo "sources: $(wc -l < data/sources/nykysuomensanalista2024.txt) Kotus lines, $(ls data/sources/voikko | wc -l | tr -d ' ') shards"
 }
 
-ingest()  { cargo run --release -p keinontolibrary-ingest; }
+harmony() { $PY scripts/qa/gen_harmony_overrides.py; }
+ingest()  {
+  # Vowel-harmony overrides (Voikko segmentation) feed the artifact; regenerate when
+  # possible, but a missing file only means no overrides.
+  if [[ -x $PY && ! -s data/harmony-overrides.jsonl ]]; then harmony; fi
+  cargo run --release -p keinontolibrary-ingest
+}
 dump()    { cargo run --release -p keinontolibrary-ingest --bin keinontolibrary-qa-dump; }
 verify()  { $PY scripts/qa/verify_voikko.py "$@"; }
 report()  { $PY scripts/qa/report.py "$@"; }
@@ -46,11 +52,12 @@ report()  { $PY scripts/qa/report.py "$@"; }
 case "${1:-all}" in
   setup)  setup ;;
   sync)   sync ;;
+  harmony) harmony ;;
   ingest) ingest ;;
   dump)   dump ;;
   verify) shift; verify "$@" ;;
   report) shift; report "$@" ;;
   all)    ingest; dump; verify; report --gate ;;
   quick)  dump; verify --sample 2000; report ;;
-  *) echo "usage: $0 [setup|sync|ingest|dump|verify|report|all|quick]" >&2; exit 2 ;;
+  *) echo "usage: $0 [setup|sync|harmony|ingest|dump|verify|report|all|quick]" >&2; exit 2 ;;
 esac

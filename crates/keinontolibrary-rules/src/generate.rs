@@ -155,9 +155,27 @@ fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
     }
 }
 
+/// The harmonic `a`/`ä` for endings, honoring a lexical override (see [`generate`]).
+fn harmony_a(front: Option<bool>, lemma: &str) -> &'static str {
+    match front {
+        Some(true) => "ä",
+        Some(false) => "a",
+        None => aa(lemma),
+    }
+}
+
+/// The harmonic `o`/`ö` (tn34 -tOn stems), honoring a lexical override.
+fn harmony_o(front: Option<bool>, lemma: &str) -> char {
+    match front {
+        Some(true) => 'ö',
+        Some(false) => 'o',
+        None => oo(lemma),
+    }
+}
+
 // A per-class dispatch: each arm is compact but there are many of them.
 #[allow(clippy::too_many_lines)]
-fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
+fn analyze(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> Option<Stems> {
     // Letter-words with no vowel (cd, tv, dvd, www) decline on the pronounced letter
     // names with a colon (cd:n, tv:ssä) — the vowel-stem machinery can only produce
     // non-words (*tvn) for them, so decline generation (the lookup still answers).
@@ -167,7 +185,13 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
     {
         return None;
     }
-    let a = aa(lemma);
+    // A consonant-final lemma in the long-vowel classes (17–20: vapaa/maa/suo/filee) is a
+    // letter-word (adhd, tn18) declining on pronounced letter names with a colon — the
+    // written stem can only produce non-words (*adhdssa), so leave it to the lookup.
+    if matches!(tn, 17..=20) && !ends_with_vowel(lemma) {
+        return None;
+    }
+    let a = harmony_a(front, lemma);
     if matches!(tn, 1 | 2 | 3 | 4 | 5 | 6 | 9 | 10 | 12 | 13 | 14) {
         return Some(analyze_vowel_stem(lemma, tn, av, a));
     }
@@ -428,14 +452,15 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>) -> Option<Stems> {
             let base = lemma
                 .strip_suffix("ton")
                 .or_else(|| lemma.strip_suffix("tön"))?;
-            let o = oo(lemma);
+            let o = harmony_o(front, lemma);
             let stem = format!("{base}tt{o}m{a}"); // onnettoma / työttömä
             let pl = format!("{base}tt{o}mi");
             let last = last_char(&stem)?;
             Some(Stems {
                 part_sg: vec![format!("{lemma}t{a}")],
                 illat_sg: vec![format!("{stem}{last}n")],
-                gen_pl: vec![format!("{pl}en"), format!("{pl}den")],
+                // onnettomien + the consonant-stem onnetonten (Voikko rejects *-miden).
+                gen_pl: vec![format!("{pl}en"), format!("{lemma}ten")],
                 part_pl: vec![format!("{pl}{a}")],
                 illat_pl: plural_illative(&pl),
                 essive_stem: stem.clone(),
@@ -640,17 +665,21 @@ fn plural_illative(pl: &str) -> Vec<String> {
 ///
 /// `adjective` marks modifier-only lemmas (adjectives/numerals), which take the bare
 /// `-ine` plural comitative instead of the noun citation `-ineen`/`-inensA`.
+/// `front` overrides vowel harmony (`Some(true)` = front endings) for compounds whose
+/// final component flips it (antigeenissä) — segmentation is lexical knowledge the
+/// generator cannot derive from the spelling alone.
 #[must_use]
 pub fn generate(
     lemma: &str,
     tn: u8,
     av: Option<char>,
     adjective: bool,
+    front: Option<bool>,
     number: Number,
     case: Case,
 ) -> Option<Vec<String>> {
-    let s = analyze(lemma, tn, av)?;
-    let a = aa(lemma);
+    let s = analyze(lemma, tn, av, front)?;
+    let a = harmony_a(front, lemma);
     let g = grade(number, case);
     let sg = if g == Grade::Strong {
         &s.sg_strong
@@ -712,7 +741,7 @@ mod tests {
     use super::*;
 
     fn one(lemma: &str, tn: u8, av: Option<char>, n: Number, c: Case) -> String {
-        generate(lemma, tn, av, false, n, c).unwrap()[0].clone()
+        generate(lemma, tn, av, false, None, n, c).unwrap()[0].clone()
     }
 
     // Vowel-stem-class lemmas ending in -e (tn1 tempe, tn2 anime/college, tn3 aaloe — all
@@ -729,7 +758,7 @@ mod tests {
             one("oboe", 3, None, Number::Plural, Case::Inessive),
             "oboeissa"
         );
-        let anime = |n, c| generate("anime", 2, None, false, n, c).unwrap();
+        let anime = |n, c| generate("anime", 2, None, false, None, n, c).unwrap();
         assert_eq!(
             anime(Number::Plural, Case::Inessive),
             vec!["animeissa".to_owned()]
@@ -767,13 +796,90 @@ mod tests {
         );
     }
 
-    // Letter-words with no vowel (cd, tv, www) decline on pronounced letter names with
-    // a colon (cd:n); the stem machinery would only produce non-words (*tvn), so it
-    // declines to generate. Found by the QA loop.
+    // Letter-words decline on pronounced letter names with a colon (cd:n, adhd:n); the
+    // written stem can only produce non-words (*tvn, *adhdssa), so the generator
+    // declines: no vowels at all, or consonant-final in the long-vowel classes 17–20
+    // (adhd is Kotus tn18 despite the spelled 'a'). Found by the QA loop.
     #[test]
-    fn vowel_less_letter_words_are_not_generated() {
-        assert!(generate("tv", 18, None, false, Number::Singular, Case::Genitive).is_none());
-        assert!(generate("dvd", 18, None, false, Number::Plural, Case::Inessive).is_none());
+    fn letter_words_are_not_generated() {
+        assert!(generate(
+            "tv",
+            18,
+            None,
+            false,
+            None,
+            Number::Singular,
+            Case::Genitive
+        )
+        .is_none());
+        assert!(generate("dvd", 18, None, false, None, Number::Plural, Case::Inessive).is_none());
+        assert!(generate(
+            "adhd",
+            18,
+            None,
+            false,
+            None,
+            Number::Singular,
+            Case::Inessive
+        )
+        .is_none());
+        // Genuine tn18 vowel-final words still generate.
+        assert_eq!(
+            one("maa", 18, None, Number::Singular, Case::Inessive),
+            "maassa"
+        );
+    }
+
+    // tn34 genitive plural: onnettomien + the consonant-stem onnetonten; the earlier
+    // *-miden secondary was a non-word (Voikko-verified). Found by the QA loop.
+    #[test]
+    fn tn34_genitive_plural_variants() {
+        let forms = generate(
+            "onneton",
+            34,
+            Some('C'),
+            false,
+            None,
+            Number::Plural,
+            Case::Genitive,
+        )
+        .unwrap();
+        assert_eq!(forms, vec!["onnettomien", "onnetonten"]);
+        assert_eq!(
+            generate(
+                "työtön",
+                34,
+                Some('C'),
+                true,
+                None,
+                Number::Plural,
+                Case::Genitive
+            )
+            .unwrap(),
+            vec!["työttömien", "työtönten"]
+        );
+    }
+
+    // A lexical harmony override (minted from Voikko's segmentation at ingest) flips the
+    // endings: antigeeni is anti+geeni, so front despite the spelled 'a' — while simplex
+    // tyranni stays back by the default last-strong-vowel rule. Found by the QA loop.
+    #[test]
+    fn front_harmony_override_flips_endings() {
+        let f = |front, n, c| generate("antigeeni", 5, None, false, front, n, c).unwrap();
+        assert_eq!(
+            f(Some(true), Number::Singular, Case::Inessive),
+            vec!["antigeenissä"]
+        );
+        assert_eq!(
+            f(Some(true), Number::Plural, Case::Partitive),
+            vec!["antigeenejä"]
+        );
+        // Without the override the spelled 'a' wins (the old, wrong behavior for
+        // compounds — kept as the default for simplex words like tyranni).
+        assert_eq!(
+            f(None, Number::Singular, Case::Inessive),
+            vec!["antigeenissa"]
+        );
     }
 
     // Modifiers (adjectives/numerals) take the bare -ine plural comitative; only head
@@ -781,7 +887,7 @@ mod tests {
     // nopeine; *punaisineen rejected. Found by the QA loop.
     #[test]
     fn adjective_comitative_is_bare_ine() {
-        let adj = |l, tn, n, c| generate(l, tn, None, true, n, c).unwrap();
+        let adj = |l, tn, n, c| generate(l, tn, None, true, None, n, c).unwrap();
         assert_eq!(
             adj("punainen", 38, Number::Plural, Case::Comitative),
             ["punaisine"]
@@ -792,7 +898,16 @@ mod tests {
         );
         // Nouns keep the possessive citation, primary first.
         assert_eq!(
-            generate("talo", 1, None, false, Number::Plural, Case::Comitative).unwrap(),
+            generate(
+                "talo",
+                1,
+                None,
+                false,
+                None,
+                Number::Plural,
+                Case::Comitative
+            )
+            .unwrap(),
             ["taloineen", "taloinensa"]
         );
     }
@@ -1233,6 +1348,15 @@ mod tests {
     #[test]
     fn unsupported_class_returns_none() {
         // tn44 (kevät) is still unsupported.
-        assert!(generate("kevät", 44, None, false, Number::Singular, Case::Genitive).is_none());
+        assert!(generate(
+            "kevät",
+            44,
+            None,
+            false,
+            None,
+            Number::Singular,
+            Case::Genitive
+        )
+        .is_none());
     }
 }

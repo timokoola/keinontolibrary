@@ -15,6 +15,24 @@ use rayon::prelude::*;
 use crate::kotus::Inventory;
 use crate::voikko::{self, CleanForm};
 
+/// Read the optional vowel-harmony overrides (JSONL `{"lemma", "front"}`); a missing or
+/// unreadable file means no overrides.
+fn read_harmony_overrides(path: &Path) -> HashMap<String, bool> {
+    #[derive(serde::Deserialize)]
+    struct Row {
+        lemma: String,
+        front: bool,
+    }
+    let Ok(text) = std::fs::read_to_string(path) else {
+        return HashMap::new();
+    };
+    text.lines()
+        .filter(|l| !l.trim().is_empty())
+        .filter_map(|l| serde_json::from_str::<Row>(l).ok())
+        .map(|r| (keinontolibrary_core::normalize(&r.lemma), r.front))
+        .collect()
+}
+
 /// Where to read sources and write outputs.
 #[derive(Debug, Clone)]
 pub struct Config {
@@ -26,6 +44,10 @@ pub struct Config {
     pub artifact_path: PathBuf,
     /// Output path for the ingest report.
     pub report_path: PathBuf,
+    /// Optional vowel-harmony overrides (JSONL `{"lemma", "front"}`, minted from
+    /// Voikko's compound segmentation by `scripts/qa/gen_harmony_overrides.py`).
+    /// Missing file is fine: no overrides are applied.
+    pub harmony_path: PathBuf,
     /// Version string stamped into the artifact metadata.
     pub version: String,
 }
@@ -49,6 +71,8 @@ pub struct Report {
     pub lemmas_without_forms: usize,
     /// `(lemma, tn)` groups where the reference-corpus gradation letter disagreed with Kotus.
     pub av_mismatches: usize,
+    /// Vowel-harmony overrides applied (lemmas in both the inventory and the overrides file).
+    pub harmony_overrides: usize,
     /// Distinct (lemma, paradigm, slot, variant) forms in the artifact.
     pub total_forms: u64,
     /// Form count per case (indexed by [`Case::index`]).
@@ -97,6 +121,11 @@ impl Report {
             s,
             "av mismatches (Kotus vs corpus):  {}",
             self.av_mismatches
+        );
+        let _ = writeln!(
+            s,
+            "Harmony overrides applied:        {}",
+            self.harmony_overrides
         );
         let _ = writeln!(s, "Total forms in artifact:          {}", self.total_forms);
 
@@ -272,6 +301,7 @@ pub fn run(config: &Config) -> Result<Report> {
     };
 
     // Build lemma records in sorted order for a deterministic artifact.
+    let harmony = read_harmony_overrides(&config.harmony_path);
     let mut lemmas: Vec<&String> = inv.lemmas.keys().collect();
     lemmas.sort();
 
@@ -311,9 +341,12 @@ pub fn run(config: &Config) -> Result<Report> {
         } else {
             report.lemmas_without_forms += 1;
         }
+        let front_harmony = harmony.get(lemma).copied();
+        report.harmony_overrides += usize::from(front_harmony.is_some());
         records.push(LemmaRecord {
             lemma: lemma.clone(),
             adjective: entry.adjective,
+            front_harmony,
             paradigms: paradigm_records,
         });
     }

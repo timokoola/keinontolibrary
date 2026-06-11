@@ -15,21 +15,21 @@ use rayon::prelude::*;
 use crate::kotus::Inventory;
 use crate::voikko::{self, CleanForm};
 
-/// Read the optional vowel-harmony overrides (JSONL `{"lemma", "front"}`); a missing or
-/// unreadable file means no overrides.
-fn read_harmony_overrides(path: &Path) -> HashMap<String, bool> {
-    #[derive(serde::Deserialize)]
-    struct Row {
-        lemma: String,
-        front: bool,
-    }
+/// Read an optional per-lemma boolean override file (JSONL `{"lemma", <flag>}`); a
+/// missing or unreadable file means no overrides.
+fn read_lemma_flags(path: &Path, flag: &str) -> HashMap<String, bool> {
     let Ok(text) = std::fs::read_to_string(path) else {
         return HashMap::new();
     };
     text.lines()
         .filter(|l| !l.trim().is_empty())
-        .filter_map(|l| serde_json::from_str::<Row>(l).ok())
-        .map(|r| (keinontolibrary_core::normalize(&r.lemma), r.front))
+        .filter_map(|l| serde_json::from_str::<serde_json::Value>(l).ok())
+        .filter_map(|v| {
+            Some((
+                keinontolibrary_core::normalize(v.get("lemma")?.as_str()?),
+                v.get(flag)?.as_bool()?,
+            ))
+        })
         .collect()
 }
 
@@ -44,10 +44,12 @@ pub struct Config {
     pub artifact_path: PathBuf,
     /// Output path for the ingest report.
     pub report_path: PathBuf,
-    /// Optional vowel-harmony overrides (JSONL `{"lemma", "front"}`, minted from
-    /// Voikko's compound segmentation by `scripts/qa/gen_harmony_overrides.py`).
-    /// Missing file is fine: no overrides are applied.
+    /// Optional vowel-harmony overrides (JSONL `{"lemma", "front"}`, minted by
+    /// `scripts/qa/gen_harmony_overrides.py`). Missing file is fine: no overrides.
     pub harmony_path: PathBuf,
+    /// Optional comitative-style overrides (JSONL `{"lemma", "bare"}`, minted by
+    /// `scripts/qa/gen_comitative_overrides.py`). Missing file is fine.
+    pub comitative_path: PathBuf,
     /// Version string stamped into the artifact metadata.
     pub version: String,
 }
@@ -301,7 +303,8 @@ pub fn run(config: &Config) -> Result<Report> {
     };
 
     // Build lemma records in sorted order for a deterministic artifact.
-    let harmony = read_harmony_overrides(&config.harmony_path);
+    let harmony = read_lemma_flags(&config.harmony_path, "front");
+    let comitative = read_lemma_flags(&config.comitative_path, "bare");
     let mut lemmas: Vec<&String> = inv.lemmas.keys().collect();
     lemmas.sort();
 
@@ -343,9 +346,13 @@ pub fn run(config: &Config) -> Result<Report> {
         }
         let front_harmony = harmony.get(lemma).copied();
         report.harmony_overrides += usize::from(front_harmony.is_some());
+        // The comitative-style override (Voikko-probed) wins over the Kotus-derived
+        // word-class default: aateliton is dual-class in Kotus but takes only the
+        // bare -ine per Voikko.
+        let adjective = comitative.get(lemma).copied().unwrap_or(entry.adjective);
         records.push(LemmaRecord {
             lemma: lemma.clone(),
-            adjective: entry.adjective,
+            adjective,
             front_harmony,
             paradigms: paradigm_records,
         });

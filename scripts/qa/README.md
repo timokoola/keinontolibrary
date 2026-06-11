@@ -60,7 +60,7 @@ Failing categories (⚠ in `report.md`, tracked in the baseline):
 | `served_misspelled` | a form the **engine actually serves** is a non-word | highest priority, whatever the source |
 
 Informational: `pass`, `pass_voikko`, `extra_variant` (we generate a legitimate alternant
-the corpus never attested), `rules_gap` (lookup serves it, rules can't), `unsupported`,
+the corpus never attested), `rules_gap` (lookup serves it, rules can't), `unimplemented`,
 `unverified` (lemma outside Voikko's lexicon — Kotus ⊃ Voikko).
 
 The **gate** (`report.py --gate`, exit 1) fires only on failures *not in*

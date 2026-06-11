@@ -18,7 +18,7 @@ Slot categories (rule-engine focus — lookup slots equal the corpus by construc
     suspect_misspelled / suspect_analysis
                     only Voikko as witness, and it rejects the form
     unverified      neither oracle can judge (lemma outside Voikko's lexicon)
-    unsupported     no rules output and no corpus data
+    unimplemented   no rules output and no corpus data
 
 Separately, `served_misspelled` lists slots where a variant the ENGINE actually serves
 (what users get) is a non-word per Voikko — the hard-fail tier.
@@ -75,7 +75,7 @@ def classify(row, verdicts):
     if not rules_variants:
         if corpus_variants:
             return "rules_gap", None
-        return "unsupported", None
+        return "unimplemented", None
 
     rp = rules_variants[0]
     v = verdicts.get(vkey(row["lemma"], rp, row["case"], row["number"]))

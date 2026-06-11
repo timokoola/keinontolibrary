@@ -4074,3 +4074,219 @@ number = "singular"
 case = "partitive"
 forms = ["verta"]
 reason = "lexicalized back-vowel partitive (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "abessive"
+forms = ["autereitta", "auteritta"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "ablative"
+forms = ["autereilta", "auterilta"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "accusative"
+forms = ["autereet", "auteret"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "adessive"
+forms = ["autereilla", "auterilla"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "allative"
+forms = ["autereille", "auterille"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "comitative"
+forms = ["autereineen", "autereinensa"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "elative"
+forms = ["autereista", "auterista"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "essive"
+forms = ["autereina", "auterina"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "genitive"
+forms = ["autereiden", "autereitten", "auterien", "auerten"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "illative"
+forms = ["autereisiin", "autereihin", "auteriin"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "inessive"
+forms = ["autereissa", "auterissa"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "instructive"
+forms = ["auterein", "auterin"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "nominative"
+forms = ["autereet", "auteret"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "partitive"
+forms = ["autereita", "auteria"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "plural"
+case = "translative"
+forms = ["autereiksi", "auteriksi"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "singular"
+case = "abessive"
+forms = ["autereetta", "auteretta"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "singular"
+case = "ablative"
+forms = ["autereelta", "auterelta"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "singular"
+case = "accusative"
+forms = ["autereen", "auteren"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "singular"
+case = "adessive"
+forms = ["autereella", "auterella"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "singular"
+case = "allative"
+forms = ["autereelle", "auterelle"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "singular"
+case = "elative"
+forms = ["autereesta", "auteresta"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "singular"
+case = "essive"
+forms = ["autereena", "auterena"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "singular"
+case = "genitive"
+forms = ["autereen", "auteren"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "singular"
+case = "illative"
+forms = ["autereeseen", "autereen"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "singular"
+case = "inessive"
+forms = ["autereessa", "auteressa"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "singular"
+case = "partitive"
+forms = ["auerta"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "auer"
+tn = 49
+number = "singular"
+case = "translative"
+forms = ["autereeksi", "autereksi"]
+reason = "irregular autere- stem with t-insertion (Voikko-verified)"

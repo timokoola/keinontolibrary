@@ -4,7 +4,10 @@
 //! the plural `-i-` stem, and the class-specific partitive/illative/genitive-plural forms;
 //! then assemble each slot with the uniform case endings and the grade table.
 //!
-//! Coverage is the pragmatic high-frequency set: classes 1-15, 17-20, 23, 24, 26-28, 32-34, 38-41, 43, 47, 48 (34 in all). Other classes return `None` (no generation; the lookup/overlay still answer).
+//! Coverage: classes 1–21, 23–28, 32–41, 43, 45, 47–49 — everything except tn22
+//! (silent-letter foreign citations, e.g. parfait'n) and the registry-served
+//! singletons (29–31, 42, 44, 46, 101). Unimplemented classes return `None` (no
+//! generation; the lookup/overlay still answer).
 
 use keinontolibrary_core::{Case, Number};
 
@@ -718,6 +721,136 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> Option
                 essive_stem: sg,
             })
         }
+        // Comparative-shaped -mpi (tn16 vanhempi): strong -mpA-, weak -mmA- stems
+        // (vanhemman, vanhempaa, vanhemmissa, vanhempien — Voikko-verified).
+        16 => {
+            let base = lemma.strip_suffix("mpi")?;
+            let sg_strong = format!("{base}mp{a}");
+            let sg_weak = format!("{base}mm{a}");
+            let pl_strong = format!("{base}mpi");
+            let pl_weak = format!("{base}mmi");
+            Some(Stems {
+                part_sg: vec![format!("{sg_strong}{a}")],
+                illat_sg: vec![format!("{sg_strong}{a}n")],
+                gen_pl: vec![format!("{pl_strong}en")],
+                part_pl: vec![format!("{pl_strong}{a}")],
+                illat_pl: vec![format!("{pl_strong}in")],
+                essive_stem: sg_strong.clone(),
+                sg_strong,
+                sg_weak,
+                pl_strong,
+                pl_weak,
+            })
+        }
+        // Foreign vowel citations (tn21 rosé, jersey): endings attach to the invariant
+        // citation (rosén, roséta, roséssa, roséita — Voikko-verified). The written
+        // final letter may be outside the Finnish vowel set (é, y-as-[i]).
+        21 => {
+            let sg = lemma.to_owned();
+            let pl = format!("{lemma}i");
+            Some(Stems {
+                part_sg: vec![format!("{lemma}t{a}")],
+                // The illative echoes the final vowel as PRONOUNCED: accents drop
+                // (roséhen), and orthographic y echoes y in front words (jerseyhyn)
+                // but [i] in back words (cowboyhin, sprayhin) — all Voikko-verified.
+                illat_sg: vec![match last_char(lemma) {
+                    Some('y') if a == "ä" => format!("{lemma}hyn"),
+                    Some('y') => format!("{lemma}hin"),
+                    Some('é' | 'è' | 'ê') => format!("{lemma}hen"),
+                    Some('á' | 'à') => format!("{lemma}han"),
+                    Some(c) => format!("{lemma}h{c}n"),
+                    None => return None,
+                }],
+                gen_pl: vec![format!("{pl}den")],
+                part_pl: vec![format!("{pl}t{a}")],
+                illat_pl: vec![format!("{pl}hin")],
+                essive_stem: sg.clone(),
+                sg_strong: sg.clone(),
+                sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // toimi (tn25): -mi with an -me- oblique stem and the consonant-stem partitive
+        // alternative (tointa ~ toimea, tointen ~ toimien — Voikko-verified).
+        25 => {
+            let base = lemma.strip_suffix("mi")?;
+            let sg = format!("{base}me");
+            let pl = format!("{base}mi");
+            Some(Stems {
+                part_sg: vec![format!("{base}nt{a}"), format!("{sg}{a}")],
+                illat_sg: vec![format!("{sg}en")],
+                gen_pl: vec![format!("{pl}en"), format!("{base}nten")],
+                part_pl: vec![format!("{pl}{a}")],
+                illat_pl: plural_illative(&pl),
+                essive_stem: sg.clone(),
+                sg_strong: sg.clone(),
+                sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // lämmin (tn35): the -mpi-less superlative shape with reverse mm:mp — oblique
+        // lämpimä- but the citation-stem partitive (lämmintä — Voikko-verified).
+        35 => {
+            let base = lemma.strip_suffix("mmin")?;
+            let stem = format!("{base}mpim{a}");
+            let pl = format!("{base}mpimi");
+            Some(Stems {
+                part_sg: vec![format!("{lemma}t{a}")],
+                illat_sg: vec![format!("{stem}{a}n")],
+                gen_pl: vec![format!("{pl}en")],
+                part_pl: vec![format!("{pl}{a}")],
+                illat_pl: plural_illative(&pl),
+                essive_stem: stem.clone(),
+                sg_strong: stem.clone(),
+                sg_weak: stem,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        // Superlative-shaped -in (tn36 sisin): strong -impA-, weak -immA-, with the
+        // citation-stem partitive and -ten genitive (sisintä, sisinten — Voikko-verified).
+        36 => {
+            let base = lemma.strip_suffix("in")?;
+            let sg_strong = format!("{base}imp{a}");
+            let sg_weak = format!("{base}imm{a}");
+            let pl_strong = format!("{base}impi");
+            let pl_weak = format!("{base}immi");
+            Some(Stems {
+                part_sg: vec![format!("{lemma}t{a}")],
+                illat_sg: vec![format!("{sg_strong}{a}n")],
+                gen_pl: vec![format!("{pl_strong}en"), format!("{lemma}ten")],
+                part_pl: vec![format!("{pl_strong}{a}")],
+                illat_pl: vec![format!("{pl_strong}in")],
+                essive_stem: sg_strong.clone(),
+                sg_strong,
+                sg_weak,
+                pl_strong,
+                pl_weak,
+            })
+        }
+        // vasen (tn37): -empA-/-emmA- stems with both partitives (vasenta ~ vasempaa —
+        // Voikko-verified).
+        37 => {
+            let base = lemma.strip_suffix("en")?;
+            let sg_strong = format!("{base}emp{a}");
+            let sg_weak = format!("{base}emm{a}");
+            let pl_strong = format!("{base}empi");
+            let pl_weak = format!("{base}emmi");
+            Some(Stems {
+                part_sg: vec![format!("{lemma}t{a}"), format!("{sg_strong}{a}")],
+                illat_sg: vec![format!("{sg_strong}{a}n")],
+                gen_pl: vec![format!("{pl_strong}en")],
+                part_pl: vec![format!("{pl_strong}{a}")],
+                illat_pl: vec![format!("{pl_strong}in")],
+                essive_stem: sg_strong.clone(),
+                sg_strong,
+                sg_weak,
+                pl_strong,
+                pl_weak,
+            })
+        }
         // Ordinals (kolmas, kymmenes, neljäs, ...): the -s nominative inflects on a -nne-
         // (weak) / -nte- (strong) oblique stem with a -nsi- plural; partitive is -tta. So
         // kolmas -> kolmannen (gen), kolmatta (part), kolmanteen (illat), kolmantena (ess),
@@ -780,8 +913,60 @@ pub fn generate(
     if tn == 48 && number == Number::Singular && lemma.ends_with("eet") {
         return None;
     }
-    let s = analyze(lemma, tn, av, front)?;
     let a = harmony_a(front, lemma);
+    // askel/askele (tn49): BOTH the short tn32-style and the long tn48-style readings
+    // are standard (askelen/askeleen, askelissa/askeleissa — the corpus attests both
+    // throughout), so generate each and merge. Consonant citations (askel, taival)
+    // carry the full short paradigm; -e citations (askele, utare) use the long
+    // paradigm plus the short genitive (utaren — the only short form Voikko attests).
+    if tn == 49 {
+        let cons_citation = !lemma.ends_with('e');
+        // The short reading's strong stem carries the gradation (taival -> taipale-);
+        // the long reading extends exactly that stem (taipalee-).
+        let (short, e_base) = if cons_citation {
+            let s = analyze(lemma, 32, av, front)?;
+            let base = s.sg_strong.clone();
+            (Some(s), base)
+        } else {
+            (None, lemma.to_owned())
+        };
+        let long = analyze(&e_base, 48, None, front)?;
+        let long_forms = assemble(lemma, &long, a, adjective, number, case);
+        let short_forms = match short {
+            Some(s) => assemble(lemma, &s, a, adjective, number, case),
+            None if number == Number::Singular
+                && matches!(case, Case::Genitive | Case::Accusative) =>
+            {
+                Some(vec![format!("{e_base}n")])
+            }
+            None => None,
+        };
+        return match (short_forms, long_forms) {
+            (None, None) => None,
+            (Some(f), None) | (None, Some(f)) => Some(f),
+            (Some(mut s), Some(l)) => {
+                for f in l {
+                    if !s.contains(&f) {
+                        s.push(f);
+                    }
+                }
+                Some(s)
+            }
+        };
+    }
+    let s = analyze(lemma, tn, av, front)?;
+    assemble(lemma, &s, a, adjective, number, case)
+}
+
+/// Assemble one slot's surface forms from a stem analysis.
+fn assemble(
+    lemma: &str,
+    s: &Stems,
+    a: &'static str,
+    adjective: bool,
+    number: Number,
+    case: Case,
+) -> Option<Vec<String>> {
     let g = grade(number, case);
     let sg = if g == Grade::Strong {
         &s.sg_strong
@@ -1025,6 +1210,122 @@ mod tests {
             Case::Genitive
         )
         .is_none());
+    }
+
+    // The previously unimplemented classes (all golds Voikko-verified). tn49 merges the
+    // short tn32-style and long tn48-style readings (the corpus attests both).
+    #[test]
+    fn newly_implemented_classes() {
+        assert_eq!(
+            one("vanhempi", 16, None, Number::Singular, Case::Genitive),
+            "vanhemman"
+        );
+        assert_eq!(
+            one("vanhempi", 16, None, Number::Singular, Case::Partitive),
+            "vanhempaa"
+        );
+        assert_eq!(
+            one("vanhempi", 16, None, Number::Plural, Case::Inessive),
+            "vanhemmissa"
+        );
+        assert_eq!(
+            one("vanhempi", 16, None, Number::Plural, Case::Genitive),
+            "vanhempien"
+        );
+        assert_eq!(
+            one("rosé", 21, None, Number::Singular, Case::Genitive),
+            "rosén"
+        );
+        assert_eq!(
+            one("rosé", 21, None, Number::Singular, Case::Partitive),
+            "roséta"
+        );
+        assert_eq!(
+            one("rosé", 21, None, Number::Plural, Case::Partitive),
+            "roséita"
+        );
+        assert_eq!(
+            generate(
+                "toimi",
+                25,
+                None,
+                false,
+                None,
+                Number::Singular,
+                Case::Partitive
+            )
+            .unwrap(),
+            vec!["tointa", "toimea"]
+        );
+        assert_eq!(
+            generate(
+                "toimi",
+                25,
+                None,
+                false,
+                None,
+                Number::Plural,
+                Case::Genitive
+            )
+            .unwrap(),
+            vec!["toimien", "tointen"]
+        );
+        assert_eq!(
+            one("lämmin", 35, None, Number::Singular, Case::Genitive),
+            "lämpimän"
+        );
+        assert_eq!(
+            one("lämmin", 35, None, Number::Singular, Case::Partitive),
+            "lämmintä"
+        );
+        assert_eq!(
+            one("lämmin", 35, None, Number::Plural, Case::Inessive),
+            "lämpimissä"
+        );
+        assert_eq!(
+            one("sisin", 36, None, Number::Singular, Case::Genitive),
+            "sisimmän"
+        );
+        assert_eq!(
+            one("sisin", 36, None, Number::Singular, Case::Partitive),
+            "sisintä"
+        );
+        assert_eq!(
+            one("vasen", 37, None, Number::Singular, Case::Genitive),
+            "vasemman"
+        );
+        assert_eq!(
+            generate(
+                "vasen",
+                37,
+                None,
+                false,
+                None,
+                Number::Singular,
+                Case::Partitive
+            )
+            .unwrap(),
+            vec!["vasenta", "vasempaa"]
+        );
+    }
+
+    // tn49 merges both standard readings: askelen/askeleen, askelissa/askeleissa, and
+    // the gradating taival -> taipaleen (all Voikko-verified; utare from report #24).
+    #[test]
+    fn tn49_dual_stem_readings() {
+        let both = |l, av, n, c| generate(l, 49, av, false, None, n, c).unwrap();
+        let gen = both("askel", None, Number::Singular, Case::Genitive);
+        assert!(gen.contains(&"askelen".to_owned()) && gen.contains(&"askeleen".to_owned()));
+        let part = both("askel", None, Number::Singular, Case::Partitive);
+        assert!(part.contains(&"askelta".to_owned()));
+        let ine = both("askel", None, Number::Plural, Case::Inessive);
+        assert!(ine.contains(&"askelissa".to_owned()) && ine.contains(&"askeleissa".to_owned()));
+        let tai = both("taival", Some('E'), Number::Singular, Case::Genitive);
+        assert!(tai.contains(&"taipaleen".to_owned()));
+        let uta = both("utare", None, Number::Plural, Case::Inessive);
+        assert!(uta.contains(&"utareissa".to_owned()));
+        let ug = both("utare", None, Number::Singular, Case::Genitive);
+        assert!(ug.contains(&"utareen".to_owned()) && ug.contains(&"utaren".to_owned()));
     }
 
     // Reverse D-gradation is k-insertion before the final long vowel (Voikko-verified:

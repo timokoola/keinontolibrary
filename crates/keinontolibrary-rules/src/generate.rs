@@ -124,13 +124,15 @@ fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
         4 | 14 => vec![format!("{pl_weak}t{a}"), format!("{pl_body}j{a}")], // laatikoita, laatikkoja
         _ => vec![format!("{pl_strong}t{a}")], // 2,3,6,12,13: palveluita, valtioita, ...
     };
+    // The archaic -Ain genitive plural is dropped from tn9/10: Voikko's lexicon is
+    // inconsistent about it (kalain accepted, satain/neljäin/kahdeksain rejected) and
+    // it is never the corpus primary.
     let gen_pl = match tn {
-        1 => vec![format!("{pl_body}jen")],
-        9 => vec![format!("{pl_body}jen"), format!("{body}{a}in")], // kalojen, kalain
-        2 if e_final => vec![format!("{pl_body}jen")],              // animejen, collegejen
+        1 | 9 => vec![format!("{pl_body}jen")], // valojen, kalojen
+        2 if e_final => vec![format!("{pl_body}jen")], // animejen, collegejen
         2 => vec![format!("{pl_body}jen"), format!("{pl_strong}den")],
         5 | 6 => vec![format!("{sg_strong}en")],
-        10 => vec![format!("{body}ien"), format!("{body}{a}in")], // koirien, koirain
+        10 => vec![format!("{body}ien")], // koirien
         12 | 13 => vec![
             format!("{pl_strong}den"),
             format!("{pl_strong}tten"),
@@ -167,7 +169,10 @@ fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
 /// `ikä → i'issä`) — all Voikko-verified. Any apostrophe in the weak singular stem is
 /// dropped before pluralizing and re-added only where an identical pair survives.
 fn weak_plural_stem(sg_strong: &str, sg_weak: &str, tn: u8) -> String {
-    let elided = sg_weak.chars().count() + 1 == sg_strong.chars().count();
+    // Elision shows as a shorter weak stem (koko -> koo) OR as the apostrophe the
+    // gradation already wrote (liuku -> liu'u): both can need the plural apostrophe
+    // (ko'oissa, liu'uissa — Voikko-verified; the vaaka type loses it by rounding).
+    let elided = sg_weak.contains('\'') || sg_weak.chars().count() + 1 == sg_strong.chars().count();
     let mut pl_weak = pluralize(&sg_weak.replace('\'', ""), tn);
     if elided {
         let cs: Vec<char> = pl_weak.chars().collect();
@@ -311,7 +316,13 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> Option
                     format!("{lemma}ten"),
                 ],
                 part_pl: vec![format!("{pl}t{a}")],
-                illat_pl: vec![format!("{pl}siin"), format!("{pl}hin")],
+                illat_pl: if pl.ends_with("ii") {
+                    // -ihin is real after a true diphthong (vieraihin) but not after
+                    // the i-stems' long -ii- (Voikko rejects *valmiihin, *rukiihin).
+                    vec![format!("{pl}siin")]
+                } else {
+                    vec![format!("{pl}siin"), format!("{pl}hin")]
+                },
                 essive_stem: sg.clone(),
                 sg_strong: sg.clone(),
                 sg_weak: sg,
@@ -329,7 +340,13 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> Option
                 illat_sg: vec![format!("{sg}seen")],
                 gen_pl: vec![format!("{pl}den"), format!("{pl}tten")],
                 part_pl: vec![format!("{pl}t{a}")],
-                illat_pl: vec![format!("{pl}siin"), format!("{pl}hin")],
+                illat_pl: if pl.ends_with("ii") {
+                    // -ihin is real after a true diphthong (vieraihin) but not after
+                    // the i-stems' long -ii- (Voikko rejects *valmiihin, *rukiihin).
+                    vec![format!("{pl}siin")]
+                } else {
+                    vec![format!("{pl}siin"), format!("{pl}hin")]
+                },
                 essive_stem: sg.clone(),
                 sg_strong: sg.clone(),
                 sg_weak: sg,
@@ -387,10 +404,18 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> Option
             let sg_weak = weaken(&sg, av);
             let pl = pluralize(&sg, tn);
             let pl_weak = pluralize(&sg_weak, tn);
+            // The consonant-stem -ten genitive is real for tn24/26 (unten, pienten)
+            // but not for the tn23 lemmas: Voikko rejects *lohten/*jouhten/*monten and
+            // the corpus attests only lohien. (tiili's tiilten is the casualty.)
+            let gen_pl = if tn == 23 {
+                vec![format!("{pl}en")]
+            } else {
+                vec![format!("{cons}ten"), format!("{pl}en")]
+            };
             Some(Stems {
                 part_sg: vec![format!("{cons}t{a}")],
                 illat_sg: vec![format!("{sg}en")],
-                gen_pl: vec![format!("{cons}ten"), format!("{pl}en")],
+                gen_pl,
                 part_pl: vec![format!("{pl}{a}")],
                 illat_pl: plural_illative(&pl),
                 essive_stem: sg.clone(),

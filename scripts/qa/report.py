@@ -162,8 +162,15 @@ def main():
                     samples[category].append({"slot": slot_id, **(detail or {})})
 
             engine = row.get("engine")
-            if category == "accepted":
-                engine = None  # accepted lemmas don't re-enter via served variants
+            # The served-variant check honors the same exemptions as classify():
+            # accepted slots (whatever category classify chose for them) and rare
+            # secondary paradigms the oracle cannot judge.
+            if (
+                f"{row['lemma']}|{row['tn']}" in accepted
+                or slot_id in accepted
+                or row.get("rare")
+            ):
+                engine = None
             if engine and engine["variants"]:
                 for variant in engine["variants"]:
                     if (

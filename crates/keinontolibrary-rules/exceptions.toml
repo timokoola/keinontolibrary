@@ -3842,3 +3842,235 @@ number = "singular"
 case = "translative"
 forms = ["oriksi"]
 reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "genitive"
+forms = ["veljen"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "accusative"
+forms = ["veljen"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "partitive"
+forms = ["veljeä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "inessive"
+forms = ["veljessä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "elative"
+forms = ["veljestä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "illative"
+forms = ["veljeen"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "adessive"
+forms = ["veljellä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "ablative"
+forms = ["veljeltä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "allative"
+forms = ["veljelle"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "essive"
+forms = ["veljenä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "translative"
+forms = ["veljeksi"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "abessive"
+forms = ["veljettä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "nominative"
+forms = ["veljet"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "accusative"
+forms = ["veljet"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "genitive"
+forms = ["veljien"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "partitive"
+forms = ["veljiä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "inessive"
+forms = ["veljissä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "elative"
+forms = ["veljistä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "illative"
+forms = ["veljiin"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "adessive"
+forms = ["veljillä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "ablative"
+forms = ["veljiltä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "allative"
+forms = ["veljille"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "essive"
+forms = ["veljinä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "translative"
+forms = ["veljiksi"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "abessive"
+forms = ["veljittä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "comitative"
+forms = ["veljineen", "veljinensä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "instructive"
+forms = ["veljin"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "meri"
+tn = 24
+number = "singular"
+case = "partitive"
+forms = ["merta"]
+reason = "lexicalized back-vowel partitive (Voikko-verified)"
+
+[[exception]]
+lemma = "veri"
+tn = 26
+number = "singular"
+case = "partitive"
+forms = ["verta"]
+reason = "lexicalized back-vowel partitive (Voikko-verified)"

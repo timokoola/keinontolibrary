@@ -430,6 +430,90 @@ case = "illative"
 forms = ["aikeisiin", "aikeihin"]
 reason = "k-insertion oblique stem aikee-"
 
+[[exception]]
+lemma = "aie"
+number = "singular"
+case = "accusative"
+forms = ["aikeen"]
+reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
+
+[[exception]]
+lemma = "aie"
+number = "singular"
+case = "abessive"
+forms = ["aikeetta"]
+reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "accusative"
+forms = ["aikeet"]
+reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "abessive"
+forms = ["aikeitta"]
+reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "elative"
+forms = ["aikeista"]
+reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "adessive"
+forms = ["aikeilla"]
+reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "ablative"
+forms = ["aikeilta"]
+reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "allative"
+forms = ["aikeille"]
+reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "essive"
+forms = ["aikeina"]
+reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "translative"
+forms = ["aikeiksi"]
+reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "comitative"
+forms = ["aikeineen", "aikeinensa"]
+reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
+
+[[exception]]
+lemma = "aie"
+number = "plural"
+case = "instructive"
+forms = ["aikein"]
+reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
+
 # --- mies (Kotus tn 42) ---
 # tn42 mies — irregular -s/-h- stem, singleton class.
 

@@ -82,6 +82,42 @@ impl Exceptions {
             .map(Vec::as_slice)
     }
 
+    /// Heads whose lexical irregularity survives compounding: any `-aika`/`-poika`
+    /// compound declines its head the same way (adventtiaika → adventtiajan, koulupoika
+    /// → koulupojan; Kotus lists 171 such compounds as plain tn9/tn10 lemmas, so the
+    /// rule generator would otherwise apply regular k-elision: *adventtiaian).
+    /// Conservative allowlist — extend only for irregulars that are purely lexical.
+    const COMPOUND_HEADS: [&'static str; 2] = ["aika", "poika"];
+
+    /// Exception forms for a compound whose final component is a registered head:
+    /// the head's registered forms with the modifier prefixed. Exact lemmas are served
+    /// by [`Exceptions::get`]; this only fires for proper compounds, which requires a
+    /// modifier of at least two characters — `taika` is t+aika by spelling but its own
+    /// regular lemma (taian, not *tajan), while the shortest real modifiers are
+    /// two-letter (yöaika, työaika).
+    #[must_use]
+    pub fn get_compound(
+        &self,
+        lemma: &str,
+        tn: u8,
+        number: Number,
+        case: Case,
+    ) -> Option<Vec<String>> {
+        let lemma = normalize(lemma);
+        for head in Self::COMPOUND_HEADS {
+            let Some(prefix) = lemma.strip_suffix(head) else {
+                continue;
+            };
+            if prefix.chars().count() < 2 {
+                continue;
+            }
+            if let Some(forms) = self.get(head, tn, number, case) {
+                return Some(forms.iter().map(|f| format!("{prefix}{f}")).collect());
+            }
+        }
+        None
+    }
+
     /// Number of registered slots (raw row count; backstop for the parity gate).
     #[must_use]
     pub fn len(&self) -> usize {

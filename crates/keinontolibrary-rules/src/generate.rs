@@ -61,6 +61,9 @@ fn pluralize(stem: &str, tn: u8) -> String {
         // -a/-ä round to -o-/-ö- before the plural -i- (most classes)...
         Some('a') if tn != 10 => format!("{body}oi"),
         Some('ä') if tn != 10 => format!("{body}öi"),
+        // tn3 -e loanwords keep the stem vowel before the plural -i- (aaloe -> aaloei-:
+        // aaloeita, aaloeissa — Voikko-verified; dropping it gives *aaloita).
+        Some('e') if tn == 3 => format!("{stem}i"),
         // ...or the final vowel just drops (type 10, and the -e stems).
         Some('e' | 'a' | 'ä') => format!("{body}i"),
         // -o/-u/-y/-ö (and anything else) just take -i.
@@ -602,11 +605,15 @@ fn plural_illative(pl: &str) -> Vec<String> {
 }
 
 /// Generate the surface form(s) for one slot, or `None` if the class is unsupported.
+///
+/// `adjective` marks modifier-only lemmas (adjectives/numerals), which take the bare
+/// `-ine` plural comitative instead of the noun citation `-ineen`/`-inensA`.
 #[must_use]
 pub fn generate(
     lemma: &str,
     tn: u8,
     av: Option<char>,
+    adjective: bool,
     number: Number,
     case: Case,
 ) -> Option<Vec<String>> {
@@ -652,10 +659,16 @@ pub fn generate(
         (Number::Plural, Case::Translative) => vec![format!("{pl}ksi")],
         (Number::Plural, Case::Abessive) => vec![format!("{pl}tt{a}")],
         (Number::Plural, Case::Comitative) => {
-            vec![
-                format!("{}neen", s.pl_strong),
-                format!("{}nens{a}", s.pl_strong),
-            ]
+            if adjective {
+                // Modifiers agree with their head bare: punaisine (poskineen); only the
+                // head noun carries the possessive (Voikko rejects *punaisineen).
+                vec![format!("{}ne", s.pl_strong)]
+            } else {
+                vec![
+                    format!("{}neen", s.pl_strong),
+                    format!("{}nens{a}", s.pl_strong),
+                ]
+            }
         }
         (Number::Plural, Case::Instructive) => vec![format!("{}n", s.pl_weak)],
     };
@@ -667,7 +680,47 @@ mod tests {
     use super::*;
 
     fn one(lemma: &str, tn: u8, av: Option<char>, n: Number, c: Case) -> String {
-        generate(lemma, tn, av, n, c).unwrap()[0].clone()
+        generate(lemma, tn, av, false, n, c).unwrap()[0].clone()
+    }
+
+    // tn3 lemmas ending in -e keep the stem vowel before the plural -i- (Voikko-verified:
+    // aaloeita/aaloeissa/aaloeiden; *aaloita is a non-word). Found by the QA loop.
+    #[test]
+    fn tn3_final_e_keeps_stem_vowel_in_plural() {
+        let g = |n, c| one("aaloe", 3, None, n, c);
+        assert_eq!(g(Number::Plural, Case::Partitive), "aaloeita");
+        assert_eq!(g(Number::Plural, Case::Inessive), "aaloeissa");
+        assert_eq!(g(Number::Plural, Case::Genitive), "aaloeiden");
+        assert_eq!(
+            one("oboe", 3, None, Number::Plural, Case::Inessive),
+            "oboeissa"
+        );
+        // The plain tn3 diphthong stems are unaffected.
+        assert_eq!(
+            one("valtio", 3, None, Number::Plural, Case::Inessive),
+            "valtioissa"
+        );
+    }
+
+    // Modifiers (adjectives/numerals) take the bare -ine plural comitative; only head
+    // nouns carry the possessive citation -ineen/-inensA. Voikko-verified: punaisine,
+    // nopeine; *punaisineen rejected. Found by the QA loop.
+    #[test]
+    fn adjective_comitative_is_bare_ine() {
+        let adj = |l, tn, n, c| generate(l, tn, None, true, n, c).unwrap();
+        assert_eq!(
+            adj("punainen", 38, Number::Plural, Case::Comitative),
+            ["punaisine"]
+        );
+        assert_eq!(
+            adj("nopea", 10, Number::Plural, Case::Comitative),
+            ["nopeine"]
+        );
+        // Nouns keep the possessive citation, primary first.
+        assert_eq!(
+            generate("talo", 1, None, false, Number::Plural, Case::Comitative).unwrap(),
+            ["taloineen", "taloinensa"]
+        );
     }
 
     // Ordinals (tn45): -nne-/-nte- oblique stems, -nsi- plural, -tta partitive. All forms
@@ -1106,6 +1159,6 @@ mod tests {
     #[test]
     fn unsupported_class_returns_none() {
         // tn44 (kevät) is still unsupported.
-        assert!(generate("kevät", 44, None, Number::Singular, Case::Genitive).is_none());
+        assert!(generate("kevät", 44, None, false, Number::Singular, Case::Genitive).is_none());
     }
 }

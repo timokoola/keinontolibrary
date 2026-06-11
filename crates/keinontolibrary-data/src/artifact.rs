@@ -57,6 +57,10 @@ pub struct Meta {
 pub struct LemmaRecord {
     /// The normalized lemma.
     pub lemma: String,
+    /// Whether every Kotus reading of the lemma is a modifier (adjective/numeral) — these
+    /// take the bare `-ine` plural comitative instead of the noun citation `-ineen`.
+    #[serde(default)]
+    pub adjective: bool,
     /// The distinct declension paradigms (deduplicated by `(tn, av)`), primary first.
     pub paradigms: Vec<ParadigmRecord>,
 }
@@ -149,6 +153,7 @@ mod tests {
             },
             lemmas: vec![LemmaRecord {
                 lemma: "talo".into(),
+                adjective: false,
                 paradigms: vec![ParadigmRecord {
                     tn: 1,
                     av: None,

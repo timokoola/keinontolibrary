@@ -22,3 +22,11 @@ ingest-report.txt
 
 # Wiktionary fetch cache (finnish-testgen)
 .cache/
+
+# QA loop (scripts/qa/): venv + bulky generated outputs. qa/baseline.json IS committed.
+/.venv/
+/qa/generated.jsonl
+/qa/voikko-verdicts.jsonl
+/qa/report.json
+/qa/report.md
+__pycache__/

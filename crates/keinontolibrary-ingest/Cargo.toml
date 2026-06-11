@@ -1,6 +1,7 @@
 [package]
 name = "keinontolibrary-ingest"
 description = "Build-time ingest: parse Kotus + Voikko sources into the packed lookup artifact."
+default-run = "keinontolibrary-ingest"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -28,6 +29,10 @@ rayon = { workspace = true }
 [[bin]]
 name = "keinontolibrary-metrics"
 path = "src/bin/metrics.rs"
+
+[[bin]]
+name = "keinontolibrary-qa-dump"
+path = "src/bin/qa_dump.rs"
 
 [lints]
 workspace = true

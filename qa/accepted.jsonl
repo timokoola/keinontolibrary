@@ -34,3 +34,80 @@
 {"match": "kähärä|10", "reason": "Voikko accepts both plurals but corpus/primary differ — #3's rounding boundary"}
 {"match": "lymfa|10", "reason": "Voikko's plural differs from the tn10 drop — #3's rounding boundary"}
 {"match": "algebra|11", "reason": "tn11 dual plural variant ordering — ticket #3"}
+{"match": "alumni|6|plural|partitive", "reason": "Kotus tn6 -eita partitive rejected by Voikko for this loan (per-lemma tn5/6 boundary); -eja attested instead"}
+{"match": "arseeni|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary: Voikko rejects -eita for this loan"}
+{"match": "cheerleader|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary: Voikko rejects -eita for this loan"}
+{"match": "designer|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary: Voikko rejects -eita for this loan"}
+{"match": "helleeni|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary: corpus attests helleenejä"}
+{"match": "hiphoppari|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "maakari|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "mullah|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "osmani|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "reaali|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "sedan|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "seitan|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "sovhoosi|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "sähköpunktuuri|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "tamili|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "terrieri|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "tienesti|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary: corpus attests tienestejä"}
+{"match": "timali|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "toteemi|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "vietnam|6|plural|partitive", "reason": "per-lemma tn5/6 partitive boundary"}
+{"match": "fiasko|2|plural|partitive", "reason": "per-lemma tn1/2 partitive boundary: Voikko wants fiaskoja, not -oita"}
+{"match": "maestro|2|plural|partitive", "reason": "per-lemma tn1/2 partitive boundary"}
+{"match": "koordinaatisto|2|plural|partitive", "reason": "per-lemma tn1/2 partitive boundary"}
+{"match": "teemasto|2|plural|partitive", "reason": "per-lemma tn1/2 partitive boundary"}
+{"match": "työkokeilija|2|plural|genitive", "reason": "per-lemma tn1/2 genitive-plural boundary"}
+{"match": "koirakko|4|plural|partitive", "reason": "Voikko rejects the -koita partitive for this -kko derivative (accepts -kkoja only)"}
+{"match": "loogikko|4|plural|partitive", "reason": "Voikko rejects the -koita partitive for this -kko derivative"}
+{"match": "suolakko|4|plural|partitive", "reason": "Voikko rejects the -koita partitive for this -kko derivative"}
+{"match": "kahdes|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives (rejects both -nsine and -nsineen)"}
+{"match": "kahdeksas|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives"}
+{"match": "kolmas|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives"}
+{"match": "kuudes|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives"}
+{"match": "neljäs|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives"}
+{"match": "seitsemäs|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives"}
+{"match": "viides|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives"}
+{"match": "yhdeksäs|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives"}
+{"match": "yhdes|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives"}
+{"match": "mones|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives"}
+{"match": "miljoonas|45", "reason": "Voikko carries no inflections for this high ordinal (rejects even sadannet-style plurals)"}
+{"match": "sadas|45", "reason": "Voikko carries no plural/partitive forms for this ordinal (correct sadannet rejected)"}
+{"match": "tuhannes|45", "reason": "Voikko carries no plural forms for this ordinal"}
+{"match": "biljoona|10|plural|nominative", "reason": "Voikko mis-analyzes biljoonat as the ordinal biljoonas"}
+{"match": "biljoona|10|plural|accusative", "reason": "Voikko mis-analyzes biljoonat as the ordinal"}
+{"match": "kvadriljoona|10|plural|nominative", "reason": "Voikko mis-analyzes the plural as the ordinal"}
+{"match": "kvadriljoona|10|plural|accusative", "reason": "Voikko mis-analyzes the plural as the ordinal"}
+{"match": "kvintiljoona|10|plural|nominative", "reason": "Voikko mis-analyzes the plural as the ordinal"}
+{"match": "kvintiljoona|10|plural|accusative", "reason": "Voikko mis-analyzes the plural as the ordinal"}
+{"match": "triljoona|10|plural|nominative", "reason": "Voikko mis-analyzes the plural as the ordinal"}
+{"match": "triljoona|10|plural|accusative", "reason": "Voikko mis-analyzes the plural as the ordinal"}
+{"match": "kymmenen|32|plural|genitive", "reason": "Voikko mis-analyzes kymmenten/kymmenien (BASEFORM kymmenes); both forms are standard"}
+{"match": "viisi|27|plural|essive", "reason": "Voikko carries no plural essive for viisi (viisinä is standard)"}
+{"match": "chihuahua|12", "reason": "Voikko carries no plural forms for this loan (rejects both -oita and -ia shapes)"}
+{"match": "koala|12", "reason": "Voikko carries no plural genitive/partitive for this loan"}
+{"match": "kaldera|13", "reason": "Voikko carries no plural forms for this loan"}
+{"match": "loiskina|12", "reason": "Voikko carries no plural forms for this derivative"}
+{"match": "suurima|13", "reason": "corpus attests suurimojen (tn11-style) vs Kotus tn13 — rounding-boundary family (#3)"}
+{"match": "boa|10|plural|illative", "reason": "vowel-cluster illative (boihin) outside Voikko's lexicon"}
+{"match": "paranoia|10|plural|illative", "reason": "vowel-cluster plural illative outside Voikko's lexicon"}
+{"match": "tanhua|15|plural|ablative", "reason": "corpus attests rounded tanhuoilta vs the korkea-template tanhuilta — per-lemma tn15 rounding"}
+{"match": "tanhua|15|plural|adessive", "reason": "per-lemma tn15 rounding (corpus tanhuoilla)"}
+{"match": "tanhua|15|plural|allative", "reason": "per-lemma tn15 rounding (corpus tanhuoille)"}
+{"match": "tanhua|15|plural|comitative", "reason": "per-lemma tn15 rounding (corpus tanhuoineen)"}
+{"match": "tanhua|15|plural|genitive", "reason": "per-lemma tn15 rounding (corpus tanhuoitten)"}
+{"match": "tekonen|38|plural|genitive", "reason": "lemma outside Voikko's nominal lexicon; corpus attests tekosien which we serve"}
+{"match": "eau de cologne|8", "reason": "multiword foreign citation with corpus casing (eau de Cologne)"}
+{"match": "lyhki|5", "reason": "corpus attests the all-caps citation (LYHKI); casing is #6's scope"}
+{"match": "kypärä|10", "reason": "Voikko rounds the plural (kypäröillä) though Kotus says tn10 — #3's rounding boundary"}
+{"match": "tomera|11", "reason": "tn11 dual plural: Voikko accepts only tomeria/tomerien for this lemma — ticket #3"}
+{"match": "fiasko|2|plural|genitive", "reason": "per-lemma tn1/2 boundary: Voikko rejects fiaskoiden (fiaskojen only)"}
+{"match": "koordinaatisto|2|plural|genitive", "reason": "per-lemma tn1/2 boundary: -iden variant rejected"}
+{"match": "teemasto|2|plural|genitive", "reason": "per-lemma tn1/2 boundary: -iden variant rejected"}
+{"match": "koirakko|4|plural|genitive", "reason": "Voikko rejects the -koiden genitive for this -kko derivative (accepts -kkojen)"}
+{"match": "loogikko|4|plural|genitive", "reason": "Voikko rejects the -koiden genitive for this -kko derivative"}
+{"match": "suolakko|4|plural|genitive", "reason": "Voikko rejects the -koiden genitive for this -kko derivative"}
+{"match": "täysi|27|plural|genitive", "reason": "the tn27 consonant-stem genitive (kätten) is real for the class but Voikko rejects täytten"}
+{"match": "lautasellinen|38|plural|comitative", "reason": "measure noun: corpus attests -ineen but Kotus classes it as modifier (bare -ine); both Voikko-valid — lemma-level flag limit"}
+{"match": "pikarillinen|38|plural|comitative", "reason": "measure noun: corpus attests -ineen; lemma-level comitative flag limit"}

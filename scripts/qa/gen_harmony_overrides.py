@@ -28,7 +28,10 @@ from verify_voikko import make_voikko  # noqa: E402
 
 # Slots whose endings carry the harmony vowel unambiguously.
 PROBE_CASES = {"inessive", "elative", "adessive", "ablative", "essive", "abessive", "partitive"}
-FLIP = str.maketrans("aouäöy", "äöyaou")
+# Only a/ä (and o/ö) appear as harmony vowels in the probe-case endings. y must NOT be
+# in this table: the flip region can reach into the stem (analyyttisyys + -ttä), and
+# mapping its y would garble the form (*analyyttisyuttä) and erase the probe signal.
+FLIP = str.maketrans("aoäö", "äöao")
 
 
 def is_back(word):

@@ -100,6 +100,11 @@ fn regrade(stem: &str, from: &str, to: &str) -> String {
     let Some((prefix, cluster, trailing)) = split(stem) else {
         return stem.to_owned();
     };
+    // Gradation never applies to a word-initial cluster (koe -> the k of `koee` is the
+    // onset, not a gradation site).
+    if prefix.is_empty() {
+        return stem.to_owned();
+    }
     match cluster.strip_suffix(from) {
         Some(head) if to.is_empty() && head.is_empty() => {
             let mut left = prefix.chars().rev();
@@ -130,8 +135,28 @@ pub fn weaken(stem: &str, av: Option<char>) -> String {
 
 /// Apply strong gradation to a weak stem (weak → strong) — used for reverse-gradation
 /// classes whose nominative shows the weak grade (e.g. type 48 `aarre` → `aartee`).
+///
+/// Reverse `D` (k:∅) on an all-vowel tail is k-INSERTION before the final long vowel:
+/// `koe → kokee-`, `jae → jakee-`, `aie → aikee-` (tn48), `kiuas → kiukaa-`,
+/// `ies → ikee-`, `oas → okaa-` (tn41) — all Voikko-verified.
 #[must_use]
 pub fn strengthen(stem: &str, av: Option<char>) -> String {
+    if matches!(av, Some('D' | 'd')) {
+        // Insert before the final maximal run of one vowel when a (different) vowel
+        // precedes it: aiee -> ai|k|ee, kiuaa -> kiu|k|aa, ie -> i|k|e (tn32 ien ->
+        // ikene-), pui -> pu|k|i (tn33 puin -> pukime-).
+        let cs: Vec<char> = stem.chars().collect();
+        let n = cs.len();
+        let mut start = n;
+        while start > 0 && is_vowel(cs[start - 1]) && cs[start - 1] == cs[n - 1] {
+            start -= 1;
+        }
+        if start > 0 && start < n && is_vowel(cs[start - 1]) && cs[start - 1] != cs[n - 1] {
+            let body: String = cs[..start].iter().collect();
+            let run: String = cs[start..].iter().collect();
+            return format!("{body}k{run}");
+        }
+    }
     match av.and_then(pair) {
         Some((strong, weak)) => regrade(stem, weak, strong),
         None => stem.to_owned(),

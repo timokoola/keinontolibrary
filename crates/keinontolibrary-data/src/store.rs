@@ -89,6 +89,7 @@ impl FormStore for LookupData {
                 ParadigmRef::new(None, p.tn)
                     .with_av(p.av)
                     .with_adjective(rec.adjective)
+                    .with_front_harmony(rec.front_harmony)
             })
             .collect()
     }
@@ -175,6 +176,7 @@ mod tests {
             lemmas: vec![LemmaRecord {
                 lemma: "talo".into(),
                 adjective: false,
+                front_harmony: None,
                 paradigms: vec![ParadigmRecord {
                     tn: 1,
                     av: None,

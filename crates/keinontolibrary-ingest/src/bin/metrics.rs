@@ -80,7 +80,8 @@ fn main() -> std::io::Result<()> {
         for paradigm in &lemma.paradigms {
             let reference = ParadigmRef::new(None, paradigm.tn)
                 .with_av(paradigm.av)
-                .with_adjective(lemma.adjective);
+                .with_adjective(lemma.adjective)
+                .with_front_harmony(lemma.front_harmony);
             for slot in &paradigm.slots {
                 if slot.variants.is_empty() {
                     continue;

@@ -243,6 +243,11 @@ impl Engine {
     fn split_compound(&self, norm: &str) -> Option<(String, String)> {
         const MIN_PREFIX_CHARS: usize = 2;
         const MIN_COMPONENT_CHARS: usize = 3;
+        // The unknown-modifier fallback needs a longer prefix: real frozen/foreign
+        // modifiers are words (`beaujolais`+viini), while a short residue is almost
+        // always a false split of a simplex word the inventory just doesn't know
+        // (pökkylä is not pök+kylä — issue #26).
+        const MIN_FALLBACK_PREFIX_CHARS: usize = 4;
         let offsets: Vec<usize> = norm.char_indices().map(|(i, _)| i).collect();
         let n = offsets.len();
         if n < MIN_PREFIX_CHARS + MIN_COMPONENT_CHARS {
@@ -259,7 +264,9 @@ impl Engine {
             if self.is_known_modifier(&split.0) {
                 return Some(split);
             }
-            fallback.get_or_insert(split);
+            if split.0.chars().count() >= MIN_FALLBACK_PREFIX_CHARS {
+                fallback.get_or_insert(split);
+            }
         }
         fallback
     }
@@ -378,10 +385,18 @@ const COMPOUND_TN: u8 = 50;
 /// the modifier and head are declined in the same slot and concatenated.
 const COMPOUND_BOTH_TN: u8 = 51;
 
-/// Whether a word takes back-vowel harmony (contains any of a/o/u). Mirrors the rule
-/// engine's harmony test; used only to detect a compound flipping harmony.
+/// Whether a word takes back-vowel harmony: the last strong vowel decides (back `a/o/u`
+/// vs front `ä/ö`), no strong vowel → front. Mirrors `keinontolibrary-rules`' harmony
+/// test (keep in sync); used only to detect a compound flipping harmony.
 fn is_back(s: &str) -> bool {
-    s.chars().any(|c| matches!(c, 'a' | 'o' | 'u'))
+    s.chars()
+        .rev()
+        .find_map(|c| match c {
+            'a' | 'o' | 'u' => Some(true),
+            'ä' | 'ö' => Some(false),
+            _ => None,
+        })
+        .unwrap_or(false)
 }
 
 /// Append `incoming` refs into `out`, skipping any with a `(hn, tn)` already present.
@@ -741,6 +756,26 @@ mod tests {
             p.get(Number::Plural, Case::Inessive).primary(),
             Some("beaujolaisviineissä")
         );
+    }
+
+    // An unknown simplex word must not be served as a false compound: pökkylä is not
+    // pök+kylä (issue #26) — a fallback split (unknown modifier) needs a modifier of
+    // at least 4 chars, like the genuine beaujolais+viini above.
+    #[test]
+    fn unknown_word_is_not_false_split_on_short_residue() {
+        let mut store = MemoryStore::new();
+        store.insert(
+            "kylä",
+            ParadigmRef::new(None, 10),
+            Number::Plural,
+            Case::Inessive,
+            Forms::present(vec!["kylissä".into()], Source::Lookup),
+        );
+        let e = Engine::builder().lookup(Box::new(store)).build();
+        assert!(matches!(
+            e.decline("pökkylä", Number::Plural, Case::Inessive),
+            Err(Error::UnknownWord(_))
+        ));
     }
 
     #[test]

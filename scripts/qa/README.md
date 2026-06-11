@@ -33,8 +33,16 @@ scripts/qa/run.sh sync          # Kotus list (curl) + corpus shards (gsutil; nee
 ```sh
 scripts/qa/run.sh all           # ingest → dump → verify (~10 min) → report --gate
 scripts/qa/run.sh quick         # sampled verify (2000 lemmas) for the inner dev loop
+scripts/qa/run.sh harmony       # re-mint data/harmony-overrides.jsonl from the dump
 scripts/qa/run.sh report --update-baseline   # accept current failures (in a fixing PR)
 ```
+
+`data/harmony-overrides.jsonl` (committed) carries per-lemma vowel-harmony overrides
+for compounds whose final component flips harmony (`antigeenissä`): minted by
+`gen_harmony_overrides.py`, which probes Voikko with the dump's generated forms and
+their harmony-flipped twins (analyze + BASEFORM match; ≥3 unanimous votes; sticky
+across regenerations). Regenerate after rule changes that affect many stems, then
+re-ingest — the set converges in one or two iterations.
 
 Outputs land in `qa/` (gitignored except `baseline.json`):
 `generated.jsonl` (dump), `voikko-verdicts.jsonl`, `report.json`, `report.md`.

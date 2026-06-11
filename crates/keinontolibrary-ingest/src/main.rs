@@ -1,7 +1,8 @@
 //! CLI wrapper around the ingest pipeline.
 //!
 //! Paths default to the repository's `data/` layout and can be overridden via environment
-//! variables: `KEINONTO_KOTUS`, `KEINONTO_VOIKKO`, `KEINONTO_ARTIFACT`, `KEINONTO_REPORT`.
+//! variables: `KEINONTO_KOTUS`, `KEINONTO_VOIKKO`, `KEINONTO_ARTIFACT`, `KEINONTO_REPORT`,
+//! `KEINONTO_HARMONY`.
 
 use std::path::PathBuf;
 use std::time::Instant;
@@ -19,6 +20,7 @@ fn main() -> Result<()> {
         voikko_dir: env_path("KEINONTO_VOIKKO", "data/sources/voikko"),
         artifact_path: env_path("KEINONTO_ARTIFACT", "data/artifact/keinontolibrary.bin"),
         report_path: env_path("KEINONTO_REPORT", "ingest-report.txt"),
+        harmony_path: env_path("KEINONTO_HARMONY", "data/harmony-overrides.jsonl"),
         version: env!("CARGO_PKG_VERSION").to_owned(),
     };
 

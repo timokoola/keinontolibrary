@@ -61,9 +61,11 @@ fn pluralize(stem: &str, tn: u8) -> String {
         // -a/-ä round to -o-/-ö- before the plural -i- (most classes)...
         Some('a') if tn != 10 => format!("{body}oi"),
         Some('ä') if tn != 10 => format!("{body}öi"),
-        // tn3 -e loanwords keep the stem vowel before the plural -i- (aaloe -> aaloei-:
-        // aaloeita, aaloeissa — Voikko-verified; dropping it gives *aaloita).
-        Some('e') if tn == 3 => format!("{stem}i"),
+        // Lemma-final -e in the vowel-stem classes (tn1 tempe, tn2 anime/college, tn3
+        // aaloe — all loanwords) keeps the vowel before the plural -i-, like -o does:
+        // animeissa, aaloeita (Voikko-verified; dropping gives *animissa, *aaloita).
+        // Oblique stems in -e from other classes (tn7 ove-, tn33 kytkime-) still drop it.
+        Some('e') if matches!(tn, 1..=3) => format!("{stem}i"),
         // ...or the final vowel just drops (type 10, and the -e stems).
         Some('e' | 'a' | 'ä') => format!("{body}i"),
         // -o/-u/-y/-ö (and anything else) just take -i.
@@ -107,8 +109,12 @@ fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
         3 => vec![format!("{sg_strong}t{a}")], // valtiota (diphthong stem)
         _ => vec![format!("{sg_strong}{a}")],
     };
+    // tn2 -e loanwords take the light j-endings on the kept -e- (animeja, animejen;
+    // Voikko rejects *animeita and *animeiden), unlike the native tn2 -o/-u words.
+    let e_final = last_char(&sg_strong) == Some('e');
     let part_pl = match tn {
         1 | 5 | 9 => vec![format!("{pl_body}j{a}")], // valoja, ristejä, kaloja
+        2 if e_final => vec![format!("{pl_body}j{a}")], // animeja, collegeja
         10 => vec![format!("{pl_strong}{a}")],       // koiria
         4 | 14 => vec![format!("{pl_weak}t{a}"), format!("{pl_body}j{a}")], // laatikoita, laatikkoja
         _ => vec![format!("{pl_strong}t{a}")], // 2,3,6,12,13: palveluita, valtioita, ...
@@ -116,6 +122,7 @@ fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
     let gen_pl = match tn {
         1 => vec![format!("{pl_body}jen")],
         9 => vec![format!("{pl_body}jen"), format!("{body}{a}in")], // kalojen, kalain
+        2 if e_final => vec![format!("{pl_body}jen")],              // animejen, collegejen
         2 => vec![format!("{pl_body}jen"), format!("{pl_strong}den")],
         5 | 6 => vec![format!("{sg_strong}en")],
         10 => vec![format!("{body}ien"), format!("{body}{a}in")], // koirien, koirain
@@ -683,10 +690,12 @@ mod tests {
         generate(lemma, tn, av, false, n, c).unwrap()[0].clone()
     }
 
-    // tn3 lemmas ending in -e keep the stem vowel before the plural -i- (Voikko-verified:
-    // aaloeita/aaloeissa/aaloeiden; *aaloita is a non-word). Found by the QA loop.
+    // Vowel-stem-class lemmas ending in -e (tn1 tempe, tn2 anime/college, tn3 aaloe — all
+    // loanwords) keep the stem vowel before the plural -i- (Voikko-verified: aaloeita,
+    // animeissa; *aaloita/*animissa are non-words). tn2 -e additionally takes the light
+    // j-endings: animeja/animejen, not *animeita/*animeiden. Found by the QA loop.
     #[test]
-    fn tn3_final_e_keeps_stem_vowel_in_plural() {
+    fn vowel_stem_final_e_keeps_stem_vowel_in_plural() {
         let g = |n, c| one("aaloe", 3, None, n, c);
         assert_eq!(g(Number::Plural, Case::Partitive), "aaloeita");
         assert_eq!(g(Number::Plural, Case::Inessive), "aaloeissa");
@@ -695,10 +704,25 @@ mod tests {
             one("oboe", 3, None, Number::Plural, Case::Inessive),
             "oboeissa"
         );
-        // The plain tn3 diphthong stems are unaffected.
+        let anime = |n, c| generate("anime", 2, None, false, n, c).unwrap();
+        assert_eq!(
+            anime(Number::Plural, Case::Inessive),
+            vec!["animeissa".to_owned()]
+        );
+        assert_eq!(anime(Number::Plural, Case::Partitive), vec!["animeja"]);
+        assert_eq!(anime(Number::Plural, Case::Genitive), vec!["animejen"]);
+        assert_eq!(
+            one("tempe", 1, None, Number::Plural, Case::Inessive),
+            "tempeissä"
+        );
+        // The plain tn2/tn3 vowel stems are unaffected.
         assert_eq!(
             one("valtio", 3, None, Number::Plural, Case::Inessive),
             "valtioissa"
+        );
+        assert_eq!(
+            one("palvelu", 2, None, Number::Plural, Case::Partitive),
+            "palveluita"
         );
     }
 

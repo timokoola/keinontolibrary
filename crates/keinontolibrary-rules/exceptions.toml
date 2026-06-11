@@ -328,191 +328,33 @@ case = "instructive"
 forms = ["pojin"]
 reason = "k:j gradation poika->poji-"
 
-# --- aie (Kotus tn 48) -----------------------------------------------------------------
-# A -e word whose oblique stem inserts a k: aie -> aikee- (aikeen, aikeessa, ...). This
-# is lexical (cf. regular hame -> hamee-) and not predictable from the lemma, so the rule
-# engine produces aiee-; the registry corrects the affected slots.
-[[exception]]
-lemma = "aie"
-number = "singular"
-case = "genitive"
-forms = ["aikeen"]
-reason = "k-insertion oblique stem aikee- (tn48 lexical irregular)"
+# (aie's k-insertion family — aie/koe/jae tn48*D, kiuas/ies/oas tn41*D — is now a rule:
+# reverse D-gradation inserts the k before the final long vowel; see gradation.rs.)
 
-[[exception]]
-lemma = "aie"
-number = "singular"
-case = "inessive"
-forms = ["aikeessa"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "singular"
-case = "elative"
-forms = ["aikeesta"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "singular"
-case = "illative"
-forms = ["aikeeseen"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "singular"
-case = "adessive"
-forms = ["aikeella"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "singular"
-case = "ablative"
-forms = ["aikeelta"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "singular"
-case = "allative"
-forms = ["aikeelle"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "singular"
-case = "essive"
-forms = ["aikeena"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "singular"
-case = "translative"
-forms = ["aikeeksi"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "nominative"
-forms = ["aikeet"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "genitive"
-forms = ["aikeiden", "aikeitten"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "partitive"
-forms = ["aikeita"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "inessive"
-forms = ["aikeissa"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "illative"
-forms = ["aikeisiin", "aikeihin"]
-reason = "k-insertion oblique stem aikee-"
 
-[[exception]]
-lemma = "aie"
-number = "singular"
-case = "accusative"
-forms = ["aikeen"]
-reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
 
-[[exception]]
-lemma = "aie"
-number = "singular"
-case = "abessive"
-forms = ["aikeetta"]
-reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "accusative"
-forms = ["aikeet"]
-reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "abessive"
-forms = ["aikeitta"]
-reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "elative"
-forms = ["aikeista"]
-reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "adessive"
-forms = ["aikeilla"]
-reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "ablative"
-forms = ["aikeilta"]
-reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "allative"
-forms = ["aikeille"]
-reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "essive"
-forms = ["aikeina"]
-reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "translative"
-forms = ["aikeiksi"]
-reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "comitative"
-forms = ["aikeineen", "aikeinensa"]
-reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
 
-[[exception]]
-lemma = "aie"
-number = "plural"
-case = "instructive"
-forms = ["aikein"]
-reason = "k-insertion oblique stem aikee- (remaining slots; Voikko-verified)"
 
 # --- mies (Kotus tn 42) ---
 # tn42 mies — irregular -s/-h- stem, singleton class.
@@ -3472,3 +3314,531 @@ case = "translative"
 forms = ["häiksi"]
 reason = "tn18 häät — plurale tantum (base hää), listed in plural form"
 
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "nominative"
+forms = ["peitsi"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "genitive"
+forms = ["peitsen"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "partitive"
+forms = ["peistä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "inessive"
+forms = ["peitsessä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "elative"
+forms = ["peitsestä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "illative"
+forms = ["peitseen"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "adessive"
+forms = ["peitsellä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "ablative"
+forms = ["peitseltä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "allative"
+forms = ["peitselle"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "essive"
+forms = ["peitsenä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "translative"
+forms = ["peitseksi"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "abessive"
+forms = ["peitsettä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "nominative"
+forms = ["peitset"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "genitive"
+forms = ["peitsien", "peisten"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "partitive"
+forms = ["peitsiä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "inessive"
+forms = ["peitsissä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "elative"
+forms = ["peitsistä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "illative"
+forms = ["peitsiin"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "adessive"
+forms = ["peitsillä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "allative"
+forms = ["peitsille"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "essive"
+forms = ["peitsinä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "translative"
+forms = ["peitsiksi"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "comitative"
+forms = ["peitsineen", "peitsinensä"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "instructive"
+forms = ["peitsin"]
+reason = "tn30 veitsi-class singleton (Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "nominative"
+forms = ["kolmet"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "genitive"
+forms = ["kolmien"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "partitive"
+forms = ["kolmia"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "accusative"
+forms = ["kolmet"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "inessive"
+forms = ["kolmissa"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "elative"
+forms = ["kolmista"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "illative"
+forms = ["kolmiin"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "adessive"
+forms = ["kolmilla"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "ablative"
+forms = ["kolmilta"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "allative"
+forms = ["kolmille"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "essive"
+forms = ["kolmina"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "translative"
+forms = ["kolmiksi"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "abessive"
+forms = ["kolmitta"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "comitative"
+forms = ["kolmine"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "kolme"
+tn = 8
+number = "plural"
+case = "instructive"
+forms = ["kolmin"]
+reason = "numeral: plural declines on the kolmi- stem (Kotus mon.7; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "abessive"
+forms = ["oreitta"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "ablative"
+forms = ["oreilta"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "accusative"
+forms = ["orit"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "adessive"
+forms = ["oreilla"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "allative"
+forms = ["oreille"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "comitative"
+forms = ["oreineen"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "elative"
+forms = ["oreista"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "essive"
+forms = ["oreina"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "genitive"
+forms = ["oriiden", "orien"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "illative"
+forms = ["oreihin"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "inessive"
+forms = ["oreissa"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "instructive"
+forms = ["orein"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "nominative"
+forms = ["orit"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "partitive"
+forms = ["oriita", "oreja"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "plural"
+case = "translative"
+forms = ["oreiksi"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "singular"
+case = "abessive"
+forms = ["oritta"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "singular"
+case = "ablative"
+forms = ["oriilta", "orilta"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "singular"
+case = "accusative"
+forms = ["orin"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "singular"
+case = "adessive"
+forms = ["oriilla", "orilla"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "singular"
+case = "allative"
+forms = ["oriille", "orille"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "singular"
+case = "elative"
+forms = ["oriista", "orista"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "singular"
+case = "essive"
+forms = ["orina"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "singular"
+case = "genitive"
+forms = ["orin"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "singular"
+case = "illative"
+forms = ["oriin"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "singular"
+case = "inessive"
+forms = ["oriissa", "orissa"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "singular"
+case = "partitive"
+forms = ["oritta", "oria"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
+
+[[exception]]
+lemma = "ori"
+tn = 48
+number = "singular"
+case = "translative"
+forms = ["oriksi"]
+reason = "irregular orii- stem (tn48 listing; Voikko-verified)"

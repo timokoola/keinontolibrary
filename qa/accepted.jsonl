@@ -1,0 +1,36 @@
+{"match": "business|5", "reason": "Voikko knows the citation (nimisana) but carries no inflections; our epenthetic businessi- forms are unverifiable"}
+{"match": "ehta|9", "reason": "colloquial adjective: Voikko has the citation but no inflections"}
+{"match": "meikä|10", "reason": "colloquial pronoun-noun: Voikko has the citation but no inflections"}
+{"match": "kyty|1", "reason": "Kotus marks gradation (kydyn) but Voikko inflects without (kytyn) — authorities conflict on a rare word"}
+{"match": "tiu|18", "reason": "rare counting word: Voikko carries only a few singular forms"}
+{"match": "hurraa|17", "reason": "interjection-noun: Voikko carries singular forms only"}
+{"match": "tenkkapoo|18", "reason": "colloquial: Voikko has the citation but no inflections"}
+{"match": "off-piste|8", "reason": "foreign hyphenated citation: Voikko has no inflections"}
+{"match": "kiiru|48", "reason": "Kotus lists tn48 (kiirue-) but Voikko inflects on the long-vowel stem (kiiruun, tn18-style) — authorities conflict"}
+{"match": "appi|5", "reason": "Kotus homonym hn2 (tn5) is outside Voikko's lexicon (only the tn7 appi/apen reading exists there)"}
+{"match": "soppi|5", "reason": "Kotus homonym (tn5) outside Voikko's lexicon (only the tn7 soppi/sopen reading exists there)"}
+{"match": "peitsi|5", "reason": "Kotus homonym hn2 (tn5) outside Voikko's lexicon (tn30 reading is registry-served)"}
+{"match": "vakaus|39", "reason": "Kotus homonym hn2 (weighing, tn39) outside Voikko's lexicon (only vakaus/vakauden tn40)"}
+{"match": "uros|41", "reason": "Kotus secondary paradigm tn41 (uroon) outside Voikko's lexicon (only uroksen tn39)"}
+{"match": "vika|9", "reason": "Kotus adjective homonym hn2 without gradation (vikan) — Voikko carries only the gradating noun (vian)"}
+{"match": "hepo|1", "reason": "Kotus homonym hn2 without gradation (hepon) — Voikko carries only the gradating reading (hevon)"}
+{"match": "koto|1", "reason": "Kotus homonym without gradation — Voikko carries only the gradating reading (kodon)"}
+{"match": "lento|1", "reason": "Kotus homonym without gradation — Voikko carries only the gradating reading (lennon)"}
+{"match": "antimoni|5", "reason": "Voikko NUMBER quirk: analyzes singular forms as plural (antimonissa -> plural), so number-matched verification always fails"}
+{"match": "melaniini|5", "reason": "Voikko NUMBER quirk: analyzes singular forms as plural"}
+{"match": "solaniini|5", "reason": "Voikko NUMBER quirk: analyzes singular forms as plural"}
+{"match": "komissionääri|5", "reason": "Voikko NUMBER quirk: analyzes singular forms as plural"}
+{"match": "visionääri|5", "reason": "Voikko NUMBER quirk: analyzes singular forms as plural"}
+{"match": "jussi|5", "reason": "corpus attests the proper-noun casing (Jussi); lowercase lemma casing is #6's scope"}
+{"match": "koraani|5", "reason": "corpus attests the proper-noun casing (Koraani); #6's scope"}
+{"match": "puola|9", "reason": "corpus/Voikko dominated by the proper noun Puola (puolia, not puoloja); #6's scope"}
+{"match": "kymmenes|45|plural|comitative", "reason": "ordinal homonym takes bare -ine but the noun homonym (tn39, one-tenth) sets the lemma-level comitative flag — per-paradigm word class is a known limit"}
+{"match": "halveksunta|10", "reason": "Voikko rounds the plural (halveksunnoissa) though Kotus says tn10 (drop) — the tn10/11/12 rounding boundary is per-lemma lexical, tracked with #3"}
+{"match": "huuhdonta|10", "reason": "Voikko rounds the plural though Kotus says tn10 — #3's rounding boundary"}
+{"match": "hyväksyntä|10", "reason": "Voikko rounds the plural though Kotus says tn10 — #3's rounding boundary"}
+{"match": "vihanta|10", "reason": "Voikko rounds the plural though Kotus says tn10 — #3's rounding boundary"}
+{"match": "väheksyntä|10", "reason": "Voikko rounds the plural though Kotus says tn10 — #3's rounding boundary"}
+{"match": "kyynärä|10", "reason": "Voikko rounds the plural (kyynäröissä) though Kotus says tn10 — #3's rounding boundary"}
+{"match": "kähärä|10", "reason": "Voikko accepts both plurals but corpus/primary differ — #3's rounding boundary"}
+{"match": "lymfa|10", "reason": "Voikko's plural differs from the tn10 drop — #3's rounding boundary"}
+{"match": "algebra|11", "reason": "tn11 dual plural variant ordering — ticket #3"}

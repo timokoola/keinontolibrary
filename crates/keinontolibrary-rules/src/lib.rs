@@ -101,16 +101,16 @@ mod tests {
     #[test]
     fn exception_registry_overrides_rules() {
         let r = RuleEngine::new();
-        // The rule generator would produce "aieen"; the registry corrects it to "aikeen".
+        // mies is registry-served (tn42 singleton); the rules alone cannot produce it.
         let forms = r
             .generate(
-                "aie",
-                &ParadigmRef::new(None, 48),
+                "mies",
+                &ParadigmRef::new(None, 42),
                 Number::Singular,
                 Case::Genitive,
             )
             .unwrap();
-        assert_eq!(forms.primary(), Some("aikeen"));
+        assert_eq!(forms.primary(), Some("miehen"));
         assert_eq!(forms.source, Source::Generated);
     }
 
@@ -161,12 +161,13 @@ mod tests {
         );
     }
 
-    // The registry now covers every irregular aie slot, including the derived accusative.
+    // The reverse-D k-insertion rule (gradation.rs) covers every aie slot, including
+    // the derived accusative — the registry rows it replaced are gone.
     #[test]
     fn aie_accusative_uses_k_insertion_stem() {
         let r = RuleEngine::new();
         let f = |n, c| {
-            r.generate("aie", &ParadigmRef::new(None, 48), n, c)
+            r.generate("aie", &ParadigmRef::new(None, 48).with_av(Some('D')), n, c)
                 .unwrap()
                 .primary()
                 .unwrap()

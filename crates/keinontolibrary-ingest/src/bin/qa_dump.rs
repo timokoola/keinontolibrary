@@ -89,7 +89,18 @@ fn main() -> std::io::Result<()> {
                             .slots
                             .iter()
                             .find(|s| s.slot == slot_index(number, case));
-                        let declined = engine.decline_with(&lemma.lemma, number, case, &reference);
+                        // decline_with() bypasses the engine's compound routing, so for
+                        // single-paradigm lemmas fall back to decline() on error — that
+                        // is what users get (tn50/51 compounds, harmony overrides).
+                        let declined = engine
+                            .decline_with(&lemma.lemma, number, case, &reference)
+                            .or_else(|e| {
+                                if lemma.paradigms.len() == 1 {
+                                    engine.decline(&lemma.lemma, number, case)
+                                } else {
+                                    Err(e)
+                                }
+                            });
                         let generated = rules.generate(&lemma.lemma, &reference, number, case);
                         counts.engine_errors += u64::from(declined.is_err());
                         counts.rules_supported += u64::from(generated.is_some());

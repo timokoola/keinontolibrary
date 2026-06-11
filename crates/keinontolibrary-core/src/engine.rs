@@ -96,6 +96,10 @@ impl Engine {
             [only] if only.tn == COMPOUND_TN => self
                 .compound_slot(&norm, number, case)
                 .map_or_else(|| self.resolve_slot(&norm, only, number, case), Ok),
+            // Compound ordinals (kahdeskymmenes, tn45) inflect BOTH parts — head-only
+            // compound routing would serve garbage (*kahdeksaskymmenettä); they are out
+            // of v1 scope, so take only the direct path.
+            [only] if only.tn == 45 => self.resolve_slot(&norm, only, number, case),
             // Known word, but a known compound whose final component flips harmony
             // (punaviini -> punaviiniä, not -nia): override with the component's harmony.
             [only] => match self.compound_harmony_slot(&norm, number, case) {
@@ -337,6 +341,16 @@ impl Engine {
             return None;
         }
         let (m, h) = (modf.variants.first()?, head.variants.first()?);
+        // In the comitative only the head carries the possessive citation; the modifier
+        // agrees bare (aavoine + merineen -> aavoinemerineen, not *aavoineenmerineen).
+        let m = if case == Case::Comitative {
+            modf.variants
+                .iter()
+                .find(|v| v.ends_with("ne"))
+                .map_or_else(|| m.strip_suffix("en").unwrap_or(m), String::as_str)
+        } else {
+            m
+        };
         Some(Forms::present(vec![format!("{m}{h}")], head.source))
     }
 

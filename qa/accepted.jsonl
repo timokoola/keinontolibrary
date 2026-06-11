@@ -111,3 +111,20 @@
 {"match": "täysi|27|plural|genitive", "reason": "the tn27 consonant-stem genitive (kätten) is real for the class but Voikko rejects täytten"}
 {"match": "lautasellinen|38|plural|comitative", "reason": "measure noun: corpus attests -ineen but Kotus classes it as modifier (bare -ine); both Voikko-valid — lemma-level flag limit"}
 {"match": "pikarillinen|38|plural|comitative", "reason": "measure noun: corpus attests -ineen; lemma-level comitative flag limit"}
+{"match": "handsfree|21", "reason": "Voikko has the citation but no inflections for this -ee foreign loan"}
+{"match": "menu|21", "reason": "pronunciation-front loan ([meny]): corpus attests menutä, the written-form harmony gives menuta — per-lemma, like tienesti"}
+{"match": "kumpi|16|singular|abessive", "reason": "Voikko analyzes kummatta as the adverb (wrong_analysis quirk); the form is the regular tn16 abessive"}
+{"match": "kumpi|16|plural|abessive", "reason": "Voikko adverb-analysis quirk (kummitta)"}
+{"match": "kumpi|16|plural|instructive", "reason": "Voikko analyzes kummin as the comparative adverb"}
+{"match": "kumpi|16|plural|comitative", "reason": "pronoun comitative outside Voikko's lexicon"}
+{"match": "hepene|49|singular|partitive", "reason": "Voikko mis-analyzes hepenettä (the regular long-stem partitive)"}
+{"match": "vasen|37|plural|comitative", "reason": "Voikko carries no comitative for vasen"}
+{"match": "vasen|37|plural|essive", "reason": "Voikko analyzes vasempina as the comparative adverb"}
+{"match": "jersey|21|singular|partitive", "reason": "Voikko analysis quirk on jerseytä (correct front partitive)"}
+{"match": "spray|21|singular|partitive", "reason": "Voikko analysis quirk on sprayta"}
+{"match": "playboy|21|singular|partitive", "reason": "Voikko analysis quirk"}
+{"match": "jockey|21|singular|partitive", "reason": "Voikko analysis quirk"}
+{"match": "maahockey|21|singular|partitive", "reason": "Voikko analysis quirk"}
+{"match": "cowboy|21|singular|partitive", "reason": "Voikko analysis quirk on cowboyta (corpus-attested)"}
+{"match": "jockey|21|singular|illative", "reason": "pronunciation-front loan in Voikko (jockeyhyn) vs written-form back harmony (jockeyhin) — per-lemma, like menu"}
+{"match": "maahockey|21|singular|illative", "reason": "pronunciation-front loan in Voikko (maahockeyhyn) — per-lemma"}

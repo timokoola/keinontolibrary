@@ -100,7 +100,22 @@ fn analyze_vowel_stem(lemma: &str, tn: u8, av: Option<char>, a: &str) -> Stems {
     };
     let sg_weak = weaken(&sg_strong, av);
     let pl_strong = pluralize(&sg_strong, tn);
-    let pl_weak = pluralize(&sg_weak, tn);
+    // The k-elision apostrophe is surface orthography between IDENTICAL vowels only:
+    // singular vaa'an but plural vaaoissa (rounding makes the vowels differ), singular
+    // koon (long vowel) but plural ko'oissa (the pair re-opens before -i-). All
+    // Voikko-verified. So: drop any apostrophe before forming the plural stem, then
+    // re-add it only when an identical pair survives before the plural -i-.
+    let elided = sg_weak.chars().count() + 1 == sg_strong.chars().count();
+    let mut pl_weak = pluralize(&sg_weak.replace('\'', ""), tn);
+    if elided {
+        let cs: Vec<char> = pl_weak.chars().collect();
+        if let [.., x, y, 'i'] = cs[..] {
+            if x == y && matches!(x, 'a' | 'e' | 'i' | 'o' | 'u' | 'y' | 'ä' | 'ö') {
+                let body: String = cs[..cs.len() - 2].iter().collect();
+                pl_weak = format!("{body}'{y}i");
+            }
+        }
+    }
     let last = last_char(&sg_strong).unwrap_or('a');
     let pl_body = drop_last(&pl_strong);
     let body = drop_last(&sg_strong);
@@ -191,6 +206,30 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> Option
     if matches!(tn, 17..=20) && !ends_with_vowel(lemma) {
         return None;
     }
+    // Letter-name citations (sora-r, suhu-s) decline on the letter name with a colon —
+    // also the lookup's job.
+    if lemma
+        .rsplit('-')
+        .next()
+        .is_some_and(|t| t.chars().count() == 1)
+    {
+        return None;
+    }
+    // Citation forms that hide the vowel stem: the cardinal numerals kahdeksan/
+    // seitsemän/yhdeksän (tn10) inflect on the n-less stem (kahdeksassa, kahdeksia),
+    // and kymmenen (tn32) on kymmen- (kymmentä, kymmenessä, kymmenten) — both
+    // Voikko-verified. The nominative keeps the full citation (handled in `generate`).
+    let lemma = if tn == 10
+        && (lemma.ends_with("kahdeksan")
+            || lemma.ends_with("seitsemän")
+            || lemma.ends_with("yhdeksän"))
+    {
+        &lemma[..lemma.len() - 1]
+    } else if tn == 32 && lemma.ends_with("kymmenen") {
+        &lemma[..lemma.len() - 2]
+    } else {
+        lemma
+    };
     let a = harmony_a(front, lemma);
     if matches!(tn, 1 | 2 | 3 | 4 | 5 | 6 | 9 | 10 | 12 | 13 | 14) {
         return Some(analyze_vowel_stem(lemma, tn, av, a));
@@ -453,8 +492,11 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> Option
                 .strip_suffix("ton")
                 .or_else(|| lemma.strip_suffix("tön"))?;
             let o = harmony_o(front, lemma);
-            let stem = format!("{base}tt{o}m{a}"); // onnettoma / työttömä
-            let pl = format!("{base}tt{o}mi");
+            // The -tOn suffix doubles its t only after a vowel: onneton -> onnettoman,
+            // but alaston -> alastoman (Voikko rejects *alasttoman).
+            let tt = if ends_with_vowel(base) { "tt" } else { "t" };
+            let stem = format!("{base}{tt}{o}m{a}"); // onnettoma / työttömä / alastoma
+            let pl = format!("{base}{tt}{o}mi");
             let last = last_char(&stem)?;
             Some(Stems {
                 part_sg: vec![format!("{lemma}t{a}")],
@@ -632,6 +674,12 @@ fn analyze(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> Option
         // kolmas -> kolmannen (gen), kolmatta (part), kolmanteen (illat), kolmantena (ess),
         // kolmansissa (pl ine). Also covers the pronominal ordinal `mones`.
         45 => {
+            // Compound ordinals (kahdeskymmenes) inflect BOTH parts
+            // (kahdennenkymmenennen) — out of v1 scope (see README); head-only
+            // generation produces non-words, so decline and leave it to the lookup.
+            if lemma.ends_with("kymmenes") && lemma.chars().count() > 8 {
+                return None;
+            }
             let base = lemma.strip_suffix('s')?;
             let nne = format!("{base}nne");
             let nte = format!("{base}nte");
@@ -857,6 +905,79 @@ mod tests {
             )
             .unwrap(),
             vec!["työttömien", "työtönten"]
+        );
+    }
+
+    // k-elision orthography (all Voikko-verified): apostrophe between identical vowels
+    // when a vowel precedes the gap (vaaka -> vaa'an — but vaaoissa in the plural), long vowel after a
+    // consonant (koko -> koon) — but the plural -i- stem re-opens the boundary
+    // (ko'oissa, not *kooissa). Found by the QA loop.
+    #[test]
+    fn k_elision_apostrophe_orthography() {
+        let g = |l, tn, n, c| one(l, tn, Some('D'), n, c);
+        assert_eq!(g("vaaka", 9, Number::Singular, Case::Genitive), "vaa'an");
+        assert_eq!(g("vaaka", 9, Number::Plural, Case::Inessive), "vaaoissa");
+        assert_eq!(g("koko", 1, Number::Singular, Case::Genitive), "koon");
+        assert_eq!(g("koko", 1, Number::Plural, Case::Inessive), "ko'oissa");
+        assert_eq!(g("rako", 1, Number::Singular, Case::Genitive), "raon");
+        // Elision between different vowels stays plain (reikä -> reiän, haku -> hauissa),
+        // and so do stems whose final vowel rounds before the plural -i- (haka -> haoissa).
+        assert_eq!(g("reikä", 9, Number::Singular, Case::Genitive), "reiän");
+        assert_eq!(g("haku", 1, Number::Plural, Case::Inessive), "hauissa");
+        assert_eq!(g("haka", 9, Number::Plural, Case::Inessive), "haoissa");
+        // The apostrophe is singular-only for the vaaka type: rounding differentiates
+        // the vowels in the plural (vaa'an but vaaoissa — Voikko-verified).
+        assert_eq!(g("raaka", 9, Number::Plural, Case::Inessive), "raaoissa");
+        assert_eq!(g("vaaka", 9, Number::Plural, Case::Adessive), "vaaoilla");
+    }
+
+    // Citation forms hiding the vowel stem (Voikko-verified): the -n cardinals and
+    // kymmenen. Compound ordinals inflect both parts — out of scope, so no generation.
+    // Found by the QA loop.
+    #[test]
+    fn numeral_citation_stems() {
+        assert_eq!(
+            one("kahdeksan", 10, None, Number::Singular, Case::Inessive),
+            "kahdeksassa"
+        );
+        assert_eq!(
+            one("kahdeksan", 10, None, Number::Plural, Case::Inessive),
+            "kahdeksissa"
+        );
+        assert_eq!(
+            one("kahdeksan", 10, None, Number::Singular, Case::Nominative),
+            "kahdeksan"
+        );
+        assert_eq!(
+            one("kymmenen", 32, None, Number::Singular, Case::Partitive),
+            "kymmentä"
+        );
+        assert_eq!(
+            one("kymmenen", 32, None, Number::Singular, Case::Inessive),
+            "kymmenessä"
+        );
+        assert!(generate(
+            "kahdeskymmenes",
+            45,
+            None,
+            true,
+            None,
+            Number::Singular,
+            Case::Genitive
+        )
+        .is_none());
+    }
+
+    // The -tOn suffix doubles its t only after a vowel (Voikko rejects *alasttoman).
+    #[test]
+    fn tn34_consonant_base_single_t() {
+        assert_eq!(
+            one("alaston", 34, None, Number::Singular, Case::Genitive),
+            "alastoman"
+        );
+        assert_eq!(
+            one("onneton", 34, Some('C'), Number::Singular, Case::Genitive),
+            "onnettoman"
         );
     }
 

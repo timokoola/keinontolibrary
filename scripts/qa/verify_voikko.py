@@ -93,10 +93,18 @@ def analysis_matches(a, lemma, case, number):
     return sija == CASE_TO_SIJAMUOTO[case] and a.get("NUMBER") == number
 
 
+# Voikko CLASS values that decline through the nominal case system. A citation known
+# only as an adverb/interjection/surname/abbreviation (nonstop, hittolainen, Amis, HIV)
+# cannot witness inflected forms — treat such lemmas as outside the oracle.
+NOMINAL_CLASSES = {"nimisana", "laatusana", "nimisana_laatusana", "lukusana", "asemosana"}
+
+
 def lemma_known(lemma):
-    """Voikko knows the lemma if it analyzes its citation form as itself."""
+    """Voikko knows the lemma if it analyzes its citation as a nominal of itself."""
     return any(
-        a.get("BASEFORM", "").lower() == lemma.lower() for a in VOIKKO.analyze(lemma)
+        a.get("BASEFORM", "").lower() == lemma.lower()
+        and a.get("CLASS") in NOMINAL_CLASSES
+        for a in VOIKKO.analyze(lemma)
     )
 
 

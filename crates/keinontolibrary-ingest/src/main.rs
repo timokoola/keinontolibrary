@@ -21,6 +21,7 @@ fn main() -> Result<()> {
         artifact_path: env_path("KEINONTO_ARTIFACT", "data/artifact/keinontolibrary.bin"),
         report_path: env_path("KEINONTO_REPORT", "ingest-report.txt"),
         harmony_path: env_path("KEINONTO_HARMONY", "data/harmony-overrides.jsonl"),
+        comitative_path: env_path("KEINONTO_COMITATIVE", "data/comitative-overrides.jsonl"),
         version: env!("CARGO_PKG_VERSION").to_owned(),
     };
 

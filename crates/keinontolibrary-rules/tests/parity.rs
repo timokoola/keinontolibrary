@@ -78,7 +78,9 @@ fn rule_lookup_parity() {
                 }
                 let (number, case) = slot_parts(slot.slot);
                 let attested = &slot.variants[0]; // corpus primary
-                let reference = ParadigmRef::new(None, paradigm.tn).with_av(paradigm.av);
+                let reference = ParadigmRef::new(None, paradigm.tn)
+                    .with_av(paradigm.av)
+                    .with_adjective(lemma.adjective);
                 match engine.generate(&lemma.lemma, &reference, number, case) {
                     None => unsupported_slots += 1,
                     Some(forms) => {

@@ -78,7 +78,9 @@ fn main() -> std::io::Result<()> {
 
     for lemma in &artifact.lemmas {
         for paradigm in &lemma.paradigms {
-            let reference = ParadigmRef::new(None, paradigm.tn).with_av(paradigm.av);
+            let reference = ParadigmRef::new(None, paradigm.tn)
+                .with_av(paradigm.av)
+                .with_adjective(lemma.adjective);
             for slot in &paradigm.slots {
                 if slot.variants.is_empty() {
                     continue;

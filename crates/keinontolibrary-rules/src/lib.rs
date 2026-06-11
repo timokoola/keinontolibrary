@@ -56,7 +56,14 @@ impl Generator for RuleEngine {
         if let Some(forms) = self.exceptions.get(lemma, reference.tn, number, case) {
             return Some(Forms::present(forms.to_vec(), Source::Generated));
         }
-        let variants = generate::generate(lemma, reference.tn, reference.av, number, case)?;
+        let variants = generate::generate(
+            lemma,
+            reference.tn,
+            reference.av,
+            reference.adjective,
+            number,
+            case,
+        )?;
         if variants.is_empty() {
             return None;
         }

@@ -128,3 +128,14 @@
 {"match": "cowboy|21|singular|partitive", "reason": "Voikko analysis quirk on cowboyta (corpus-attested)"}
 {"match": "jockey|21|singular|illative", "reason": "pronunciation-front loan in Voikko (jockeyhyn) vs written-form back harmony (jockeyhin) — per-lemma, like menu"}
 {"match": "maahockey|21|singular|illative", "reason": "pronunciation-front loan in Voikko (maahockeyhyn) — per-lemma"}
+{"match": "*|51", "reason": "tn51 both-parts-inflect compounds written solid (isossakierrossa) are outside Voikko's analyzer — it only parses an uninflected modifier; the forms follow the Voikko-oracle compound-parity harness instead"}
+{"match": "kahdeskymmenes|45", "reason": "compound ordinal (both parts inflect) — out of v1 scope; the corpus carries mislabeled head-reading rows (…kymmeneksen) that lookup still serves"}
+{"match": "kolmaskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
+{"match": "neljäskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
+{"match": "viideskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
+{"match": "kuudeskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
+{"match": "seitsemäskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
+{"match": "kahdeksaskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
+{"match": "yhdeksäskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
+{"match": "vinopysäköinti|50", "reason": "correct head-declined forms (vinopysäköinnissä) that Voikko's compounder does not parse"}
+{"match": "kevytsukeltaja|50", "reason": "correct head-declined forms outside Voikko's compounder"}

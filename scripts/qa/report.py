@@ -140,14 +140,37 @@ def main():
     samples = defaultdict(list)
     failures = set()
     served_misspelled = []
+    # Total coverage: of EVERY Kotus nominal × every (number, case) slot, how many can
+    # the engine answer with a form? The denominator excludes only what grammatically
+    # cannot exist (the singular comitative) and what the corpus explicitly marks
+    # defective (plurale tantum singulars etc.).
+    cov = Counter()
+    cov_gap_tn = Counter()
+    cov_gap_case = Counter()
 
     with open(args.dump, encoding="utf-8") as fh:
         for line in fh:
             row = json.loads(line)
             slot_id = f"{row['lemma']}|{row['tn']}|{row['number']}|{row['case']}"
+            cov["total"] += 1
+            eng_cov = row.get("engine")
+            if eng_cov and eng_cov["variants"]:
+                cov["served"] += 1
+            elif row["number"] == "singular" and row["case"] in ("comitative", "instructive"):
+                # Both are plural-only in the standard paradigm; singular instructives
+                # exist only as lexicalized adverbs (jalan), which the corpus serves.
+                cov["grammar_defective"] += 1
+            elif (row.get("corpus") or {}).get("status") == "missing":
+                cov["corpus_defective"] += 1
+            else:
+                cov["gap"] += 1
+                cov_gap_tn[row["tn"]] += 1
+                cov_gap_case[f"{row['number']} {row['case']}"] += 1
             category, detail = classify(row, verdicts)
             if category in FAILING and (
-                f"{row['lemma']}|{row['tn']}" in accepted or slot_id in accepted
+                f"{row['lemma']}|{row['tn']}" in accepted
+                or f"*|{row['tn']}" in accepted
+                or slot_id in accepted
             ):
                 category, detail = "accepted", None
             counts[category] += 1
@@ -167,6 +190,7 @@ def main():
             # secondary paradigms the oracle cannot judge.
             if (
                 f"{row['lemma']}|{row['tn']}" in accepted
+                or f"*|{row['tn']}" in accepted
                 or slot_id in accepted
                 or row.get("rare")
             ):
@@ -197,7 +221,19 @@ def main():
     regressions = sorted(failures - baseline)
     fixed = sorted(baseline - failures)
 
+    denom = cov["total"] - cov["grammar_defective"] - cov["corpus_defective"]
+    coverage_pct = 100.0 * cov["served"] / denom if denom else 0.0
     report = {
+        "coverage": {
+            "total_slots": cov["total"],
+            "served": cov["served"],
+            "grammar_defective": cov["grammar_defective"],
+            "corpus_defective": cov["corpus_defective"],
+            "gap": cov["gap"],
+            "percent": round(coverage_pct, 3),
+            "gap_by_tn": {str(t): n for t, n in cov_gap_tn.most_common()},
+            "gap_by_case": {k: n for k, n in cov_gap_case.most_common()},
+        },
         "totals": dict(counts),
         "n_failures": len(failures),
         "n_regressions": len(regressions),
@@ -212,7 +248,21 @@ def main():
         json.dump(report, fh, ensure_ascii=False, indent=1)
 
     with open(args.out_md, "w", encoding="utf-8") as fh:
-        fh.write("# QA report\n\n## Totals\n\n")
+        fh.write("# QA report\n\n## Total coverage\n\n")
+        fh.write(
+            f"Every Kotus nominal × every slot: **{cov['served']}/{denom} = "
+            f"{coverage_pct:.2f}%** answered with a form\n"
+            f"({cov['total']} slots; {cov['grammar_defective']} grammatically "
+            f"nonexistent, {cov['corpus_defective']} corpus-marked defective, "
+            f"**{cov['gap']} gap**)\n\n"
+        )
+        if cov["gap"]:
+            fh.write("Gap by class: ")
+            fh.write(", ".join(f"tn{t}: {n}" for t, n in cov_gap_tn.most_common(10)))
+            fh.write("\n\nGap by slot: ")
+            fh.write(", ".join(f"{k}: {n}" for k, n in cov_gap_case.most_common(6)))
+            fh.write("\n\n")
+        fh.write("## Totals\n\n")
         for cat, n in counts.most_common():
             flag = " ⚠" if cat in FAILING else ""
             fh.write(f"- {cat}: {n}{flag}\n")

@@ -122,7 +122,7 @@ fn rule_lookup_parity() {
         100.0 * overall.matched as f64 / overall.total as f64
     };
     eprintln!(
-        "  overall: {}/{} = {overall_pct:.2}%   (slots in unsupported classes: {unsupported_slots})",
+        "  overall: {}/{} = {overall_pct:.2}%   (slots in unimplemented classes: {unsupported_slots})",
         overall.matched, overall.total
     );
     eprintln!("\nsample mismatches:");

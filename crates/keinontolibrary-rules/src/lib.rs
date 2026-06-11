@@ -299,13 +299,15 @@ mod tests {
     }
 
     #[test]
-    fn unsupported_class_yields_none() {
+    fn unimplemented_class_yields_none() {
         let r = RuleEngine::new();
-        // tn16 (the comparative -mpi class) has neither a rule arm nor a registry entry.
+        // tn22 (silent-letter foreign citations, parfait'n) has neither a rule arm nor
+        // a registry entry — the apostrophe/colon orthography needs per-lemma
+        // pronunciation knowledge.
         assert!(r
             .generate(
-                "pienempi",
-                &ParadigmRef::new(None, 16),
+                "parfait",
+                &ParadigmRef::new(None, 22),
                 Number::Singular,
                 Case::Genitive
             )

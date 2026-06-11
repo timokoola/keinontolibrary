@@ -132,7 +132,10 @@ def main():
             by_tn[row["tn"]][category] += 1
             by_case[f"{row['number']} {row['case']}"][category] += 1
             if category in FAILING:
-                failures.add(f"{slot_id}|{category}")
+                # Baseline keys are SLOT identity, not slot+category: a fix that merely
+                # shifts a slot's failure category (e.g. misspelled → wrong-analysis)
+                # must not read as a regression.
+                failures.add(slot_id)
                 if len(samples[category]) < SAMPLES_PER_CATEGORY:
                     samples[category].append({"slot": slot_id, **(detail or {})})
 
@@ -145,7 +148,7 @@ def main():
                         )
                         == "misspelled"
                     ):
-                        failures.add(f"{slot_id}|served_misspelled")
+                        failures.add(slot_id)
                         counts["served_misspelled"] += 1
                         if len(served_misspelled) < SAMPLES_PER_CATEGORY:
                             served_misspelled.append(

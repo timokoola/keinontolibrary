@@ -23,6 +23,11 @@ pub struct ParadigmRef {
     /// possessive citation `-ineen`/`-inensA` (`taloineen`).
     #[cfg_attr(feature = "serde", serde(default))]
     pub adjective: bool,
+    /// Vowel-harmony override: `Some(true)` = front endings, `Some(false)` = back,
+    /// `None` = derive from the lemma. Set for compounds whose final component flips
+    /// harmony (antigeenissä), where segmentation is lexical knowledge.
+    #[cfg_attr(feature = "serde", serde(default))]
+    pub front_harmony: Option<bool>,
     /// Optional human-readable gloss, surfaced only in error messages.
     pub gloss: Option<String>,
 }
@@ -35,6 +40,7 @@ impl ParadigmRef {
             tn,
             av: None,
             adjective: false,
+            front_harmony: None,
             gloss: None,
         }
     }
@@ -50,6 +56,13 @@ impl ParadigmRef {
     #[must_use]
     pub fn with_adjective(mut self, adjective: bool) -> Self {
         self.adjective = adjective;
+        self
+    }
+
+    /// Builder-style setter for the vowel-harmony override.
+    #[must_use]
+    pub fn with_front_harmony(mut self, front: Option<bool>) -> Self {
+        self.front_harmony = front;
         self
     }
 

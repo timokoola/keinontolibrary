@@ -68,6 +68,7 @@ impl Generator for RuleEngine {
             reference.tn,
             reference.av,
             reference.adjective,
+            reference.front_harmony,
             number,
             case,
         )?;

@@ -61,6 +61,11 @@ pub struct LemmaRecord {
     /// take the bare `-ine` plural comitative instead of the noun citation `-ineen`.
     #[serde(default)]
     pub adjective: bool,
+    /// Vowel-harmony override: `Some(true)` = front endings, `Some(false)` = back,
+    /// `None` = derive from the lemma. Minted from Voikko's compound segmentation
+    /// (suffix harmony follows the final component: antigeenissä, not *antigeenissa).
+    #[serde(default)]
+    pub front_harmony: Option<bool>,
     /// The distinct declension paradigms (deduplicated by `(tn, av)`), primary first.
     pub paradigms: Vec<ParadigmRecord>,
 }
@@ -154,6 +159,7 @@ mod tests {
             lemmas: vec![LemmaRecord {
                 lemma: "talo".into(),
                 adjective: false,
+                front_harmony: None,
                 paradigms: vec![ParadigmRecord {
                     tn: 1,
                     av: None,

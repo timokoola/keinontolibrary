@@ -28,12 +28,23 @@ pub struct KotusParadigm {
     pub rare: bool,
 }
 
+/// One kept lemma: its paradigms plus the word-class summary across all its rows.
+#[derive(Debug, Default, Clone)]
+pub struct KotusLemma {
+    /// The distinct declension paradigms (deduplicated by `(tn, av)`), primary first.
+    pub paradigms: Vec<KotusParadigm>,
+    /// True when every reading is a modifier (adjektiivi/numeraali) and none a
+    /// substantiivi — modifiers take the bare `-ine` plural comitative, not the noun
+    /// citation `-ineen`.
+    pub adjective: bool,
+}
+
 /// The parsed, filtered lemma inventory: normalized lemma → its distinct paradigms
 /// (primary first).
 #[derive(Debug, Default)]
 pub struct Inventory {
-    /// Normalized lemma → paradigms.
-    pub lemmas: HashMap<String, Vec<KotusParadigm>>,
+    /// Normalized lemma → paradigms + word-class summary.
+    pub lemmas: HashMap<String, KotusLemma>,
     /// Count of nominal rows whose `Taivutustiedot` had no in-scope class (1–49 or 101) —
     /// i.e. compounds and indeclinables that were dropped.
     pub dropped_compounds: usize,
@@ -121,7 +132,8 @@ impl Inventory {
             }
             // Keep all nominals — they share the declension classes. Pronouns are nominals
             // too, carrying the irregular tn 101 that `parse_paradigms` keeps alongside 1–49.
-            if !sanaluokka.split([',', ' ']).any(|w| NOMINALS.contains(&w)) {
+            let classes: Vec<&str> = sanaluokka.split([',', ' ']).collect();
+            if !classes.iter().any(|w| NOMINALS.contains(w)) {
                 inv.skipped_non_nouns += 1;
                 continue;
             }
@@ -130,8 +142,19 @@ impl Inventory {
                 inv.dropped_compounds += 1;
                 continue;
             }
+            // Modifier-only rows (adjektiivi/numeraali without a substantiivi reading)
+            // take the bare -ine comitative; any noun reading wins across homonym rows.
+            let modifier_only = !classes.contains(&"substantiivi")
+                && classes
+                    .iter()
+                    .any(|w| matches!(*w, "adjektiivi" | "numeraali"));
             let lemma = normalize(word);
-            merge(inv.lemmas.entry(lemma).or_default(), paradigms);
+            let entry = inv.lemmas.entry(lemma).or_insert_with(|| KotusLemma {
+                paradigms: Vec::new(),
+                adjective: modifier_only,
+            });
+            entry.adjective = entry.adjective && modifier_only;
+            merge(&mut entry.paradigms, paradigms);
         }
         inv
     }
@@ -255,21 +278,23 @@ mod tests {
                    aakkosjärjestys\t\tsubstantiivi\t\n";
         let inv = Inventory::parse_str(tsv);
         assert_eq!(
-            inv.lemmas["talo"],
+            inv.lemmas["talo"].paradigms,
             vec![KotusParadigm {
                 tn: 1,
                 av: None,
                 rare: false
             }]
         );
+        assert!(!inv.lemmas["talo"].adjective);
         // Two homonyms, same tn=3 -> collapsed to one paradigm.
-        assert_eq!(inv.lemmas["aarnio"].len(), 1);
-        // Adjectives and numerals are nominals -> kept (they share the declension classes).
-        assert!(inv.lemmas.contains_key("nopea"));
-        assert!(inv.lemmas.contains_key("kolmas"));
+        assert_eq!(inv.lemmas["aarnio"].paradigms.len(), 1);
+        // Adjectives and numerals are nominals -> kept (they share the declension classes),
+        // and flagged as modifiers (bare -ine comitative).
+        assert!(inv.lemmas["nopea"].adjective);
+        assert!(inv.lemmas["kolmas"].adjective);
         // Pronouns are nominals too; tn 101 is in scope (registry-backed) -> kept.
         assert_eq!(
-            inv.lemmas["tämä"],
+            inv.lemmas["tämä"].paradigms,
             vec![KotusParadigm {
                 tn: 101,
                 av: None,

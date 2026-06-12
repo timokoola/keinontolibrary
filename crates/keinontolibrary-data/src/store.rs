@@ -50,9 +50,7 @@ impl LookupData {
     /// # Errors
     /// Returns an error if the bytes cannot be decoded.
     pub fn from_bytes(bytes: &[u8]) -> io::Result<Self> {
-        Ok(Self::from_artifact(
-            Artifact::decode(bytes).map_err(io::Error::other)?,
-        ))
+        Ok(Self::from_artifact(Artifact::decode(bytes)?))
     }
 
     /// Build/provenance metadata.

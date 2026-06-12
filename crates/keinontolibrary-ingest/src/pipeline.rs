@@ -199,22 +199,34 @@ fn list_shards(dir: &Path) -> Result<Vec<PathBuf>> {
         .map(|e| e.path())
         .filter(|p| p.extension().is_some_and(|x| x == "jsonl"))
         .collect();
+    // A directory with no shards is a configuration error, not an empty corpus: failing
+    // here prevents silently shipping a Kotus-only artifact with zero attested forms.
+    if paths.is_empty() {
+        anyhow::bail!(
+            "no .jsonl shards found in {} — check the Voikko source directory",
+            dir.display()
+        );
+    }
     paths.sort();
     Ok(paths)
 }
 
 /// Parse all shards in parallel, returning forms concatenated in shard (file-name) order.
-fn parse_all(shards: &[PathBuf]) -> Vec<CleanForm> {
+///
+/// A shard that cannot be read is a hard error: silently treating it as empty would drop
+/// every form in it and ship an incomplete artifact that still "succeeds".
+fn parse_all(shards: &[PathBuf]) -> Result<Vec<CleanForm>> {
     let mut per_shard: Vec<(usize, Vec<CleanForm>)> = shards
         .par_iter()
         .enumerate()
         .map(|(i, path)| {
-            let text = std::fs::read_to_string(path).unwrap_or_default();
-            (i, voikko::parse_shard(&text))
+            let text = std::fs::read_to_string(path)
+                .with_context(|| format!("reading shard {}", path.display()))?;
+            Ok((i, voikko::parse_shard(&text)))
         })
-        .collect();
+        .collect::<Result<_>>()?;
     per_shard.sort_by_key(|(i, _)| *i);
-    per_shard.into_iter().flat_map(|(_, forms)| forms).collect()
+    Ok(per_shard.into_iter().flat_map(|(_, forms)| forms).collect())
 }
 
 /// Group surviving forms by `(lemma, tn)`, keeping only lemmas in the Kotus inventory.
@@ -322,7 +334,7 @@ pub fn run(config: &Config) -> Result<Report> {
     let inv = Inventory::parse_str(&kotus_text);
 
     let shards = list_shards(&config.voikko_dir)?;
-    let forms = parse_all(&shards);
+    let forms = parse_all(&shards)?;
     let reference_forms_kept = forms.len();
 
     let (groups, av_seen, not_in_kotus) = group_forms(&inv, forms);

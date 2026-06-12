@@ -101,21 +101,68 @@ pub struct SlotRecord {
     pub coincides_with: Option<u8>,
 }
 
+/// Header magic: "KEIN" — identifies a keinontolibrary artifact and rejects unrelated
+/// files before bincode ever sees them.
+const MAGIC: [u8; 4] = *b"KEIN";
+/// On-disk format version. Bump when the layout changes incompatibly; old files then
+/// fail loudly instead of deserializing into garbage.
+const FORMAT_VERSION: u8 = 1;
+/// `MAGIC` (4) + version (1) + CRC32 of the payload (4, little-endian).
+const HEADER_LEN: usize = 9;
+
 impl Artifact {
-    /// Encode to `bincode` bytes.
+    /// Encode to the framed on-disk bytes: `KEIN` magic, a format-version byte, a CRC32
+    /// of the bincode payload, then the payload.
     ///
     /// # Errors
     /// Propagates `bincode` serialization failures.
     pub fn encode(&self) -> Result<Vec<u8>, bincode::Error> {
-        bincode::serialize(self)
+        let payload = bincode::serialize(self)?;
+        let crc = crc32fast::hash(&payload);
+        let mut out = Vec::with_capacity(HEADER_LEN + payload.len());
+        out.extend_from_slice(&MAGIC);
+        out.push(FORMAT_VERSION);
+        out.extend_from_slice(&crc.to_le_bytes());
+        out.extend_from_slice(&payload);
+        Ok(out)
     }
 
-    /// Decode from `bincode` bytes.
+    /// Decode framed artifact bytes, validating the magic, version and CRC32 first.
     ///
     /// # Errors
-    /// Propagates `bincode` deserialization failures.
-    pub fn decode(bytes: &[u8]) -> Result<Self, bincode::Error> {
-        bincode::deserialize(bytes)
+    /// Returns an error if the bytes are too short, not a keinontolibrary artifact, a
+    /// future format version, corrupt (CRC mismatch), undecodable, or carry metadata
+    /// inconsistent with the contents.
+    pub fn decode(bytes: &[u8]) -> io::Result<Self> {
+        let bad = |msg: &str| io::Error::new(io::ErrorKind::InvalidData, msg.to_owned());
+        if bytes.len() < HEADER_LEN {
+            return Err(bad("artifact too short (truncated header)"));
+        }
+        if bytes[..4] != MAGIC {
+            return Err(bad("not a keinontolibrary artifact (bad magic)"));
+        }
+        let version = bytes[4];
+        if version != FORMAT_VERSION {
+            return Err(bad(&format!(
+                "unsupported artifact format version {version} (expected {FORMAT_VERSION})"
+            )));
+        }
+        let stored_crc = u32::from_le_bytes([bytes[5], bytes[6], bytes[7], bytes[8]]);
+        let payload = &bytes[HEADER_LEN..];
+        if crc32fast::hash(payload) != stored_crc {
+            return Err(bad("artifact checksum mismatch (corrupt or truncated)"));
+        }
+        let artifact: Self = bincode::deserialize(payload).map_err(io::Error::other)?;
+        // The header survived; sanity-check the metadata against the actual contents so a
+        // stale n_lemmas can't mislead callers that trust it.
+        if artifact.meta.n_lemmas as usize != artifact.lemmas.len() {
+            return Err(bad(&format!(
+                "artifact metadata mismatch: n_lemmas={} but {} lemma records",
+                artifact.meta.n_lemmas,
+                artifact.lemmas.len()
+            )));
+        }
+        Ok(artifact)
     }
 
     /// Write the encoded artifact to `path`.
@@ -133,7 +180,7 @@ impl Artifact {
     /// Returns an error if the read or decoding fails.
     pub fn read_from(path: impl AsRef<Path>) -> io::Result<Self> {
         let bytes = std::fs::read(path)?;
-        Self::decode(&bytes).map_err(io::Error::other)
+        Self::decode(&bytes)
     }
 }
 
@@ -179,11 +226,65 @@ mod tests {
             }],
         };
         let bytes = art.encode().unwrap();
+        assert_eq!(&bytes[..4], b"KEIN");
         let back = Artifact::decode(&bytes).unwrap();
         assert_eq!(back.lemmas[0].lemma, "talo");
         assert_eq!(
             back.lemmas[0].paradigms[0].slots[0].variants,
             vec!["talossa"]
         );
+    }
+
+    fn sample_bytes() -> Vec<u8> {
+        Artifact {
+            meta: Meta {
+                version: "test".into(),
+                n_lemmas: 1,
+                n_forms: 1,
+                ..Meta::default()
+            },
+            lemmas: vec![LemmaRecord {
+                lemma: "talo".into(),
+                adjective: false,
+                front_harmony: None,
+                citation: None,
+                paradigms: vec![],
+            }],
+        }
+        .encode()
+        .unwrap()
+    }
+
+    // Corrupt/foreign/truncated inputs must error, never panic or deserialize garbage.
+    #[test]
+    fn decode_rejects_corruption() {
+        assert!(Artifact::decode(b"").is_err());
+        assert!(Artifact::decode(b"not an artifact at all").is_err());
+        // Truncated payload.
+        let bytes = sample_bytes();
+        assert!(Artifact::decode(&bytes[..bytes.len() - 5]).is_err());
+        // Bit flip in the payload trips the CRC.
+        let mut flipped = sample_bytes();
+        let last = flipped.len() - 1;
+        flipped[last] ^= 0xff;
+        assert!(Artifact::decode(&flipped).is_err());
+        // Wrong format version.
+        let mut wrong_ver = sample_bytes();
+        wrong_ver[4] = 99;
+        assert!(Artifact::decode(&wrong_ver).is_err());
+    }
+
+    #[test]
+    fn decode_rejects_metadata_mismatch() {
+        // Encode an artifact whose n_lemmas lies about the record count.
+        let art = Artifact {
+            meta: Meta {
+                n_lemmas: 7,
+                ..Meta::default()
+            },
+            lemmas: vec![],
+        };
+        let bytes = art.encode().unwrap();
+        assert!(Artifact::decode(&bytes).is_err());
     }
 }

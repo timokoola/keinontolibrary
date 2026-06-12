@@ -9,7 +9,7 @@
 use std::fs::OpenOptions;
 use std::io::{self, BufRead, Write};
 use std::path::{Path, PathBuf};
-use std::sync::{Arc, RwLock};
+use std::sync::{Arc, PoisonError, RwLock};
 
 use keinontolibrary_core::{
     normalize, Case, FormStore, Forms, MemoryStore, Number, ParadigmRef, Source,
@@ -37,6 +37,30 @@ pub struct OverlayEntry {
     pub variants: Vec<String>,
 }
 
+impl OverlayEntry {
+    /// Validate an entry before it is persisted/applied: a real declension class, at
+    /// least one non-empty variant, and a non-empty lemma.
+    ///
+    /// # Errors
+    /// Returns a message describing the first problem found.
+    pub fn validate(&self) -> Result<(), String> {
+        if self.lemma.trim().is_empty() {
+            return Err("empty lemma".into());
+        }
+        // 1–49 regular, 50/51 compounds, 101 pronouns (mirrors the ingest's in-scope set).
+        if !(matches!(self.tn, 1..=51) || self.tn == 101) {
+            return Err(format!("tn {} out of range", self.tn));
+        }
+        if self.variants.is_empty() {
+            return Err("no variants".into());
+        }
+        if self.variants.iter().any(|v| v.trim().is_empty()) {
+            return Err("empty variant".into());
+        }
+        Ok(())
+    }
+}
+
 #[derive(Debug)]
 struct Inner {
     store: RwLock<MemoryStore>,
@@ -59,13 +83,25 @@ impl Overlay {
         let mut store = MemoryStore::new();
         if path.exists() {
             let file = std::fs::File::open(&path)?;
-            for line in io::BufReader::new(file).lines() {
+            for (i, line) in io::BufReader::new(file).lines().enumerate() {
                 let line = line?;
                 if line.trim().is_empty() {
                     continue;
                 }
-                if let Ok(entry) = serde_json::from_str::<OverlayEntry>(&line) {
-                    apply(&mut store, &entry);
+                match serde_json::from_str::<OverlayEntry>(&line) {
+                    Ok(entry) => match entry.validate() {
+                        Ok(()) => apply(&mut store, &entry),
+                        Err(e) => eprintln!(
+                            "overlay {}: skipping invalid entry on line {}: {e}",
+                            path.display(),
+                            i + 1
+                        ),
+                    },
+                    Err(e) => eprintln!(
+                        "overlay {}: skipping malformed JSON on line {}: {e}",
+                        path.display(),
+                        i + 1
+                    ),
                 }
             }
         }
@@ -93,6 +129,7 @@ impl Overlay {
     /// # Errors
     /// Returns an error if the entry cannot be persisted.
     pub fn append(&self, entry: &OverlayEntry) -> io::Result<()> {
+        entry.validate().map_err(io::Error::other)?;
         if !self.inner.path.as_os_str().is_empty() {
             if let Some(parent) = self.inner.path.parent() {
                 if !parent.as_os_str().is_empty() {
@@ -106,7 +143,13 @@ impl Overlay {
                 .open(&self.inner.path)?;
             writeln!(file, "{line}")?;
         }
-        let mut store = self.inner.store.write().expect("overlay lock poisoned");
+        // A panic mid-write could poison the lock; recover the inner store rather than
+        // cascading the panic to every later request.
+        let mut store = self
+            .inner
+            .store
+            .write()
+            .unwrap_or_else(PoisonError::into_inner);
         apply(&mut store, entry);
         Ok(())
     }
@@ -129,7 +172,7 @@ impl FormStore for Overlay {
         self.inner
             .store
             .read()
-            .expect("overlay lock poisoned")
+            .unwrap_or_else(PoisonError::into_inner)
             .paradigms(lemma)
     }
 
@@ -143,7 +186,7 @@ impl FormStore for Overlay {
         self.inner
             .store
             .read()
-            .expect("overlay lock poisoned")
+            .unwrap_or_else(PoisonError::into_inner)
             .forms(lemma, reference, number, case)
     }
 }
@@ -191,6 +234,42 @@ mod tests {
                 .variants,
             vec!["uudissanassa"]
         );
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn append_rejects_invalid_entries() {
+        let overlay = Overlay::in_memory();
+        let mut e = entry("x", "xssa");
+        e.variants = vec![];
+        assert!(overlay.append(&e).is_err());
+        let mut e = entry("x", "xssa");
+        e.variants = vec![String::new()];
+        assert!(overlay.append(&e).is_err());
+        let mut e = entry("x", "xssa");
+        e.tn = 200;
+        assert!(overlay.append(&e).is_err());
+        assert!(overlay.append(&entry("", "xssa")).is_err());
+    }
+
+    #[test]
+    fn open_skips_malformed_and_invalid_lines() {
+        let dir = std::env::temp_dir().join(format!("kl-ov-bad-{}", std::process::id()));
+        let path = dir.join("overlay.jsonl");
+        std::fs::create_dir_all(&dir).unwrap();
+        std::fs::write(
+            &path,
+            "not json at all\n\
+             {\"lemma\":\"\",\"tn\":1,\"number\":\"singular\",\"case\":\"inessive\",\"variants\":[\"x\"]}\n\
+             {\"lemma\":\"hyvä\",\"tn\":10,\"number\":\"singular\",\"case\":\"inessive\",\"variants\":[\"hyvässä\"]}\n",
+        )
+        .unwrap();
+        // Bad lines are skipped (logged), the good one survives.
+        let overlay = Overlay::open(&path).unwrap();
+        let r = ParadigmRef::new(None, 10);
+        assert!(overlay
+            .forms("hyvä", &r, Number::Singular, Case::Inessive)
+            .is_some());
         let _ = std::fs::remove_dir_all(&dir);
     }
 

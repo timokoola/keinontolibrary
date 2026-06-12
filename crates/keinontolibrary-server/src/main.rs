@@ -10,9 +10,17 @@ use std::sync::Arc;
 
 use keinontolibrary_data::build_engine;
 use keinontolibrary_server::{app, AppState};
+use tracing_subscriber::EnvFilter;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Structured logging; level via RUST_LOG (default info), tower-http traces requests.
+    tracing_subscriber::fmt()
+        .with_env_filter(
+            EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("info")),
+        )
+        .init();
+
     let artifact = std::env::var("KEINONTO_ARTIFACT")
         .unwrap_or_else(|_| "data/artifact/keinontolibrary.bin".to_owned());
     let overlay_path =
@@ -22,12 +30,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let bundle = build_engine(&artifact, &overlay_path)
         .map_err(|e| format!("loading artifact {artifact}: {e}"))?;
-    eprintln!(
-        "loaded {} lemmas / {} forms (v{})",
-        bundle.meta.n_lemmas, bundle.meta.n_forms, bundle.meta.version
+    tracing::info!(
+        lemmas = bundle.meta.n_lemmas,
+        forms = bundle.meta.n_forms,
+        version = %bundle.meta.version,
+        "artifact loaded"
     );
     if admin_token.is_none() {
-        eprintln!("note: KEINONTO_ADMIN_TOKEN unset — admin endpoints disabled");
+        tracing::warn!("KEINONTO_ADMIN_TOKEN unset — admin endpoints disabled");
     }
 
     let state = Arc::new(AppState {
@@ -38,7 +48,35 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     });
 
     let listener = tokio::net::TcpListener::bind(&addr).await?;
-    eprintln!("listening on http://{addr}");
-    axum::serve(listener, app(state)).await?;
+    tracing::info!(%addr, "listening");
+    axum::serve(listener, app(state))
+        .with_graceful_shutdown(shutdown_signal())
+        .await?;
+    tracing::info!("shut down cleanly");
     Ok(())
+}
+
+/// Resolve when the process receives SIGINT (Ctrl-C) or SIGTERM (container stop), so
+/// axum drains in-flight requests before exiting.
+async fn shutdown_signal() {
+    let ctrl_c = async {
+        tokio::signal::ctrl_c()
+            .await
+            .expect("install Ctrl-C handler");
+    };
+    #[cfg(unix)]
+    let terminate = async {
+        tokio::signal::unix::signal(tokio::signal::unix::SignalKind::terminate())
+            .expect("install SIGTERM handler")
+            .recv()
+            .await;
+    };
+    #[cfg(not(unix))]
+    let terminate = std::future::pending::<()>();
+
+    tokio::select! {
+        () = ctrl_c => {}
+        () = terminate => {}
+    }
+    tracing::info!("shutdown signal received, draining");
 }

@@ -81,7 +81,7 @@ impl Generator for RuleEngine {
         {
             return Some(Forms::missing());
         }
-        let variants = generate::generate(
+        if let Some(variants) = generate::generate(
             lemma,
             reference.tn,
             reference.av,
@@ -89,11 +89,32 @@ impl Generator for RuleEngine {
             reference.front_harmony,
             number,
             case,
-        )?;
-        if variants.is_empty() {
-            return None;
+        ) {
+            if !variants.is_empty() {
+                return Some(Forms::present(variants, Source::Generated));
+            }
         }
-        Some(Forms::present(variants, Source::Generated))
+        // Fallback: clitic pronominals whose clitic stays at the very end — the stem
+        // inflects and the clitic re-attaches (kumpikin -> kummankin, kumpainenkin ->
+        // kumpaisenkin, joltinenkin -> joltisenkin; Voikko-verified). Distinct from
+        // jokin/kukaan, whose clitic moves inside (registry-served, returned above).
+        for clitic in ["kin", "kaan", "kään"] {
+            if let Some(base) = lemma.strip_suffix(clitic) {
+                if base.len() >= 4 {
+                    if let Some(forms) = self.generate(base, reference, number, case) {
+                        if !forms.is_missing() {
+                            let variants = forms
+                                .variants
+                                .iter()
+                                .map(|v| format!("{v}{clitic}"))
+                                .collect();
+                            return Some(Forms::present(variants, Source::Generated));
+                        }
+                    }
+                }
+            }
+        }
+        None
     }
 }
 

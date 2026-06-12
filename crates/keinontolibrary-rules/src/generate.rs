@@ -198,6 +198,54 @@ fn weak_plural_stem(sg_strong: &str, sg_weak: &str, tn: u8) -> String {
     pl_weak
 }
 
+/// All forms of a foreign/letter-word citation: endings attach after the separator
+/// with pronunciation-derived harmony and illative echo (parfait'n, parfait'ta,
+/// parfait'hen; cd:n, cd:tä, cd:hen; show'hun — Voikko-verified where its lexicon
+/// reaches). Plurals take the long-vowel-class i-shapes (cd:t, cd:iden, cd:itä).
+#[must_use]
+pub fn citation_forms(
+    lemma: &str,
+    c: keinontolibrary_core::ForeignCitation,
+    number: Number,
+    case: Case,
+) -> Option<Vec<String>> {
+    let s = c.sep;
+    let a = if c.front { "ä" } else { "a" };
+    let e = c.echo;
+    let forms = match (number, case) {
+        (Number::Singular, Case::Nominative) => vec![lemma.to_owned()],
+        (Number::Singular, Case::Genitive | Case::Accusative) => vec![format!("{lemma}{s}n")],
+        (Number::Singular, Case::Partitive) => vec![format!("{lemma}{s}t{a}")],
+        (Number::Singular, Case::Inessive) => vec![format!("{lemma}{s}ss{a}")],
+        (Number::Singular, Case::Elative) => vec![format!("{lemma}{s}st{a}")],
+        (Number::Singular, Case::Illative) => vec![format!("{lemma}{s}h{e}n")],
+        (Number::Singular, Case::Adessive) => vec![format!("{lemma}{s}ll{a}")],
+        (Number::Singular, Case::Ablative) => vec![format!("{lemma}{s}lt{a}")],
+        (Number::Singular, Case::Allative) => vec![format!("{lemma}{s}lle")],
+        (Number::Singular, Case::Essive) => vec![format!("{lemma}{s}n{a}")],
+        (Number::Singular, Case::Translative) => vec![format!("{lemma}{s}ksi")],
+        (Number::Singular, Case::Abessive) => vec![format!("{lemma}{s}tt{a}")],
+        (Number::Singular, Case::Comitative | Case::Instructive) => return None,
+        (Number::Plural, Case::Nominative | Case::Accusative) => vec![format!("{lemma}{s}t")],
+        (Number::Plural, Case::Genitive) => {
+            vec![format!("{lemma}{s}iden"), format!("{lemma}{s}itten")]
+        }
+        (Number::Plural, Case::Partitive) => vec![format!("{lemma}{s}it{a}")],
+        (Number::Plural, Case::Inessive) => vec![format!("{lemma}{s}iss{a}")],
+        (Number::Plural, Case::Elative) => vec![format!("{lemma}{s}ist{a}")],
+        (Number::Plural, Case::Illative) => vec![format!("{lemma}{s}ihin")],
+        (Number::Plural, Case::Adessive) => vec![format!("{lemma}{s}ill{a}")],
+        (Number::Plural, Case::Ablative) => vec![format!("{lemma}{s}ilt{a}")],
+        (Number::Plural, Case::Allative) => vec![format!("{lemma}{s}ille")],
+        (Number::Plural, Case::Essive) => vec![format!("{lemma}{s}in{a}")],
+        (Number::Plural, Case::Translative) => vec![format!("{lemma}{s}iksi")],
+        (Number::Plural, Case::Abessive) => vec![format!("{lemma}{s}itt{a}")],
+        (Number::Plural, Case::Comitative) => vec![format!("{lemma}{s}ineen")],
+        (Number::Plural, Case::Instructive) => vec![format!("{lemma}{s}in")],
+    };
+    Some(forms)
+}
+
 /// Stem analysis for a plurale tantum citation — a `-t` lemma that IS the weak
 /// nominative plural (sakset, hohtimet, arpajaiset, kaverukset, rattaat). Stripping
 /// the `-t` yields the weak stem; for most classes a singular citation can be
@@ -1405,6 +1453,46 @@ mod tests {
         assert!(uta.contains(&"utareissa".to_owned()));
         let ug = both("utare", None, Number::Singular, Case::Genitive);
         assert!(ug.contains(&"utareen".to_owned()) && ug.contains(&"utaren".to_owned()));
+    }
+
+    // Foreign/letter-word citations: endings after the separator with
+    // pronunciation-derived harmony and echo (Voikko-verified: parfait'ta, cd:hen,
+    // show'hun, cd:iden). Cycle 12 of the 100% roadmap.
+    #[test]
+    fn foreign_citations_decline_on_pronunciation() {
+        use keinontolibrary_core::ForeignCitation;
+        let parfait = ForeignCitation {
+            sep: '\'',
+            front: false,
+            echo: 'e',
+        };
+        let cd = ForeignCitation {
+            sep: ':',
+            front: true,
+            echo: 'e',
+        };
+        let show = ForeignCitation {
+            sep: '\'',
+            front: false,
+            echo: 'u',
+        };
+        let f = |l, c, n, ca| citation_forms(l, c, n, ca).unwrap()[0].clone();
+        assert_eq!(
+            f("parfait", parfait, Number::Singular, Case::Partitive),
+            "parfait'ta"
+        );
+        assert_eq!(
+            f("parfait", parfait, Number::Singular, Case::Genitive),
+            "parfait'n"
+        );
+        assert_eq!(f("cd", cd, Number::Singular, Case::Partitive), "cd:tä");
+        assert_eq!(f("cd", cd, Number::Singular, Case::Illative), "cd:hen");
+        assert_eq!(f("cd", cd, Number::Plural, Case::Genitive), "cd:iden");
+        assert_eq!(
+            f("show", show, Number::Singular, Case::Illative),
+            "show'hun"
+        );
+        assert_eq!(f("show", show, Number::Plural, Case::Inessive), "show'issa");
     }
 
     // Plurale tantum citations: the -t IS the weak nominative plural; plural slots

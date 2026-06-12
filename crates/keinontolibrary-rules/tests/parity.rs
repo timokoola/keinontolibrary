@@ -81,7 +81,8 @@ fn rule_lookup_parity() {
                 let reference = ParadigmRef::new(None, paradigm.tn)
                     .with_av(paradigm.av)
                     .with_adjective(lemma.adjective)
-                    .with_front_harmony(lemma.front_harmony);
+                    .with_front_harmony(lemma.front_harmony)
+                    .with_citation(lemma.citation);
                 match engine.generate(&lemma.lemma, &reference, number, case) {
                     None => unsupported_slots += 1,
                     Some(forms) => {

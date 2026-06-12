@@ -66,6 +66,10 @@ pub struct LemmaRecord {
     /// (suffix harmony follows the final component: antigeenissä, not *antigeenissa).
     #[serde(default)]
     pub front_harmony: Option<bool>,
+    /// Foreign/letter-word citation style (parfait'n, cd:n), from the citation
+    /// overrides sidecar.
+    #[serde(default)]
+    pub citation: Option<keinontolibrary_core::ForeignCitation>,
     /// The distinct declension paradigms (deduplicated by `(tn, av)`), primary first.
     pub paradigms: Vec<ParadigmRecord>,
 }
@@ -160,6 +164,7 @@ mod tests {
                 lemma: "talo".into(),
                 adjective: false,
                 front_harmony: None,
+                citation: None,
                 paradigms: vec![ParadigmRecord {
                     tn: 1,
                     av: None,

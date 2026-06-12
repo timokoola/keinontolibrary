@@ -198,6 +198,73 @@ fn weak_plural_stem(sg_strong: &str, sg_weak: &str, tn: u8) -> String {
     pl_weak
 }
 
+/// Stem analysis for a plurale tantum citation — a `-t` lemma that IS the weak
+/// nominative plural (sakset, hohtimet, arpajaiset, kaverukset, rattaat). Stripping
+/// the `-t` yields the weak stem; for most classes a singular citation can be
+/// synthesized and the normal arm reused, tn41 builds its plural stems directly.
+/// Only plural slots are ever assembled from these (the words have no singular).
+fn tantum_stems(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> Option<Stems> {
+    let stripped = lemma.strip_suffix('t')?;
+    match tn {
+        // sakset -> sakse- -> (strengthen) länke- -> citation saksi/länki.
+        7 => {
+            let strong = strengthen(stripped, av);
+            let citation = format!("{}i", drop_last(&strong));
+            analyze(&citation, 7, av, front)
+        }
+        // hohtimet -> hohtime- -> citation hohdin (the arm re-strengthens).
+        33 => {
+            let body = stripped.strip_suffix("me")?;
+            let citation = format!("{}n", weaken(body, av));
+            analyze(&citation, 33, av, front)
+        }
+        // arpajaiset -> arpajaise- -> citation arpajainen.
+        38 => {
+            let base = stripped.strip_suffix("se")?;
+            analyze(&format!("{base}nen"), 38, av, front)
+        }
+        // kaverukset -> kavherukse- -> citation kaverus.
+        39 => {
+            let base = stripped.strip_suffix("kse")?;
+            analyze(&format!("{base}s"), 39, av, front)
+        }
+        // rattaat: the strip IS the long strong stem (rattaa-); no citation needed —
+        // build the plural stems directly (rattaiden, rattaita, rattaisiin —
+        // Voikko-verified; gradation reversal back to ratas/mallas is not).
+        41 => {
+            let a = harmony_a(front, lemma);
+            let sg = stripped.to_owned();
+            let pl = format!("{}i", drop_last(&sg));
+            Some(Stems {
+                part_sg: vec![format!("{sg}t{a}")],
+                illat_sg: vec![format!("{sg}seen")],
+                gen_pl: vec![format!("{pl}den"), format!("{pl}tten")],
+                part_pl: vec![format!("{pl}t{a}")],
+                illat_pl: vec![format!("{pl}siin"), format!("{pl}hin")],
+                essive_stem: sg.clone(),
+                sg_strong: sg.clone(),
+                sg_weak: sg,
+                pl_strong: pl.clone(),
+                pl_weak: pl,
+            })
+        }
+        _ => None,
+    }
+}
+
+/// Whether `lemma` is a plurale tantum citation the generator stems (its singular
+/// slots are true defectives, not gaps).
+#[must_use]
+pub fn is_plurale_tantum(lemma: &str, tn: u8, av: Option<char>) -> bool {
+    if tn == 48 && lemma.ends_with("eet") {
+        return true;
+    }
+    matches!(tn, 7 | 33 | 38 | 39 | 41)
+        && lemma.ends_with('t')
+        && analyze(lemma, tn, av, None).is_none()
+        && tantum_stems(lemma, tn, av, None).is_some()
+}
+
 /// The harmonic `a`/`ä` for endings, honoring a lexical override (see [`generate`]).
 fn harmony_a(front: Option<bool>, lemma: &str) -> &'static str {
     match front {
@@ -914,6 +981,18 @@ pub fn generate(
         return None;
     }
     let a = harmony_a(front, lemma);
+    // Plurale tantum citations (sakset, hohtimet, arpajaiset, kaverukset, rattaat):
+    // generate the plural from the stripped stem; the singular does not exist (the
+    // RuleEngine layer answers Missing for it).
+    if number == Number::Plural
+        && matches!(tn, 7 | 33 | 38 | 39 | 41)
+        && lemma.ends_with('t')
+        && analyze(lemma, tn, av, front).is_none()
+    {
+        if let Some(s) = tantum_stems(lemma, tn, av, front) {
+            return assemble(lemma, &s, a, adjective, number, case);
+        }
+    }
     // askel/askele (tn49): BOTH the short tn32-style and the long tn48-style readings
     // are standard (askelen/askeleen, askelissa/askeleissa — the corpus attests both
     // throughout), so generate each and merge. Consonant citations (askel, taival)
@@ -1326,6 +1405,28 @@ mod tests {
         assert!(uta.contains(&"utareissa".to_owned()));
         let ug = both("utare", None, Number::Singular, Case::Genitive);
         assert!(ug.contains(&"utareen".to_owned()) && ug.contains(&"utaren".to_owned()));
+    }
+
+    // Plurale tantum citations: the -t IS the weak nominative plural; plural slots
+    // generate from the stripped stem, singulars are true defectives (all forms
+    // Voikko-verified: saksien, längissä, hohtimilla, arpajaisissa, kaveruksia,
+    // rattaisiin). Cycle 11 of the 100% roadmap.
+    #[test]
+    fn plurale_tantum_citations_generate_plurals() {
+        let g = |l, tn, av, c| one(l, tn, av, Number::Plural, c);
+        assert_eq!(g("sakset", 7, None, Case::Genitive), "saksien");
+        assert_eq!(g("sakset", 7, None, Case::Inessive), "saksissa");
+        assert_eq!(g("länget", 7, Some('G'), Case::Inessive), "längissä");
+        assert_eq!(g("länget", 7, Some('G'), Case::Partitive), "länkiä");
+        assert_eq!(g("hohtimet", 33, Some('F'), Case::Adessive), "hohtimilla");
+        assert_eq!(g("arpajaiset", 38, None, Case::Inessive), "arpajaisissa");
+        assert_eq!(g("arpajaiset", 38, None, Case::Genitive), "arpajaisten");
+        assert_eq!(g("kaverukset", 39, None, Case::Partitive), "kaveruksia");
+        assert_eq!(g("rattaat", 41, None, Case::Illative), "rattaisiin");
+        assert_eq!(g("rattaat", 41, None, Case::Genitive), "rattaiden");
+        assert!(is_plurale_tantum("sakset", 7, None));
+        assert!(is_plurale_tantum("rattaat", 41, None));
+        assert!(!is_plurale_tantum("olut", 43, None));
     }
 
     // The pronoun nerd-test forms: t-accusatives, clitic-internal inflection, the

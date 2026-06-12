@@ -15,6 +15,27 @@ use rayon::prelude::*;
 use crate::kotus::Inventory;
 use crate::voikko::{self, CleanForm};
 
+/// Read the optional foreign-citation styles (JSONL `{"lemma","sep","front","echo"}`).
+fn read_citations(path: &Path) -> HashMap<String, keinontolibrary_core::ForeignCitation> {
+    let Ok(text) = std::fs::read_to_string(path) else {
+        return HashMap::new();
+    };
+    text.lines()
+        .filter(|l| !l.trim().is_empty())
+        .filter_map(|l| serde_json::from_str::<serde_json::Value>(l).ok())
+        .filter_map(|v| {
+            Some((
+                keinontolibrary_core::normalize(v.get("lemma")?.as_str()?),
+                keinontolibrary_core::ForeignCitation {
+                    sep: v.get("sep")?.as_str()?.chars().next()?,
+                    front: v.get("front")?.as_bool()?,
+                    echo: v.get("echo")?.as_str()?.chars().next()?,
+                },
+            ))
+        })
+        .collect()
+}
+
 /// Read an optional per-lemma boolean override file (JSONL `{"lemma", <flag>}`); a
 /// missing or unreadable file means no overrides.
 fn read_lemma_flags(path: &Path, flag: &str) -> HashMap<String, bool> {
@@ -50,6 +71,9 @@ pub struct Config {
     /// Optional comitative-style overrides (JSONL `{"lemma", "bare"}`, minted by
     /// `scripts/qa/gen_comitative_overrides.py`). Missing file is fine.
     pub comitative_path: PathBuf,
+    /// Optional foreign-citation styles (JSONL `{"lemma", "sep", "front", "echo"}`,
+    /// minted by `scripts/qa/gen_citation_overrides.py`). Missing file is fine.
+    pub citation_path: PathBuf,
     /// Version string stamped into the artifact metadata.
     pub version: String,
 }
@@ -315,6 +339,7 @@ pub fn run(config: &Config) -> Result<Report> {
     // Build lemma records in sorted order for a deterministic artifact.
     let harmony = read_lemma_flags(&config.harmony_path, "front");
     let comitative = read_lemma_flags(&config.comitative_path, "bare");
+    let citations = read_citations(&config.citation_path);
     let mut lemmas: Vec<&String> = inv.lemmas.keys().collect();
     lemmas.sort();
 
@@ -364,6 +389,7 @@ pub fn run(config: &Config) -> Result<Report> {
             lemma: lemma.clone(),
             adjective,
             front_harmony,
+            citation: citations.get(lemma).copied(),
             paradigms: paradigm_records,
         });
     }

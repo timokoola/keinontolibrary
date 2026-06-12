@@ -165,3 +165,4 @@
 {"match": "kahdeksaskymmenes|45|plural|accusative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
 {"match": "yhdeksäskymmenes|45|plural|nominative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
 {"match": "yhdeksäskymmenes|45|plural|accusative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "nougat|22|singular|illative", "reason": "Voikko parses nougat'han as the -hAn focus clitic, not the illative echo — the form is the standard tn22 illative"}

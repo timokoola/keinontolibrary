@@ -43,6 +43,7 @@ harmony() {
   # QA dump; committed in data/. Regenerate after rule changes, then re-ingest.
   $PY scripts/qa/gen_harmony_overrides.py
   $PY scripts/qa/gen_comitative_overrides.py
+  $PY scripts/qa/gen_citation_overrides.py
 }
 ingest()  {
   if [[ -x $PY && ! -s data/harmony-overrides.jsonl ]]; then harmony; fi

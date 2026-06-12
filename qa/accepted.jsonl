@@ -129,15 +129,39 @@
 {"match": "jockey|21|singular|illative", "reason": "pronunciation-front loan in Voikko (jockeyhyn) vs written-form back harmony (jockeyhin) — per-lemma, like menu"}
 {"match": "maahockey|21|singular|illative", "reason": "pronunciation-front loan in Voikko (maahockeyhyn) — per-lemma"}
 {"match": "*|51", "reason": "tn51 both-parts-inflect compounds written solid (isossakierrossa) are outside Voikko's analyzer — it only parses an uninflected modifier; the forms follow the Voikko-oracle compound-parity harness instead"}
-{"match": "kahdeskymmenes|45", "reason": "compound ordinal (both parts inflect) — out of v1 scope; the corpus carries mislabeled head-reading rows (…kymmeneksen) that lookup still serves"}
-{"match": "kolmaskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
-{"match": "neljäskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
-{"match": "viideskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
-{"match": "kuudeskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
-{"match": "seitsemäskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
-{"match": "kahdeksaskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
-{"match": "yhdeksäskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
 {"match": "vinopysäköinti|50", "reason": "correct head-declined forms (vinopysäköinnissä) that Voikko's compounder does not parse"}
 {"match": "kevytsukeltaja|50", "reason": "correct head-declined forms outside Voikko's compounder"}
 {"match": "mikä|101", "reason": "mikä's plural forms are identical strings to the singular (mitkä/minkä/mitä/missä) — Voikko lemmatizes them as singular, so number-matched verification abstains wrongly"}
 {"match": "mikään|101", "reason": "mikään's plural forms are identical strings to the singular — Voikko lemmatizes them as singular"}
+{"match": "kahdeskymmenes|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "kahdeskymmenes|45|plural|instructive", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "kolmaskymmenes|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "kolmaskymmenes|45|plural|instructive", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "neljäskymmenes|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "neljäskymmenes|45|plural|instructive", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "viideskymmenes|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "viideskymmenes|45|plural|instructive", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "kuudeskymmenes|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "kuudeskymmenes|45|plural|instructive", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "seitsemäskymmenes|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "seitsemäskymmenes|45|plural|instructive", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "kahdeksaskymmenes|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "kahdeksaskymmenes|45|plural|instructive", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "yhdeksäskymmenes|45|plural|comitative", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "yhdeksäskymmenes|45|plural|instructive", "reason": "Voikko carries no ordinal comitatives/instructives; the both-parts concatenation follows the simple-ordinal pattern"}
+{"match": "kahdeskymmenes|45|plural|nominative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "kahdeskymmenes|45|plural|accusative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "kolmaskymmenes|45|plural|nominative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "kolmaskymmenes|45|plural|accusative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "neljäskymmenes|45|plural|nominative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "neljäskymmenes|45|plural|accusative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "viideskymmenes|45|plural|nominative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "viideskymmenes|45|plural|accusative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "kuudeskymmenes|45|plural|nominative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "kuudeskymmenes|45|plural|accusative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "seitsemäskymmenes|45|plural|nominative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "seitsemäskymmenes|45|plural|accusative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "kahdeksaskymmenes|45|plural|nominative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "kahdeksaskymmenes|45|plural|accusative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "yhdeksäskymmenes|45|plural|nominative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
+{"match": "yhdeksäskymmenes|45|plural|accusative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}

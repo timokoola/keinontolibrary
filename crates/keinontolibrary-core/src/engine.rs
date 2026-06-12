@@ -96,10 +96,12 @@ impl Engine {
             [only] if only.tn == COMPOUND_TN => self
                 .compound_slot(&norm, number, case)
                 .map_or_else(|| self.resolve_slot(&norm, only, number, case), Ok),
-            // Compound ordinals (kahdeskymmenes, tn45) inflect BOTH parts — head-only
-            // compound routing would serve garbage (*kahdeksaskymmenettä); they are out
-            // of v1 scope, so take only the direct path.
-            [only] if only.tn == 45 => self.resolve_slot(&norm, only, number, case),
+            // Compound ordinals (kahdeskymmenes, tn45) inflect BOTH parts:
+            // kahdennenkymmenennen. Falls back to the direct path (registry/lookup)
+            // for simple ordinals and slots the parts cannot fill.
+            [only] if only.tn == 45 => self
+                .ordinal_both_slot(&norm, number, case)
+                .map_or_else(|| self.resolve_slot(&norm, only, number, case), Ok),
             // Known word, but a known compound whose final component flips harmony
             // (punaviini -> punaviiniä, not -nia): override with the component's harmony.
             [only] => match self.compound_harmony_slot(&norm, number, case) {
@@ -144,6 +146,15 @@ impl Engine {
             [only] if only.tn == COMPOUND_TN => Ok(self
                 .compound_paradigm(&norm)
                 .unwrap_or_else(|| self.build_paradigm(&norm, only))),
+            // Compound ordinals: both parts inflect per slot (kahdennenkymmenennen).
+            [only] if only.tn == 45 => {
+                let reference = only.clone();
+                Ok(Paradigm::build(norm.clone(), reference.clone(), |n, c| {
+                    self.ordinal_both_slot(&norm, n, c)
+                        .or_else(|| self.slot(&norm, &reference, n, c))
+                        .unwrap_or_else(Forms::missing)
+                }))
+            }
             [only] => Ok(self
                 .compound_harmony_paradigm(&norm)
                 .unwrap_or_else(|| self.build_paradigm(&norm, only))),
@@ -362,6 +373,30 @@ impl Engine {
             self.compound_both_slot(norm, number, case)
                 .unwrap_or_else(Forms::missing)
         }))
+    }
+
+    /// One slot of a compound ordinal — a tn45 lemma whose head is itself the tn45
+    /// ordinal `kymmenes`: BOTH parts decline in the same slot and concatenate
+    /// (`kahdeskymmenes` → `kahdennen` + `kymmenennen`, Voikko-verified).
+    fn ordinal_both_slot(&self, norm: &str, number: Number, case: Case) -> Option<Forms> {
+        let prefix = norm.strip_suffix("kymmenes").filter(|p| !p.is_empty())?;
+        let ord = |lemma: &str| self.resolve(lemma).into_iter().find(|r| r.tn == 45);
+        let pref_ref = ord(prefix)?;
+        let head_ref = ord("kymmenes")?;
+        // The parts come from the GENERATOR, not the lookup-first slot(): the corpus
+        // carries mislabeled tn39-reading rows under kymmenes/tn45 (kymmeneksen) that
+        // would otherwise leak into the concatenation.
+        let generator = self.generator.as_ref()?;
+        let p = generator.generate(prefix, &pref_ref, number, case)?;
+        let h = generator.generate("kymmenes", &head_ref, number, case)?;
+        if p.is_missing() || h.is_missing() {
+            return None;
+        }
+        let (a, b) = (p.variants.first()?, h.variants.first()?);
+        Some(Forms::present(
+            vec![format!("{a}{b}")],
+            crate::Source::Generated,
+        ))
     }
 
     /// Should we override a *known* word's harmony because it's really a compound whose final

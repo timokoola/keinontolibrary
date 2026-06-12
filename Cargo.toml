@@ -53,7 +53,12 @@ rayon = "1"
 clap = { version = "4", features = ["derive", "env"] }
 axum = "0.7"
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "signal"] }
-tower-http = { version = "0.6", features = ["trace"] }
+tower-http = { version = "0.6", features = ["trace", "limit"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+sha2 = "0.10"
+subtle = "2"
+crc32fast = "1"
 
 [profile.release]
 lto = "thin"

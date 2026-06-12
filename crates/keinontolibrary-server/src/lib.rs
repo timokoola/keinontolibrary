@@ -5,10 +5,16 @@
 //! - `GET  /about` — version, data metadata, attribution.
 //! - `GET  /decline?word=&number=&case=[&hn=&tn=]` — one slot.
 //! - `GET  /paradigm?word=[&hn=&tn=]` — full table.
-//! - `POST /admin/add`, `POST /admin/override` — overlay mutation (bearer auth).
+//! - `POST /admin/add`, `POST /admin/override` — overlay mutation (bearer auth). The two
+//!   paths are **aliases**: the overlay is upsert-by-key (the last write for a
+//!   `(lemma, tn, hn, number, case)` wins on replay), so "add" and "override" do the
+//!   same thing — both create-or-replace.
 //!
 //! The state is shared and stateless across requests; the overlay uses interior mutability
 //! so admin writes are immediately visible to lookups.
+//!
+//! Hardening: the admin token is compared in constant time (SHA-256 digests), request
+//! bodies are capped, the `word` query is length-limited, and requests are traced.
 
 use std::sync::Arc;
 
@@ -21,6 +27,17 @@ use keinontolibrary_core::{Case, Engine, Error, Forms, Number, Paradigm, Paradig
 use keinontolibrary_data::{Meta, Overlay};
 use serde::Deserialize;
 use serde_json::{json, Value};
+use sha2::{Digest, Sha256};
+use subtle::ConstantTimeEq;
+use tower_http::limit::RequestBodyLimitLayer;
+use tower_http::trace::TraceLayer;
+
+/// Max bytes accepted in an admin request body — an overlay entry is a few hundred bytes;
+/// anything larger is rejected before deserialization.
+const MAX_BODY_BYTES: usize = 16 * 1024;
+/// Max bytes accepted in a `word` query parameter (Finnish words are short; this only
+/// bounds abuse).
+const MAX_WORD_BYTES: usize = 256;
 
 /// Shared application state.
 #[derive(Debug)]
@@ -42,8 +59,11 @@ pub fn app(state: Arc<AppState>) -> Router {
         .route("/about", get(about))
         .route("/decline", get(decline))
         .route("/paradigm", get(paradigm))
+        // Aliases: both create-or-replace an overlay entry (see module docs).
         .route("/admin/add", post(admin_add))
         .route("/admin/override", post(admin_add))
+        .layer(RequestBodyLimitLayer::new(MAX_BODY_BYTES))
+        .layer(TraceLayer::new_for_http())
         .with_state(state)
 }
 
@@ -89,6 +109,9 @@ async fn decline(
     State(st): State<Arc<AppState>>,
     Query(q): Query<DeclineQuery>,
 ) -> (StatusCode, Json<Value>) {
+    if let Err(resp) = check_word(&q.word) {
+        return resp;
+    }
     let (number, case) = match parse_number_case(&q.number, &q.case) {
         Ok(pair) => pair,
         Err(resp) => return resp,
@@ -109,6 +132,9 @@ async fn paradigm(
     State(st): State<Arc<AppState>>,
     Query(q): Query<ParadigmQuery>,
 ) -> (StatusCode, Json<Value>) {
+    if let Err(resp) = check_word(&q.word) {
+        return resp;
+    }
     let result = match q.tn {
         Some(tn) => st
             .engine
@@ -127,6 +153,7 @@ async fn admin_add(
     Json(entry): Json<keinontolibrary_data::OverlayEntry>,
 ) -> (StatusCode, Json<Value>) {
     if !authorized(&st, &headers) {
+        tracing::warn!("admin request rejected: bad or missing bearer token");
         return (StatusCode::FORBIDDEN, Json(json!({ "error": "forbidden" })));
     }
     match st.overlay.append(&entry) {
@@ -142,11 +169,28 @@ fn authorized(st: &AppState, headers: &HeaderMap) -> bool {
     let Some(expected) = &st.admin_token else {
         return false; // admin disabled when no token configured
     };
-    headers
+    let Some(presented) = headers
         .get(axum::http::header::AUTHORIZATION)
         .and_then(|v| v.to_str().ok())
         .and_then(|v| v.strip_prefix("Bearer "))
-        .is_some_and(|token| token == expected)
+    else {
+        return false;
+    };
+    // Constant-time comparison of SHA-256 digests: fixed-length, so neither the token
+    // value nor its length leaks through response timing.
+    let a = Sha256::digest(presented.as_bytes());
+    let b = Sha256::digest(expected.as_bytes());
+    a.ct_eq(&b).into()
+}
+
+fn check_word(word: &str) -> Result<(), (StatusCode, Json<Value>)> {
+    if word.len() > MAX_WORD_BYTES {
+        return Err((
+            StatusCode::BAD_REQUEST,
+            Json(json!({ "error": "word too long" })),
+        ));
+    }
+    Ok(())
 }
 
 fn parse_number_case(
@@ -331,5 +375,45 @@ mod tests {
             .decline("blorko", Number::Singular, Case::Inessive)
             .unwrap();
         assert_eq!(f.primary(), Some("blorkossa"));
+    }
+
+    #[tokio::test]
+    async fn admin_rejects_wrong_token() {
+        let body =
+            r#"{"lemma":"x","tn":1,"number":"singular","case":"inessive","variants":["xssa"]}"#;
+        for token in [
+            "Bearer wrong",
+            "Bearer secre",
+            "Bearer secrets",
+            "Basic secret",
+        ] {
+            let resp = app(test_state())
+                .oneshot(
+                    Request::post("/admin/add")
+                        .header("content-type", "application/json")
+                        .header("authorization", token)
+                        .body(Body::from(body))
+                        .unwrap(),
+                )
+                .await
+                .unwrap();
+            assert_eq!(resp.status(), StatusCode::FORBIDDEN, "token {token:?}");
+        }
+    }
+
+    #[tokio::test]
+    async fn overlong_word_is_400() {
+        let word = "a".repeat(500);
+        let resp = app(test_state())
+            .oneshot(
+                Request::get(format!(
+                    "/decline?word={word}&number=singular&case=inessive"
+                ))
+                .body(Body::empty())
+                .unwrap(),
+            )
+            .await
+            .unwrap();
+        assert_eq!(resp.status(), StatusCode::BAD_REQUEST);
     }
 }

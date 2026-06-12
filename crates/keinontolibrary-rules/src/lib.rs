@@ -12,7 +12,7 @@ mod gradation;
 mod harmony;
 
 pub use exceptions::Exceptions;
-pub use generate::{generate, is_plurale_tantum};
+pub use generate::{citation_forms, generate, is_plurale_tantum};
 
 use keinontolibrary_core::{Case, Forms, Generator, Number, ParadigmRef, Source};
 
@@ -66,6 +66,13 @@ impl Generator for RuleEngine {
             .get_compound(lemma, reference.tn, number, case)
         {
             return Some(Forms::present(forms, Source::Generated));
+        }
+        // Foreign/letter-word citations decline on the pronunciation behind a
+        // separator (parfait'n, cd:tä) — the sidecar-minted style carries what the
+        // spelling cannot.
+        if let Some(c) = reference.citation {
+            let variants = generate::citation_forms(lemma, c, number, case)?;
+            return Some(Forms::present(variants, Source::Generated));
         }
         // Plurale tantum citations (sakset, arpajaiset, rattaat, alkeet) have no
         // singular at all: answer Missing, not a gap.

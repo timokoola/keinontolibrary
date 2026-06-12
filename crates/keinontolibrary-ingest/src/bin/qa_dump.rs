@@ -81,7 +81,8 @@ fn main() -> std::io::Result<()> {
                 let reference = ParadigmRef::new(None, paradigm.tn)
                     .with_av(paradigm.av)
                     .with_adjective(lemma.adjective)
-                    .with_front_harmony(lemma.front_harmony);
+                    .with_front_harmony(lemma.front_harmony)
+                    .with_citation(lemma.citation);
                 for number in Number::ALL {
                     for case in Case::ALL {
                         counts.slots += 1;

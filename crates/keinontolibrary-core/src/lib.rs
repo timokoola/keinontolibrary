@@ -32,7 +32,7 @@ pub use engine::{Engine, EngineBuilder, FormStore, Generator, MemoryStore};
 pub use error::Error;
 pub use forms::{Forms, Paradigm, Source, Status};
 pub use normalize::normalize;
-pub use paradigm_ref::ParadigmRef;
+pub use paradigm_ref::{ForeignCitation, ParadigmRef};
 
 use std::sync::OnceLock;
 

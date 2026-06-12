@@ -2,6 +2,20 @@
 
 use std::fmt;
 
+/// How a foreign/letter-word citation attaches its endings: after a separator, with
+/// harmony and the illative echo vowel taken from the PRONUNCIATION (`parfait'ta`,
+/// `cd:hen`, `show'hun`) — none of which is derivable from the spelling.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct ForeignCitation {
+    /// The separator: `'` for tn22 silent-letter citations, `:` for letter-words.
+    pub sep: char,
+    /// Front-vowel endings (cd:tä) vs back (dna:ta).
+    pub front: bool,
+    /// The pronounced final vowel echoed in the illative (show'hUn, cd:hEn).
+    pub echo: char,
+}
+
 /// Identifies a single paradigm of a lemma, used to disambiguate homonyms and
 /// multi-paradigm words.
 ///
@@ -28,6 +42,10 @@ pub struct ParadigmRef {
     /// harmony (antigeenissä), where segmentation is lexical knowledge.
     #[cfg_attr(feature = "serde", serde(default))]
     pub front_harmony: Option<bool>,
+    /// Foreign/letter-word citation style (parfait'n, cd:n), when the lemma declines
+    /// on its pronunciation behind a separator.
+    #[cfg_attr(feature = "serde", serde(default))]
+    pub citation: Option<ForeignCitation>,
     /// Optional human-readable gloss, surfaced only in error messages.
     pub gloss: Option<String>,
 }
@@ -41,6 +59,7 @@ impl ParadigmRef {
             av: None,
             adjective: false,
             front_harmony: None,
+            citation: None,
             gloss: None,
         }
     }
@@ -63,6 +82,13 @@ impl ParadigmRef {
     #[must_use]
     pub fn with_front_harmony(mut self, front: Option<bool>) -> Self {
         self.front_harmony = front;
+        self
+    }
+
+    /// Builder-style setter for the foreign-citation style.
+    #[must_use]
+    pub fn with_citation(mut self, citation: Option<ForeignCitation>) -> Self {
+        self.citation = citation;
         self
     }
 

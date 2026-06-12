@@ -90,6 +90,7 @@ impl FormStore for LookupData {
                     .with_av(p.av)
                     .with_adjective(rec.adjective)
                     .with_front_harmony(rec.front_harmony)
+                    .with_citation(rec.citation)
             })
             .collect()
     }
@@ -177,6 +178,7 @@ mod tests {
                 lemma: "talo".into(),
                 adjective: false,
                 front_harmony: None,
+                citation: None,
                 paradigms: vec![ParadigmRecord {
                     tn: 1,
                     av: None,

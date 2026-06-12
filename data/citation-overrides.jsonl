@@ -22,6 +22,7 @@
 {"lemma": "gourmet", "sep": "'", "front": false, "echo": "e"}
 {"lemma": "hiv", "sep": ":", "front": true, "echo": "e"}
 {"lemma": "it", "sep": ":", "front": true, "echo": "e"}
+{"lemma": "kaksois-v", "sep": ":", "front": true, "echo": "e"}
 {"lemma": "know-how", "sep": "'", "front": false, "echo": "u"}
 {"lemma": "lsd", "sep": ":", "front": true, "echo": "e"}
 {"lemma": "nougat", "sep": "'", "front": false, "echo": "a"}
@@ -37,9 +38,13 @@
 {"lemma": "roux", "sep": "'", "front": false, "echo": "u"}
 {"lemma": "show", "sep": "'", "front": false, "echo": "u"}
 {"lemma": "sioux", "sep": "'", "front": false, "echo": "u"}
+{"lemma": "sora-r", "sep": ":", "front": true, "echo": "ä"}
+{"lemma": "suhu-s", "sep": ":", "front": true, "echo": "ä"}
 {"lemma": "tournedos", "sep": "'", "front": false, "echo": "o"}
+{"lemma": "tupla-v", "sep": ":", "front": true, "echo": "e"}
 {"lemma": "tv", "sep": ":", "front": true, "echo": "e"}
 {"lemma": "uv", "sep": ":", "front": true, "echo": "e"}
 {"lemma": "wc", "sep": ":", "front": true, "echo": "e"}
 {"lemma": "www", "sep": ":", "front": true, "echo": "e"}
+{"lemma": "yksöis-v", "sep": ":", "front": true, "echo": "e"}
 {"lemma": "yt", "sep": ":", "front": true, "echo": "e"}

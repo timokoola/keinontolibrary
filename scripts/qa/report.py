@@ -304,6 +304,8 @@ def main():
 
     print(f"failures: {len(failures)}  regressions: {len(regressions)}  "
           f"fixed: {len(fixed)}", file=sys.stderr)
+    print(f"coverage: {cov['served']}/{denom} = {coverage_pct:.2f}%  "
+          f"(gap {cov['gap']})", file=sys.stderr)
     print(f"wrote {args.out_json}, {args.out_md}", file=sys.stderr)
 
     if args.update_baseline:
@@ -313,6 +315,11 @@ def main():
 
     if args.gate and regressions:
         print(f"GATE FAILED: {len(regressions)} regression(s)", file=sys.stderr)
+        sys.exit(1)
+    # Coverage is at 100%: the gate also guards against any new gap slot — every Kotus
+    # nominal × every slot must stay answered (or be a declared defective).
+    if args.gate and cov["gap"] > 0:
+        print(f"GATE FAILED: coverage dropped, {cov['gap']} gap slot(s)", file=sys.stderr)
         sys.exit(1)
 
 

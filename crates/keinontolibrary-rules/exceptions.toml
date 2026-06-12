@@ -10533,3 +10533,5941 @@ number = "plural"
 case = "instructive"
 forms = ["veljin"]
 reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "nominative"
+forms = ["uksi"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "genitive"
+forms = ["uksen"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "partitive"
+forms = ["utta"]
+reason = "tn29 uksi (uks-/ude- stem) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "accusative"
+forms = ["uksen"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "inessive"
+forms = ["uksessa"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "elative"
+forms = ["uksesta"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "illative"
+forms = ["ukseen"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "adessive"
+forms = ["uksella"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "ablative"
+forms = ["ukselta"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "allative"
+forms = ["ukselle"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "essive"
+forms = ["uksena"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "translative"
+forms = ["ukseksi"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "abessive"
+forms = ["uksetta"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "comitative"
+missing = true
+reason = "tn29 uksi (uks-/ude- stem) (defective slot)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "singular"
+case = "instructive"
+missing = true
+reason = "tn29 uksi (uks-/ude- stem) (defective slot)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "nominative"
+forms = ["ukset"]
+reason = "tn29 uksi (uks-/ude- stem) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "genitive"
+forms = ["uksien"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "partitive"
+forms = ["uksia"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "accusative"
+forms = ["ukset"]
+reason = "tn29 uksi (uks-/ude- stem) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "inessive"
+forms = ["uksissa"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "elative"
+forms = ["uksista"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "illative"
+forms = ["uksiin"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "adessive"
+forms = ["uksilla"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "ablative"
+forms = ["uksilta"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "allative"
+forms = ["uksille"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "essive"
+forms = ["uksina"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "translative"
+forms = ["uksiksi"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "abessive"
+forms = ["uksitta"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "comitative"
+forms = ["uksineen"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "uksi"
+tn = 29
+number = "plural"
+case = "instructive"
+forms = ["uksin"]
+reason = "tn29 uksi (uks-/ude- stem)"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "nominative"
+forms = ["hapsi"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "genitive"
+forms = ["hapsen"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "partitive"
+forms = ["hapsea"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "accusative"
+forms = ["hapsen"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "inessive"
+forms = ["hapsessa"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "elative"
+forms = ["hapsesta"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "illative"
+forms = ["hapseen"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "adessive"
+forms = ["hapsella"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "ablative"
+forms = ["hapselta"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "allative"
+forms = ["hapselle"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "essive"
+forms = ["hapsena"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "translative"
+forms = ["hapseksi"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "abessive"
+forms = ["hapsetta"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "comitative"
+missing = true
+reason = "tn29 hapsi (defective slot)"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "singular"
+case = "instructive"
+missing = true
+reason = "tn29 hapsi (defective slot)"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "nominative"
+forms = ["hapset"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "genitive"
+forms = ["hapsien", "hasten"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "partitive"
+forms = ["hapsia"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "accusative"
+forms = ["hapset"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "inessive"
+forms = ["hapsissa"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "elative"
+forms = ["hapsista"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "illative"
+forms = ["hapsiin"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "adessive"
+forms = ["hapsilla"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "ablative"
+forms = ["hapsilta"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "allative"
+forms = ["hapsille"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "essive"
+forms = ["hapsina"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "translative"
+forms = ["hapsiksi"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "abessive"
+forms = ["hapsitta"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "comitative"
+forms = ["hapsineen"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "hapsi"
+tn = 29
+number = "plural"
+case = "instructive"
+forms = ["hapsin"]
+reason = "tn29 hapsi"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "nominative"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "genitive"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "partitive"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "accusative"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "inessive"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "elative"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "illative"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "adessive"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "ablative"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "allative"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "essive"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "translative"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "abessive"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "comitative"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "singular"
+case = "instructive"
+missing = true
+reason = "tn50 compound plurale tantum (head vanhemmat) (defective slot)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "nominative"
+forms = ["isovanhemmat"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "genitive"
+forms = ["isovanhempien"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "partitive"
+forms = ["isovanhempia"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "accusative"
+forms = ["isovanhemmat"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "inessive"
+forms = ["isovanhemmissa"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "elative"
+forms = ["isovanhemmista"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "illative"
+forms = ["isovanhempiin"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "adessive"
+forms = ["isovanhemmilla"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "ablative"
+forms = ["isovanhemmilta"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "allative"
+forms = ["isovanhemmille"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "essive"
+forms = ["isovanhempina"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "translative"
+forms = ["isovanhemmiksi"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "abessive"
+forms = ["isovanhemmitta"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "comitative"
+forms = ["isovanhempineen"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "isovanhemmat"
+tn = 50
+number = "plural"
+case = "instructive"
+forms = ["isovanhemmin"]
+reason = "tn50 compound plurale tantum (head vanhemmat) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "nominative"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "genitive"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "partitive"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "accusative"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "inessive"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "elative"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "illative"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "adessive"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "ablative"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "allative"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "essive"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "translative"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "abessive"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "comitative"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "singular"
+case = "instructive"
+missing = true
+reason = "tn50 compound plurale tantum (head olot) (defective slot)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "nominative"
+forms = ["normaaliolot"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "genitive"
+forms = ["normaaliolojen"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "partitive"
+forms = ["normaalioloja"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "accusative"
+forms = ["normaaliolot"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "inessive"
+forms = ["normaalioloissa"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "elative"
+forms = ["normaalioloista"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "illative"
+forms = ["normaalioloihin"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "adessive"
+forms = ["normaalioloilla"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "ablative"
+forms = ["normaalioloilta"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "allative"
+forms = ["normaalioloille"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "essive"
+forms = ["normaalioloina"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "translative"
+forms = ["normaalioloiksi"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "abessive"
+forms = ["normaalioloitta"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "comitative"
+forms = ["normaalioloineen"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "normaaliolot"
+tn = 50
+number = "plural"
+case = "instructive"
+forms = ["normaalioloin"]
+reason = "tn50 compound plurale tantum (head olot) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "nominative"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "genitive"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "partitive"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "accusative"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "inessive"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "elative"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "illative"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "adessive"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "ablative"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "allative"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "essive"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "translative"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "abessive"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "comitative"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "singular"
+case = "instructive"
+missing = true
+reason = "tn50 compound plurale tantum (head kustannukset) (defective slot)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "nominative"
+forms = ["omakustannukset"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "genitive"
+forms = ["omakustannusten", "omakustannuksien"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "partitive"
+forms = ["omakustannuksia"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "accusative"
+forms = ["omakustannukset"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "inessive"
+forms = ["omakustannuksissa"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "elative"
+forms = ["omakustannuksista"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "illative"
+forms = ["omakustannuksiin"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "adessive"
+forms = ["omakustannuksilla"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "ablative"
+forms = ["omakustannuksilta"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "allative"
+forms = ["omakustannuksille"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "essive"
+forms = ["omakustannuksina"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "translative"
+forms = ["omakustannuksiksi"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "abessive"
+forms = ["omakustannuksitta"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "comitative"
+forms = ["omakustannuksineen"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "omakustannukset"
+tn = 50
+number = "plural"
+case = "instructive"
+forms = ["omakustannuksin"]
+reason = "tn50 compound plurale tantum (head kustannukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "nominative"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "genitive"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "partitive"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "accusative"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "inessive"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "elative"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "illative"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "adessive"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "ablative"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "allative"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "essive"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "translative"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "abessive"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "comitative"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "singular"
+case = "instructive"
+missing = true
+reason = "tn50 compound plurale tantum (head sisarukset) (defective slot)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "nominative"
+forms = ["täysisisarukset"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "genitive"
+forms = ["täysisisarusten", "täysisisaruksien"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "partitive"
+forms = ["täysisisaruksia"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "accusative"
+forms = ["täysisisarukset"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "inessive"
+forms = ["täysisisaruksissa"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "elative"
+forms = ["täysisisaruksista"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "illative"
+forms = ["täysisisaruksiin"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "adessive"
+forms = ["täysisisaruksilla"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "ablative"
+forms = ["täysisisaruksilta"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "allative"
+forms = ["täysisisaruksille"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "essive"
+forms = ["täysisisaruksina"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "translative"
+forms = ["täysisisaruksiksi"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "abessive"
+forms = ["täysisisaruksitta"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "comitative"
+forms = ["täysisisaruksineen"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "täysisisarukset"
+tn = 50
+number = "plural"
+case = "instructive"
+forms = ["täysisisaruksin"]
+reason = "tn50 compound plurale tantum (head sisarukset) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "nominative"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "genitive"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "partitive"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "accusative"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "inessive"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "elative"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "illative"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "adessive"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "ablative"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "allative"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "essive"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "translative"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "abessive"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "comitative"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "singular"
+case = "instructive"
+missing = true
+reason = "tn47 plurale tantum participle (defective slot)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "nominative"
+forms = ["liittoutuneet"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "genitive"
+forms = ["liittoutuneiden", "liittoutuneitten"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "partitive"
+forms = ["liittoutuneita"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "accusative"
+forms = ["liittoutuneet"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "inessive"
+forms = ["liittoutuneissa"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "elative"
+forms = ["liittoutuneista"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "illative"
+forms = ["liittoutuneisiin"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "adessive"
+forms = ["liittoutuneilla"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "ablative"
+forms = ["liittoutuneilta"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "allative"
+forms = ["liittoutuneille"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "essive"
+forms = ["liittoutuneina"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "translative"
+forms = ["liittoutuneiksi"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "abessive"
+forms = ["liittoutuneitta"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "comitative"
+forms = ["liittoutuneineen"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "liittoutuneet"
+tn = 47
+number = "plural"
+case = "instructive"
+forms = ["liittoutunein"]
+reason = "tn47 plurale tantum participle (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "nominative"
+forms = ["minunlaiseni"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "genitive"
+forms = ["minunlaiseni"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "partitive"
+forms = ["minunlaistani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "accusative"
+forms = ["minunlaiseni"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "inessive"
+forms = ["minunlaisessani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "elative"
+forms = ["minunlaisestani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "illative"
+forms = ["minunlaiseeni"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "adessive"
+forms = ["minunlaisellani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "ablative"
+forms = ["minunlaiseltani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "allative"
+forms = ["minunlaiselleni"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "essive"
+forms = ["minunlaisenani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "translative"
+forms = ["minunlaisekseni"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "abessive"
+forms = ["minunlaisettani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "comitative"
+missing = true
+reason = "tn38 possessive-marked pronominal (-laiseni) (defective slot)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "singular"
+case = "instructive"
+missing = true
+reason = "tn38 possessive-marked pronominal (-laiseni) (defective slot)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "nominative"
+forms = ["minunlaiseni"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "genitive"
+forms = ["minunlaisteni"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "partitive"
+forms = ["minunlaisiani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "accusative"
+forms = ["minunlaiseni"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "inessive"
+forms = ["minunlaisissani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "elative"
+forms = ["minunlaisistani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "illative"
+forms = ["minunlaisiini"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "adessive"
+forms = ["minunlaisillani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "ablative"
+forms = ["minunlaisiltani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "allative"
+forms = ["minunlaisilleni"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "essive"
+forms = ["minunlaisinani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "translative"
+forms = ["minunlaisikseni"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "abessive"
+forms = ["minunlaisittani"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "comitative"
+forms = ["minunlaisineni"]
+reason = "tn38 possessive-marked pronominal (-laiseni) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "minunlaiseni"
+tn = 38
+number = "plural"
+case = "instructive"
+missing = true
+reason = "tn38 possessive-marked pronominal (-laiseni) (defective slot)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "nominative"
+forms = ["sinunlaisesi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "genitive"
+forms = ["sinunlaisesi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "partitive"
+forms = ["sinunlaistasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "accusative"
+forms = ["sinunlaisesi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "inessive"
+forms = ["sinunlaisessasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "elative"
+forms = ["sinunlaisestasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "illative"
+forms = ["sinunlaiseesi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "adessive"
+forms = ["sinunlaisellasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "ablative"
+forms = ["sinunlaiseltasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "allative"
+forms = ["sinunlaisellesi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "essive"
+forms = ["sinunlaisenasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "translative"
+forms = ["sinunlaiseksesi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "abessive"
+forms = ["sinunlaisettasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "comitative"
+missing = true
+reason = "tn38 possessive-marked pronominal (-laisesi) (defective slot)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "singular"
+case = "instructive"
+missing = true
+reason = "tn38 possessive-marked pronominal (-laisesi) (defective slot)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "nominative"
+forms = ["sinunlaisesi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "genitive"
+forms = ["sinunlaistesi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "partitive"
+forms = ["sinunlaisiasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "accusative"
+forms = ["sinunlaisesi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "inessive"
+forms = ["sinunlaisissasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "elative"
+forms = ["sinunlaisistasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "illative"
+forms = ["sinunlaisiisi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "adessive"
+forms = ["sinunlaisillasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "ablative"
+forms = ["sinunlaisiltasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "allative"
+forms = ["sinunlaisillesi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "essive"
+forms = ["sinunlaisinasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "translative"
+forms = ["sinunlaisiksesi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "abessive"
+forms = ["sinunlaisittasi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "comitative"
+forms = ["sinunlaisinesi"]
+reason = "tn38 possessive-marked pronominal (-laisesi) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "sinunlaisesi"
+tn = 38
+number = "plural"
+case = "instructive"
+missing = true
+reason = "tn38 possessive-marked pronominal (-laisesi) (defective slot)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "nominative"
+forms = ["hänenlaisensa"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "genitive"
+forms = ["hänenlaisensa"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "partitive"
+forms = ["hänenlaistaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "accusative"
+forms = ["hänenlaisensa"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "inessive"
+forms = ["hänenlaisessaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "elative"
+forms = ["hänenlaisestaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "illative"
+forms = ["hänenlaiseensa"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "adessive"
+forms = ["hänenlaisellaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "ablative"
+forms = ["hänenlaiseltaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "allative"
+forms = ["hänenlaiselleen"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "essive"
+forms = ["hänenlaisenaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "translative"
+forms = ["hänenlaisekseen"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "abessive"
+forms = ["hänenlaisettaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "comitative"
+missing = true
+reason = "tn38 possessive-marked pronominal (-laisensa) (defective slot)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "singular"
+case = "instructive"
+missing = true
+reason = "tn38 possessive-marked pronominal (-laisensa) (defective slot)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "nominative"
+forms = ["hänenlaisensa"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "genitive"
+forms = ["hänenlaistensa"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "partitive"
+forms = ["hänenlaisiaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "accusative"
+forms = ["hänenlaisensa"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "inessive"
+forms = ["hänenlaisissaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "elative"
+forms = ["hänenlaisistaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "illative"
+forms = ["hänenlaisiinsa"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "adessive"
+forms = ["hänenlaisillaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "ablative"
+forms = ["hänenlaisiltaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "allative"
+forms = ["hänenlaisilleen"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "essive"
+forms = ["hänenlaisinaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "translative"
+forms = ["hänenlaisikseen"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "abessive"
+forms = ["hänenlaisittaan"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "comitative"
+forms = ["hänenlaisineen"]
+reason = "tn38 possessive-marked pronominal (-laisensa) (hand-specified; outside Voikko)"
+
+[[exception]]
+lemma = "hänenlaisensa"
+tn = 38
+number = "plural"
+case = "instructive"
+missing = true
+reason = "tn38 possessive-marked pronominal (-laisensa) (defective slot)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["itse kukin"]
+reason = "multiword pronoun (itse + kukin)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["itse kunkin"]
+reason = "multiword pronoun (itse + kukin)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["itse kutakin"]
+reason = "multiword pronoun (itse + kukin)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["itse kunkin"]
+reason = "multiword pronoun (itse + kukin)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["itse kussakin"]
+reason = "multiword pronoun (itse + kukin)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["itse kustakin"]
+reason = "multiword pronoun (itse + kukin)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["itse kuhunkin"]
+reason = "multiword pronoun (itse + kukin)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["itse kullakin"]
+reason = "multiword pronoun (itse + kukin)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["itse kultakin"]
+reason = "multiword pronoun (itse + kukin)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["itse kullekin"]
+reason = "multiword pronoun (itse + kukin)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["itse kunakin"]
+reason = "multiword pronoun (itse + kukin)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["itse kuksikin"]
+reason = "multiword pronoun (itse + kukin)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "multiword pronoun (defective slot)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "multiword pronoun (defective slot)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "multiword pronoun (defective slot)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+[[exception]]
+lemma = "itse kukin"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "multiword pronoun (no plural)"
+
+# --- accented loans + digit-citation s2 (Voikko coverage partial; hand-specified) ---
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "nominative"
+missing = true
+reason = "accented loan (rosé-class) (defective)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "genitive"
+forms = ["bébén"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "partitive"
+forms = ["bébéta"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "accusative"
+forms = ["bébén"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "inessive"
+forms = ["bébéssä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "elative"
+forms = ["bébéstä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "illative"
+forms = ["bébéhen"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "adessive"
+forms = ["bébéllä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "ablative"
+forms = ["bébéltä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "allative"
+forms = ["bébélle"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "essive"
+forms = ["bébénä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "translative"
+forms = ["bébéksi"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "abessive"
+forms = ["bébéttä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "comitative"
+missing = true
+reason = "accented loan (rosé-class) (defective)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "singular"
+case = "instructive"
+missing = true
+reason = "accented loan (rosé-class) (defective)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "nominative"
+forms = ["bébét"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "genitive"
+forms = ["bébéiden", "bébéitten"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "partitive"
+forms = ["bébéitä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "accusative"
+forms = ["bébét"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "inessive"
+forms = ["bébéissä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "elative"
+forms = ["bébéistä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "illative"
+forms = ["bébéihin"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "adessive"
+forms = ["bébéillä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "ablative"
+forms = ["bébéiltä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "allative"
+forms = ["bébéille"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "essive"
+forms = ["bébéinä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "translative"
+forms = ["bébéiksi"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "abessive"
+forms = ["bébéittä"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "comitative"
+forms = ["bébéineen"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "bébé"
+tn = 21
+number = "plural"
+case = "instructive"
+forms = ["bébéin"]
+reason = "accented loan (rosé-class)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "nominative"
+forms = ["csárdás"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "genitive"
+forms = ["csárdáksen"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "partitive"
+forms = ["csárdásta"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "accusative"
+forms = ["csárdáksen"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "inessive"
+forms = ["csárdáksessa"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "elative"
+forms = ["csárdáksesta"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "illative"
+forms = ["csárdákseen"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "adessive"
+forms = ["csárdáksella"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "ablative"
+forms = ["csárdákselta"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "allative"
+forms = ["csárdákselle"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "essive"
+forms = ["csárdáksena"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "translative"
+forms = ["csárdákseksi"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "abessive"
+forms = ["csárdáksetta"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "comitative"
+missing = true
+reason = "accented loan (-s noun, csárdáks- stem) (defective)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "singular"
+case = "instructive"
+missing = true
+reason = "accented loan (-s noun, csárdáks- stem) (defective)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "nominative"
+forms = ["csárdákset"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "genitive"
+forms = ["csárdásten", "csárdáksien"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "partitive"
+forms = ["csárdáksia"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "accusative"
+forms = ["csárdákset"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "inessive"
+forms = ["csárdáksissa"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "elative"
+forms = ["csárdáksista"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "illative"
+forms = ["csárdáksiin"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "adessive"
+forms = ["csárdáksilla"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "ablative"
+forms = ["csárdáksilta"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "allative"
+forms = ["csárdáksille"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "essive"
+forms = ["csárdáksina"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "translative"
+forms = ["csárdáksiksi"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "abessive"
+forms = ["csárdáksitta"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "comitative"
+forms = ["csárdáksineen"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 5
+number = "plural"
+case = "instructive"
+forms = ["csárdáksin"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "nominative"
+forms = ["shinto"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "genitive"
+forms = ["shinton"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "partitive"
+forms = ["shintoa"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "accusative"
+forms = ["shinton"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "inessive"
+forms = ["shintossa"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "elative"
+forms = ["shintosta"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "illative"
+forms = ["shintoon"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "adessive"
+forms = ["shintolla"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "ablative"
+forms = ["shintolta"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "allative"
+forms = ["shintolle"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "essive"
+forms = ["shintona"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "translative"
+forms = ["shintoksi"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "abessive"
+forms = ["shintotta"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "comitative"
+missing = true
+reason = "tn1 -o noun (report mislabel tn38) (defective)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "singular"
+case = "instructive"
+missing = true
+reason = "tn1 -o noun (report mislabel tn38) (defective)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "nominative"
+forms = ["shintot"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "genitive"
+forms = ["shintojen"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "partitive"
+forms = ["shintoja"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "accusative"
+forms = ["shintot"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "inessive"
+forms = ["shintoissa"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "elative"
+forms = ["shintoista"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "illative"
+forms = ["shintoihin"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "adessive"
+forms = ["shintoilla"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "ablative"
+forms = ["shintoilta"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "allative"
+forms = ["shintoille"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "essive"
+forms = ["shintoina"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "translative"
+forms = ["shintoiksi"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "abessive"
+forms = ["shintoitta"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "comitative"
+forms = ["shintoineen"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "shinto"
+tn = 38
+number = "plural"
+case = "instructive"
+forms = ["shintoin"]
+reason = "tn1 -o noun (report mislabel tn38)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "nominative"
+forms = ["s2"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "genitive"
+forms = ["s2:n"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "partitive"
+forms = ["s2:ta"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "accusative"
+forms = ["s2:n"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "inessive"
+forms = ["s2:ssa"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "elative"
+forms = ["s2:sta"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "illative"
+forms = ["s2:hen"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "adessive"
+forms = ["s2:lla"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "ablative"
+forms = ["s2:lta"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "allative"
+forms = ["s2:lle"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "essive"
+forms = ["s2:na"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "translative"
+forms = ["s2:ksi"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "abessive"
+forms = ["s2:tta"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "comitative"
+missing = true
+reason = "phonetics term declining on the digit (colon citation) (defective)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "singular"
+case = "instructive"
+missing = true
+reason = "phonetics term declining on the digit (colon citation) (defective)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "nominative"
+forms = ["s2:t"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "genitive"
+forms = ["s2:iden"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "partitive"
+forms = ["s2:ita"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "accusative"
+forms = ["s2:t"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "inessive"
+forms = ["s2:issa"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "elative"
+forms = ["s2:ista"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "illative"
+forms = ["s2:ihin"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "adessive"
+forms = ["s2:illa"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "ablative"
+forms = ["s2:ilta"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "allative"
+forms = ["s2:ille"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "essive"
+forms = ["s2:ina"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "translative"
+forms = ["s2:iksi"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "abessive"
+forms = ["s2:itta"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "comitative"
+forms = ["s2:ineen"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "s2"
+tn = 31
+number = "plural"
+case = "instructive"
+forms = ["s2:in"]
+reason = "phonetics term declining on the digit (colon citation)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "nominative"
+forms = ["csárdás"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "genitive"
+forms = ["csárdáksen"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "partitive"
+forms = ["csárdásta"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "accusative"
+forms = ["csárdáksen"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "inessive"
+forms = ["csárdáksessa"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "elative"
+forms = ["csárdáksesta"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "illative"
+forms = ["csárdákseen"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "adessive"
+forms = ["csárdáksella"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "ablative"
+forms = ["csárdákselta"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "allative"
+forms = ["csárdákselle"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "essive"
+forms = ["csárdáksena"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "translative"
+forms = ["csárdákseksi"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "abessive"
+forms = ["csárdáksetta"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "comitative"
+missing = true
+reason = "accented loan (-s noun, csárdáks- stem) (defective)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "singular"
+case = "instructive"
+missing = true
+reason = "accented loan (-s noun, csárdáks- stem) (defective)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "nominative"
+forms = ["csárdákset"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "genitive"
+forms = ["csárdásten", "csárdáksien"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "partitive"
+forms = ["csárdáksia"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "accusative"
+forms = ["csárdákset"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "inessive"
+forms = ["csárdáksissa"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "elative"
+forms = ["csárdáksista"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "illative"
+forms = ["csárdáksiin"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "adessive"
+forms = ["csárdáksilla"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "ablative"
+forms = ["csárdáksilta"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "allative"
+forms = ["csárdáksille"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "essive"
+forms = ["csárdáksina"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "translative"
+forms = ["csárdáksiksi"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "abessive"
+forms = ["csárdáksitta"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "comitative"
+forms = ["csárdáksineen"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "csárdás"
+tn = 39
+number = "plural"
+case = "instructive"
+forms = ["csárdáksin"]
+reason = "accented loan (-s noun, csárdáks- stem)"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "nominative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "genitive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "partitive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "accusative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "inessive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "elative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "illative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "adessive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "ablative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "allative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "essive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "translative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "abessive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "accusative"
+forms = ["häät"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "abessive"
+forms = ["häittä"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "comitative"
+forms = ["häineen"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "häät"
+tn = 18
+number = "plural"
+case = "instructive"
+forms = ["häin"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "accusative"
+forms = ["kaksi"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "abessive"
+forms = ["kahdetta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "nominative"
+forms = ["kakset"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "accusative"
+forms = ["kakset"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "abessive"
+forms = ["kaksitta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "comitative"
+forms = ["kaksineen"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "kaksi"
+tn = 31
+number = "plural"
+case = "instructive"
+forms = ["kaksin"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "accusative"
+forms = ["yksi"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "abessive"
+forms = ["yhdettä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "accusative"
+forms = ["yhdet"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "abessive"
+forms = ["yksittä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "comitative"
+forms = ["yksineen"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "yksi"
+tn = 31
+number = "plural"
+case = "instructive"
+forms = ["yksin"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "accusative"
+forms = ["haaksi"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "abessive"
+forms = ["haahdetta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "accusative"
+forms = ["haahdet"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "illative"
+forms = ["haaksiin"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "abessive"
+forms = ["haaksitta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "comitative"
+forms = ["haaksineen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "haaksi"
+tn = 31
+number = "plural"
+case = "instructive"
+forms = ["haaksin"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "accusative"
+forms = ["kevään"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "abessive"
+forms = ["keväättä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "accusative"
+forms = ["keväät"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "inessive"
+forms = ["keväissä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "ablative"
+forms = ["keväiltä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "allative"
+forms = ["keväille"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "translative"
+forms = ["keväiksi"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "abessive"
+forms = ["keväittä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "kevät"
+tn = 44
+number = "plural"
+case = "instructive"
+forms = ["keväin"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "accusative"
+forms = ["tuhannen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "abessive"
+forms = ["tuhannetta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "accusative"
+forms = ["tuhannet"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "abessive"
+forms = ["tuhansitta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "comitative"
+forms = ["tuhansineen"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "tuhat"
+tn = 46
+number = "plural"
+case = "instructive"
+forms = ["tuhansin"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "partitive"
+forms = ["lasta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "accusative"
+forms = ["lapsen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "accusative"
+forms = ["lapset"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "lapsi"
+tn = 29
+number = "plural"
+case = "abessive"
+forms = ["lapsitta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "accusative"
+forms = ["veitsen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "accusative"
+forms = ["veitset"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "ablative"
+forms = ["veitsiltä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "veitsi"
+tn = 30
+number = "plural"
+case = "abessive"
+forms = ["veitsittä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "accusative"
+forms = ["peitsen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "accusative"
+forms = ["peitset"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "ablative"
+forms = ["peitsiltä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "peitsi"
+tn = 30
+number = "plural"
+case = "abessive"
+forms = ["peitsittä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "nominative"
+forms = ["suorakulmio"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "genitive"
+forms = ["suorakulmion"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "partitive"
+forms = ["suorakulmiota"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "accusative"
+forms = ["suorakulmion"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "inessive"
+forms = ["suorakulmiossa"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "elative"
+forms = ["suorakulmiosta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "illative"
+forms = ["suorakulmioon"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "adessive"
+forms = ["suorakulmiolla"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "ablative"
+forms = ["suorakulmiolta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "allative"
+forms = ["suorakulmiolle"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "essive"
+forms = ["suorakulmiona"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "translative"
+forms = ["suorakulmioksi"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "abessive"
+forms = ["suorakulmiotta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "nominative"
+forms = ["suorakulmiot"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "genitive"
+forms = ["suorakulmioiden", "suorakulmioitten"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "partitive"
+forms = ["suorakulmioita"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "accusative"
+forms = ["suorakulmiot"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "inessive"
+forms = ["suorakulmioissa"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "elative"
+forms = ["suorakulmioista"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "illative"
+forms = ["suorakulmioihin"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "adessive"
+forms = ["suorakulmioilla"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "ablative"
+forms = ["suorakulmioilta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "allative"
+forms = ["suorakulmioille"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "essive"
+forms = ["suorakulmioina"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "translative"
+forms = ["suorakulmioiksi"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "abessive"
+forms = ["suorakulmioitta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "comitative"
+forms = ["suorakulmioineen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmio"
+tn = 50
+number = "plural"
+case = "instructive"
+forms = ["suorakulmioin"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "nominative"
+forms = ["villilapsi"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "genitive"
+forms = ["villilapsen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "partitive"
+forms = ["villilasta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "accusative"
+forms = ["villilapsen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "inessive"
+forms = ["villilapsessa"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "elative"
+forms = ["villilapsesta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "illative"
+forms = ["villilapseen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "adessive"
+forms = ["villilapsella"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "ablative"
+forms = ["villilapselta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "allative"
+forms = ["villilapselle"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "essive"
+forms = ["villilapsena"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "translative"
+forms = ["villilapseksi"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "abessive"
+forms = ["villilapsetta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "nominative"
+forms = ["villilapset"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "genitive"
+forms = ["villilasten", "villilapsien"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "partitive"
+forms = ["villilapsia"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "accusative"
+forms = ["villilapset"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "inessive"
+forms = ["villilapsissa"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "elative"
+forms = ["villilapsista"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "illative"
+forms = ["villilapsiin"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "adessive"
+forms = ["villilapsilla"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "ablative"
+forms = ["villilapsilta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "allative"
+forms = ["villilapsille"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "essive"
+forms = ["villilapsina"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "translative"
+forms = ["villilapsiksi"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "abessive"
+forms = ["villilapsitta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "comitative"
+forms = ["villilapsineen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "villilapsi"
+tn = 50
+number = "plural"
+case = "instructive"
+forms = ["villilapsin"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "nominative"
+forms = ["suorakulmain"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "genitive"
+forms = ["suorakulmaimen"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "partitive"
+forms = ["suorakulmainta"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "accusative"
+forms = ["suorakulmaimen"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "inessive"
+forms = ["suorakulmaimessa"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "elative"
+forms = ["suorakulmaimesta"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "illative"
+forms = ["suorakulmaimeen"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "adessive"
+forms = ["suorakulmaimella"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "ablative"
+forms = ["suorakulmaimelta"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "allative"
+forms = ["suorakulmaimelle"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "essive"
+forms = ["suorakulmaimena"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "translative"
+forms = ["suorakulmaimeksi"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "abessive"
+forms = ["suorakulmaimetta"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "nominative"
+forms = ["suorakulmaimet"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "genitive"
+forms = ["suorakulmainten", "suorakulmaimien"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "partitive"
+forms = ["suorakulmaimia"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "accusative"
+forms = ["suorakulmaimet"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "inessive"
+forms = ["suorakulmaimissa"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "elative"
+forms = ["suorakulmaimista"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "illative"
+forms = ["suorakulmaimiin"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "adessive"
+forms = ["suorakulmaimilla"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "ablative"
+forms = ["suorakulmaimilta"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "allative"
+forms = ["suorakulmaimille"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "essive"
+forms = ["suorakulmaimina"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "translative"
+forms = ["suorakulmaimiksi"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "abessive"
+forms = ["suorakulmaimitta"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "comitative"
+forms = ["suorakulmaimineen"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "suorakulmain"
+tn = 50
+number = "plural"
+case = "instructive"
+forms = ["suorakulmaimin"]
+reason = "singleton/irregular completion (hand-specified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "nominative"
+forms = ["puoliyö"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "genitive"
+forms = ["puolenyön"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "partitive"
+forms = ["puoltayötä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "accusative"
+forms = ["puolenyön"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "inessive"
+forms = ["puolessayössä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "elative"
+forms = ["puolestayöstä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "illative"
+forms = ["puoleenyöhön"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "adessive"
+forms = ["puolellayöllä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "ablative"
+forms = ["puoleltayöltä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "allative"
+forms = ["puolelleyölle"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "essive"
+forms = ["puolenayönä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "translative"
+forms = ["puoleksiyöksi"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "abessive"
+forms = ["puolettayöttä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "nominative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "genitive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "partitive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "accusative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "inessive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "elative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "illative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "adessive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "ablative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "allative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "essive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "translative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "abessive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puoliyö"
+tn = 51
+number = "plural"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "nominative"
+forms = ["puolisataa"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "genitive"
+forms = ["puolensadan"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "partitive"
+forms = ["puoltasataa"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "accusative"
+forms = ["puolensadan"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "inessive"
+forms = ["puolessasadassa"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "elative"
+forms = ["puolestasadasta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "illative"
+forms = ["puoleensataan"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "adessive"
+forms = ["puolellasadalla"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "ablative"
+forms = ["puoleltasadalta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "allative"
+forms = ["puolellesadalle"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "essive"
+forms = ["puolenasatana"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "translative"
+forms = ["puoleksisadaksi"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "abessive"
+forms = ["puolettasadatta"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "nominative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "genitive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "partitive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "accusative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "inessive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "elative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "illative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "adessive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "ablative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "allative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "essive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "translative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "abessive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolisataa"
+tn = 51
+number = "plural"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "nominative"
+forms = ["puolikymmentä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "genitive"
+forms = ["puolenkymmenen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "partitive"
+forms = ["puoltakymmentä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "accusative"
+forms = ["puolenkymmenen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "inessive"
+forms = ["puolessakymmenessä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "elative"
+forms = ["puolestakymmenestä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "illative"
+forms = ["puoleenkymmeneen"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "adessive"
+forms = ["puolellakymmenellä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "ablative"
+forms = ["puoleltakymmeneltä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "allative"
+forms = ["puolellekymmenelle"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "essive"
+forms = ["puolenakymmenenä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "translative"
+forms = ["puoleksikymmeneksi"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "abessive"
+forms = ["puolettakymmenettä"]
+reason = "singleton/irregular completion (Voikko-verified)"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "singular"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "nominative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "genitive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "partitive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "accusative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "inessive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "elative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "illative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "adessive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "ablative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "allative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "essive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "translative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "abessive"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "comitative"
+missing = true
+reason = "singleton/tantum defective slot"
+
+[[exception]]
+lemma = "puolikymmentä"
+tn = 51
+number = "plural"
+case = "instructive"
+missing = true
+reason = "singleton/tantum defective slot"

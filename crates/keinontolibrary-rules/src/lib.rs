@@ -12,7 +12,7 @@ mod gradation;
 mod harmony;
 
 pub use exceptions::Exceptions;
-pub use generate::generate;
+pub use generate::{generate, is_plurale_tantum};
 
 use keinontolibrary_core::{Case, Forms, Generator, Number, ParadigmRef, Source};
 
@@ -66,6 +66,13 @@ impl Generator for RuleEngine {
             .get_compound(lemma, reference.tn, number, case)
         {
             return Some(Forms::present(forms, Source::Generated));
+        }
+        // Plurale tantum citations (sakset, arpajaiset, rattaat, alkeet) have no
+        // singular at all: answer Missing, not a gap.
+        if number == Number::Singular
+            && generate::is_plurale_tantum(lemma, reference.tn, reference.av)
+        {
+            return Some(Forms::missing());
         }
         let variants = generate::generate(
             lemma,

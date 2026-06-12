@@ -279,7 +279,10 @@ fn tantum_stems(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> O
         // rattaat: the strip IS the long strong stem (rattaa-); no citation needed —
         // build the plural stems directly (rattaiden, rattaita, rattaisiin —
         // Voikko-verified; gradation reversal back to ratas/mallas is not).
-        41 => {
+        // Long-vowel-stem tantums: the strip IS the long strong stem and the plural
+        // -i- drops one vowel — rattaat (41), talkoot/hynttyyt (17), bileet (20),
+        // liittoutuneet (47). All Voikko-verified (rattaisiin, talkoisiin, bileisiin).
+        17 | 20 | 41 | 47 => {
             let a = harmony_a(front, lemma);
             let sg = stripped.to_owned();
             let pl = format!("{}i", drop_last(&sg));
@@ -296,6 +299,13 @@ fn tantum_stems(lemma: &str, tn: u8, av: Option<char>, front: Option<bool>) -> O
                 pl_weak: pl,
             })
         }
+        // molemmat (16, plurale tantum): reconstruct the -mpi citation (molemmat ->
+        // molempi, i.e. the stripped molemma minus -mma plus -mpi) and reuse the
+        // comparative arm (molempien, molemmissa, molempia).
+        16 => {
+            let citation = format!("{}mpi", stripped.strip_suffix("mma")?);
+            analyze(&citation, 16, av, front)
+        }
         _ => None,
     }
 }
@@ -307,7 +317,7 @@ pub fn is_plurale_tantum(lemma: &str, tn: u8, av: Option<char>) -> bool {
     if tn == 48 && lemma.ends_with("eet") {
         return true;
     }
-    matches!(tn, 7 | 33 | 38 | 39 | 41)
+    matches!(tn, 7 | 16 | 17 | 20 | 33 | 38 | 39 | 41 | 47)
         && lemma.ends_with('t')
         && analyze(lemma, tn, av, None).is_none()
         && tantum_stems(lemma, tn, av, None).is_some()
@@ -1033,7 +1043,7 @@ pub fn generate(
     // generate the plural from the stripped stem; the singular does not exist (the
     // RuleEngine layer answers Missing for it).
     if number == Number::Plural
-        && matches!(tn, 7 | 33 | 38 | 39 | 41)
+        && matches!(tn, 7 | 16 | 17 | 20 | 33 | 38 | 39 | 41 | 47)
         && lemma.ends_with('t')
         && analyze(lemma, tn, av, front).is_none()
     {

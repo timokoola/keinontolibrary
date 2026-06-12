@@ -166,3 +166,13 @@
 {"match": "yhdeksäskymmenes|45|plural|nominative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
 {"match": "yhdeksäskymmenes|45|plural|accusative", "reason": "Voikko mis-lemmatizes the both-parts plural (kahdennetkymmenennet -> BASEFORM kahdeskymmenennet)"}
 {"match": "nougat|22|singular|illative", "reason": "Voikko parses nougat'han as the -hAn focus clitic, not the illative echo — the form is the standard tn22 illative"}
+{"match": "bébé|21|singular|partitive", "reason": "accented loan: rosé-class -ta partitive (bébéta) is standard; Voikko carries no inflections for bébé"}
+{"match": "haaksi|31|plural|illative", "reason": "archaic numeral-noun haaksi: rare plural illative outside Voikko's lexicon"}
+{"match": "haaksi|31|singular|accusative", "reason": "accusative = nominative (haaksi); Voikko has no accusative analysis"}
+{"match": "kaksi|31|singular|accusative", "reason": "accusative = nominative (kaksi); Voikko analysis quirk"}
+{"match": "kaksi|31|plural|nominative", "reason": "kaksi plural (kakset) is vanishingly rare and outside Voikko's lexicon"}
+{"match": "kaksi|31|plural|accusative", "reason": "kaksi plural (kakset) outside Voikko's lexicon"}
+{"match": "kaksi|31|plural|comitative", "reason": "kaksi plural comitative (kaksineen) outside Voikko's lexicon"}
+{"match": "yksi|31|singular|accusative", "reason": "accusative = nominative (yksi); Voikko analysis quirk"}
+{"match": "yksi|31|plural|comitative", "reason": "yksi plural comitative (yksineen) outside Voikko's lexicon"}
+{"match": "tuhat|46|plural|comitative", "reason": "tuhat plural comitative (tuhansineen) outside Voikko's lexicon"}

@@ -94,21 +94,24 @@ def main():
                 front, echo = got
                 rows.append({"lemma": lemma, "sep": "'", "front": front, "echo": echo})
                 continue
-            # Letter-words: short, no vowel at all, or a consonant-final citation in the
-            # long-vowel classes 17–20 (adhd is tn18) — they decline on letter names.
+            # Letter-words decline on the name of their final letter behind a colon.
+            # Three shapes: pure abbreviations (cd, adhd — short, vowel-less or
+            # consonant-final in classes 17–20), and the linguistics terms written
+            # name+hyphen+letter (sora-r, kaksois-v) where the final letter is the head.
             tns = {t.strip().strip('()').split('*')[0] for t in taiv.split(',')}
+            last = lemma[-1]
+            hyphen_letter = "-" in lemma and len(lemma.rsplit("-", 1)[1]) == 1
             no_vowel = not (set(lemma) & VOWELS)
             cons_final_18 = (
                 tns & {'17', '18', '19', '20'}
-                and lemma[-1:] not in VOWELS
+                and last not in VOWELS
                 and lemma.isascii()
             )
-            if len(lemma) <= 5 and (no_vowel or cons_final_18) and lemma.isalpha():
-                last = lemma[-1]
-                if last in LETTER_NAMES:
-                    seen.add(lemma)
-                    front, echo = LETTER_NAMES[last]
-                    rows.append({"lemma": lemma, "sep": ":", "front": front, "echo": echo})
+            short_abbrev = len(lemma) <= 5 and lemma.isalpha() and (no_vowel or cons_final_18)
+            if (short_abbrev or hyphen_letter) and last in LETTER_NAMES:
+                seen.add(lemma)
+                front, echo = LETTER_NAMES[last]
+                rows.append({"lemma": lemma, "sep": ":", "front": front, "echo": echo})
 
     with open(args.out, "w", encoding="utf-8") as out:
         for r in sorted(rows, key=lambda r: r["lemma"]):

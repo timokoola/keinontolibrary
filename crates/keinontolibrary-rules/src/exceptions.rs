@@ -24,7 +24,12 @@ struct Entry {
     lemma: String,
     number: String,
     case: String,
+    #[serde(default)]
     forms: Vec<String>,
+    /// Declares the slot defective (no form exists: hän has no plural — he is its
+    /// plural). `forms` must be empty iff this is set.
+    #[serde(default)]
+    missing: bool,
     #[allow(dead_code)] // documentation only
     reason: String,
     #[serde(default)]
@@ -62,10 +67,23 @@ impl Exceptions {
                 .case
                 .parse()
                 .map_err(|_| format!("bad case {:?}", e.case))?;
-            if e.forms.is_empty() {
-                return Err(format!("empty forms for {:?}", e.lemma));
+            if e.forms.is_empty() != e.missing {
+                return Err(format!(
+                    "forms must be empty iff missing=true: {:?} {number} {case}",
+                    e.lemma
+                ));
             }
-            by_slot.insert((normalize(&e.lemma), e.tn, number, case), e.forms.clone());
+            // A duplicate key would silently last-write-win in the HashMap — an easy
+            // merge-conflict / double-append artifact in a 4000-line file (issue #31).
+            if by_slot
+                .insert((normalize(&e.lemma), e.tn, number, case), e.forms.clone())
+                .is_some()
+            {
+                return Err(format!(
+                    "duplicate entry for {:?} tn={:?} {number} {case}",
+                    e.lemma, e.tn
+                ));
+            }
         }
         let count = by_slot.len();
         Ok(Self { by_slot, count })

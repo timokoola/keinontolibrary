@@ -54,7 +54,11 @@ impl Generator for RuleEngine {
     ) -> Option<Forms> {
         // The exception registry overrides the rule generator for documented irregulars,
         // including compounds whose head is a registered irregular (adventtiaika → ajan).
+        // An empty registered slot declares a true defective (hän has no plural).
         if let Some(forms) = self.exceptions.get(lemma, reference.tn, number, case) {
+            if forms.is_empty() {
+                return Some(Forms::missing());
+            }
             return Some(Forms::present(forms.to_vec(), Source::Generated));
         }
         if let Some(forms) = self

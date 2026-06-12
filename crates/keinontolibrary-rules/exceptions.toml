@@ -3843,221 +3843,32 @@ case = "translative"
 forms = ["oriksi"]
 reason = "irregular orii- stem (tn48 listing; Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "singular"
-case = "genitive"
-forms = ["veljen"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "singular"
-case = "accusative"
-forms = ["veljen"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "singular"
-case = "partitive"
-forms = ["veljeä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "singular"
-case = "inessive"
-forms = ["veljessä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "singular"
-case = "elative"
-forms = ["veljestä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "singular"
-case = "illative"
-forms = ["veljeen"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "singular"
-case = "adessive"
-forms = ["veljellä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "singular"
-case = "ablative"
-forms = ["veljeltä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "singular"
-case = "allative"
-forms = ["veljelle"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "singular"
-case = "essive"
-forms = ["veljenä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "singular"
-case = "translative"
-forms = ["veljeksi"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "singular"
-case = "abessive"
-forms = ["veljettä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "nominative"
-forms = ["veljet"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "accusative"
-forms = ["veljet"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "genitive"
-forms = ["veljien"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "partitive"
-forms = ["veljiä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "inessive"
-forms = ["veljissä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "elative"
-forms = ["veljistä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "illative"
-forms = ["veljiin"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "adessive"
-forms = ["veljillä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "ablative"
-forms = ["veljiltä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "allative"
-forms = ["veljille"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "essive"
-forms = ["veljinä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "translative"
-forms = ["veljiksi"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "abessive"
-forms = ["veljittä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "comitative"
-forms = ["veljineen", "veljinensä"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
-[[exception]]
-lemma = "veli"
-tn = 7
-number = "plural"
-case = "instructive"
-forms = ["veljin"]
-reason = "irregular velj- oblique stem (Voikko-verified)"
 
 [[exception]]
 lemma = "meri"
@@ -4290,3 +4101,6435 @@ number = "singular"
 case = "translative"
 forms = ["autereeksi", "autereksi"]
 reason = "irregular autere- stem with t-insertion (Voikko-verified)"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["minut"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "minä"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["sinut"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "sinä"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["hänet"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "hän"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["meidät"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "me"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["teidät"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "te"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["heidät"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "he"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["sen"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["sinä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "se"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["tämän"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tämä"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["tuon"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "tuo"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["ne"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ne"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["nämä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nämä"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["nuo"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "nuo"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["joka"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["jonka"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["jota"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["jonka"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["jossa"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["josta"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["johon"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["jolla"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["jolta"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["jolle"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["jona"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["joksi"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "nominative"
+forms = ["jotka"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "genitive"
+forms = ["joiden", "joitten"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "partitive"
+forms = ["joita"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["jotka"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "inessive"
+forms = ["joissa"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "elative"
+forms = ["joista"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "illative"
+forms = ["joihin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "adessive"
+forms = ["joilla"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "ablative"
+forms = ["joilta"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "allative"
+forms = ["joille"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "essive"
+forms = ["joina"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "translative"
+forms = ["joiksi"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "joka"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["jokin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["jonkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["jotakin", "jotain"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["jonkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["jossakin", "jossain"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["jostakin", "jostain"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["johonkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["jollakin", "jollain"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["joltakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["jollekin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["jonakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["joksikin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "nominative"
+forms = ["jotkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "genitive"
+forms = ["joidenkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "partitive"
+forms = ["joitakin", "joitain"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["jotkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "inessive"
+forms = ["joissakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "elative"
+forms = ["joistakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "illative"
+forms = ["joihinkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "adessive"
+forms = ["joillakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "ablative"
+forms = ["joiltakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "allative"
+forms = ["joillekin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "essive"
+forms = ["joinakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "translative"
+forms = ["joiksikin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "jokin"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["joku"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["jonkun"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["jotakuta"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["jonkun"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["jossakussa"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["jostakusta"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["johonkuhun"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["jollakulla"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["joltakulta"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["jollekulle"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["jonakuna"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["joksikuksi"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "nominative"
+forms = ["jotkut"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "genitive"
+forms = ["joidenkuiden"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "partitive"
+forms = ["joitakuita"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["jotkut"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "inessive"
+forms = ["joissakuissa"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "elative"
+forms = ["joistakuista"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "illative"
+forms = ["joihinkuihin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "adessive"
+forms = ["joillakuilla"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "ablative"
+forms = ["joiltakuilta"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "allative"
+forms = ["joillekuille"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "essive"
+forms = ["joinakuina"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "translative"
+forms = ["joiksikuiksi"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "joku"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["kuka"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["kenen"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["ketä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["kenet"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["kenessä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["kenestä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["keneen", "kehen"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["kenellä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["keneltä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["kenelle"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["kenenä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["keneksi"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "nominative"
+forms = ["ketkä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "genitive"
+forms = ["keiden", "keitten"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "partitive"
+forms = ["keitä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["ketkä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "inessive"
+forms = ["keissä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "elative"
+forms = ["keistä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "illative"
+forms = ["keihin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "adessive"
+forms = ["keillä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "ablative"
+forms = ["keiltä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "allative"
+forms = ["keille"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "essive"
+forms = ["keinä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "translative"
+forms = ["keiksi"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kuka"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["ken"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["kenen"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["ketä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["kenet"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["kenessä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["kenestä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["keneen", "kehen"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["kenellä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["keneltä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["kenelle"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["kenenä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["keneksi"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "nominative"
+forms = ["ketkä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "genitive"
+forms = ["keiden", "keitten"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "partitive"
+forms = ["keitä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["ketkä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "inessive"
+forms = ["keissä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "elative"
+forms = ["keistä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "illative"
+forms = ["keihin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "adessive"
+forms = ["keillä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "ablative"
+forms = ["keiltä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "allative"
+forms = ["keille"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "essive"
+forms = ["keinä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "translative"
+forms = ["keiksi"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "ken"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["mikä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["minkä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["mitä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["minkä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["missä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["mistä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["mihin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["millä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["miltä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["mille"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["minä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["miksi"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "nominative"
+forms = ["mitkä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "genitive"
+forms = ["minkä"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "partitive"
+forms = ["mitä"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["mitkä"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "inessive"
+forms = ["missä"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "elative"
+forms = ["mistä"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "illative"
+forms = ["mihin"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "adessive"
+forms = ["millä"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "ablative"
+forms = ["miltä"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "allative"
+forms = ["mille"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "essive"
+forms = ["minä"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "translative"
+forms = ["miksi"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikä"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["kukin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["kunkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["kutakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["kunkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["kussakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["kustakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["kuhunkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["kullakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["kultakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["kullekin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["kunakin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["kuksikin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukin"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["mikin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["minkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["mitäkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["minkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["missäkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["mistäkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["mihinkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["milläkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["miltäkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["millekin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["minäkin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["miksikin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikin"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["kukaan"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["kenenkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["ketään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["kenessäkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["kenestäkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["keneenkään", "kehenkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["kenelläkään", "kelläkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["keneltäkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["kenellekään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["kenenäkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["keneksikään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "nominative"
+forms = ["ketkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "genitive"
+forms = ["keidenkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "partitive"
+forms = ["keitään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "inessive"
+forms = ["keissäkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "elative"
+forms = ["keistäkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "illative"
+forms = ["keihinkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "adessive"
+forms = ["keilläkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "ablative"
+forms = ["keiltäkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "allative"
+forms = ["keillekään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "essive"
+forms = ["keinäkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "translative"
+forms = ["keiksikään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kukaan"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["kenkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["kenenkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["ketään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["kenessäkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["kenestäkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["keneenkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["kenelläkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["keneltäkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["kenellekään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["kenenäkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["keneksikään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "kenkään"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["mikään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["minkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["mitään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["missään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["mistään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["mihinkään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["millään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["miltään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["millekään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["minään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["miksikään"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "nominative"
+forms = ["mitkään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "genitive"
+forms = ["minkään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "partitive"
+forms = ["mitään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "inessive"
+forms = ["missään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "elative"
+forms = ["mistään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "illative"
+forms = ["mihinkään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "adessive"
+forms = ["millään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "ablative"
+forms = ["miltään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "allative"
+forms = ["millekään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "essive"
+forms = ["minään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "translative"
+forms = ["miksikään"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mikään"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["muuan"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["muutaman"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["muutamaa"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["muutaman"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["muutamassa"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["muutamasta"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["muutamaan"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["muutamalla"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["muutamalta"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["muutamalle"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "essive"
+forms = ["muutamana"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "translative"
+forms = ["muutamaksi"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "abessive"
+forms = ["muutamatta"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "nominative"
+forms = ["muutamat"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "genitive"
+forms = ["muutamien"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "partitive"
+forms = ["muutamia"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["muutamat"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "inessive"
+forms = ["muutamissa"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "elative"
+forms = ["muutamista"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "illative"
+forms = ["muutamiin"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "adessive"
+forms = ["muutamilla"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "ablative"
+forms = ["muutamilta"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "allative"
+forms = ["muutamille"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "essive"
+forms = ["muutamina"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "translative"
+forms = ["muutamiksi"]
+reason = "irregular pronoun paradigm (Voikko-verified)"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "muuan"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["missä"]
+reason = "irregular pronoun paradigm (form identical to singular; Voikko lemmatizes as singular)"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "missä"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "defective: the slot does not exist for this pronoun"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["mä"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["mun"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["mua"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["mut"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["mussa"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["musta"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["muhun"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["mulla"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["multa"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["mulle"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "mä"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["sä"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["sun"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["sua"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["sut"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["sussa"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["susta"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["suhun"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["sulla"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["sulta"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["sulle"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "sä"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["tää"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["tän"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["tätä"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["tän", "tää"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["tässä"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["tästä"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["tähän"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["tällä"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["tältä"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["tälle"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "tää"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "nominative"
+forms = ["toi"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "genitive"
+forms = ["ton"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "partitive"
+forms = ["tota"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "accusative"
+forms = ["ton", "toi"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "inessive"
+forms = ["tossa"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "elative"
+forms = ["tosta"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "illative"
+forms = ["tohon"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "adessive"
+forms = ["tolla"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "ablative"
+forms = ["tolta"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "allative"
+forms = ["tolle"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "nominative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "genitive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "partitive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "accusative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "inessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "elative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "illative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "adessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "ablative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "allative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "toi"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "nominative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "genitive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "partitive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "accusative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "inessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "elative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "illative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "adessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "ablative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "allative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "nominative"
+forms = ["nää"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "genitive"
+forms = ["näiden"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "partitive"
+forms = ["näitä"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["nää"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "inessive"
+forms = ["näissä"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "elative"
+forms = ["näistä"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "illative"
+forms = ["näihin"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "adessive"
+forms = ["näillä"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "ablative"
+forms = ["näiltä"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "allative"
+forms = ["näille"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "nää"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "nominative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "genitive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "partitive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "accusative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "inessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "elative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "illative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "adessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "ablative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "allative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "essive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "translative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "abessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "comitative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "singular"
+case = "instructive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "nominative"
+forms = ["noi"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "genitive"
+forms = ["noiden"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "partitive"
+forms = ["noita"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "accusative"
+forms = ["noi"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "inessive"
+forms = ["noissa"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "elative"
+forms = ["noista"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "illative"
+forms = ["noihin"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "adessive"
+forms = ["noilla"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "ablative"
+forms = ["noilta"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "allative"
+forms = ["noille"]
+reason = "colloquial spoken-Finnish pronoun (outside Voikko's lexicon)"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "essive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "translative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "abessive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "comitative"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "noi"
+tn = 101
+number = "plural"
+case = "instructive"
+missing = true
+reason = "colloquial pronoun: slot not in spoken usage"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "singular"
+case = "accusative"
+forms = ["veljen"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "accusative"
+forms = ["veljet"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "comitative"
+forms = ["veljineen", "veljinensä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "abessive"
+forms = ["veljittä"]
+reason = "irregular velj- oblique stem (Voikko-verified)"
+
+[[exception]]
+lemma = "veli"
+tn = 7
+number = "plural"
+case = "instructive"
+forms = ["veljin"]
+reason = "irregular velj- oblique stem (Voikko-verified)"

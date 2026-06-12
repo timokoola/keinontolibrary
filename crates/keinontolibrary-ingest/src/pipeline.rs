@@ -207,6 +207,16 @@ fn group_forms(inv: &Inventory, forms: Vec<CleanForm>) -> (Groups, AvSeen, usize
             not_in_kotus += 1;
             continue;
         }
+        // Compound ordinals inflect BOTH parts (kahdennenkymmenennen); corpus rows
+        // whose form still starts with the uninflected citation prefix are mislabeled
+        // head-only readings (kahdeskymmeneksen, the tn39 'one-tenth' noun) — drop
+        // them so the lookup never serves them. The legit both-parts rows (and the
+        // citation itself) survive: their prefix is inflected.
+        if let Some(prefix) = f.lemma.strip_suffix("kymmenes") {
+            if !prefix.is_empty() && f.form != f.lemma && f.form.starts_with(prefix) {
+                continue;
+            }
+        }
         let key = (f.lemma.clone(), f.tn);
         av_seen.entry(key.clone()).or_insert(f.av);
         let slot = slot_index(f.number, f.case);

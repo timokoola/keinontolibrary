@@ -132,3 +132,45 @@ fn non_compound_ending_in_known_word_is_left_alone() {
         "laviineissa"
     );
 }
+
+// Compound ordinals inflect BOTH parts (Voikko-verified: kahdennenkymmenennen,
+// kahdennessakymmenennessä, kahdensissakymmenensissä). Cycle 10b of the 100% roadmap.
+#[test]
+fn compound_ordinals_decline_both_parts() {
+    use keinontolibrary_core::{Case, Engine, MemoryStore, Number};
+    use keinontolibrary_rules::RuleEngine;
+    // The lemmas must resolve: insert citation slots for the parts and the compound.
+    let mut store = MemoryStore::new();
+    for (lemma, tn) in [("kahdes", 45), ("kymmenes", 45), ("kahdeskymmenes", 45)] {
+        store.insert(
+            lemma,
+            keinontolibrary_core::ParadigmRef::new(None, tn),
+            keinontolibrary_core::Number::Singular,
+            keinontolibrary_core::Case::Nominative,
+            keinontolibrary_core::Forms::present(
+                vec![lemma.to_owned()],
+                keinontolibrary_core::Source::Lookup,
+            ),
+        );
+    }
+    let e = Engine::builder()
+        .lookup(Box::new(store))
+        .generator(Box::new(RuleEngine::new()))
+        .build();
+    let f = |n, c| {
+        e.decline("kahdeskymmenes", n, c)
+            .unwrap()
+            .primary()
+            .unwrap()
+            .to_string()
+    };
+    assert_eq!(f(Number::Singular, Case::Genitive), "kahdennenkymmenennen");
+    assert_eq!(
+        f(Number::Singular, Case::Inessive),
+        "kahdennessakymmenennessä"
+    );
+    assert_eq!(
+        f(Number::Plural, Case::Inessive),
+        "kahdensissakymmenensissä"
+    );
+}

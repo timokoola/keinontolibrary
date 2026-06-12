@@ -160,6 +160,9 @@ def main():
                 # Both are plural-only in the standard paradigm; singular instructives
                 # exist only as lexicalized adverbs (jalan), which the corpus serves.
                 cov["grammar_defective"] += 1
+            elif (row.get("rules") or {}).get("status") == "missing":
+                # Registry-declared defective: hän has no plural (he is its plural).
+                cov["grammar_defective"] += 1
             elif (row.get("corpus") or {}).get("status") == "missing":
                 cov["corpus_defective"] += 1
             else:

@@ -139,3 +139,5 @@
 {"match": "yhdeksäskymmenes|45", "reason": "compound ordinal — out of v1 scope; corpus mislabel rows"}
 {"match": "vinopysäköinti|50", "reason": "correct head-declined forms (vinopysäköinnissä) that Voikko's compounder does not parse"}
 {"match": "kevytsukeltaja|50", "reason": "correct head-declined forms outside Voikko's compounder"}
+{"match": "mikä|101", "reason": "mikä's plural forms are identical strings to the singular (mitkä/minkä/mitä/missä) — Voikko lemmatizes them as singular, so number-matched verification abstains wrongly"}
+{"match": "mikään|101", "reason": "mikään's plural forms are identical strings to the singular — Voikko lemmatizes them as singular"}

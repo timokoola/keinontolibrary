@@ -1328,6 +1328,51 @@ mod tests {
         assert!(ug.contains(&"utareen".to_owned()) && ug.contains(&"utaren".to_owned()));
     }
 
+    // The pronoun nerd-test forms: t-accusatives, clitic-internal inflection, the
+    // joka relative, and explicit defectives (hän has no plural — he is its plural).
+    #[test]
+    fn pronoun_registry_serves_the_nerd_test() {
+        let r = crate::RuleEngine::new();
+        let f = |l: &str, n, c| {
+            use keinontolibrary_core::{Generator, ParadigmRef};
+            Generator::generate(&r, l, &ParadigmRef::new(None, 101), n, c).unwrap()
+        };
+        assert_eq!(
+            f("hän", Number::Singular, Case::Accusative).primary(),
+            Some("hänet")
+        );
+        assert_eq!(
+            f("minä", Number::Singular, Case::Accusative).primary(),
+            Some("minut")
+        );
+        assert_eq!(
+            f("kuka", Number::Singular, Case::Accusative).primary(),
+            Some("kenet")
+        );
+        assert_eq!(
+            f("joka", Number::Singular, Case::Genitive).primary(),
+            Some("jonka")
+        );
+        assert_eq!(
+            f("jokin", Number::Singular, Case::Inessive).primary(),
+            Some("jossakin")
+        );
+        assert_eq!(
+            f("joku", Number::Singular, Case::Partitive).primary(),
+            Some("jotakuta")
+        );
+        assert_eq!(
+            f("kukaan", Number::Singular, Case::Genitive).primary(),
+            Some("kenenkään")
+        );
+        assert_eq!(
+            f("mä", Number::Singular, Case::Genitive).primary(),
+            Some("mun")
+        );
+        // hän has no plural (he is its plural): explicitly defective, not a gap.
+        assert!(f("hän", Number::Plural, Case::Inessive).is_missing());
+    }
+
     // Reverse D-gradation is k-insertion before the final long vowel (Voikko-verified:
     // kokeen, kiukaassa, ikeen, okaita; previously only the registry knew aie). Found
     // by the QA loop.

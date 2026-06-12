@@ -75,12 +75,41 @@ def init_worker():
     VOIKKO = make_voikko()
 
 
+# Pronouns whose oblique forms Voikko lemmatizes to a different baseform, plus the
+# clitic pronouns whose clitic Voikko peels off into FOCUS (jossakin -> joka + kin).
+PRONOUN_ALT_BASE = {
+    "kuka": {"ken"},
+    "ken": {"kuka"},
+    "kenkään": {"kukaan", "ken"},
+    "kukaan": {"ken", "kuka"},
+    "mikään": {"mikä"},
+    "mikin": {"mikä"},
+    "jokin": {"joka"},
+    "joku": {"joka"},
+    "kukin": {"kuka", "ken"},
+    "muuan": {"muutama"},
+}
+PRONOUN_CLITICS = ("kin", "kaan", "kään")
+
+
 def analysis_matches(a, lemma, case, number):
     """One Voikko analysis vs one expected slot, with the slot-semantics special cases."""
-    if a.get("BASEFORM", "").lower() != lemma.lower():
+    baseform = a.get("BASEFORM", "").lower()
+    clitic = next((c for c in PRONOUN_CLITICS if lemma.endswith(c)), None)
+    clitic_focus = clitic is not None and a.get("FOCUS") in (clitic, clitic.replace("ä", "a"))
+    if baseform == lemma.lower():
+        pass
+    elif baseform in PRONOUN_ALT_BASE.get(lemma, ()):
+        # Voikko peels the pronoun's own clitic into FOCUS (jossakin -> joka + kin);
+        # when it did, the clitic MUST be there — joka's bare jossa is not jokin's
+        # form. An alt baseform that itself carries the clitic (kenkään -> kukaan)
+        # needs no FOCUS.
+        if clitic and not clitic_focus and not baseform.endswith(clitic.replace("ä", "a")) and not baseform.endswith(clitic):
+            return False
+    else:
         return False
-    # Clean forms only: enclitics/possessives disqualify, except the comitative citation.
-    if a.get("FOCUS") or a.get("KYSYMYSLIITE"):
+    # Clean forms only: enclitics/possessives disqualify, except the pronoun's own clitic.
+    if (a.get("FOCUS") and not clitic_focus) or a.get("KYSYMYSLIITE"):
         return False
     if a.get("POSSESSIVE") and case != "comitative":
         return False

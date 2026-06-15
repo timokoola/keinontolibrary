@@ -110,6 +110,7 @@ impl Engine {
             [] => self
                 .compound_slot(&norm, number, case)
                 .or_else(|| self.plural_head_slot(&norm, number, case))
+                .or_else(|| self.numeral_compound_slot(&norm, number, case))
                 .or_else(|| self.inferred_slot(&norm, number, case))
                 .ok_or(Error::UnknownWord(norm)),
             // A tn51 compound: both parts inflect (isoveli -> isoissaveljissä). Falls back to
@@ -166,6 +167,7 @@ impl Engine {
             [] => self
                 .compound_paradigm(&norm)
                 .or_else(|| self.plural_head_paradigm(&norm))
+                .or_else(|| self.numeral_compound_paradigm(&norm))
                 .or_else(|| self.inferred_paradigm(&norm))
                 .ok_or(Error::UnknownWord(norm)),
             [only] if only.tn == COMPOUND_BOTH_TN => Ok(self
@@ -572,6 +574,83 @@ impl Engine {
             vec![format!("{a}{b}")],
             crate::Source::Generated,
         ))
+    }
+
+    // --- compound cardinal/teen numerals ------------------------------------------------
+    //
+    // Kotus lists compound numerals (`kahdeksankymmentä` = 80, `kaksitoista` = 12) without a
+    // tn. Cardinals inflect BOTH parts (`kahdeksassakymmenessä`); the counted base reads as a
+    // partitive in the nominative/accusative (`kahdeksankymmentä`). The `-toista` teens and
+    // their ordinals inflect the leading numeral only, with `toista` frozen
+    // (`kahdeksaatoista`, `kahdennentoista`).
+
+    /// One slot of a compound cardinal/teen numeral, or `None` if it isn't one.
+    fn numeral_compound_slot(&self, norm: &str, number: Number, case: Case) -> Option<Forms> {
+        // Cardinal bases: (nominative surface = the base's partitive, base lemma).
+        const BASES: &[(&str, &str)] = &[
+            ("kymmentä", "kymmenen"),
+            ("sataa", "sata"),
+            ("tuhatta", "tuhat"),
+        ];
+        let generator = self.generator.as_ref()?;
+        // The leading numeral's first declinable paradigm (cardinal kahdeksan / kaksi, or
+        // ordinal kahdes / kahdeksas), falling back to class inference.
+        let lead_ref = |lemma: &str| {
+            self.resolve(lemma)
+                .into_iter()
+                .next()
+                .or_else(|| generator.infer(lemma))
+        };
+        let lead = |lemma: &str, c: Case| {
+            let r = lead_ref(lemma)?;
+            let f = generator.generate(lemma, &r, number, c)?;
+            (!f.is_missing())
+                .then(|| f.variants.first().cloned())
+                .flatten()
+        };
+        // Teens and ordinal-teens: <numeral>toista, `toista` frozen.
+        if let Some(p) = norm.strip_suffix("toista").filter(|p| !p.is_empty()) {
+            let a = lead(p, case)?;
+            return Some(Forms::present(
+                vec![format!("{a}toista")],
+                crate::Source::Generated,
+            ));
+        }
+        // Cardinals: <multiplier> + base (kymmenen/sata/tuhat) in the surface partitive.
+        // Both inflect; the base is partitive in the nominative/accusative.
+        for (suffix, base) in BASES {
+            let Some(mult) = norm.strip_suffix(suffix).filter(|p| !p.is_empty()) else {
+                continue;
+            };
+            let base_ref = self.resolve(base).into_iter().next()?;
+            let base_case = if matches!(case, Case::Nominative | Case::Accusative) {
+                Case::Partitive
+            } else {
+                case
+            };
+            let a = lead(mult, case)?;
+            let h = generator.generate(base, &base_ref, number, base_case)?;
+            if h.is_missing() {
+                return None;
+            }
+            let b = h.variants.first()?;
+            return Some(Forms::present(
+                vec![format!("{a}{b}")],
+                crate::Source::Generated,
+            ));
+        }
+        None
+    }
+
+    /// The whole paradigm of a compound numeral, or `None` if it isn't one.
+    fn numeral_compound_paradigm(&self, norm: &str) -> Option<Paradigm> {
+        // Confirm it's a compound numeral (singular nominative resolves), then fill all slots.
+        self.numeral_compound_slot(norm, Number::Singular, Case::Nominative)?;
+        let reference = ParadigmRef::new(None, 0);
+        Some(Paradigm::build(norm, reference, |number, case| {
+            self.numeral_compound_slot(norm, number, case)
+                .unwrap_or_else(Forms::missing)
+        }))
     }
 
     /// Should we override a *known* word's harmony because it's really a compound whose final

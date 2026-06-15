@@ -60,10 +60,13 @@ near-exhaustive by construction.
   Segmentation prefers a split where both parts are known lemmas. Validated by a
   Voikko-oracle compound-parity harness at ~99.8% (tn 50) / ~99.7% (tn 51) of judged slots;
   design and test-data plan: [`docs/compound-nouns.md`](docs/compound-nouns.md).
-- **Out:** **verbs** — conjugation is the one word class not handled, and the only
-  out-of-scope item (a roadmap item; see [Roadmap](#roadmap)). Every **nominal** declension
-  class in the **Kotus 1–51 range** is in scope; if you find a 1–51 case that isn't covered,
-  that's a bug, not a scope boundary (scope has widened as the engine matured).
+- **Out:** **verbs** — conjugation is the one word class not handled (a roadmap item; see
+  [Roadmap](#roadmap)) — and Kotus **tn 99 indeclinables** (`alias`, `aprilli`, `ensi`, the
+  colloquial *-isen* approximates), which by definition have no inflection. Every **nominal**
+  declension class in the **Kotus 1–51 range** is in scope; if you find a 1–51 case that isn't
+  covered, that's a bug, not a scope boundary (scope has widened as the engine matured).
+  Coverage over the full Kotus nominal list (excluding tn 99) is **99.9%** — including
+  productive derivations and compounds with no Kotus tn (`scripts/qa/run.sh coverage`).
 - **Not declension, so not produced** (these are separate morphology, not scope exclusions):
   comparative/superlative *derivation* from a positive (`suuri → suurempi`) — but the derived
   word itself **declines** as an ordinary adjective once known (`parempi → paremman`,

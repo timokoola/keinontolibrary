@@ -117,6 +117,51 @@ fn plural_head_compound_resolves() {
 }
 
 #[test]
+fn compound_numerals_decline_both_parts() {
+    // The numeral parts (kahdeksan/kaksi tn10/31, kymmenen tn32, sata tn9, kahdes tn45)
+    // come from the real rule engine + registry; seed only their paradigms so resolve finds
+    // them. tuhat is registry-served.
+    let mut store = MemoryStore::new();
+    for (lemma, tn, av) in [
+        ("kahdeksan", 10u8, None),
+        ("kaksi", 31, None),
+        ("kolme", 8, None),
+        ("kymmenen", 32, None),
+        ("sata", 9, Some('F')), // t:d gradation -> sadassa
+        ("kahdes", 45, None),
+    ] {
+        store.insert(
+            lemma,
+            ParadigmRef::new(None, tn).with_av(av),
+            Number::Singular,
+            Case::Nominative,
+            Forms::present(vec![lemma.into()], Source::Lookup),
+        );
+    }
+    let e = Engine::builder()
+        .lookup(Box::new(store))
+        .generator(Box::new(RuleEngine::new()))
+        .build();
+    let g = |w, c| form(&e, w, Number::Singular, c);
+    // Cardinal X+kymmentä: both parts inflect; base reads partitive in the nominative.
+    assert_eq!(
+        g("kahdeksankymmentä", Case::Nominative),
+        "kahdeksankymmentä"
+    );
+    assert_eq!(g("kahdeksankymmentä", Case::Genitive), "kahdeksankymmenen");
+    assert_eq!(
+        g("kahdeksankymmentä", Case::Inessive),
+        "kahdeksassakymmenessä"
+    );
+    // Cardinal X+sataa.
+    assert_eq!(g("kaksisataa", Case::Inessive), "kahdessasadassa");
+    // Teen X+toista: leading numeral inflects, toista frozen.
+    assert_eq!(g("kaksitoista", Case::Inessive), "kahdessatoista");
+    // Ordinal-teen: kahdes (tn45) + toista.
+    assert_eq!(g("kahdestoista", Case::Genitive), "kahdennentoista");
+}
+
+#[test]
 fn frontier_resolvers_split_and_infer() {
     let e = engine_frontier();
     // Bound prefix (avo-, ali-) + known head, even though the prefix is too short to be a

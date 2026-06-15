@@ -331,7 +331,7 @@ impl Engine {
         // keeping the hyphen on the frozen prefix.
         if let Some(idx) = norm.rfind('-') {
             let (prefix, tail) = (&norm[..=idx], &norm[idx + 1..]);
-            if tail.chars().count() >= 2 && !self.resolve(tail).is_empty() {
+            if tail.chars().count() >= 2 && self.component_ref(tail).is_some() {
                 return Some((prefix.to_owned(), tail.to_owned()));
             }
         }
@@ -341,7 +341,10 @@ impl Engine {
         // word ending in those two letters is not split.
         for head in SHORT_HEADS {
             if let Some(prefix) = norm.strip_suffix(head) {
-                if self.is_known_modifier(prefix) && !self.resolve(head).is_empty() {
+                let ok_prefix = self.is_known_modifier(prefix)
+                    || is_bound_prefix(prefix)
+                    || prefix.chars().count() >= MIN_FALLBACK_PREFIX_CHARS;
+                if ok_prefix && !self.resolve(head).is_empty() {
                     return Some((prefix.to_owned(), (*head).to_owned()));
                 }
             }
@@ -358,7 +361,7 @@ impl Engine {
         let mut fallback: Option<usize> = None;
         for &at in &offsets[MIN_PREFIX_CHARS..=(n - MIN_COMPONENT_CHARS)] {
             let (prefix, component) = (&norm[..at], &norm[at..]);
-            if self.resolve(component).is_empty() {
+            if self.component_ref(component).is_none() {
                 continue;
             }
             // Accept a known modifier (a real word linker) or a productive bound prefix
@@ -374,23 +377,46 @@ impl Engine {
         fallback.map(|at| (norm[..at].to_owned(), norm[at..].to_owned()))
     }
 
+    /// A paradigm for a compound *component*: a known lemma (first paradigm), a registered
+    /// combining head that is not a free word (`-kulmio`, `-niekka`, `-sälpä`), or a
+    /// productive form whose class is inferable (`-nen` -> tn38). This is what makes a
+    /// component "splittable".
+    fn component_ref(&self, component: &str) -> Option<ParadigmRef> {
+        self.resolve(component)
+            .into_iter()
+            .next()
+            .or_else(|| combining_head_ref(component))
+            .or_else(|| self.generator.as_ref().and_then(|g| g.infer(component)))
+    }
+
     /// `(prefix, component, chosen paradigm)` for a compound, or `None`. If the component is
     /// ambiguous the first paradigm is used — a lemma's paradigms share the same vowels, so
     /// the harmony (a/ä) choice is unaffected.
     fn compound_parts(&self, norm: &str) -> Option<(String, String, ParadigmRef)> {
         let (prefix, component) = self.split_compound(norm)?;
-        let chosen = self.resolve(&component).into_iter().next()?;
+        let chosen = self.component_ref(&component)?;
         Some((prefix, component, chosen))
+    }
+
+    /// Decline a compound *component* for one slot, routing by its class so a component that
+    /// is itself a compound recurses (`jää`+`viileäkaappi`, where `viileäkaappi` = `viileä`+
+    /// `kaappi`). `None` if the component yields no form for this slot.
+    fn component_slot(
+        &self,
+        component: &str,
+        chosen: &ParadigmRef,
+        number: Number,
+        case: Case,
+    ) -> Option<Forms> {
+        let forms = self.slot_routed(component, chosen, number, case).ok()?;
+        (!forms.is_missing()).then_some(forms)
     }
 
     /// Build one slot of a compound by declining its final component and re-attaching the
     /// fixed prefix to every variant.
     fn compound_slot(&self, norm: &str, number: Number, case: Case) -> Option<Forms> {
         let (prefix, component, chosen) = self.compound_parts(norm)?;
-        let mut forms = self.slot(&component, &chosen, number, case)?;
-        if forms.is_missing() {
-            return None;
-        }
+        let mut forms = self.component_slot(&component, &chosen, number, case)?;
         forms.variants = forms
             .variants
             .iter()
@@ -404,7 +430,7 @@ impl Engine {
         let (prefix, component, chosen) = self.compound_parts(norm)?;
         Some(Paradigm::build(norm, chosen.clone(), |number, case| {
             let mut forms = self
-                .slot(&component, &chosen, number, case)
+                .component_slot(&component, &chosen, number, case)
                 .unwrap_or_else(Forms::missing);
             forms.variants = forms
                 .variants
@@ -599,12 +625,27 @@ impl Engine {
                 .next()
                 .or_else(|| generator.infer(lemma))
         };
-        let lead = |lemma: &str, c: Case| {
-            let r = lead_ref(lemma)?;
-            let f = generator.generate(lemma, &r, number, c)?;
-            (!f.is_missing())
-                .then(|| f.variants.first().cloned())
-                .flatten()
+        let lead = |mult: &str, c: Case| -> Option<String> {
+            // A declinable numeral (kahdeksan, kaksi, the ordinal kahdes)…
+            if let Some(r) = lead_ref(mult) {
+                if let Some(f) = generator.generate(mult, &r, number, c) {
+                    if !f.is_missing() {
+                        return f.variants.first().cloned();
+                    }
+                }
+            }
+            // …or itself a compound numeral (kahdeksantoista in kahdeksantoistasataa)…
+            if let Some(f) = self.numeral_compound_slot(mult, number, c) {
+                return f.variants.first().cloned();
+            }
+            // …or a frozen quantifier (toista, puoli/puolen, puolitoista, pari, the
+            // colloquial -isen approximates) that does not itself inflect here.
+            if matches!(mult, "toista" | "puoli" | "puolen" | "puolitoista" | "pari")
+                || mult.ends_with("isen")
+            {
+                return Some(mult.to_owned());
+            }
+            None
         };
         // Teens and ordinal-teens: <numeral>toista, `toista` frozen.
         if let Some(p) = norm.strip_suffix("toista").filter(|p| !p.is_empty()) {
@@ -685,8 +726,38 @@ const COMPOUND_BOTH_TN: u8 = 51;
 /// known lemma, so a coincidental match (`ali`+bi) cannot fire — `bi` is not a lemma.
 const BOUND_PREFIXES: &[&str] = &[
     "avo", "ali", "ala", "yli", "ylä", "ulko", "sisä", "etu", "taka", "etä", "eri", "esi", "iki",
-    "eko", "bio", "geo", "neo", "epä", "aku", "aju", "apu", "hää", "uus", "ohi",
+    "eko", "bio", "geo", "neo", "epä", "aku", "aju", "apu", "hää", "uus", "ohi", "upo", "uro",
+    "kik", "rai", "mys", "käs", "pan", "äkä", "iän", "itse",
 ];
+
+/// Productive compound *heads* that are not free Kotus headwords but inflect regularly —
+/// `(head, tn, av)`, the tn/gradation taken from rhyming Kotus entries (`-kulmio` like
+/// `kolmio`, `-niekka` like `praasniekka`). Lets `monikulmio`, `kynäniekka`, `maasälpä`,
+/// `lainsäädäntö`, `kaikkivoipa` split and decline on the head.
+const COMBINING_HEADS: &[(&str, u8, Option<char>)] = &[
+    ("kulmio", 3, None),
+    ("niekka", 9, Some('A')),
+    ("sälpä", 10, Some('E')),
+    ("liitäjä", 10, None),
+    ("mikko", 4, Some('A')),
+    ("panija", 12, None),
+    ("suhta", 10, Some('F')),
+    ("säädäntö", 1, Some('J')),
+    ("voipa", 10, Some('E')),
+    ("pursu", 1, None),
+    ("housu", 1, None),
+    ("ruoskinta", 9, Some('J')),
+    ("pirkko", 1, Some('A')),
+    ("osastointi", 5, Some('J')),
+];
+
+/// The paradigm of a registered combining head (see [`COMBINING_HEADS`]).
+fn combining_head_ref(component: &str) -> Option<ParadigmRef> {
+    COMBINING_HEADS
+        .iter()
+        .find(|(h, ..)| *h == component)
+        .map(|&(_, tn, av)| ParadigmRef::new(None, tn).with_av(av))
+}
 
 /// Known short heads (2 chars) that the general scan (min 3) skips but that form real
 /// compounds: `yö` (aamu+yö, sydän+yö). Accepted only behind a known-modifier prefix.

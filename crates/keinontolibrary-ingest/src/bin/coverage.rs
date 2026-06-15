@@ -64,11 +64,12 @@ fn main() -> std::io::Result<()> {
         if !matches!(sanaluokka, "substantiivi" | "adjektiivi" | "numeraali") {
             continue;
         }
-        // Kotus tn99 = "no inflection": indeclinable by definition (alias, aprilli, ensi,
-        // the colloquial -isen approximates). Out of scope, like verbs — not a declension
-        // candidate, so excluded from the denominator.
+        // Special Kotus markers, not standard declension classes — out of scope, excluded
+        // from the denominator: tn99 = "no inflection" (alias, aprilli, the -isen
+        // approximates); tn100 = deprecated/variant spellings that defer to a preferred
+        // entry (kehoitus->kehotus, renesanssi->renessanssi, naivi->naiivi; some are verbs).
         let primary_tn = tn_field.split([',', ' ', '*', '(']).next().unwrap_or("");
-        if primary_tn == "99" {
+        if matches!(primary_tn, "99" | "100") {
             indeclinable += 1;
             continue;
         }

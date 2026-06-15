@@ -52,9 +52,20 @@ near-exhaustive by construction.
   a general possessive-suffix system; class inference for unlisted *simple* words; and the
   modifier-inflecting **compound ordinals** like `kahdeskymmenes` (only the head declines).
 
+## Documentation
+
+Task-oriented guides live in [`docs/guides/`](docs/guides/):
+[embed in Rust](docs/guides/embed-rust.md) ·
+[CLI](docs/guides/cli.md) ·
+[HTTP service](docs/guides/http-service.md) ·
+[build the artifact](docs/guides/build-artifact.md) ·
+[contributing](docs/guides/contributing.md).
+See also [`docs/DISTRIBUTION.md`](docs/DISTRIBUTION.md) (install channels) and
+[`docs/SITE_PLAN.md`](docs/SITE_PLAN.md) (the keinonto.com docs site).
+
 ## Building
 
-Requires a stable Rust toolchain.
+Requires Rust ≥ 1.85 (MSRV).
 
 ```sh
 cargo fmt --check

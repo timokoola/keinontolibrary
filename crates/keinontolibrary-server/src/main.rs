@@ -21,11 +21,23 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         )
         .init();
 
+    let addr = std::env::var("KEINONTO_ADDR").unwrap_or_else(|_| "0.0.0.0:8080".to_owned());
+
+    // `--health`: the container HEALTHCHECK (scratch has no curl). A TCP connect to the
+    // listening port confirms the server is accepting connections; exit 0/1.
+    if std::env::args().any(|a| a == "--health") {
+        let probe = addr.replace("0.0.0.0", "127.0.0.1");
+        if tokio::net::TcpStream::connect(&probe).await.is_ok() {
+            return Ok(());
+        }
+        eprintln!("health probe failed: {probe}");
+        std::process::exit(1);
+    }
+
     let artifact = std::env::var("KEINONTO_ARTIFACT")
         .unwrap_or_else(|_| "data/artifact/keinontolibrary.bin".to_owned());
     let overlay_path =
         std::env::var("KEINONTO_OVERLAY").unwrap_or_else(|_| "data/overlay.jsonl".to_owned());
-    let addr = std::env::var("KEINONTO_ADDR").unwrap_or_else(|_| "0.0.0.0:8080".to_owned());
     let admin_token = std::env::var("KEINONTO_ADMIN_TOKEN").ok();
 
     let bundle = build_engine(&artifact, &overlay_path)

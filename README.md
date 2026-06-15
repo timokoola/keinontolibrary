@@ -83,7 +83,11 @@ cargo run -p keinontolibrary-ingest    # Kotus + reference corpus -> data/artifa
 ```
 
 - **Kotus list** (CC BY 4.0): <https://kaino.kotus.fi/lataa/nykysuomensanalista2024.txt>
-- **Reference corpus** (JSONL; collected by us, labeled with Voikko): bucket `gs://REDACTED-CORPUS-BUCKET/` (1201 shards).
+- **Reference corpus** (JSONL; collected by us, labeled with Voikko): a private,
+  access-controlled store, **not redistributed**. It bootstrapped and cross-checked the
+  engine; the rule engine + registry + overrides now give full coverage without it
+  (verified by the test suite and the Voikko QA gate), so building from the public Kotus
+  list alone is supported. Maintainers point `KEINONTO_CORPUS_URI` at their own copy.
 
 ## Running
 

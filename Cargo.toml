@@ -59,6 +59,7 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 sha2 = "0.10"
 subtle = "2"
 crc32fast = "1"
+proptest = "1"
 
 [profile.release]
 lto = "thin"

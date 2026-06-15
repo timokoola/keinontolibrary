@@ -18,5 +18,8 @@ default = []
 # Derive serde (De)Serialize on the public types (used by the server/CLI for JSON).
 serde = ["dep:serde"]
 
+[dev-dependencies]
+proptest = { workspace = true }
+
 [lints]
 workspace = true

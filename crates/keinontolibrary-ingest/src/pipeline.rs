@@ -253,13 +253,20 @@ fn group_forms(inv: &Inventory, forms: Vec<CleanForm>) -> (Groups, AvSeen, usize
                 continue;
             }
         }
-        let key = (f.lemma.clone(), f.tn);
-        av_seen.entry(key.clone()).or_insert(f.av);
         let slot = slot_index(f.number, f.case);
-        push_unique(
-            groups.entry(key).or_default().entry(slot).or_default(),
-            f.form,
-        );
+        // One owned key per form for the groups map (unavoidable); the parallel av_seen
+        // key is cloned only when the group is first created, not on every form.
+        match groups.entry((f.lemma.clone(), f.tn)) {
+            std::collections::hash_map::Entry::Occupied(mut e) => {
+                push_unique(e.get_mut().entry(slot).or_default(), f.form);
+            }
+            std::collections::hash_map::Entry::Vacant(e) => {
+                av_seen.entry(e.key().clone()).or_insert(f.av);
+                let mut slots = SlotMap::new();
+                slots.entry(slot).or_default().push(f.form);
+                e.insert(slots);
+            }
+        }
     }
     (groups, av_seen, not_in_kotus)
 }

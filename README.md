@@ -18,12 +18,14 @@ near-exhaustive by construction.
 > The QA gate runs at **0 failing slots across the in-scope inventory** — i.e. correctness,
 > not whole-language coverage. That **denominator is the ~32k Kotus lemmas that carry a
 > declension type**; Kotus leaves ~72k further rows (transparent compounds and derivations)
-> *without* a tn, expecting inflection through their final component. Many of those resolve
-> at runtime via the compound splitter (`linja-auto`), but productive derivations
-> (`ahdaskatseinen`), short-prefix compounds (`avoauto`), and compound numerals are the open
-> **coverage frontier** (see [Roadmap](#roadmap)) — distinct from the Cloudflare Workers
-> target. The working/repo name is `keinontolibrary` (`keinonto` = the instructive case); the
-> crate prefix is `keinontolibrary-*`.
+> *without* a tn, expecting inflection through their final component. Runtime resolvers reach
+> that frontier — the compound splitter (`linja-auto`, `avoauto`), productive class inference
+> (`ahdaskatseinen`→tn38, `-uus`→tn40), and a plural-head reverse index (`ajovalot`→`valo`) —
+> covering **99.5% of all Kotus nominal rows** (measure it with `scripts/qa/run.sh coverage`).
+> The remaining ~0.5% (compound numerals, a few foreign/abbreviation compounds) and the
+> Cloudflare Workers target are the open work (see [Roadmap](#roadmap)). The working/repo name
+> is `keinontolibrary` (`keinonto` = the instructive case); the crate prefix is
+> `keinontolibrary-*`.
 
 ## Workspace layout
 

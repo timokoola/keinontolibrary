@@ -29,4 +29,5 @@ ingest-report.txt
 /qa/voikko-verdicts.jsonl
 /qa/report.json
 /qa/report.md
+/qa/coverage-misses.tsv
 __pycache__/

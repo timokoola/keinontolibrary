@@ -2,7 +2,11 @@
 //! harmony follows that component even when the modifier prefix has the opposite harmony.
 //! Regression for koirankeksi/beaujolaisviini coming out as -ssa instead of -ssä.
 
-use keinontolibrary_core::{Case, Engine, Forms, MemoryStore, Number, ParadigmRef, Source};
+use std::collections::HashMap;
+
+use keinontolibrary_core::{
+    Case, Engine, Forms, MemoryStore, Number, ParadigmRef, PluralHead, Source,
+};
 use keinontolibrary_rules::RuleEngine;
 
 /// Engine whose lookup only knows the *paradigm* of each component (one seeded slot, so
@@ -55,6 +59,51 @@ fn engine_frontier() -> Engine {
         .lookup(Box::new(store))
         .generator(Box::new(RuleEngine::new()))
         .build()
+}
+
+#[test]
+fn plural_head_compound_resolves() {
+    let mut store = MemoryStore::new();
+    for (lemma, tn) in [("ajo", 1u8), ("valo", 1)] {
+        store.insert(
+            lemma,
+            ParadigmRef::new(None, tn),
+            Number::Singular,
+            Case::Nominative,
+            Forms::present(vec![lemma.into()], Source::Lookup),
+        );
+    }
+    // Reverse index: the plural-nominative surface `valot` -> head lemma `valo`.
+    let mut index = HashMap::new();
+    index.insert(
+        "valot".to_string(),
+        PluralHead {
+            lemma: "valo".into(),
+            reference: ParadigmRef::new(None, 1),
+        },
+    );
+    let e = Engine::builder()
+        .lookup(Box::new(store))
+        .generator(Box::new(RuleEngine::new()))
+        .plural_index(index)
+        .build();
+    // ajo (known modifier) + valot (plural of valo) -> decline valo in the plural.
+    assert_eq!(
+        form(&e, "ajovalot", Number::Plural, Case::Inessive),
+        "ajovaloissa"
+    );
+    assert_eq!(
+        form(&e, "ajovalot", Number::Plural, Case::Ablative),
+        "ajovaloilta"
+    );
+    // A plural lemma has no singular.
+    assert!(e
+        .decline("ajovalot", Number::Singular, Case::Inessive)
+        .is_err());
+    // Without a plausible modifier prefix, no false split.
+    assert!(e
+        .decline("xyvalot", Number::Plural, Case::Inessive)
+        .is_err());
 }
 
 #[test]

@@ -42,6 +42,7 @@ fn config(scratch: &Scratch) -> Config {
         harmony_path: d.join("missing-harmony.jsonl"),
         comitative_path: d.join("missing-comitative.jsonl"),
         citation_path: d.join("missing-citation.jsonl"),
+        alternant_path: d.join("missing-alternant.jsonl"),
         version: "test".into(),
     }
 }

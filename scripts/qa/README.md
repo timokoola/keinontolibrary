@@ -44,6 +44,18 @@ their harmony-flipped twins (analyze + BASEFORM match; ≥3 unanimous votes; sti
 across regenerations). Regenerate after rule changes that affect many stems, then
 re-ingest — the set converges in one or two iterations.
 
+`data/alternant-overrides.jsonl` (committed) carries **slot-level alternant completions**:
+Voikko-verified alternant forms the rule engine produces but the reference corpus
+under-attested. The engine resolves a slot lookup-first and stops, so a corpus that
+attested only `omenilta` shadows the equally-correct `omenoilta` the rules also generate.
+`gen_alternant_overrides.py` reads the dump, and for every lookup-answered slot keeps the
+rule alternants Voikko confirms as `lemma + case + number` (the verifier's own gate) that
+the served forms lack; ingest unions them into the slot (corpus form stays primary). A
+blind union of rule output would inject the generator's ~2% wrong forms — the Voikko gate
+is what makes it safe. Sticky and convergent: after a re-ingest the slot serves both forms,
+so the next run mints nothing new. The `harmony` subcommand mints this too (it needs a dump
+to read, so run `dump` first, or use `all`).
+
 Outputs land in `qa/` (gitignored except `baseline.json`):
 `generated.jsonl` (dump), `voikko-verdicts.jsonl`, `report.json`, `report.md`.
 

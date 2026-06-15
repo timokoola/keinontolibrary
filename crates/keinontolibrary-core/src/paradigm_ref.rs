@@ -101,8 +101,12 @@ impl ParadigmRef {
 
     /// Whether this reference matches a user-supplied `(hn, tn)` filter.
     ///
-    /// A `None` field in the filter matches anything; this lets callers disambiguate by
-    /// `tn` alone, by `hn` alone, or by both.
+    /// A `None` field in the filter is a **wildcard** — it matches any value of that
+    /// field. So `matches(None, Some(5))` accepts this ref whatever its `hn`, and
+    /// `matches(None, None)` accepts it unconditionally. This is intended (it lets a
+    /// caller disambiguate by `tn` alone, by `hn` alone, or by both), but note the
+    /// asymmetry: passing `None` for `hn` does **not** mean "the no-homonym reading" —
+    /// it means "any homonym". To require a specific reading, pass `Some(_)`.
     pub fn matches(&self, hn: Option<u8>, tn: Option<u8>) -> bool {
         hn.is_none_or(|h| self.hn == Some(h)) && tn.is_none_or(|t| self.tn == t)
     }

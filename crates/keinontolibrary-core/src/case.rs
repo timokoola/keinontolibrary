@@ -151,13 +151,32 @@ impl FromStr for Case {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let lower = s.trim().to_ascii_lowercase();
-        Case::ALL
-            .into_iter()
-            .find(|c| c.name() == lower)
-            .ok_or(ParseError {
-                kind: "case",
-                input: lower,
-            })
+        // A direct match instead of scanning Case::ALL: the compiler turns this into a
+        // jump/hash rather than 15 string comparisons.
+        let case = match lower.as_str() {
+            "nominative" => Case::Nominative,
+            "genitive" => Case::Genitive,
+            "partitive" => Case::Partitive,
+            "accusative" => Case::Accusative,
+            "inessive" => Case::Inessive,
+            "elative" => Case::Elative,
+            "illative" => Case::Illative,
+            "adessive" => Case::Adessive,
+            "ablative" => Case::Ablative,
+            "allative" => Case::Allative,
+            "essive" => Case::Essive,
+            "translative" => Case::Translative,
+            "abessive" => Case::Abessive,
+            "comitative" => Case::Comitative,
+            "instructive" => Case::Instructive,
+            _ => {
+                return Err(ParseError {
+                    kind: "case",
+                    input: lower,
+                })
+            }
+        };
+        Ok(case)
     }
 }
 

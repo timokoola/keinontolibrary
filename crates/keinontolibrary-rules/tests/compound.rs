@@ -117,6 +117,48 @@ fn plural_head_compound_resolves() {
 }
 
 #[test]
+fn combining_head_and_nested_compounds() {
+    // Heads that are not free Kotus words (kulmio, niekka) decline via the combining-head
+    // registry; a nested compound (jää + viileäkaappi, itself viileä + kaappi) recurses.
+    let mut store = MemoryStore::new();
+    for (lemma, tn, av) in [
+        ("moni", 5u8, None),
+        ("kynä", 10, None),
+        ("jää", 18, None),
+        ("viileä", 10, None),
+        ("kaappi", 5, Some('B')),
+        ("viileäkaappi", 50, None), // a tn50 compound headword
+    ] {
+        store.insert(
+            lemma,
+            ParadigmRef::new(None, tn).with_av(av),
+            Number::Singular,
+            Case::Nominative,
+            Forms::present(vec![lemma.into()], Source::Lookup),
+        );
+    }
+    let e = Engine::builder()
+        .lookup(Box::new(store))
+        .generator(Box::new(RuleEngine::new()))
+        .build();
+    // combining head kulmio (tn3) behind a numeral combining-form prefix.
+    assert_eq!(
+        form(&e, "monikulmio", Number::Singular, Case::Inessive),
+        "monikulmiossa"
+    );
+    // combining head niekka (tn9*A) behind a known modifier.
+    assert_eq!(
+        form(&e, "kynäniekka", Number::Singular, Case::Inessive),
+        "kynäniekassa"
+    );
+    // nested compound: jää + viileäkaappi (which is viileä + kaappi) -> recurse.
+    assert_eq!(
+        form(&e, "jääviileäkaappi", Number::Singular, Case::Inessive),
+        "jääviileäkaapissa"
+    );
+}
+
+#[test]
 fn paradigm_agrees_with_decline_for_compounds() {
     // Regression: paradigm() once built empty slots for compounds where decline() served a
     // form (the two used different code paths). They now share one per-slot router.

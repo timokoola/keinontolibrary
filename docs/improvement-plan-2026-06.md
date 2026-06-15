@@ -237,8 +237,8 @@ to a review queue (could reuse the import-reports → GitHub-issue renderer in
   (e.g. 2k lemmas stratified by tn) for the inner edit-test loop, since full Voikko
   verification is minutes.
 - **Nightly GitHub Actions workflow** (`qa.yml`): apt-install `libvoikko-dev voikko-fi`,
-  pull corpus shards from `gs://suomiqueriestimokoolacom/` with a service-account
-  secret (cache them — they change rarely), run `just qa`, upload `qa/report.*` as
+  pull the private reference corpus from a secret location (cache it — it changes
+  rarely), run `just qa`, upload `qa/report.*` as
   artifacts, and on new regressions open a GitHub issue (reuse the import-reports
   pattern). Trend: append the summary numbers to `metrics/metrics.json` history so the
   LinkedIn chart gets a time axis for free.

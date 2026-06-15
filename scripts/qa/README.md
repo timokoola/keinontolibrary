@@ -23,9 +23,9 @@ two independent oracles, triage, fix, rerun.
 ```sh
 brew install libvoikko          # native library + voikko-fi dictionary
 scripts/qa/run.sh setup         # .venv with the libvoikko python wrapper
-scripts/qa/run.sh sync          # Kotus list (curl) + corpus shards (gsutil; needs
-                                #   gcloud auth as timo@timokoola.com, project
-                                #   suomicollector-queries)
+scripts/qa/run.sh sync          # public Kotus list (curl); the private reference corpus
+                                #   only if KEINONTO_CORPUS_URI is set (maintainer-only —
+                                #   the corpus is not redistributed)
 ```
 
 ## Running

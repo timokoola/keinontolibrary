@@ -46,6 +46,7 @@ fn main() -> std::io::Result<()> {
     let mut buckets: BTreeMap<String, Tally> = BTreeMap::new();
     let mut misses: Vec<(String, String)> = Vec::new(); // (lemma, sanaluokka)
     let mut total = Tally::default();
+    let mut indeclinable = 0u64; // tn99 rows skipped (out of scope)
 
     for (i, line) in text.lines().enumerate() {
         if i == 0 || line.trim().is_empty() {
@@ -57,9 +58,18 @@ fn main() -> std::io::Result<()> {
             continue;
         }
         let sanaluokka = cols.get(2).copied().unwrap_or("").trim();
-        let has_tn = cols.get(3).is_some_and(|t| !t.trim().is_empty());
+        let tn_field = cols.get(3).map_or("", |t| t.trim());
+        let has_tn = !tn_field.is_empty();
         // Only the nominal word classes are in our remit (verbs are out of scope).
         if !matches!(sanaluokka, "substantiivi" | "adjektiivi" | "numeraali") {
+            continue;
+        }
+        // Kotus tn99 = "no inflection": indeclinable by definition (alias, aprilli, ensi,
+        // the colloquial -isen approximates). Out of scope, like verbs — not a declension
+        // candidate, so excluded from the denominator.
+        let primary_tn = tn_field.split([',', ' ', '*', '(']).next().unwrap_or("");
+        if primary_tn == "99" {
+            indeclinable += 1;
             continue;
         }
         // Declinable iff the engine yields a real oblique form (plural inessive — present
@@ -67,8 +77,11 @@ fn main() -> std::io::Result<()> {
         // lemma (several paradigms) is still declinable: pick the first paradigm, exactly as
         // a caller would with `--tn`. Only a genuinely unresolved lemma falls to the
         // compound/inference path of `paradigm()`.
+        // A real oblique form in EITHER number: nouns have both, plurale tantum only the
+        // plural, numerals only the singular (kahdeksassakymmenessä). Any one suffices.
         let has_plural_inessive = |p: &keinontolibrary_core::Paradigm| {
             !p.get(Number::Plural, Case::Inessive).variants.is_empty()
+                || !p.get(Number::Singular, Case::Inessive).variants.is_empty()
         };
         let declinable = if let Ok(p) = engine.paradigm(lemma) {
             has_plural_inessive(&p)
@@ -127,5 +140,6 @@ fn main() -> std::io::Result<()> {
         pct(&total)
     );
     eprintln!("\n  {} misses -> {miss_path}", misses.len());
+    eprintln!("  ({indeclinable} tn99 indeclinable rows excluded — out of scope)");
     Ok(())
 }

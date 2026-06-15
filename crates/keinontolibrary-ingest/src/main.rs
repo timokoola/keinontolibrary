@@ -2,7 +2,7 @@
 //!
 //! Paths default to the repository's `data/` layout and can be overridden via environment
 //! variables: `KEINONTO_KOTUS`, `KEINONTO_VOIKKO`, `KEINONTO_ARTIFACT`, `KEINONTO_REPORT`,
-//! `KEINONTO_HARMONY`.
+//! `KEINONTO_HARMONY`, `KEINONTO_COMITATIVE`, `KEINONTO_CITATION`, `KEINONTO_ALTERNANTS`.
 
 use std::path::PathBuf;
 use std::time::Instant;
@@ -23,6 +23,7 @@ fn main() -> Result<()> {
         harmony_path: env_path("KEINONTO_HARMONY", "data/harmony-overrides.jsonl"),
         comitative_path: env_path("KEINONTO_COMITATIVE", "data/comitative-overrides.jsonl"),
         citation_path: env_path("KEINONTO_CITATION", "data/citation-overrides.jsonl"),
+        alternant_path: env_path("KEINONTO_ALTERNANTS", "data/alternant-overrides.jsonl"),
         version: env!("CARGO_PKG_VERSION").to_owned(),
     };
 

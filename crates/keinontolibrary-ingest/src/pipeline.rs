@@ -54,6 +54,75 @@ fn read_lemma_flags(path: &Path, flag: &str) -> HashMap<String, bool> {
         .collect()
 }
 
+/// Parse a `Number` from its lowercase display name (`singular`/`plural`).
+fn parse_number(s: &str) -> Option<Number> {
+    match s {
+        "singular" => Some(Number::Singular),
+        "plural" => Some(Number::Plural),
+        _ => None,
+    }
+}
+
+/// Parse a `Case` from its lowercase name (`inessive`, …), matching `Case::name`.
+fn parse_case(s: &str) -> Option<Case> {
+    Case::ALL.iter().copied().find(|c| c.name() == s)
+}
+
+/// A slot-level alternant override: `(lemma, tn, packed slot, variants)`.
+type AlternantOverride = (String, u8, u8, Vec<String>);
+
+/// Read slot-level alternant completions (JSONL `{"lemma","tn","number","case","variants"}`).
+/// A missing/unreadable file means none.
+fn read_alternant_overrides(path: &Path) -> Vec<AlternantOverride> {
+    let Ok(text) = std::fs::read_to_string(path) else {
+        return Vec::new();
+    };
+    text.lines()
+        .filter(|l| !l.trim().is_empty())
+        .filter_map(|l| serde_json::from_str::<serde_json::Value>(l).ok())
+        .filter_map(|v| {
+            let lemma = keinontolibrary_core::normalize(v.get("lemma")?.as_str()?);
+            let tn = u8::try_from(v.get("tn")?.as_u64()?).ok()?;
+            let number = parse_number(v.get("number")?.as_str()?)?;
+            let case = parse_case(v.get("case")?.as_str()?)?;
+            let variants: Vec<String> = v
+                .get("variants")?
+                .as_array()?
+                .iter()
+                .filter_map(|x| x.as_str().map(str::to_owned))
+                .collect();
+            if variants.is_empty() {
+                return None;
+            }
+            Some((lemma, tn, slot_index(number, case), variants))
+        })
+        .collect()
+}
+
+/// Union each alternant override's variants into its `(lemma, tn)` slot, preserving the
+/// corpus form as primary (`push_unique` keeps first-occurrence order). Returns the count
+/// of overrides whose slot actually gained a form. This runs after `group_forms`, so the
+/// completions flow through the same dedup, accusative derivation, and counting as corpus
+/// data.
+fn apply_alternant_overrides(groups: &mut Groups, overrides: &[AlternantOverride]) -> usize {
+    let mut applied = 0;
+    for (lemma, tn, slot, variants) in overrides {
+        let entry = groups
+            .entry((lemma.clone(), *tn))
+            .or_default()
+            .entry(*slot)
+            .or_default();
+        let before = entry.len();
+        for v in variants {
+            push_unique(entry, v.clone());
+        }
+        if entry.len() > before {
+            applied += 1;
+        }
+    }
+    applied
+}
+
 /// Where to read sources and write outputs.
 #[derive(Debug, Clone)]
 pub struct Config {
@@ -74,6 +143,12 @@ pub struct Config {
     /// Optional foreign-citation styles (JSONL `{"lemma", "sep", "front", "echo"}`,
     /// minted by `scripts/qa/gen_citation_overrides.py`). Missing file is fine.
     pub citation_path: PathBuf,
+    /// Optional slot-level alternant completions (JSONL
+    /// `{"lemma", "tn", "number", "case", "variants"}`, minted by
+    /// `scripts/qa/gen_alternant_overrides.py`). Each entry's variants are unioned into the
+    /// corpus slot — surfacing Voikko-verified rule alternants the corpus under-attested
+    /// (omena plural ablative: `omenilta` + `omenoilta`). Missing file is fine.
+    pub alternant_path: PathBuf,
     /// Version string stamped into the artifact metadata.
     pub version: String,
 }
@@ -99,6 +174,8 @@ pub struct Report {
     pub av_mismatches: usize,
     /// Vowel-harmony overrides applied (lemmas in both the inventory and the overrides file).
     pub harmony_overrides: usize,
+    /// Slot-level alternant completions that added at least one form to their slot.
+    pub alternant_overrides: usize,
     /// Distinct (lemma, paradigm, slot, variant) forms in the artifact.
     pub total_forms: u64,
     /// Form count per case (indexed by [`Case::index`]).
@@ -344,7 +421,12 @@ pub fn run(config: &Config) -> Result<Report> {
     let forms = parse_all(&shards)?;
     let reference_forms_kept = forms.len();
 
-    let (groups, av_seen, not_in_kotus) = group_forms(&inv, forms);
+    let (mut groups, av_seen, not_in_kotus) = group_forms(&inv, forms);
+
+    // Union Voikko-verified alternants the corpus under-attested into their slots (before
+    // the report/slot build, so they count and derive like corpus forms).
+    let alternants = read_alternant_overrides(&config.alternant_path);
+    let alternant_overrides = apply_alternant_overrides(&mut groups, &alternants);
 
     let mut report = Report {
         kotus_lemmas: inv.len(),
@@ -352,6 +434,7 @@ pub fn run(config: &Config) -> Result<Report> {
         kotus_skipped_non_nouns: inv.skipped_non_nouns,
         reference_forms_kept,
         reference_forms_not_in_kotus: not_in_kotus,
+        alternant_overrides,
         ..Report::default()
     };
 

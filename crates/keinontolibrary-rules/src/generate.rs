@@ -1048,7 +1048,7 @@ pub fn generate(
         && analyze(lemma, tn, av, front).is_none()
     {
         if let Some(s) = tantum_stems(lemma, tn, av, front) {
-            return assemble(lemma, &s, a, adjective, number, case);
+            return assemble(lemma, &s, a, adjective, number, case, &[]);
         }
     }
     // askel/askele (tn49): BOTH the short tn32-style and the long tn48-style readings
@@ -1068,9 +1068,9 @@ pub fn generate(
             (None, lemma.to_owned())
         };
         let long = analyze(&e_base, 48, None, front)?;
-        let long_forms = assemble(lemma, &long, a, adjective, number, case);
+        let long_forms = assemble(lemma, &long, a, adjective, number, case, &[]);
         let short_forms = match short {
-            Some(s) => assemble(lemma, &s, a, adjective, number, case),
+            Some(s) => assemble(lemma, &s, a, adjective, number, case, &[]),
             None if number == Number::Singular
                 && matches!(case, Case::Genitive | Case::Accusative) =>
             {
@@ -1092,10 +1092,20 @@ pub fn generate(
         };
     }
     let s = analyze(lemma, tn, av, front)?;
-    assemble(lemma, &s, a, adjective, number, case)
+    // tn11 (omena) has a parallel -oi- plural stem alongside the primary -i- one; offer its
+    // local/adverbial plural forms as alternants (omenoissa, omenoilta, … beside omenissa).
+    let pl_alt = if tn == 11 {
+        vec![format!("{}{}i", drop_last(lemma), oo(lemma))]
+    } else {
+        Vec::new()
+    };
+    assemble(lemma, &s, a, adjective, number, case, &pl_alt)
 }
 
-/// Assemble one slot's surface forms from a stem analysis.
+/// Assemble one slot's surface forms from a stem analysis. `pl_alt` carries extra plural
+/// stems for classes with a parallel plural (tn11 omena: `omeni-` AND `omenoi-`); their
+/// local/adverbial plural forms are appended as alternants. Genitive/partitive plural carry
+/// their own variant lists (`s.gen_pl`/`s.part_pl`) and are left untouched.
 fn assemble(
     lemma: &str,
     s: &Stems,
@@ -1103,6 +1113,7 @@ fn assemble(
     adjective: bool,
     number: Number,
     case: Case,
+    pl_alt: &[String],
 ) -> Option<Vec<String>> {
     let g = grade(number, case);
     let sg = if g == Grade::Strong {
@@ -1116,7 +1127,7 @@ fn assemble(
         &s.pl_weak
     };
 
-    let forms = match (number, case) {
+    let mut forms = match (number, case) {
         (Number::Singular, Case::Nominative) => vec![lemma.to_owned()],
         (Number::Singular, Case::Genitive | Case::Accusative) => vec![format!("{}n", s.sg_weak)],
         (Number::Singular, Case::Partitive) => s.part_sg.clone(),
@@ -1157,6 +1168,32 @@ fn assemble(
         }
         (Number::Plural, Case::Instructive) => vec![format!("{}n", s.pl_weak)],
     };
+    // Parallel-plural classes (tn11): append the alternate-stem forms for the cases built
+    // off the plural stem. Nominative/genitive/partitive/accusative carry their own lists.
+    if number == Number::Plural {
+        for alt in pl_alt {
+            let extra = match case {
+                Case::Inessive => vec![format!("{alt}ss{a}")],
+                Case::Elative => vec![format!("{alt}st{a}")],
+                Case::Illative => plural_illative(alt),
+                Case::Adessive => vec![format!("{alt}ll{a}")],
+                Case::Ablative => vec![format!("{alt}lt{a}")],
+                Case::Allative => vec![format!("{alt}lle")],
+                Case::Essive => vec![format!("{alt}n{a}")],
+                Case::Translative => vec![format!("{alt}ksi")],
+                Case::Abessive => vec![format!("{alt}tt{a}")],
+                Case::Instructive => vec![format!("{alt}n")],
+                Case::Comitative if adjective => vec![format!("{alt}ne")],
+                Case::Comitative => vec![format!("{alt}neen"), format!("{alt}nens{a}")],
+                _ => vec![],
+            };
+            for f in extra {
+                if !forms.contains(&f) {
+                    forms.push(f);
+                }
+            }
+        }
+    }
     Some(forms)
 }
 
@@ -1172,6 +1209,45 @@ mod tests {
     // loanwords) keep the stem vowel before the plural -i- (Voikko-verified: aaloeita,
     // animeissa; *aaloita/*animissa are non-words). tn2 -e additionally takes the light
     // j-endings: animeja/animejen, not *animeita/*animeiden. Found by the QA loop.
+    // tn11 (omena) has a parallel -oi- plural stem beside the primary -i- one. Every
+    // plural local/adverbial case offers both (omenissa~omenoissa, omenilta~omenoilta;
+    // all Voikko-verified); the primary stays the -i- form. The ablative is the slot the
+    // reference corpus under-attested (only omenilta), so it must come from the rules.
+    #[test]
+    fn tn11_omena_offers_parallel_oi_plural_stem() {
+        let all = |c| generate("omena", 11, None, false, None, Number::Plural, c).unwrap();
+        for (case, primary, alt) in [
+            (Case::Inessive, "omenissa", "omenoissa"),
+            (Case::Elative, "omenista", "omenoista"),
+            (Case::Illative, "omeniin", "omenoihin"),
+            (Case::Adessive, "omenilla", "omenoilla"),
+            (Case::Ablative, "omenilta", "omenoilta"),
+            (Case::Allative, "omenille", "omenoille"),
+            (Case::Essive, "omenina", "omenoina"),
+            (Case::Translative, "omeniksi", "omenoiksi"),
+            (Case::Abessive, "omenitta", "omenoitta"),
+        ] {
+            let forms = all(case);
+            assert_eq!(forms[0], primary, "{case:?} primary");
+            assert!(
+                forms.contains(&alt.to_owned()),
+                "{case:?} missing {alt}: {forms:?}"
+            );
+        }
+        // Front-harmony tn11 (the -ä type) rounds to -öi-: käpälä -> käpälöissä.
+        assert!(generate(
+            "käpälä",
+            11,
+            None,
+            false,
+            None,
+            Number::Plural,
+            Case::Inessive
+        )
+        .unwrap()
+        .contains(&"käpälöissä".to_owned()));
+    }
+
     #[test]
     fn vowel_stem_final_e_keeps_stem_vowel_in_plural() {
         let g = |n, c| one("aaloe", 3, None, n, c);

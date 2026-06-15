@@ -47,11 +47,14 @@ sync() {
 }
 
 harmony() {
-  # Voikko-probed per-lemma overrides (harmony + comitative style), minted from the
-  # QA dump; committed in data/. Regenerate after rule changes, then re-ingest.
+  # Voikko-probed overrides minted from the QA dump; committed in data/. Regenerate after
+  # rule changes, then re-ingest. Per-lemma: harmony + comitative style + citation. Plus
+  # slot-level alternant completions (rule alternants the corpus under-attested, e.g.
+  # omenoilta) — needs a dump to read, so it is skipped if qa/generated.jsonl is absent.
   $PY scripts/qa/gen_harmony_overrides.py
   $PY scripts/qa/gen_comitative_overrides.py
   $PY scripts/qa/gen_citation_overrides.py
+  if [[ -s qa/generated.jsonl ]]; then $PY scripts/qa/gen_alternant_overrides.py; fi
 }
 ingest()  {
   if [[ -x $PY && ! -s data/harmony-overrides.jsonl ]]; then harmony; fi

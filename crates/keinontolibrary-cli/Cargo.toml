@@ -1,6 +1,6 @@
 [package]
 name = "keinontolibrary-cli"
-description = "Command-line interface: decline, paradigm, add, override, validate."
+description = "Command-line interface: decline, paradigm, table, add, override, validate, selftest."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -15,6 +15,7 @@ path = "src/main.rs"
 [dependencies]
 keinontolibrary-core = { workspace = true, features = ["serde"] }
 keinontolibrary-data = { workspace = true }
+keinontolibrary-rules = { workspace = true }
 clap = { workspace = true }
 serde_json = { workspace = true }
 anyhow = { workspace = true }

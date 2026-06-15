@@ -5,7 +5,7 @@ The gap decomposes into five buckets; this plans all of them, with the two
 "nerd-test" buckets (pronouns, compound ordinals) first. Each bucket lands as
 its own QA cycle: implement → full Voikko loop → 0 regressions → merge.
 
-## Cycle 10a — pronouns (tn101, ~765 slots) ★ nerd-test priority
+## Cycle 10a — pronouns (tn101, ~765 slots) ★ nerd-test priority — ✅ DONE
 
 `hän`, `he`, `joka`, `joku`, `jokin`, `kuka`, `ken`, `mikä`, `kukin`,
 `kumpikin`, `jompikumpi`, `mikään`, `kukaan`, `kenkään`, `muuan`, …
@@ -20,10 +20,11 @@ its own QA cycle: implement → full Voikko loop → 0 regressions → merge.
   pattern). Multiword `itse kukin` waits for bucket 5's space-compound route.
 - Registry caps: ~15 lemmas × ~25 rows ≈ 375 rows on top of 500 → fits the
   1500/64 caps with room.
-- Scope note: README currently lists kuka/mikä/joka as out of scope — this
-  cycle reverses that; update README.
+- Scope note: ✅ done — `kuka/mikä/kumpi/joka` are now registry-served (correct
+  suppletive stems `kenen/minkä/kumman/jonka`, Voikko-verified) and listed under
+  **In** in the README.
 
-## Cycle 10b — compound ordinals (tn45 both-part, ~216 slots) ★ nerd-test priority
+## Cycle 10b — compound ordinals (tn45 both-part, ~216 slots) ★ nerd-test priority — ✅ DONE
 
 `kahdeskymmenes → kahdennenkymmenennen`, … (8 Kotus lemmas + productive).
 

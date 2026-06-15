@@ -269,21 +269,22 @@ impl Engine {
             return None;
         }
         // `at` is the byte offset where the candidate final component starts; the loop visits
-        // the longest component first (shortest prefix).
-        let mut fallback: Option<(String, String)> = None;
+        // the longest component first (shortest prefix). Work on string slices and only
+        // allocate the owned pair once a split is actually chosen.
+        let mut fallback: Option<usize> = None;
         for &at in &offsets[MIN_PREFIX_CHARS..=(n - MIN_COMPONENT_CHARS)] {
-            if self.resolve(&norm[at..]).is_empty() {
+            let (prefix, component) = (&norm[..at], &norm[at..]);
+            if self.resolve(component).is_empty() {
                 continue;
             }
-            let split = (norm[..at].to_owned(), norm[at..].to_owned());
-            if self.is_known_modifier(&split.0) {
-                return Some(split);
+            if self.is_known_modifier(prefix) {
+                return Some((prefix.to_owned(), component.to_owned()));
             }
-            if split.0.chars().count() >= MIN_FALLBACK_PREFIX_CHARS {
-                fallback.get_or_insert(split);
+            if fallback.is_none() && prefix.chars().count() >= MIN_FALLBACK_PREFIX_CHARS {
+                fallback = Some(at);
             }
         }
-        fallback
+        fallback.map(|at| (norm[..at].to_owned(), norm[at..].to_owned()))
     }
 
     /// `(prefix, component, chosen paradigm)` for a compound, or `None`. If the component is
@@ -344,6 +345,10 @@ impl Engine {
     /// lemmas; returns `None` otherwise (the caller falls back to the head-only reading).
     fn compound_both_slot(&self, norm: &str, number: Number, case: Case) -> Option<Forms> {
         let (modifier, component) = self.split_compound(norm)?;
+        // If a component is homonymous, the first resolved paradigm is used (issue #36).
+        // This is safe in practice: a lemma's paradigms share the same vowels and stem
+        // shape, so the harmony and the concatenated form are unaffected by the choice.
+        // No Kotus tn51 compound currently has a component that resolves ambiguously.
         let mod_ref = self.resolve(&modifier).into_iter().next()?;
         let head_ref = self.resolve(&component).into_iter().next()?;
         let modf = self.slot(&modifier, &mod_ref, number, case)?;

@@ -615,7 +615,7 @@ const COMPOUND_BOTH_TN: u8 = 51;
 /// known lemma, so a coincidental match (`ali`+bi) cannot fire — `bi` is not a lemma.
 const BOUND_PREFIXES: &[&str] = &[
     "avo", "ali", "ala", "yli", "ylä", "ulko", "sisä", "etu", "taka", "etä", "eri", "esi", "iki",
-    "eko", "bio", "geo", "neo", "epä", "aku", "aju", "apu",
+    "eko", "bio", "geo", "neo", "epä", "aku", "aju", "apu", "hää",
 ];
 
 /// Known short heads (2 chars) that the general scan (min 3) skips but that form real

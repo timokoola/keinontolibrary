@@ -140,6 +140,12 @@ pub fn infer_class(lemma: &str) -> Option<ParadigmRef> {
     if n >= 5 && lemma.ends_with("nen") {
         return Some(ParadigmRef::new(None, 38));
     }
+    // -ias/-iäs adjectives are tn41 (vieras-type: vuotias -> vuotiaan): exceptionless among
+    // unlisted words — the few foreign -ias (alias tn99, iskias tn39) are all in the lookup,
+    // so this only fires for productive forms like the `-vuotias` age adjectives.
+    if n >= 6 && (lemma.ends_with("ias") || lemma.ends_with("iäs")) {
+        return Some(ParadigmRef::new(None, 41));
+    }
     None
 }
 

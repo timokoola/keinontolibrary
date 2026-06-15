@@ -101,14 +101,30 @@ fn main() -> ExitCode {
     let cli = Cli::parse();
     match run(cli) {
         Ok(()) => ExitCode::SUCCESS,
-        Err(e) => {
+        // A lookup that found no answer (unknown/ambiguous/defective) is a distinct,
+        // scriptable exit code from a setup error (bad artifact, I/O).
+        Err(RunError::NotFound) => ExitCode::from(3),
+        Err(RunError::Other(e)) => {
             eprintln!("error: {e:#}");
             ExitCode::FAILURE
         }
     }
 }
 
-fn run(cli: Cli) -> anyhow::Result<()> {
+/// CLI run outcome: `NotFound` for a query the engine could not answer (exit 3),
+/// `Other` for setup/usage failures (exit 1).
+enum RunError {
+    NotFound,
+    Other(anyhow::Error),
+}
+
+impl<E: Into<anyhow::Error>> From<E> for RunError {
+    fn from(e: E) -> Self {
+        RunError::Other(e.into())
+    }
+}
+
+fn run(cli: Cli) -> Result<(), RunError> {
     let bundle = build_engine(&cli.artifact, &cli.overlay)
         .map_err(|e| anyhow::anyhow!("loading artifact {}: {e}", cli.artifact.display()))?;
 
@@ -123,9 +139,15 @@ fn run(cli: Cli) -> anyhow::Result<()> {
         } => {
             let result = decline(&bundle.engine, &word, number, case, tn, hn);
             print_forms_result(&word, number, case, &result, json);
+            // Scripts can rely on the exit code, not stderr parsing.
+            if result.is_err() {
+                return Err(RunError::NotFound);
+            }
         }
         Command::Paradigm { word, tn, hn, json } => {
-            print_paradigm(&bundle.engine, &word, tn, hn, json);
+            if !print_paradigm(&bundle.engine, &word, tn, hn, json) {
+                return Err(RunError::NotFound);
+            }
         }
         Command::Add(args) | Command::Override(args) => {
             let entry = args.into_entry();
@@ -181,7 +203,9 @@ fn print_forms_result(
     }
 }
 
-fn print_paradigm(engine: &Engine, word: &str, tn: Option<u8>, hn: Option<u8>, json: bool) {
+/// Print a paradigm; returns `false` when the lemma could not be resolved (so the caller
+/// can exit nonzero).
+fn print_paradigm(engine: &Engine, word: &str, tn: Option<u8>, hn: Option<u8>, json: bool) -> bool {
     let result = match tn {
         Some(tn) => engine.paradigm_with(word, &ParadigmRef::new(hn, tn)),
         None => engine.paradigm(word),
@@ -197,8 +221,12 @@ fn print_paradigm(engine: &Engine, word: &str, tn: Option<u8>, hn: Option<u8>, j
                 println!("  {number:<8} {case:<12} {}", forms.variants.join(", "));
             }
         }
-        Err(e) => print_error(&e),
+        Err(e) => {
+            print_error(&e);
+            return false;
+        }
     }
+    true
 }
 
 fn print_error(e: &Error) {

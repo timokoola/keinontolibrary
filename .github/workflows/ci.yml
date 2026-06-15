@@ -32,3 +32,24 @@ jobs:
 
       - name: Test
         run: cargo test --all-features
+
+  msrv:
+    name: MSRV (1.82)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Pinned to the rust-version declared in Cargo.toml; a dependency or syntax bump
+      # that needs a newer compiler fails here, not for downstream consumers.
+      - uses: dtolnay/rust-toolchain@1.82
+      - uses: Swatinem/rust-cache@v2
+      - name: Build at MSRV
+        run: cargo build --all-features --all-targets
+
+  audit:
+    name: cargo-audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: rustsec/audit-check@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

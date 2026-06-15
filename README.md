@@ -12,9 +12,11 @@ consonant gradation), and is validated against a ~400k-form corpus so test cover
 near-exhaustive by construction.
 
 > **Status:** runnable end to end — library, CLI, HTTP service, overlay, FFI scaffold, and a
-> <10 MB container. The rule-engine fallback covers 34 Kotus classes at ~98% agreement with
-> the reference corpus; the remaining irregular classes and the Cloudflare Workers target are
-> the open work (see [Roadmap](#roadmap)). The working/repo name is `keinontolibrary`
+> <10 MB container. Every nominal declension class in the **Kotus 1–51 range is in scope and
+> covered** — the rule generator handles the bulk directly (~98% rule↔corpus agreement) and
+> the Voikko-verified exception registry + overrides serve the irregulars the generator
+> doesn't, so the gate runs at full coverage. The remaining open work is the Cloudflare
+> Workers target (see [Roadmap](#roadmap)). The working/repo name is `keinontolibrary`
 > (`keinonto` = the instructive case); the crate prefix is `keinontolibrary-*`.
 
 ## Workspace layout
@@ -34,12 +36,15 @@ near-exhaustive by construction.
 - **In:** all **nominals** — substantives, **adjectives**, and **numerals** — in declension
   classes 1–49 with gradation, all 15 cases, both numbers, multi-paradigm homonyms. Nominals
   share the declension classes, so the class-driven engine handles them uniformly (the ingest
-  keeps every nominal word class, not just `substantiivi`). Plus the **core pronouns** (Kotus
-  tn 101 — irregular: the personal `minä/sinä/hän/me/te/he` and the demonstratives
-  `se/tämä/tuo/nämä/nuo/ne`), served from the Voikko-verified exception registry rather than
-  the rule generator. Plus the **special numeral classes**: the productive **ordinals** (tn 45
+  keeps every nominal word class, not just `substantiivi`). Plus the **pronouns** (Kotus
+  tn 101 — irregular: the personal `minä/sinä/hän/me/te/he`, the demonstratives
+  `se/tämä/tuo/nämä/nuo/ne`, and the interrogative/relative `kuka/mikä/kumpi/joka` with their
+  suppletive oblique stems — `kuka → kenen/ketä`, `mikä → minkä`, `joka → jonka`), served from
+  the Voikko-verified exception registry rather than the rule generator. Plus the **special numeral classes**: the productive **ordinals** (tn 45
   — `kolmas → kolmannen`, `kymmenes`, `neljäs`, … incl. the pronominal `mones`) via a rule
-  arm, and the singletons `kaksi`/`yksi` (tn 31) and `tuhat` (tn 46) from the registry. Plus
+  arm — including **compound ordinals** like `kahdeskymmenes`, where *both* components decline
+  (`kahdennenkymmenennen`, `kahdettakymmenettä`; Voikko-verified) — and the singletons
+  `kaksi`/`yksi` (tn 31) and `tuhat` (tn 46) from the registry. Plus
   **compounds**, both Kotus classes plus any productive compound whose final component is a
   known lemma: **tn 50** head-inflecting (modifier frozen, harmony follows the head —
   `koirankeksi` → `koirankeksissä`, `halpakauppa` → `halpakaupoissa`) and **tn 51**
@@ -47,10 +52,17 @@ near-exhaustive by construction.
   Segmentation prefers a split where both parts are known lemmas. Validated by a
   Voikko-oracle compound-parity harness at ~99.8% (tn 50) / ~99.7% (tn 51) of judged slots;
   design and test-data plan: [`docs/compound-nouns.md`](docs/compound-nouns.md).
-- **Out:** verbs; adjective **comparison** (comparative/superlative); the **interrogative /
-  relative pronouns** (`kuka/mikä/kumpi/joka` — irregular oblique stems, tracked separately);
-  a general possessive-suffix system; class inference for unlisted *simple* words; and the
-  modifier-inflecting **compound ordinals** like `kahdeskymmenes` (only the head declines).
+- **Out:** **verbs** — conjugation is the one word class not handled, and the only
+  out-of-scope item (a roadmap item; see [Roadmap](#roadmap)). Every **nominal** declension
+  class in the **Kotus 1–51 range** is in scope; if you find a 1–51 case that isn't covered,
+  that's a bug, not a scope boundary (scope has widened as the engine matured).
+- **Not declension, so not produced** (these are separate morphology, not scope exclusions):
+  comparative/superlative *derivation* from a positive (`suuri → suurempi`) — but the derived
+  word itself **declines** as an ordinary adjective once known (`parempi → paremman`,
+  `vanhin → vanhimman`, tn 16/6); possessive suffixes and clitics (`taloni`, `talokin`),
+  beyond the comitative's obligatory `-ineen`; and class *inference* for an unlisted simplex
+  word — the engine declines a word whose class it knows (from Kotus, the registry, compound
+  segmentation, or an overlay `add`), it does not guess a class for a word it has never seen.
 
 ## Documentation
 
@@ -130,11 +142,18 @@ docker run -p 8080:8080 keinontolibrary
   covering ~99.4% of all corpus slots. An **exception registry** (`exceptions.toml`,
   CI-capped) overrides the generator for documented irregulars: the `aie` k-insertion
   family plus the singleton/irregular classes `mies` (42), `kevät` (44), `lapsi` (29),
-  `veitsi` (30) — all at 100% parity. Remaining: a few numerals/comparatives, the dual-stem
-  `askel` (49), and the long tail (loanword harmony, the 39/40 `-Us` boundary).
+  `veitsi` (30) — all at 100% parity. The slots the *rule arm* still doesn't generate
+  natively (a few numerals, the dual-stem `askel` (49), the loanword-harmony / 39–40 `-Us`
+  long tail) are served by the registry, overrides, and lookup, so end coverage across 1–51
+  is complete — these are rule-generator polish, not scope gaps. (Comparative and superlative
+  *forms* decline normally as tn 16/6 adjectives; only their *derivation* from the positive is
+  a separate, non-declension concern.)
 - ⬜ **Cloudflare Workers target** (`keinontolibrary-worker`): edge deployment backed by
   KV/D1/R2. The storage abstraction it needs already exists as the `FormStore` trait in
   `keinontolibrary-core`.
+- ⬜ **Verb conjugation** — the one word class still out of scope. Finnish verbs (Kotus
+  taivutustyypit 52–78) are a separate inflection system (tense, mood, person, voice,
+  infinitives, participles); they would extend, not modify, the nominal engine. Not started.
 
 ## Data provenance & attribution
 

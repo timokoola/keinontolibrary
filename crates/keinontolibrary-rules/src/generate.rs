@@ -1313,8 +1313,9 @@ mod tests {
     }
 
     // Citation forms hiding the vowel stem (Voikko-verified): the -n cardinals and
-    // kymmenen. Compound ordinals inflect both parts — out of scope, so no generation.
-    // Found by the QA loop.
+    // kymmenen. Compound ordinals (kahdeskymmenes) inflect both parts and are handled by the
+    // compound splitter in the engine layer, not this single-lemma generate — which therefore
+    // returns None for them (the engine recombines `kahdes`+`kymmenes`). Found by the QA loop.
     #[test]
     fn numeral_citation_stems() {
         assert_eq!(
@@ -2093,7 +2094,8 @@ mod tests {
 
     #[test]
     fn unsupported_class_returns_none() {
-        // tn44 (kevät) is still unsupported.
+        // The bare rule arm has no tn44 generator, so `generate` returns None — kevät is
+        // served end-to-end by the exception registry (`RuleEngine`/lookup), not here.
         assert!(generate(
             "kevät",
             44,

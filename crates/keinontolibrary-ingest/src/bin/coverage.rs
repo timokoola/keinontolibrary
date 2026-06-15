@@ -62,12 +62,27 @@ fn main() -> std::io::Result<()> {
         if !matches!(sanaluokka, "substantiivi" | "adjektiivi" | "numeraali") {
             continue;
         }
-        // Declinable iff the engine yields a real oblique form. Plural inessive exists for
-        // every count noun; for plurale tantum it is the natural primary slot.
-        let declinable = engine
-            .paradigm(lemma)
-            .ok()
-            .is_some_and(|p| !p.get(Number::Plural, Case::Inessive).variants.is_empty());
+        // Declinable iff the engine yields a real oblique form (plural inessive — present
+        // for every count noun, the natural primary slot for plurale tantum). An *ambiguous*
+        // lemma (several paradigms) is still declinable: pick the first paradigm, exactly as
+        // a caller would with `--tn`. Only a genuinely unresolved lemma falls to the
+        // compound/inference path of `paradigm()`.
+        let has_plural_inessive = |p: &keinontolibrary_core::Paradigm| {
+            !p.get(Number::Plural, Case::Inessive).variants.is_empty()
+        };
+        let declinable = if let Ok(p) = engine.paradigm(lemma) {
+            has_plural_inessive(&p)
+        } else {
+            // `paradigm()` errors on an *ambiguous* lemma (several paradigms); it is still
+            // declinable — pick the first paradigm, as a caller would with `--tn`. (Unknown
+            // lemmas already exhausted the compound/inference path inside `paradigm()`.)
+            let refs = engine.resolve(&keinontolibrary_core::normalize(lemma));
+            refs.len() > 1
+                && engine
+                    .paradigm_with(lemma, &refs[0])
+                    .ok()
+                    .is_some_and(|p| has_plural_inessive(&p))
+        };
 
         let key = format!(
             "{sanaluokka:<12} {}",

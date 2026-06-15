@@ -104,6 +104,16 @@ fn plural_head_compound_resolves() {
     assert!(e
         .decline("xyvalot", Number::Plural, Case::Inessive)
         .is_err());
+    // Simplex plurale tantum: the whole word is a plural in the index (no prefix).
+    assert_eq!(
+        form(&e, "valot", Number::Plural, Case::Inessive),
+        "valoissa"
+    );
+    // Explicit hyphen boundary with a plural head.
+    assert_eq!(
+        form(&e, "tv-valot", Number::Plural, Case::Inessive),
+        "tv-valoissa"
+    );
 }
 
 #[test]
@@ -133,6 +143,11 @@ fn frontier_resolvers_split_and_infer() {
     assert_eq!(
         form(&e, "ahdaskatseinen", Number::Singular, Case::Genitive),
         "ahdaskatseisen"
+    );
+    // epä- is a productive bound prefix (epä + known head).
+    assert_eq!(
+        form(&e, "epäauto", Number::Singular, Case::Genitive),
+        "epäauton"
     );
     // A simplex word with no inferable class still errors (not a false split).
     assert!(e

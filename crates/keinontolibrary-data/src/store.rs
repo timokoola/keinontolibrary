@@ -5,7 +5,9 @@ use std::collections::HashMap;
 use std::io;
 use std::path::Path;
 
-use keinontolibrary_core::{Case, Engine, FormStore, Forms, ParadigmRef, Source, Status};
+use keinontolibrary_core::{
+    Case, Engine, FormStore, Forms, Generator, Number, ParadigmRef, PluralHead, Source, Status,
+};
 
 use crate::artifact::{slot_index, Artifact, LemmaRecord, Meta};
 
@@ -73,6 +75,12 @@ impl LookupData {
 
     fn record(&self, lemma: &str) -> Option<&LemmaRecord> {
         self.index.get(lemma).map(|&i| &self.lemmas[i])
+    }
+
+    /// All lemma records, for offline index building (e.g. the plural-head reverse index).
+    #[must_use]
+    pub fn lemmas(&self) -> &[LemmaRecord] {
+        &self.lemmas
     }
 }
 
@@ -151,16 +159,51 @@ pub fn build_engine(
     let lookup = LookupData::load(artifact_path)?;
     let meta = lookup.meta().clone();
     let overlay = crate::overlay::Overlay::open(overlay_path)?;
+    let rules = keinontolibrary_rules::RuleEngine::new();
+    let plural_index = build_plural_index(&lookup, &rules);
     let engine = Engine::builder()
         .lookup(Box::new(lookup))
         .overlay(Box::new(overlay.clone()))
-        .generator(Box::new(keinontolibrary_rules::RuleEngine::new()))
+        .generator(Box::new(rules))
+        .plural_index(plural_index)
         .build();
     Ok(EngineBundle {
         engine,
         overlay,
         meta,
     })
+}
+
+/// Build the plural-head reverse index: every inventory lemma's *generated* plural
+/// nominative (via the registry-aware rule engine, so gradation and irregulars are
+/// handled — `käsi` -> `kädet`) mapped back to that lemma. Lets plurale-tantum compounds
+/// (`ajovalot` -> head `valo`) decline on the head in the plural. First writer wins on a
+/// collision (a lemma's paradigms share vowels, so the choice is harmless).
+fn build_plural_index(
+    lookup: &LookupData,
+    rules: &keinontolibrary_rules::RuleEngine,
+) -> HashMap<String, PluralHead> {
+    let mut index: HashMap<String, PluralHead> = HashMap::new();
+    for rec in lookup.lemmas() {
+        for p in &rec.paradigms {
+            let reference = ParadigmRef::new(None, p.tn)
+                .with_av(p.av)
+                .with_adjective(rec.adjective)
+                .with_front_harmony(rec.front_harmony);
+            let Some(forms) =
+                rules.generate(&rec.lemma, &reference, Number::Plural, Case::Nominative)
+            else {
+                continue;
+            };
+            for variant in &forms.variants {
+                index.entry(variant.clone()).or_insert_with(|| PluralHead {
+                    lemma: rec.lemma.clone(),
+                    reference: reference.clone(),
+                });
+            }
+        }
+    }
+    index
 }
 
 #[cfg(test)]

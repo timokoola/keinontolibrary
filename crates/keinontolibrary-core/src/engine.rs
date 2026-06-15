@@ -51,11 +51,25 @@ pub trait Generator: fmt::Debug + Send + Sync {
     }
 }
 
+/// A head lemma reached via its plural-nominative surface — the value of the plural-head
+/// reverse index. Carries the lemma string and its paradigm so a plurale-tantum compound
+/// (`ajovalot` = `ajo` + plural of `valo`) can be declined on the head in the plural.
+#[derive(Debug, Clone)]
+pub struct PluralHead {
+    /// The head lemma (singular base), e.g. `valo` for the tail `valot`.
+    pub lemma: String,
+    /// Its paradigm.
+    pub reference: ParadigmRef,
+}
+
 /// The declension engine: holds the providers and runs the resolution pipeline.
 pub struct Engine {
     lookup: Box<dyn FormStore>,
     overlay: Option<Box<dyn FormStore>>,
     generator: Option<Box<dyn Generator>>,
+    /// Reverse index `plural-nominative surface -> head lemma`, for plural-head compounds
+    /// (`ajovalot`, `aluevaalit`). Empty unless populated at construction (`build_engine`).
+    plural_index: HashMap<String, PluralHead>,
 }
 
 impl fmt::Debug for Engine {
@@ -64,6 +78,7 @@ impl fmt::Debug for Engine {
             .field("lookup", &self.lookup)
             .field("has_overlay", &self.overlay.is_some())
             .field("has_generator", &self.generator.is_some())
+            .field("plural_index_len", &self.plural_index.len())
             .finish()
     }
 }
@@ -81,6 +96,7 @@ impl Engine {
             lookup: Box::new(EmptyStore),
             overlay: None,
             generator: None,
+            plural_index: HashMap::new(),
         }
     }
 
@@ -93,6 +109,7 @@ impl Engine {
             // (last resort) a productive form whose class we can infer (-nen -> tn38).
             [] => self
                 .compound_slot(&norm, number, case)
+                .or_else(|| self.plural_head_slot(&norm, number, case))
                 .or_else(|| self.inferred_slot(&norm, number, case))
                 .ok_or(Error::UnknownWord(norm)),
             // A tn51 compound: both parts inflect (isoveli -> isoissaveljissä). Falls back to
@@ -148,6 +165,7 @@ impl Engine {
         match refs.as_slice() {
             [] => self
                 .compound_paradigm(&norm)
+                .or_else(|| self.plural_head_paradigm(&norm))
                 .or_else(|| self.inferred_paradigm(&norm))
                 .ok_or(Error::UnknownWord(norm)),
             [only] if only.tn == COMPOUND_BOTH_TN => Ok(self
@@ -387,6 +405,86 @@ impl Engine {
         }))
     }
 
+    // --- plural-head (plurale-tantum) compounds -----------------------------------------
+    //
+    // `ajovalot`, `aluevaalit`, `arkiolot`: Kotus lists these as plurals with no tn, and the
+    // head surfaces as a plural (`valot` = plural of `valo`), so the singular-lemma splitter
+    // cannot see it. The plural-head reverse index maps a plural-nominative surface back to
+    // its head lemma; the compound then declines on that head in the plural (singular slots
+    // are defective — the lemma is a lexical plural).
+
+    /// Split `norm` into `(prefix, head)` where the tail is a known lemma's plural
+    /// nominative (per the reverse index). Longest tail first. The prefix must be a known
+    /// modifier, a bound prefix, or a long (>= 4) frozen modifier, so an arbitrary word
+    /// ending in a common plural is not mis-split.
+    fn split_plural_head(&self, norm: &str) -> Option<(String, PluralHead)> {
+        const MIN_PREFIX_CHARS: usize = 2;
+        const MIN_TAIL_CHARS: usize = 3;
+        if self.plural_index.is_empty() {
+            return None;
+        }
+        let offsets: Vec<usize> = norm.char_indices().map(|(i, _)| i).collect();
+        let n = offsets.len();
+        if n < MIN_PREFIX_CHARS + MIN_TAIL_CHARS {
+            return None;
+        }
+        let mut fallback: Option<(usize, PluralHead)> = None;
+        for &at in &offsets[MIN_PREFIX_CHARS..=(n - MIN_TAIL_CHARS)] {
+            let (prefix, tail) = (&norm[..at], &norm[at..]);
+            let Some(head) = self.plural_index.get(tail) else {
+                continue;
+            };
+            if self.is_known_modifier(prefix) || is_bound_prefix(prefix) {
+                return Some((prefix.to_owned(), head.clone()));
+            }
+            if fallback.is_none() && prefix.chars().count() >= 4 {
+                fallback = Some((at, head.clone()));
+            }
+        }
+        fallback.map(|(at, head)| (norm[..at].to_owned(), head))
+    }
+
+    /// One slot of a plural-head compound. Plural slots decline the head in the plural with
+    /// the prefix re-attached; singular slots are defective (`None`).
+    fn plural_head_slot(&self, norm: &str, number: Number, case: Case) -> Option<Forms> {
+        if number == Number::Singular {
+            return None;
+        }
+        let (prefix, head) = self.split_plural_head(norm)?;
+        let mut forms = self.slot(&head.lemma, &head.reference, Number::Plural, case)?;
+        if forms.is_missing() {
+            return None;
+        }
+        forms.variants = forms
+            .variants
+            .iter()
+            .map(|v| format!("{prefix}{v}"))
+            .collect();
+        Some(forms)
+    }
+
+    /// The whole paradigm of a plural-head compound: plural slots filled, singular missing.
+    fn plural_head_paradigm(&self, norm: &str) -> Option<Paradigm> {
+        let (prefix, head) = self.split_plural_head(norm)?;
+        let reference = head.reference.clone();
+        Some(Paradigm::build(norm, reference, |number, case| {
+            if number == Number::Singular {
+                return Forms::missing();
+            }
+            let mut forms = self
+                .slot(&head.lemma, &head.reference, Number::Plural, case)
+                .unwrap_or_else(Forms::missing);
+            if !forms.is_missing() {
+                forms.variants = forms
+                    .variants
+                    .iter()
+                    .map(|v| format!("{prefix}{v}"))
+                    .collect();
+            }
+            forms
+        }))
+    }
+
     /// Whether `prefix` is a valid compound modifier: a known lemma either bare (the
     /// nominative linker, `puna`+viini) or in its genitive-singular linking form (`koira`+n =
     /// `koiran`, as in `koiran`+keksi). The genitive `-n` is Finnish's most common linker, so
@@ -544,6 +642,7 @@ pub struct EngineBuilder {
     lookup: Option<Box<dyn FormStore>>,
     overlay: Option<Box<dyn FormStore>>,
     generator: Option<Box<dyn Generator>>,
+    plural_index: HashMap<String, PluralHead>,
 }
 
 impl fmt::Debug for EngineBuilder {
@@ -552,6 +651,7 @@ impl fmt::Debug for EngineBuilder {
             .field("has_lookup", &self.lookup.is_some())
             .field("has_overlay", &self.overlay.is_some())
             .field("has_generator", &self.generator.is_some())
+            .field("plural_index_len", &self.plural_index.len())
             .finish()
     }
 }
@@ -578,12 +678,21 @@ impl EngineBuilder {
         self
     }
 
+    /// Install the plural-head reverse index (`plural-nominative surface -> head lemma`),
+    /// enabling plurale-tantum compound resolution (`ajovalot` -> `ajovaloissa`).
+    #[must_use]
+    pub fn plural_index(mut self, index: HashMap<String, PluralHead>) -> Self {
+        self.plural_index = index;
+        self
+    }
+
     /// Finish building. Without a lookup store, an empty one is used.
     pub fn build(self) -> Engine {
         Engine {
             lookup: self.lookup.unwrap_or_else(|| Box::new(EmptyStore)),
             overlay: self.overlay,
             generator: self.generator,
+            plural_index: self.plural_index,
         }
     }
 }

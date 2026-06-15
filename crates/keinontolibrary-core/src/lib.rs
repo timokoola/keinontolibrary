@@ -28,7 +28,7 @@ mod normalize;
 mod paradigm_ref;
 
 pub use case::{Case, Number, ParseError};
-pub use engine::{Engine, EngineBuilder, FormStore, Generator, MemoryStore};
+pub use engine::{Engine, EngineBuilder, FormStore, Generator, MemoryStore, PluralHead};
 pub use error::Error;
 pub use forms::{Forms, Paradigm, Source, Status};
 pub use normalize::normalize;

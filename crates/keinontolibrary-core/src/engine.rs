@@ -413,15 +413,28 @@ impl Engine {
     // its head lemma; the compound then declines on that head in the plural (singular slots
     // are defective — the lemma is a lexical plural).
 
-    /// Split `norm` into `(prefix, head)` where the tail is a known lemma's plural
-    /// nominative (per the reverse index). Longest tail first. The prefix must be a known
-    /// modifier, a bound prefix, or a long (>= 4) frozen modifier, so an arbitrary word
-    /// ending in a common plural is not mis-split.
-    fn split_plural_head(&self, norm: &str) -> Option<(String, PluralHead)> {
+    /// Find `(prefix, head)` where the tail is a known lemma's plural nominative (per the
+    /// reverse index): the whole word itself (simplex plurale tantum `farmarit` -> `farmari`,
+    /// empty prefix), an explicit hyphen boundary (`A-oikeudet` -> `oikeus`), or a scanned
+    /// split (longest tail first). For a scanned split the prefix must be a known modifier, a
+    /// bound prefix, or a long (>= 4) frozen modifier, so an arbitrary word ending in a common
+    /// plural is not mis-split.
+    fn plural_head_parts(&self, norm: &str) -> Option<(String, PluralHead)> {
         const MIN_PREFIX_CHARS: usize = 2;
         const MIN_TAIL_CHARS: usize = 3;
         if self.plural_index.is_empty() {
             return None;
+        }
+        // The whole word is itself a lexical plural (simplex plurale tantum).
+        if let Some(head) = self.plural_index.get(norm) {
+            return Some((String::new(), head.clone()));
+        }
+        // Explicit hyphen boundary with a plural head (`tv-uutiset`, `EU-vaalit`).
+        if let Some(idx) = norm.rfind('-') {
+            let tail = &norm[idx + 1..];
+            if let Some(head) = self.plural_index.get(tail) {
+                return Some((norm[..=idx].to_owned(), head.clone()));
+            }
         }
         let offsets: Vec<usize> = norm.char_indices().map(|(i, _)| i).collect();
         let n = offsets.len();
@@ -450,7 +463,7 @@ impl Engine {
         if number == Number::Singular {
             return None;
         }
-        let (prefix, head) = self.split_plural_head(norm)?;
+        let (prefix, head) = self.plural_head_parts(norm)?;
         let mut forms = self.slot(&head.lemma, &head.reference, Number::Plural, case)?;
         if forms.is_missing() {
             return None;
@@ -465,7 +478,7 @@ impl Engine {
 
     /// The whole paradigm of a plural-head compound: plural slots filled, singular missing.
     fn plural_head_paradigm(&self, norm: &str) -> Option<Paradigm> {
-        let (prefix, head) = self.split_plural_head(norm)?;
+        let (prefix, head) = self.plural_head_parts(norm)?;
         let reference = head.reference.clone();
         Some(Paradigm::build(norm, reference, |number, case| {
             if number == Number::Singular {
@@ -602,7 +615,7 @@ const COMPOUND_BOTH_TN: u8 = 51;
 /// known lemma, so a coincidental match (`ali`+bi) cannot fire — `bi` is not a lemma.
 const BOUND_PREFIXES: &[&str] = &[
     "avo", "ali", "ala", "yli", "ylä", "ulko", "sisä", "etu", "taka", "etä", "eri", "esi", "iki",
-    "eko", "bio", "geo", "neo",
+    "eko", "bio", "geo", "neo", "epä", "aku", "aju", "apu",
 ];
 
 /// Known short heads (2 chars) that the general scan (min 3) skips but that form real

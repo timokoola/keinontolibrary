@@ -41,6 +41,14 @@ pub trait Generator: fmt::Debug + Send + Sync {
         number: Number,
         case: Case,
     ) -> Option<Forms>;
+
+    /// Infer a paradigm for an *unlisted* lemma from productive morphology — e.g. any
+    /// `-nen` word inflects as Kotus tn38, any `-uus/-yys` abstract as tn40. Used only as a
+    /// last resort, after lookup and compound splitting fail, to reach the ~72k tn-less
+    /// Kotus rows (and beyond). Returns `None` when no confident inference applies.
+    fn infer(&self, _lemma: &str) -> Option<ParadigmRef> {
+        None
+    }
 }
 
 /// The declension engine: holds the providers and runs the resolution pipeline.
@@ -81,9 +89,11 @@ impl Engine {
         let norm = normalize(lemma);
         let refs = self.resolve(&norm);
         match refs.as_slice() {
-            // Unknown as a whole: it may be a compound whose final component is known.
+            // Unknown as a whole: it may be a compound whose final component is known, or
+            // (last resort) a productive form whose class we can infer (-nen -> tn38).
             [] => self
                 .compound_slot(&norm, number, case)
+                .or_else(|| self.inferred_slot(&norm, number, case))
                 .ok_or(Error::UnknownWord(norm)),
             // A tn51 compound: both parts inflect (isoveli -> isoissaveljissä). Falls back to
             // the head-only reading (the accepted tn50 variant), then the normal path.
@@ -138,6 +148,7 @@ impl Engine {
         match refs.as_slice() {
             [] => self
                 .compound_paradigm(&norm)
+                .or_else(|| self.inferred_paradigm(&norm))
                 .ok_or(Error::UnknownWord(norm)),
             [only] if only.tn == COMPOUND_BOTH_TN => Ok(self
                 .compound_both_paradigm(&norm)
@@ -234,6 +245,28 @@ impl Engine {
             })
     }
 
+    /// Last-resort slot from an inferred class (the generator's [`Generator::infer`]):
+    /// for an unlisted lemma whose morphology is productive (`-nen` -> tn38). `None` if no
+    /// class is inferred or the inferred class yields nothing for this slot.
+    fn inferred_slot(&self, norm: &str, number: Number, case: Case) -> Option<Forms> {
+        let reference = self.generator.as_ref()?.infer(norm)?;
+        self.slot(norm, &reference, number, case)
+            .filter(|f| !f.is_missing())
+    }
+
+    /// The full paradigm from an inferred class. `None` if no class is inferred or the
+    /// inferred class produces an empty paradigm (so the caller still reports unknown).
+    fn inferred_paradigm(&self, norm: &str) -> Option<Paradigm> {
+        let reference = self.generator.as_ref()?.infer(norm)?;
+        let paradigm = self.build_paradigm(norm, &reference);
+        // Guard against inferring a class the generator cannot actually fill.
+        (!paradigm
+            .get(Number::Plural, Case::Inessive)
+            .variants
+            .is_empty())
+        .then_some(paradigm)
+    }
+
     fn build_paradigm(&self, norm: &str, reference: &ParadigmRef) -> Paradigm {
         Paradigm::build(norm, reference.clone(), |number, case| {
             self.slot(norm, reference, number, case)
@@ -263,6 +296,29 @@ impl Engine {
         // always a false split of a simplex word the inventory just doesn't know
         // (pökkylä is not pök+kylä — issue #26).
         const MIN_FALLBACK_PREFIX_CHARS: usize = 4;
+
+        // Explicit hyphen boundary: acronym/letter/short modifiers the author already
+        // delimited (`3D-tulostin`, `A-pylväs`, `av-väline`, `4H-kerho`). The boundary is
+        // given, not guessed, so split at the last hyphen when the tail is a known lemma —
+        // keeping the hyphen on the frozen prefix.
+        if let Some(idx) = norm.rfind('-') {
+            let (prefix, tail) = (&norm[..=idx], &norm[idx + 1..]);
+            if tail.chars().count() >= 2 && !self.resolve(tail).is_empty() {
+                return Some((prefix.to_owned(), tail.to_owned()));
+            }
+        }
+
+        // A known 2-char head (`yö`: aamu+yö, kesä+yö, sydän+yö) is too short for the
+        // general scan. Allow it only behind a *known modifier* prefix, so an arbitrary
+        // word ending in those two letters is not split.
+        for head in SHORT_HEADS {
+            if let Some(prefix) = norm.strip_suffix(head) {
+                if self.is_known_modifier(prefix) && !self.resolve(head).is_empty() {
+                    return Some((prefix.to_owned(), (*head).to_owned()));
+                }
+            }
+        }
+
         let offsets: Vec<usize> = norm.char_indices().map(|(i, _)| i).collect();
         let n = offsets.len();
         if n < MIN_PREFIX_CHARS + MIN_COMPONENT_CHARS {
@@ -277,7 +333,10 @@ impl Engine {
             if self.resolve(component).is_empty() {
                 continue;
             }
-            if self.is_known_modifier(prefix) {
+            // Accept a known modifier (a real word linker) or a productive bound prefix
+            // (`avo`+auto, `ali`+nopeus, `yli`+hinta) even though it is too short to be a
+            // free word — these are exceptionless compound-forming morphemes.
+            if self.is_known_modifier(prefix) || is_bound_prefix(prefix) {
                 return Some((prefix.to_owned(), component.to_owned()));
             }
             if fallback.is_none() && prefix.chars().count() >= MIN_FALLBACK_PREFIX_CHARS {
@@ -438,6 +497,23 @@ const COMPOUND_TN: u8 = 50;
 /// Kotus class for compounds where *both* parts inflect (`isoveli` → `isoissaveljissä`):
 /// the modifier and head are declined in the same slot and concatenated.
 const COMPOUND_BOTH_TN: u8 = 51;
+
+/// Productive bound prefixes — compound-forming morphemes that are not free words, so the
+/// splitter would otherwise reject them as too short. Each is exceptionless as a modifier
+/// (`avo`+auto, `ali`+nopeus, `yli`+hinta, `etä`+työ). Only accepted when the head is a
+/// known lemma, so a coincidental match (`ali`+bi) cannot fire — `bi` is not a lemma.
+const BOUND_PREFIXES: &[&str] = &[
+    "avo", "ali", "ala", "yli", "ylä", "ulko", "sisä", "etu", "taka", "etä", "eri", "esi", "iki",
+    "eko", "bio", "geo", "neo",
+];
+
+/// Known short heads (2 chars) that the general scan (min 3) skips but that form real
+/// compounds: `yö` (aamu+yö, sydän+yö). Accepted only behind a known-modifier prefix.
+const SHORT_HEADS: &[&str] = &["yö"];
+
+fn is_bound_prefix(prefix: &str) -> bool {
+    BOUND_PREFIXES.contains(&prefix)
+}
 
 /// Whether a word takes back-vowel harmony: the last strong vowel decides (back `a/o/u`
 /// vs front `ä/ö`), no strong vowel → front. Mirrors `keinontolibrary-rules`' harmony
@@ -624,6 +700,42 @@ mod tests {
             e.decline("hevonen", Number::Singular, Case::Inessive),
             Err(Error::UnknownWord("hevonen".into()))
         );
+    }
+
+    /// A stub generator that infers `-nen` -> tn38 and "generates" a marker form for it.
+    #[derive(Debug)]
+    struct InferGen;
+    impl Generator for InferGen {
+        fn generate(
+            &self,
+            lemma: &str,
+            reference: &ParadigmRef,
+            _n: Number,
+            _c: Case,
+        ) -> Option<Forms> {
+            (reference.tn == 38)
+                .then(|| Forms::present(vec![format!("{lemma}!")], Source::Generated))
+        }
+        fn infer(&self, lemma: &str) -> Option<ParadigmRef> {
+            lemma.ends_with("nen").then(|| ParadigmRef::new(None, 38))
+        }
+    }
+
+    #[test]
+    fn unlisted_lemma_resolves_via_inference() {
+        // No lookup entry for the word; the generator infers tn38 from the -nen suffix and
+        // the engine serves the generated form instead of UnknownWord.
+        let e = Engine::builder().generator(Box::new(InferGen)).build();
+        let f = e
+            .decline("ajankohtainen", Number::Singular, Case::Inessive)
+            .unwrap();
+        assert_eq!(f.primary(), Some("ajankohtainen!"));
+        assert_eq!(f.source, Source::Generated);
+        // A word the generator cannot infer still reports unknown.
+        assert!(e.decline("talo", Number::Singular, Case::Inessive).is_err());
+        // The whole-paradigm path infers too.
+        assert!(e.paradigm("ajankohtainen").is_ok());
+        assert!(e.paradigm("talo").is_err());
     }
 
     #[test]

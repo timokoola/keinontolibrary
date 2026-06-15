@@ -116,11 +116,57 @@ impl Generator for RuleEngine {
         }
         None
     }
+
+    fn infer(&self, lemma: &str) -> Option<ParadigmRef> {
+        infer_class(lemma)
+    }
+}
+
+/// Infer a declension class for an *unlisted* lemma from productive, exceptionless
+/// morphology. Kotus leaves transparent derivations without a declension type, expecting
+/// inflection through their shape; these two suffixes are fully regular:
+/// - any word ending in `-nen` is **tn38** (`nainen`, `hevonen`, `ahdaskatseinen`);
+/// - any abstract noun in `-uus`/`-yys` is **tn40** (`ystävyys`, `ajankohtaisuus`).
+///
+/// Deliberately conservative: only suffixes with a single possible class. Plain `-us`
+/// (tn39 *or* 40) and `-in` (tn33/49) are ambiguous and left out.
+#[must_use]
+pub fn infer_class(lemma: &str) -> Option<ParadigmRef> {
+    let n = lemma.chars().count();
+    if n >= 5 && (lemma.ends_with("uus") || lemma.ends_with("yys")) {
+        return Some(ParadigmRef::new(None, 40));
+    }
+    // "-nen" alone is 3 chars; require a real stem before it.
+    if n >= 5 && lemma.ends_with("nen") {
+        return Some(ParadigmRef::new(None, 38));
+    }
+    None
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn infer_class_maps_productive_suffixes() {
+        // -nen -> tn38, -uus/-yys -> tn40; both exceptionless. Other suffixes: no inference.
+        assert_eq!(infer_class("ahdaskatseinen").map(|r| r.tn), Some(38));
+        assert_eq!(infer_class("nainen").map(|r| r.tn), Some(38));
+        assert_eq!(infer_class("ajankohtaisuus").map(|r| r.tn), Some(40));
+        assert_eq!(infer_class("ystävyys").map(|r| r.tn), Some(40));
+        // Ambiguous / too short -> no inference (lookup/compound must answer instead).
+        assert_eq!(infer_class("vastaus"), None); // -us is tn39 or 40
+        assert_eq!(infer_class("talo"), None);
+        assert_eq!(infer_class("nen"), None);
+        // The inferred class actually generates correct forms via the engine path.
+        let r = RuleEngine::new();
+        let ref38 = infer_class("ahdaskatseinen").unwrap();
+        assert_eq!(
+            r.generate("ahdaskatseinen", &ref38, Number::Singular, Case::Genitive)
+                .and_then(|f| f.primary().map(String::from)),
+            Some("ahdaskatseisen".to_owned())
+        );
+    }
 
     #[test]
     fn rule_engine_generates_tagged_generated() {

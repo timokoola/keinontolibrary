@@ -34,5 +34,9 @@ path = "src/bin/metrics.rs"
 name = "keinontolibrary-qa-dump"
 path = "src/bin/qa_dump.rs"
 
+[[bin]]
+name = "keinontolibrary-coverage"
+path = "src/bin/coverage.rs"
+
 [lints]
 workspace = true

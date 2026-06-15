@@ -12,12 +12,18 @@ consonant gradation), and is validated against a ~400k-form corpus so test cover
 near-exhaustive by construction.
 
 > **Status:** runnable end to end — library, CLI, HTTP service, overlay, FFI scaffold, and a
-> <10 MB container. Every nominal declension class in the **Kotus 1–51 range is in scope and
-> covered** — the rule generator handles the bulk directly (~98% rule↔corpus agreement) and
-> the Voikko-verified exception registry + overrides serve the irregulars the generator
-> doesn't, so the gate runs at full coverage. The remaining open work is the Cloudflare
-> Workers target (see [Roadmap](#roadmap)). The working/repo name is `keinontolibrary`
-> (`keinonto` = the instructive case); the crate prefix is `keinontolibrary-*`.
+> <10 MB container. Every nominal declension class in the **Kotus 1–51 range is in scope** —
+> the rule generator handles the bulk directly (~98% rule↔corpus agreement) and the
+> Voikko-verified exception registry + overrides serve the irregulars the generator doesn't.
+> The QA gate runs at **0 failing slots across the in-scope inventory** — i.e. correctness,
+> not whole-language coverage. That **denominator is the ~32k Kotus lemmas that carry a
+> declension type**; Kotus leaves ~72k further rows (transparent compounds and derivations)
+> *without* a tn, expecting inflection through their final component. Many of those resolve
+> at runtime via the compound splitter (`linja-auto`), but productive derivations
+> (`ahdaskatseinen`), short-prefix compounds (`avoauto`), and compound numerals are the open
+> **coverage frontier** (see [Roadmap](#roadmap)) — distinct from the Cloudflare Workers
+> target. The working/repo name is `keinontolibrary` (`keinonto` = the instructive case); the
+> crate prefix is `keinontolibrary-*`.
 
 ## Workspace layout
 

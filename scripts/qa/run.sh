@@ -61,6 +61,7 @@ ingest()  {
   cargo run --release -p keinontolibrary-ingest
 }
 dump()    { cargo run --release -p keinontolibrary-ingest --bin keinontolibrary-qa-dump; }
+coverage(){ cargo run --release -p keinontolibrary-ingest --bin keinontolibrary-coverage; }
 verify()  { $PY scripts/qa/verify_voikko.py "$@"; }
 report()  { $PY scripts/qa/report.py "$@"; }
 content() { $PY scripts/qa/gen_content.py; }
@@ -71,10 +72,11 @@ case "${1:-all}" in
   harmony) harmony ;;
   ingest) ingest ;;
   dump)   dump ;;
+  coverage) coverage ;;
   verify) shift; verify "$@" ;;
   report) shift; report "$@" ;;
   content) content ;;
   all)    ingest; dump; verify; report --gate ;;
   quick)  dump; verify --sample 2000; report ;;
-  *) echo "usage: $0 [setup|sync|harmony|ingest|dump|verify|report|content|all|quick]" >&2; exit 2 ;;
+  *) echo "usage: $0 [setup|sync|harmony|ingest|dump|coverage|verify|report|content|all|quick]" >&2; exit 2 ;;
 esac

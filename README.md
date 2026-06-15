@@ -26,7 +26,7 @@ near-exhaustive by construction.
 | `keinontolibrary-ingest`  | Offline pipeline: Kotus + reference corpus → packed artifact. |
 | `keinontolibrary-data`    | Packed artifact + zero-copy (mmap/embedded) loader.           |
 | `keinontolibrary-server`  | axum HTTP service (the container deployment).                 |
-| `keinontolibrary-cli`     | CLI: `decline`, `paradigm`, `add`, `override`, `validate`.    |
+| `keinontolibrary-cli`     | CLI: `decline`, `paradigm`, `table`, `add`, `override`, `validate`, `selftest`. |
 | `keinontolibrary-ffi`     | FFI scaffold (UniFFI/Swift; feature-gated wasm + PyO3).       |
 
 ## Scope (v1.0)

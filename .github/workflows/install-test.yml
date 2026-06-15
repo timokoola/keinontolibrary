@@ -1,0 +1,88 @@
+name: install-test
+
+# Smoke-tests that the CLI installs and runs from each distribution channel. The
+# canonical check is `keinontolibrary selftest` — it declines a built-in golden set
+# through the rule engine and registry and needs no artifact/data file, so it is a true
+# end-to-end test of a fresh install (exit 0 = the binary works).
+#
+# Only the `cargo-install` job is live today (channel 1, crates.io / `cargo install`).
+# The brew / apt / docker / npm jobs are stubs, commented out until each channel ships
+# (see docs/DISTRIBUTION.md). Uncomment and fill in `<…>` as each comes online.
+
+on:
+  # Run after a release publishes, and on demand.
+  release:
+    types: [published]
+  workflow_dispatch:
+  # While only cargo-install is live, also guard it on changes to the CLI itself.
+  pull_request:
+    paths:
+      - "crates/keinontolibrary-cli/**"
+      - ".github/workflows/install-test.yml"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  # Channel 1 — crates.io / `cargo install`. Until the crate is published, this installs
+  # from the checked-out path, which still exercises the same build + selftest path.
+  cargo-install:
+    name: cargo install + selftest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install the CLI
+        # Once published: `cargo install keinontolibrary-cli --locked`.
+        run: cargo install --path crates/keinontolibrary-cli --locked
+
+      - name: selftest
+        run: keinontolibrary selftest
+
+  # ---------------------------------------------------------------------------
+  # Stubs — enable each as the channel ships (docs/DISTRIBUTION.md).
+  # ---------------------------------------------------------------------------
+
+  # Channel 3 — Homebrew tap.
+  # brew-install:
+  #   name: brew install + selftest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       os: [macos-latest, ubuntu-latest]
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - run: brew install <timokoola/tap/keinontolibrary>
+  #     - run: keinontolibrary selftest
+
+  # Channel 4 — apt / .deb (Debian/Ubuntu).
+  # apt-install:
+  #   name: apt install + selftest
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # From a hosted repo, or `dpkg -i` a release .deb (cargo-deb).
+  #     - run: sudo apt-get update && sudo apt-get install -y <keinontolibrary>
+  #     - run: keinontolibrary selftest
+
+  # Channel 4 — container image (GHCR). The image entrypoint is the server; override it.
+  # docker-run:
+  #   name: docker run selftest
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: docker run --rm --entrypoint keinontolibrary <ghcr.io/timokoola/keinontolibrary:latest> selftest
+
+  # Channel 4 — npm (WASM/CLI wrapper).
+  # npm-install:
+  #   name: npx selftest
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: lts/*
+  #     - run: npx <keinontolibrary> selftest

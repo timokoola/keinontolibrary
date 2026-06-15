@@ -14,6 +14,7 @@ serde = { workspace = true }
 toml = "0.8"
 
 [dev-dependencies]
+proptest = { workspace = true }
 keinontolibrary-data = { workspace = true }
 
 [lints]

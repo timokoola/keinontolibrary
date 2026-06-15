@@ -1,0 +1,7 @@
+# cargo-audit configuration (read by `cargo audit` in this directory and mirrored by the
+# CI audit-check `ignore` input).
+[advisories]
+# RUSTSEC-2025-0141: bincode 1.x is unmaintained (no CVE). It is the artifact
+# serialization format; migrating to bincode 2 is tracked as a follow-up. We accept the
+# informational warning and fail only on real vulnerabilities.
+ignore = ["RUSTSEC-2025-0141"]

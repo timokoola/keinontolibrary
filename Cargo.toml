@@ -13,7 +13,9 @@ members = [
 [workspace.package]
 version = "0.1.0"
 edition = "2021"
-rust-version = "1.82"
+# 1.85 is the real floor: the toml → indexmap → hashbrown 0.17 chain (parsing the
+# exception registry) requires edition2024, stabilized in 1.85.
+rust-version = "1.85"
 license = "MIT"
 repository = "https://github.com/timokoola/keinontolibrary"
 authors = ["Timo Koola"]

@@ -8,7 +8,7 @@
 # ---- build stage -----------------------------------------------------------------------
 # rust:alpine targets *-unknown-linux-musl by default, so `cargo build` yields a static
 # binary with no libc dependency. Pin the exact toolchain for reproducible builds.
-FROM rust:1.82-alpine AS builder
+FROM rust:1.85-alpine AS builder
 RUN apk add --no-cache musl-dev
 WORKDIR /build
 

@@ -113,33 +113,46 @@ impl Engine {
                 .or_else(|| self.numeral_compound_slot(&norm, number, case))
                 .or_else(|| self.inferred_slot(&norm, number, case))
                 .ok_or(Error::UnknownWord(norm)),
-            // A tn51 compound: both parts inflect (isoveli -> isoissaveljissä). Falls back to
-            // the head-only reading (the accepted tn50 variant), then the normal path.
-            [only] if only.tn == COMPOUND_BOTH_TN => self
-                .compound_both_slot(&norm, number, case)
-                .or_else(|| self.compound_slot(&norm, number, case))
-                .map_or_else(|| self.resolve_slot(&norm, only, number, case), Ok),
-            // A Kotus-listed compound (tn50): decline on the final component, modifier frozen
-            // (so harmony follows the head). Falls through if it can't be segmented.
-            [only] if only.tn == COMPOUND_TN => self
-                .compound_slot(&norm, number, case)
-                .map_or_else(|| self.resolve_slot(&norm, only, number, case), Ok),
-            // Compound ordinals (kahdeskymmenes, tn45) inflect BOTH parts:
-            // kahdennenkymmenennen. Falls back to the direct path (registry/lookup)
-            // for simple ordinals and slots the parts cannot fill.
-            [only] if only.tn == 45 => self
-                .ordinal_both_slot(&norm, number, case)
-                .map_or_else(|| self.resolve_slot(&norm, only, number, case), Ok),
-            // Known word, but a known compound whose final component flips harmony
-            // (punaviini -> punaviiniä, not -nia): override with the component's harmony.
-            [only] => match self.compound_harmony_slot(&norm, number, case) {
-                Some(forms) => Ok(forms),
-                None => self.resolve_slot(&norm, only, number, case),
-            },
+            // A known paradigm: route by class (tn50/51 compounds, tn45 ordinals, harmony
+            // override) with a per-slot fall-back to the whole-word lookup.
+            [only] => self.slot_routed(&norm, only, number, case),
             _ => Err(Error::Ambiguous {
                 lemma: norm,
                 paradigms: refs,
             }),
+        }
+    }
+
+    /// Resolve one slot of a *known* paradigm, routing by declension class and falling back
+    /// per slot to the whole-word lookup. This is the shared core of `decline`/`paradigm`/
+    /// `decline_with`/`paradigm_with`, so all four agree (a nested compound whose component
+    /// can't be declined directly still serves its attested whole-word form).
+    fn slot_routed(
+        &self,
+        norm: &str,
+        only: &ParadigmRef,
+        number: Number,
+        case: Case,
+    ) -> Result<Forms, Error> {
+        let fallback = || self.resolve_slot(norm, only, number, case);
+        match only.tn {
+            // tn51: both parts inflect (isoveli -> isoissaveljissä); else the tn50 reading.
+            t if t == COMPOUND_BOTH_TN => self
+                .compound_both_slot(norm, number, case)
+                .or_else(|| self.compound_slot(norm, number, case))
+                .map_or_else(fallback, Ok),
+            // tn50: decline on the final component, modifier frozen.
+            t if t == COMPOUND_TN => self
+                .compound_slot(norm, number, case)
+                .map_or_else(fallback, Ok),
+            // tn45 compound ordinals inflect both parts (kahdennenkymmenennen).
+            45 => self
+                .ordinal_both_slot(norm, number, case)
+                .map_or_else(fallback, Ok),
+            // A known compound whose final component flips harmony (punaviini -> punaviiniä).
+            _ => self
+                .compound_harmony_slot(norm, number, case)
+                .map_or_else(fallback, Ok),
         }
     }
 
@@ -156,6 +169,8 @@ impl Engine {
     ) -> Result<Forms, Error> {
         let norm = normalize(lemma);
         let chosen = self.choose(&norm, paradigm)?;
+        // Raw, lookup-first (the corpus form is authoritative for an explicit paradigm);
+        // `decline` does the compound/ordinal/harmony routing.
         self.resolve_slot(&norm, &chosen, number, case)
     }
 
@@ -170,25 +185,10 @@ impl Engine {
                 .or_else(|| self.numeral_compound_paradigm(&norm))
                 .or_else(|| self.inferred_paradigm(&norm))
                 .ok_or(Error::UnknownWord(norm)),
-            [only] if only.tn == COMPOUND_BOTH_TN => Ok(self
-                .compound_both_paradigm(&norm)
-                .or_else(|| self.compound_paradigm(&norm))
-                .unwrap_or_else(|| self.build_paradigm(&norm, only))),
-            [only] if only.tn == COMPOUND_TN => Ok(self
-                .compound_paradigm(&norm)
-                .unwrap_or_else(|| self.build_paradigm(&norm, only))),
-            // Compound ordinals: both parts inflect per slot (kahdennenkymmenennen).
-            [only] if only.tn == 45 => {
-                let reference = only.clone();
-                Ok(Paradigm::build(norm.clone(), reference.clone(), |n, c| {
-                    self.ordinal_both_slot(&norm, n, c)
-                        .or_else(|| self.slot(&norm, &reference, n, c))
-                        .unwrap_or_else(Forms::missing)
-                }))
-            }
-            [only] => Ok(self
-                .compound_harmony_paradigm(&norm)
-                .unwrap_or_else(|| self.build_paradigm(&norm, only))),
+            // A known paradigm: build every slot through the same router as `decline`, so the
+            // paradigm and the per-slot calls always agree (no empty paradigm where
+            // `decline` would have served a form).
+            [only] => Ok(self.routed_paradigm(&norm, only)),
             _ => Err(Error::Ambiguous {
                 lemma: norm,
                 paradigms: refs,
@@ -196,11 +196,19 @@ impl Engine {
         }
     }
 
+    /// Build a full paradigm for a known reference using [`Self::slot_routed`] per slot.
+    fn routed_paradigm(&self, norm: &str, only: &ParadigmRef) -> Paradigm {
+        Paradigm::build(norm.to_owned(), only.clone(), |number, case| {
+            self.slot_routed(norm, only, number, case)
+                .unwrap_or_else(|_| Forms::missing())
+        })
+    }
+
     /// Build the full paradigm table for an explicit paradigm of `lemma`.
     pub fn paradigm_with(&self, lemma: &str, paradigm: &ParadigmRef) -> Result<Paradigm, Error> {
         let norm = normalize(lemma);
         let chosen = self.choose(&norm, paradigm)?;
-        Ok(self.build_paradigm(&norm, &chosen))
+        Ok(self.routed_paradigm(&norm, &chosen))
     }
 
     /// The candidate paradigms for a normalized lemma: the union of overlay and lookup,
@@ -542,16 +550,6 @@ impl Engine {
         Some(Forms::present(vec![format!("{m}{h}")], head.source))
     }
 
-    /// The whole paradigm of a tn51 both-parts-inflect compound.
-    fn compound_both_paradigm(&self, norm: &str) -> Option<Paradigm> {
-        let (_, component) = self.split_compound(norm)?;
-        let head_ref = self.resolve(&component).into_iter().next()?;
-        Some(Paradigm::build(norm, head_ref, |number, case| {
-            self.compound_both_slot(norm, number, case)
-                .unwrap_or_else(Forms::missing)
-        }))
-    }
-
     /// One slot of a compound ordinal — a tn45 lemma whose head is itself the tn45
     /// ordinal `kymmenes`: BOTH parts decline in the same slot and concatenate
     /// (`kahdeskymmenes` → `kahdennen` + `kymmenennen`, Voikko-verified).
@@ -670,13 +668,6 @@ impl Engine {
             return None;
         }
         self.compound_slot(norm, number, case)
-    }
-
-    fn compound_harmony_paradigm(&self, norm: &str) -> Option<Paradigm> {
-        if !self.compound_harmony_ok(norm) {
-            return None;
-        }
-        self.compound_paradigm(norm)
     }
 }
 

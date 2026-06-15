@@ -117,6 +117,29 @@ fn plural_head_compound_resolves() {
 }
 
 #[test]
+fn paradigm_agrees_with_decline_for_compounds() {
+    // Regression: paradigm() once built empty slots for compounds where decline() served a
+    // form (the two used different code paths). They now share one per-slot router.
+    let e = engine(); // knows keksi, viini
+    for (w, n, c) in [
+        ("koirankeksi", Number::Singular, Case::Inessive),
+        ("koirankeksi", Number::Plural, Case::Inessive),
+        ("beaujolaisviini", Number::Singular, Case::Adessive),
+    ] {
+        let from_decline = e.decline(w, n, c).unwrap().primary().unwrap().to_string();
+        let from_paradigm = e
+            .paradigm(w)
+            .unwrap()
+            .get(n, c)
+            .variants
+            .first()
+            .cloned()
+            .unwrap_or_default();
+        assert_eq!(from_decline, from_paradigm, "{w} {n:?} {c:?}");
+    }
+}
+
+#[test]
 fn compound_numerals_decline_both_parts() {
     // The numeral parts (kahdeksan/kaksi tn10/31, kymmenen tn32, sata tn9, kahdes tn45)
     // come from the real rule engine + registry; seed only their paradigms so resolve finds

@@ -41,6 +41,14 @@ pub trait Generator: fmt::Debug + Send + Sync {
         number: Number,
         case: Case,
     ) -> Option<Forms>;
+
+    /// Infer a paradigm for an *unlisted* lemma from productive morphology — e.g. any
+    /// `-nen` word inflects as Kotus tn38, any `-uus/-yys` abstract as tn40. Used only as a
+    /// last resort, after lookup and compound splitting fail, to reach the ~72k tn-less
+    /// Kotus rows (and beyond). Returns `None` when no confident inference applies.
+    fn infer(&self, _lemma: &str) -> Option<ParadigmRef> {
+        None
+    }
 }
 
 /// The declension engine: holds the providers and runs the resolution pipeline.
@@ -81,9 +89,11 @@ impl Engine {
         let norm = normalize(lemma);
         let refs = self.resolve(&norm);
         match refs.as_slice() {
-            // Unknown as a whole: it may be a compound whose final component is known.
+            // Unknown as a whole: it may be a compound whose final component is known, or
+            // (last resort) a productive form whose class we can infer (-nen -> tn38).
             [] => self
                 .compound_slot(&norm, number, case)
+                .or_else(|| self.inferred_slot(&norm, number, case))
                 .ok_or(Error::UnknownWord(norm)),
             // A tn51 compound: both parts inflect (isoveli -> isoissaveljissä). Falls back to
             // the head-only reading (the accepted tn50 variant), then the normal path.
@@ -138,6 +148,7 @@ impl Engine {
         match refs.as_slice() {
             [] => self
                 .compound_paradigm(&norm)
+                .or_else(|| self.inferred_paradigm(&norm))
                 .ok_or(Error::UnknownWord(norm)),
             [only] if only.tn == COMPOUND_BOTH_TN => Ok(self
                 .compound_both_paradigm(&norm)
@@ -232,6 +243,28 @@ impl Engine {
                     .as_ref()
                     .and_then(|g| g.generate(norm, reference, number, case))
             })
+    }
+
+    /// Last-resort slot from an inferred class (the generator's [`Generator::infer`]):
+    /// for an unlisted lemma whose morphology is productive (`-nen` -> tn38). `None` if no
+    /// class is inferred or the inferred class yields nothing for this slot.
+    fn inferred_slot(&self, norm: &str, number: Number, case: Case) -> Option<Forms> {
+        let reference = self.generator.as_ref()?.infer(norm)?;
+        self.slot(norm, &reference, number, case)
+            .filter(|f| !f.is_missing())
+    }
+
+    /// The full paradigm from an inferred class. `None` if no class is inferred or the
+    /// inferred class produces an empty paradigm (so the caller still reports unknown).
+    fn inferred_paradigm(&self, norm: &str) -> Option<Paradigm> {
+        let reference = self.generator.as_ref()?.infer(norm)?;
+        let paradigm = self.build_paradigm(norm, &reference);
+        // Guard against inferring a class the generator cannot actually fill.
+        (!paradigm
+            .get(Number::Plural, Case::Inessive)
+            .variants
+            .is_empty())
+        .then_some(paradigm)
     }
 
     fn build_paradigm(&self, norm: &str, reference: &ParadigmRef) -> Paradigm {
@@ -624,6 +657,42 @@ mod tests {
             e.decline("hevonen", Number::Singular, Case::Inessive),
             Err(Error::UnknownWord("hevonen".into()))
         );
+    }
+
+    /// A stub generator that infers `-nen` -> tn38 and "generates" a marker form for it.
+    #[derive(Debug)]
+    struct InferGen;
+    impl Generator for InferGen {
+        fn generate(
+            &self,
+            lemma: &str,
+            reference: &ParadigmRef,
+            _n: Number,
+            _c: Case,
+        ) -> Option<Forms> {
+            (reference.tn == 38)
+                .then(|| Forms::present(vec![format!("{lemma}!")], Source::Generated))
+        }
+        fn infer(&self, lemma: &str) -> Option<ParadigmRef> {
+            lemma.ends_with("nen").then(|| ParadigmRef::new(None, 38))
+        }
+    }
+
+    #[test]
+    fn unlisted_lemma_resolves_via_inference() {
+        // No lookup entry for the word; the generator infers tn38 from the -nen suffix and
+        // the engine serves the generated form instead of UnknownWord.
+        let e = Engine::builder().generator(Box::new(InferGen)).build();
+        let f = e
+            .decline("ajankohtainen", Number::Singular, Case::Inessive)
+            .unwrap();
+        assert_eq!(f.primary(), Some("ajankohtainen!"));
+        assert_eq!(f.source, Source::Generated);
+        // A word the generator cannot infer still reports unknown.
+        assert!(e.decline("talo", Number::Singular, Case::Inessive).is_err());
+        // The whole-paradigm path infers too.
+        assert!(e.paradigm("ajankohtainen").is_ok());
+        assert!(e.paradigm("talo").is_err());
     }
 
     #[test]

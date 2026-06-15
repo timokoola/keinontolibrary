@@ -79,6 +79,16 @@ The **gate** (`report.py --gate`, exit 1) fires only on failures *not in*
 `qa/baseline.json` — i.e. regressions. Burn-down therefore works incrementally: fix a
 class, rerun, `--update-baseline` in the same PR (never to bury a regression).
 
+**What the coverage % means.** The reported coverage (e.g. `100.00%`) is over the
+**in-scope inventory only** — the ~32k Kotus lemmas that carry a declension type, expanded
+to every paradigm slot. It is a *correctness* measure (zero wrong forms among what the engine
+generates), **not** whole-language declinability. Kotus lists ~72k further rows (transparent
+compounds and derivations) *without* a tn; those are not in this denominator. To measure the
+runtime reach over that frontier — class inference (`-nen`→38, `-uus`→40), the compound
+splitter, numerals — use `scripts/qa/run.sh coverage` (the missing-rows harness: a Rust bin
+that runs every Kotus row through the live engine and reports declinable % by word class),
+which is a separate metric from this gate.
+
 ## Fix workflow per failure
 
 1. Pick a failing slot from `report.md` (worst-tn table first).

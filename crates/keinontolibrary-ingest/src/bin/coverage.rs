@@ -11,6 +11,9 @@
 //! Env: `KEINONTO_KOTUS` (in), `KEINONTO_ARTIFACT`, `KEINONTO_OVERLAY`,
 //!      `KEINONTO_COVERAGE_MISSES` (out, default `qa/coverage-misses.tsv`).
 
+// Counts are word tallies (< 10^6); the f64 percentage casts cannot lose precision.
+#![allow(clippy::cast_precision_loss)]
+
 use std::collections::BTreeMap;
 use std::io::{BufWriter, Write};
 

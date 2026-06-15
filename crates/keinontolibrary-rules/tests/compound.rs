@@ -32,6 +32,65 @@ fn form(e: &Engine, lemma: &str, number: Number, case: Case) -> String {
         .to_string()
 }
 
+/// Engine knowing a handful of heads/modifiers, to exercise the frontier resolvers:
+/// bound-prefix splits, hyphen boundaries, 2-char heads, and productive class inference.
+fn engine_frontier() -> Engine {
+    let mut store = MemoryStore::new();
+    for (lemma, tn) in [
+        ("auto", 1u8),
+        ("nopeus", 40),
+        ("väline", 48),
+        ("yö", 19),
+        ("aamu", 1),
+    ] {
+        store.insert(
+            lemma,
+            ParadigmRef::new(None, tn),
+            Number::Singular,
+            Case::Nominative,
+            Forms::present(vec![lemma.into()], Source::Lookup),
+        );
+    }
+    Engine::builder()
+        .lookup(Box::new(store))
+        .generator(Box::new(RuleEngine::new()))
+        .build()
+}
+
+#[test]
+fn frontier_resolvers_split_and_infer() {
+    let e = engine_frontier();
+    // Bound prefix (avo-, ali-) + known head, even though the prefix is too short to be a
+    // free word.
+    assert_eq!(
+        form(&e, "avoauto", Number::Singular, Case::Genitive),
+        "avoauton"
+    );
+    assert_eq!(
+        form(&e, "alinopeus", Number::Singular, Case::Genitive),
+        "alinopeuden"
+    );
+    // Explicit hyphen boundary: known head after the last hyphen, frozen prefix kept.
+    assert_eq!(
+        form(&e, "av-väline", Number::Singular, Case::Genitive),
+        "av-välineen"
+    );
+    // 2-char head (yö) behind a known modifier (aamu).
+    assert_eq!(
+        form(&e, "aamuyö", Number::Singular, Case::Genitive),
+        "aamuyön"
+    );
+    // Productive class inference (no lookup, no compound head): -nen -> tn38.
+    assert_eq!(
+        form(&e, "ahdaskatseinen", Number::Singular, Case::Genitive),
+        "ahdaskatseisen"
+    );
+    // A simplex word with no inferable class still errors (not a false split).
+    assert!(e
+        .decline("pökkylä", Number::Singular, Case::Genitive)
+        .is_err());
+}
+
 #[test]
 fn compound_harmony_follows_final_component() {
     let e = engine();

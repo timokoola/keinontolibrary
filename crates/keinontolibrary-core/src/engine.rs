@@ -296,6 +296,29 @@ impl Engine {
         // always a false split of a simplex word the inventory just doesn't know
         // (pökkylä is not pök+kylä — issue #26).
         const MIN_FALLBACK_PREFIX_CHARS: usize = 4;
+
+        // Explicit hyphen boundary: acronym/letter/short modifiers the author already
+        // delimited (`3D-tulostin`, `A-pylväs`, `av-väline`, `4H-kerho`). The boundary is
+        // given, not guessed, so split at the last hyphen when the tail is a known lemma —
+        // keeping the hyphen on the frozen prefix.
+        if let Some(idx) = norm.rfind('-') {
+            let (prefix, tail) = (&norm[..=idx], &norm[idx + 1..]);
+            if tail.chars().count() >= 2 && !self.resolve(tail).is_empty() {
+                return Some((prefix.to_owned(), tail.to_owned()));
+            }
+        }
+
+        // A known 2-char head (`yö`: aamu+yö, kesä+yö, sydän+yö) is too short for the
+        // general scan. Allow it only behind a *known modifier* prefix, so an arbitrary
+        // word ending in those two letters is not split.
+        for head in SHORT_HEADS {
+            if let Some(prefix) = norm.strip_suffix(head) {
+                if self.is_known_modifier(prefix) && !self.resolve(head).is_empty() {
+                    return Some((prefix.to_owned(), (*head).to_owned()));
+                }
+            }
+        }
+
         let offsets: Vec<usize> = norm.char_indices().map(|(i, _)| i).collect();
         let n = offsets.len();
         if n < MIN_PREFIX_CHARS + MIN_COMPONENT_CHARS {
@@ -310,7 +333,10 @@ impl Engine {
             if self.resolve(component).is_empty() {
                 continue;
             }
-            if self.is_known_modifier(prefix) {
+            // Accept a known modifier (a real word linker) or a productive bound prefix
+            // (`avo`+auto, `ali`+nopeus, `yli`+hinta) even though it is too short to be a
+            // free word — these are exceptionless compound-forming morphemes.
+            if self.is_known_modifier(prefix) || is_bound_prefix(prefix) {
                 return Some((prefix.to_owned(), component.to_owned()));
             }
             if fallback.is_none() && prefix.chars().count() >= MIN_FALLBACK_PREFIX_CHARS {
@@ -471,6 +497,23 @@ const COMPOUND_TN: u8 = 50;
 /// Kotus class for compounds where *both* parts inflect (`isoveli` → `isoissaveljissä`):
 /// the modifier and head are declined in the same slot and concatenated.
 const COMPOUND_BOTH_TN: u8 = 51;
+
+/// Productive bound prefixes — compound-forming morphemes that are not free words, so the
+/// splitter would otherwise reject them as too short. Each is exceptionless as a modifier
+/// (`avo`+auto, `ali`+nopeus, `yli`+hinta, `etä`+työ). Only accepted when the head is a
+/// known lemma, so a coincidental match (`ali`+bi) cannot fire — `bi` is not a lemma.
+const BOUND_PREFIXES: &[&str] = &[
+    "avo", "ali", "ala", "yli", "ylä", "ulko", "sisä", "etu", "taka", "etä", "eri", "esi", "iki",
+    "eko", "bio", "geo", "neo",
+];
+
+/// Known short heads (2 chars) that the general scan (min 3) skips but that form real
+/// compounds: `yö` (aamu+yö, sydän+yö). Accepted only behind a known-modifier prefix.
+const SHORT_HEADS: &[&str] = &["yö"];
+
+fn is_bound_prefix(prefix: &str) -> bool {
+    BOUND_PREFIXES.contains(&prefix)
+}
 
 /// Whether a word takes back-vowel harmony: the last strong vowel decides (back `a/o/u`
 /// vs front `ä/ö`), no strong vowel → front. Mirrors `keinontolibrary-rules`' harmony

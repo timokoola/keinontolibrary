@@ -34,3 +34,5 @@ __pycache__/
 
 # mdBook build output
 docs/book/
+/_site/
+/.cache/mdbook/

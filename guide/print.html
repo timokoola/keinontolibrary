@@ -1,0 +1,650 @@
+<!DOCTYPE HTML>
+<html lang="en" class="rust sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>keinontolibrary</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Guides for keinontolibrary — a Rust library that declines Finnish nouns.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-0392ca55.css">
+        <link rel="stylesheet" href="css/chrome-fc474251.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "rust";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "searchindex-8285be42.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-1e24a099.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">keinontolibrary</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/timokoola/keinontolibrary" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="keinontolibrary"><a class="header" href="#keinontolibrary">keinontolibrary</a></h1>
+<p>A fast, embeddable Rust library that declines <strong>Finnish nouns</strong>. Give it a noun lemma and a
+case; it returns the inflected form(s).</p>
+<pre><code class="language-text">decline("hevonen", Number::Plural, Case::Inessive) -&gt; ["hevosissa"]
+</code></pre>
+<p>It is <strong>data-backed</strong> — precomputed forms from a reference corpus collected over three years
+and labeled with <a href="https://voikko.puimula.org/">Voikko</a> — with a <strong>rule-based fallback</strong> over
+the <a href="https://kaino.kotus.fi/sanat/nykysuomi/">Kotus</a> declension classes (taivutustyypit 1–49
+with consonant gradation). It covers <strong>100% of declinable Kotus 2024 nominal rows</strong>; verbs and
+the indeclinable tn 99/100 classes are out of scope.</p>
+<p>These guides are task-oriented — pick the one that matches what you want to do:</p>
+<ul>
+<li><strong><a href="#embed-in-a-rust-program">Embed in a Rust program</a></strong> — add the crate and decline words in
+your own code.</li>
+<li><strong><a href="#decline-from-the-command-line">Decline from the command line</a></strong> — look up forms from a terminal or script.</li>
+<li><strong><a href="#run-the-http-service">Run the HTTP service</a></strong> — stand up the declension service /
+container.</li>
+<li><strong><a href="#build-the-data-artifact">Build the data artifact</a></strong> — rebuild the packed data from
+sources.</li>
+<li><strong><a href="#fix-a-wrong-declension-the-right-way">Fix a wrong declension</a></strong> — the right way to correct a form.</li>
+</ul>
+<p>For background on how compounds are handled, see
+<strong><a href="#compound-nouns-kotus-5051--design--test-data-plan">Compound nouns</a></strong>.</p>
+<p>The source lives on <a href="https://github.com/timokoola/keinontolibrary">GitHub</a>. If you’d rather
+browse declensions than embed them, try <a href="https://humalapaikallissija.com">humalapaikallissija.com</a>,
+a toy built on this library.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="embed-in-a-rust-program"><a class="header" href="#embed-in-a-rust-program">Embed in a Rust program</a></h1>
+<p>Decline Finnish nominals from your own crate.</p>
+<h2 id="add-the-dependency"><a class="header" href="#add-the-dependency">Add the dependency</a></h2>
+<pre><code class="language-toml">[dependencies]
+keinontolibrary-core = "0.1"
+keinontolibrary-data = "0.1"   # the artifact-backed lookup store
+</code></pre>
+<p><code>keinontolibrary-core</code> is the API (enums, <code>Engine</code>, <code>decline</code>, <code>paradigm</code>).
+<code>keinontolibrary-data</code> loads the packed artifact and wires the rule fallback behind it.</p>
+<h2 id="build-an-engine-and-decline-a-word"><a class="header" href="#build-an-engine-and-decline-a-word">Build an engine and decline a word</a></h2>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use keinontolibrary_core::{Case, Number};
+use keinontolibrary_data::build_engine;
+
+// Loads the packed artifact + (optional) overlay, with the rule engine as fallback.
+let bundle = build_engine("data/artifact/keinontolibrary.bin", "data/overlay.jsonl")?;
+let engine = &amp;bundle.engine;
+
+let forms = engine.decline("hevonen", Number::Plural, Case::Inessive)?;
+assert_eq!(forms.primary(), Some("hevosissa"));
+assert_eq!(forms.variants, ["hevosissa"]);   // primary first; some slots have several
+<span class="boring">}</span></code></pre>
+<p><code>decline</code> returns <code>Forms { variants, status, source, coincides_with }</code>:</p>
+<ul>
+<li><code>variants</code> — surface forms, primary first (genitive plural and illative often have more
+than one valid form).</li>
+<li><code>source</code> — <code>Lookup</code> (corpus), <code>Generated</code> (rules/registry), or <code>Overlay</code>.</li>
+<li><code>coincides_with</code> — set on the accusative (singular = genitive, plural = nominative).</li>
+</ul>
+<h2 id="the-whole-paradigm"><a class="header" href="#the-whole-paradigm">The whole paradigm</a></h2>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let p = engine.paradigm("talo")?;
+for (number, case, forms) in p.iter() {
+    println!("{number} {case}: {}", forms.variants.join(", "));
+}
+<span class="boring">}</span></code></pre>
+<h2 id="handle-the-three-error-cases"><a class="header" href="#handle-the-three-error-cases">Handle the three error cases</a></h2>
+<p><code>decline</code>/<code>paradigm</code> return <code>Result&lt;_, Error&gt;</code>:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use keinontolibrary_core::Error;
+
+match engine.decline("kuusi", Number::Singular, Case::Inessive) {
+    Ok(f) =&gt; println!("{:?}", f.primary()),
+    Err(Error::UnknownWord(w)) =&gt; eprintln!("not a known word: {w}"),
+    Err(Error::Ambiguous { lemma, paradigms }) =&gt; {
+        // Homonyms: kuusi is "six" (tn24) and "spruce" (tn27). Pick one and retry.
+        eprintln!("{lemma} is ambiguous: {paradigms:?}");
+    }
+    Err(Error::DefectiveForm { lemma, number, case }) =&gt; {
+        // The slot genuinely does not exist (e.g. sakset has no singular).
+        eprintln!("{lemma} has no {number} {case}");
+    }
+}
+<span class="boring">}</span></code></pre>
+<h2 id="disambiguate-homonyms"><a class="header" href="#disambiguate-homonyms">Disambiguate homonyms</a></h2>
+<p>Pass an explicit paradigm with <code>decline_with</code> / <code>paradigm_with</code>:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use keinontolibrary_core::ParadigmRef;
+
+// "kuusi" → spruce (Kotus class tn27)
+let f = engine.decline_with("kuusi", Number::Singular, Case::Inessive,
+                            &amp;ParadigmRef::new(None, 27))?;
+assert_eq!(f.primary(), Some("kuusessa"));
+<span class="boring">}</span></code></pre>
+<p><code>ParadigmRef::new(hn, tn)</code> — a <code>None</code> field is a wildcard (matches any homonym number /
+any class). To require a specific reading, pass <code>Some(_)</code>.</p>
+<h2 id="notes"><a class="header" href="#notes">Notes</a></h2>
+<ul>
+<li>All inputs are normalized (trimmed, NFC, lowercased) — <code>"Talo"</code>, <code>" talo "</code>, and
+<code>"talo"</code> are equivalent.</li>
+<li>Resolution order is <strong>overlay → lookup → rule fallback</strong>: an overlay entry wins, then
+the corpus, then the rules.</li>
+<li>The artifact is not committed (it embeds corpus-derived data; see <code>LICENSING.md</code>).
+Build it once with <code>cargo run -p keinontolibrary-ingest</code> — see
+<a href="#build-the-data-artifact">build-artifact</a> — or embed your own via <code>LookupData::from_bytes</code>.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="decline-from-the-command-line"><a class="header" href="#decline-from-the-command-line">Decline from the command line</a></h1>
+<p>Quick lookups and scripting, no code.</p>
+<h2 id="install"><a class="header" href="#install">Install</a></h2>
+<pre><code class="language-sh"># From a checkout (until published to a package channel — see ../DISTRIBUTION.md):
+cargo install --path crates/keinontolibrary-cli
+# or run in place:
+cargo run -p keinontolibrary-cli -- &lt;args&gt;
+</code></pre>
+<p>The CLI reads the artifact at <code>data/artifact/keinontolibrary.bin</code> (override with
+<code>--artifact</code> or <code>$KEINONTO_ARTIFACT</code>) and an overlay at <code>data/overlay.jsonl</code>
+(<code>--overlay</code> / <code>$KEINONTO_OVERLAY</code>).</p>
+<h2 id="decline-one-slot"><a class="header" href="#decline-one-slot">Decline one slot</a></h2>
+<pre><code class="language-sh">keinontolibrary decline hevonen --number plural --case inessive
+# hevonen (plural inessive): hevosissa  (Present, Lookup)
+
+keinontolibrary decline kuka --number singular --case accusative
+# kuka (singular accusative): kenet  (Present, Generated)
+</code></pre>
+<h2 id="the-whole-paradigm-1"><a class="header" href="#the-whole-paradigm-1">The whole paradigm</a></h2>
+<pre><code class="language-sh">keinontolibrary paradigm talo
+# talo (tn=1)
+#   singular nominative   talo
+#   singular genitive     talon
+#   ...
+</code></pre>
+<h2 id="declension-tables"><a class="header" href="#declension-tables">Declension tables</a></h2>
+<p><code>table</code> renders the full paradigm as a case-rows × singular/plural-columns grid, for one
+or more words at once. Defective slots show an em dash (<code>—</code>).</p>
+<pre><code class="language-sh">keinontolibrary table talo
+# talo (tn 1)
+# case         singular  plural
+# nominative   talo      talot
+# genitive     talon     talojen
+# ...
+# comitative   —         taloineen, taloinensa
+</code></pre>
+<p>Pick the output with <code>--format</code> (<code>text</code> default, <code>markdown</code>, <code>csv</code>, <code>json</code>):</p>
+<pre><code class="language-sh">keinontolibrary table aika --format markdown    # GitHub table, with a tn heading
+keinontolibrary table parfait --format csv      # case,singular,plural (RFC-4180 quoting)
+keinontolibrary table talo --format json        # the full Paradigm as JSON
+
+# Several words; --tn/--hn disambiguate and apply to each:
+keinontolibrary table talo koira kissa
+keinontolibrary table kuusi --tn 27
+</code></pre>
+<p>Exit code 3 if any requested word could not be resolved.</p>
+<h2 id="disambiguate-homonyms-1"><a class="header" href="#disambiguate-homonyms-1">Disambiguate homonyms</a></h2>
+<pre><code class="language-sh">keinontolibrary decline kuusi --number singular --case inessive
+# 'kuusi' is ambiguous; pass --tn (or --hn):
+#   tn=24
+#   tn=27
+keinontolibrary decline kuusi --number singular --case inessive --tn 27
+# kuusi (singular inessive): kuusessa
+</code></pre>
+<h2 id="add-or-correct-a-word-overlay"><a class="header" href="#add-or-correct-a-word-overlay">Add or correct a word (overlay)</a></h2>
+<pre><code class="language-sh">keinontolibrary add --lemma uudissana --tn 9 \
+    --number singular --case inessive --forms uudissanassa
+# overlay: uudissana singular inessive = ["uudissanassa"]
+</code></pre>
+<p><code>override</code> is an alias of <code>add</code> (the overlay is upsert-by-key — last write wins). New
+overlay entries are immediately declinable and persist to the overlay file.</p>
+<h2 id="json-output"><a class="header" href="#json-output">JSON output</a></h2>
+<pre><code class="language-sh">keinontolibrary decline talo --number plural --case adessive --json
+# {"variants":["taloilla"],"status":"present","source":"lookup","coincides_with":null}
+</code></pre>
+<h2 id="exit-codes-for-scripts"><a class="header" href="#exit-codes-for-scripts">Exit codes (for scripts)</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>code</th><th>meaning</th></tr>
+</thead>
+<tbody>
+<tr><td>0</td><td>success</td></tr>
+<tr><td>3</td><td>the word could not be declined — unknown, ambiguous, or defective form</td></tr>
+<tr><td>1</td><td>setup/usage error (bad artifact path, I/O)</td></tr>
+<tr><td>2</td><td>argument parsing error (from clap)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-sh">if keinontolibrary decline "$w" --number singular --case genitive --json &gt;/tmp/out; then
+    jq -r '.variants[0]' /tmp/out
+else
+    echo "no form for $w (exit $?)"
+fi
+</code></pre>
+<h2 id="validate--inspect-the-loaded-artifact"><a class="header" href="#validate--inspect-the-loaded-artifact"><code>validate</code> — inspect the loaded artifact</a></h2>
+<pre><code class="language-sh">keinontolibrary validate
+# version, lemma count, form count, and the Kotus / reference-corpus provenance.
+</code></pre>
+<h2 id="selftest--verify-an-install"><a class="header" href="#selftest--verify-an-install"><code>selftest</code> — verify an install</a></h2>
+<p><code>selftest</code> declines a built-in golden set through the rule engine and registry and checks
+each form. It needs <strong>no artifact or data file</strong>, so it’s the smoke test to run right after
+installing from any channel (cargo, brew, apt, the container, …). Exit 0 if every check
+passes, 1 on any mismatch.</p>
+<pre><code class="language-sh">keinontolibrary selftest
+# ok   talo singular inessive: talossa (want talossa)
+# ok   aika singular genitive: ajan (want ajan)
+# ...
+# selftest: 8 checks passed
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="run-the-http-service"><a class="header" href="#run-the-http-service">Run the HTTP service</a></h1>
+<p>A small axum server for declension lookups — the container deployment.</p>
+<h2 id="run"><a class="header" href="#run">Run</a></h2>
+<pre><code class="language-sh">cargo run -p keinontolibrary-server         # listens on 0.0.0.0:8080
+</code></pre>
+<p>Configuration is via environment:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>var</th><th>default</th><th>purpose</th></tr>
+</thead>
+<tbody>
+<tr><td><code>KEINONTO_ARTIFACT</code></td><td><code>data/artifact/keinontolibrary.bin</code></td><td>the packed artifact</td></tr>
+<tr><td><code>KEINONTO_OVERLAY</code></td><td><code>data/overlay.jsonl</code></td><td>persistent overlay (admin writes)</td></tr>
+<tr><td><code>KEINONTO_ADDR</code></td><td><code>0.0.0.0:8080</code></td><td>bind address</td></tr>
+<tr><td><code>KEINONTO_ADMIN_TOKEN</code></td><td><em>(unset)</em></td><td>bearer token; admin endpoints are <strong>disabled</strong> unless set</td></tr>
+<tr><td><code>RUST_LOG</code></td><td><code>info</code></td><td>log level (structured tracing; requests are traced)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="endpoints"><a class="header" href="#endpoints">Endpoints</a></h2>
+<pre><code class="language-sh">curl 'localhost:8080/decline?word=hevonen&amp;number=plural&amp;case=inessive'
+# {"variants":["hevosissa"],"status":"present","source":"lookup","coincides_with":null}
+
+curl 'localhost:8080/paradigm?word=talo'          # full table as JSON
+curl 'localhost:8080/healthz'                      # "ok"
+curl 'localhost:8080/about'                        # version, data metadata, attribution
+</code></pre>
+<p>Both <code>/decline</code> and <code>/paradigm</code> accept <code>&amp;hn=</code> and <code>&amp;tn=</code> to disambiguate homonyms.</p>
+<p>Response status codes mirror the engine: <code>200</code> ok, <code>400</code> bad number/case (or overlong
+<code>word</code>), <code>404</code> unknown word, <code>409</code> ambiguous (body lists the candidate paradigms), <code>422</code>
+defective form.</p>
+<h2 id="admin-overlay-mutation"><a class="header" href="#admin-overlay-mutation">Admin (overlay mutation)</a></h2>
+<p>Enabled only when <code>KEINONTO_ADMIN_TOKEN</code> is set. Both paths are aliases (create-or-replace):</p>
+<pre><code class="language-sh">curl -X POST localhost:8080/admin/add \
+  -H "authorization: Bearer $KEINONTO_ADMIN_TOKEN" \
+  -H 'content-type: application/json' \
+  -d '{"lemma":"uudissana","tn":9,"number":"singular","case":"inessive","variants":["uudissanassa"]}'
+</code></pre>
+<p>The token is compared in constant time (SHA-256 digests); bad tokens get <code>403</code>. Request
+bodies are capped at 16 KiB. Put the service behind a proxy for TLS and rate limiting.</p>
+<h2 id="container"><a class="header" href="#container">Container</a></h2>
+<pre><code class="language-sh">cargo run -p keinontolibrary-ingest          # produce data/artifact/keinontolibrary.bin first
+docker build -t keinontolibrary .            # ~10 MB static-musl scratch image
+docker run -p 8080:8080 keinontolibrary
+</code></pre>
+<p>The image runs unprivileged (<code>USER 65532</code>) and ships a <code>HEALTHCHECK</code> (the binary
+self-probes via <code>--health</code>). The server drains in-flight requests on SIGTERM/SIGINT, so
+it stops cleanly under an orchestrator.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="build-the-data-artifact"><a class="header" href="#build-the-data-artifact">Build the data artifact</a></h1>
+<p>The packed artifact (<code>data/artifact/keinontolibrary.bin</code>) is <strong>not committed</strong> — it embeds
+reference-corpus-derived forms whose redistribution license is unresolved (see
+<code>LICENSING.md</code>). Build it yourself from the sources.</p>
+<h2 id="sources"><a class="header" href="#sources">Sources</a></h2>
+<ol>
+<li><strong>Kotus <em>Nykysuomen sanalista 2024</em></strong> (CC BY 4.0) — the lemma inventory:
+<a href="https://kaino.kotus.fi/lataa/nykysuomensanalista2024.txt">https://kaino.kotus.fi/lataa/nykysuomensanalista2024.txt</a> → <code>data/sources/</code></li>
+<li><strong>Reference corpus</strong> — Voikko-labeled JSONL shards (collected by the project). Place
+the <code>*.jsonl</code> shards in <code>data/sources/voikko/</code>.</li>
+</ol>
+<h2 id="ingest"><a class="header" href="#ingest">Ingest</a></h2>
+<pre><code class="language-sh">cargo run -p keinontolibrary-ingest          # Kotus + corpus -&gt; data/artifact/keinontolibrary.bin
+</code></pre>
+<p>The artifact is framed (<code>KEIN</code> magic + format-version byte + CRC32); a corrupt, truncated,
+or version-mismatched file is rejected loudly on load. The build is deterministic — same
+sources produce a byte-identical artifact.</p>
+<h2 id="overrides-optional-voikko-required"><a class="header" href="#overrides-optional-voikko-required">Overrides (optional, Voikko-required)</a></h2>
+<p>Four probe-minted sidecars in <code>data/</code> refine forms the spelling alone cannot determine —
+vowel harmony (<code>antigeenissä</code>), comitative style (<code>-ine</code> vs <code>-ineen</code>), and foreign
+citations (<code>parfait'n</code>, <code>cd:n</code>). They are committed; regenerate after rule changes with:</p>
+<pre><code class="language-sh">scripts/qa/run.sh harmony      # needs libvoikko + the Python venv (run.sh setup)
+</code></pre>
+<h2 id="verify-with-the-qa-loop"><a class="header" href="#verify-with-the-qa-loop">Verify with the QA loop</a></h2>
+<p>The QA loop generates every form, checks each against Voikko + the corpus, and gates on
+regressions and total coverage:</p>
+<pre><code class="language-sh">scripts/qa/run.sh setup        # one-time: venv + libvoikko
+scripts/qa/run.sh all          # ingest -&gt; dump -&gt; verify -&gt; report --gate
+</code></pre>
+<p>The gate holds two invariants: <strong>0 failing slots</strong> and <strong>100% total coverage</strong> (every
+Kotus nominal × every slot answered or declared defective). See
+<a href="../scripts/qa/README.html"><code>scripts/qa/README.md</code></a> for the full workflow and the
+accepted-list mechanism.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="fix-a-wrong-declension-the-right-way"><a class="header" href="#fix-a-wrong-declension-the-right-way">Fix a wrong declension (the right way)</a></h1>
+<p>The library is gated at <strong>100% coverage / 0 failing slots</strong> against Voikko + the corpus.
+Every change keeps it there. The workflow for fixing or adding a form:</p>
+<h2 id="1-reproduce"><a class="header" href="#1-reproduce">1. Reproduce</a></h2>
+<pre><code class="language-sh">keinontolibrary decline &lt;word&gt; --number &lt;n&gt; --case &lt;c&gt;
+</code></pre>
+<p>Decide whether it’s a <strong>rule</strong> problem (a whole class is wrong), a <strong>lexical</strong> one (one
+irregular word), or a <strong>gap</strong> (no form at all).</p>
+<h2 id="2-mint-voikko-verified-gold-data"><a class="header" href="#2-mint-voikko-verified-gold-data">2. Mint Voikko-verified gold data</a></h2>
+<p>Never hand-write forms from memory — mint them. The <code>finnish-testgen</code> skill pulls the
+fi.wiktionary table and validates every form through Voikko:</p>
+<pre><code class="language-sh">DYLD_LIBRARY_PATH=/opt/homebrew/lib .venv/bin/python \
+  .claude/skills/finnish-testgen/scripts/mint_testdata.py &lt;word&gt; \
+  --kotus data/sources/nykysuomensanalista2024.txt
+</code></pre>
+<h2 id="3-make-the-fix-at-the-right-altitude"><a class="header" href="#3-make-the-fix-at-the-right-altitude">3. Make the fix at the right altitude</a></h2>
+<ul>
+<li><strong>Rule</strong> — edit the class arm in <code>crates/keinontolibrary-rules/src/generate.rs</code> (or the
+gradation/harmony helpers). Prefer generalizing over special-casing.</li>
+<li><strong>Irregular</strong> — add Voikko-verified rows to <code>crates/keinontolibrary-rules/exceptions.toml</code>
+(the registry rejects duplicate keys and is CI-capped).</li>
+<li><strong>Override</strong> — for harmony / comitative / citation quirks, regenerate the sidecar
+(<code>scripts/qa/run.sh harmony</code>) rather than editing forms by hand.</li>
+</ul>
+<p>Add a unit test with the Voikko-verified forms next to the change.</p>
+<h2 id="4-run-the-gate"><a class="header" href="#4-run-the-gate">4. Run the gate</a></h2>
+<pre><code class="language-sh">scripts/qa/run.sh quick      # while iterating (sampled)
+scripts/qa/run.sh all        # full: ingest -&gt; dump -&gt; verify -&gt; report --gate
+</code></pre>
+<p>The gate fails on any <strong>new failing slot</strong> or <strong>coverage drop</strong>. If a slot genuinely
+cannot be judged by Voikko (a lemma outside its lexicon, a Kotus↔Voikko disagreement),
+add it to <code>qa/accepted.jsonl</code> <strong>with a reason</strong> — never re-baseline over a real
+regression. Update the baseline only in the same PR as the fix:</p>
+<pre><code class="language-sh">scripts/qa/run.sh report -- --update-baseline
+</code></pre>
+<h2 id="5-standard-checks"><a class="header" href="#5-standard-checks">5. Standard checks</a></h2>
+<pre><code class="language-sh">cargo fmt --all &amp;&amp; cargo clippy --all-targets --all-features -- -D warnings &amp;&amp; cargo test --all-features
+</code></pre>
+<p>CI additionally runs the MSRV build (1.85) and <code>cargo-audit</code>. See
+<a href="../scripts/qa/README.html"><code>scripts/qa/README.md</code></a> for the loop’s internals.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="compound-nouns-kotus-5051--design--test-data-plan"><a class="header" href="#compound-nouns-kotus-5051--design--test-data-plan">Compound nouns (Kotus 50/51) — design &amp; test-data plan</a></h1>
+<p>Compounds are the bulk of any Finnish dictionary, and they’re the largest remaining gap in
+keinontolibrary. This doc records the design and, in particular, <strong>how we get enough test
+data to trust it</strong>.</p>
+<h2 id="what-ships-today"><a class="header" href="#what-ships-today">What ships today</a></h2>
+<p><code>Engine</code> has a final-component fallback (see <code>keinontolibrary-core/src/engine.rs</code>): when a
+lemma is unknown as a whole, it splits off the <strong>longest suffix that is a known lemma</strong>
+(using the existing inventory via <code>resolve()</code>), declines that component through the normal
+lookup→rules path, and re-attaches the fixed modifier prefix. So:</p>
+<pre><code>koirankeksi → split → koiran + keksi → decline keksi → keksissä → koirankeksissä
+</code></pre>
+<p>This is correct for the overwhelmingly common Finnish pattern — <strong>the head (final
+component) inflects; the modifier is frozen</strong> — and it makes vowel harmony fall out for free
+(harmony follows the head). It is the right 80% with ~30 lines and no new data.</p>
+<h3 id="known-limits-of-the-heuristic"><a class="header" href="#known-limits-of-the-heuristic">Known limits of the heuristic</a></h3>
+<ol>
+<li><strong>Greedy/wrong splits.</strong> Longest-suffix can mis-segment when a long suffix is
+coincidentally a word (<code>taatelitaikina</code> → <code>taatelita</code> + <code>ikina</code>? no, but adversarial
+cases exist). Mitigated by min prefix/component lengths; not eliminated.</li>
+<li><strong>Ambiguous heads.</strong> If the head has several paradigms (<code>viini</code> = tn 5 / 26), we take the
+first; harmony is unaffected but the stem could be wrong for the minority reading.</li>
+<li><strong>Modifier-inflecting compounds.</strong> A minority inflect the modifier too — numerals
+(<code>kahdeksankymmentä</code> → <code>kahdeksaakymmentä</code>), a few lexicalized nouns. The heuristic keeps
+the modifier frozen, which is wrong for these.</li>
+<li><strong>Linking elements &amp; foreign modifiers.</strong> <code>-n-</code>/<code>-en-</code> linkers (<code>koira**n**keksi</code>) are
+part of the frozen prefix and need no handling; foreign modifiers (<code>beaujolaisviini</code>)
+work because only the head is looked up.</li>
+</ol>
+<h2 id="what-full-kotus-5051-adds"><a class="header" href="#what-full-kotus-5051-adds">What “full Kotus 50/51” adds</a></h2>
+<p>Kotus marks compounds 50/51 (modifier+head, with/without modifier inflection). Full support
+means:</p>
+<ol>
+<li><strong>Reliable segmentation.</strong> Prefer splits where <em>both</em> parts are known lemmas, score
+candidates (head frequency, prefix plausibility, linker shape), and fall back to the
+single-known-head heuristic. Consider Voikko’s own compound analysis as an oracle at
+ingest time (not at runtime).</li>
+<li><strong>Modifier inflection.</strong> A small, explicit class (numerals + a curated lexicalized list)
+that inflects both parts; everything else freezes the modifier.</li>
+<li><strong>Head paradigm selection.</strong> When the head is ambiguous, disambiguate via the compound’s
+own Kotus entry (50/51 rows carry the head’s class) rather than guessing.</li>
+</ol>
+<p>The runtime stays lexicon-light: segmentation uses the packed inventory already loaded; the
+heavy lifting (which compounds exist, their head class, modifier-inflection flag) is resolved
+<strong>at ingest</strong> and baked into the artifact.</p>
+<h2 id="the-hard-part-collecting-enough-test-data"><a class="header" href="#the-hard-part-collecting-enough-test-data">The hard part: collecting enough test data</a></h2>
+<p>We cannot hand-write paradigms for compounds at scale, and most compounds have no Wiktionary
+page. Three complementary sources, all <strong>Voikko-validated</strong> so they’re trustworthy:</p>
+<h3 id="1-mine-the-reference-corpus-highest-value"><a class="header" href="#1-mine-the-reference-corpus-highest-value">1. Mine the reference corpus (highest value)</a></h3>
+<p>The corpus already contains compound surface forms — they’re currently <strong>dropped at the
+Kotus join</strong> because compounds aren’t in the 1–49 list. Instead:</p>
+<ul>
+<li>Keep corpus rows whose <code>BASEFORM</code> Voikko analyses as a compound (Voikko exposes the
+word-part boundaries in <code>WORDBASES</code>/<code>STRUCTURE</code>).</li>
+<li>For each, record <code>(compound_lemma, number, case) → surface form</code> as <strong>attested gold</strong>.</li>
+<li>This yields tens of thousands of <em>real, attested</em> compound forms for free, and is the
+primary parity target: run the segmentation+decline path and check it reproduces them.</li>
+</ul>
+<h3 id="2-voikko-validated-synthetic-compounds-coverage-at-scale"><a class="header" href="#2-voikko-validated-synthetic-compounds-coverage-at-scale">2. Voikko-validated synthetic compounds (coverage at scale)</a></h3>
+<p>The corpus is sparse per slot (same funnel as simple nouns). To fill gaps:</p>
+<ul>
+<li>Take the ~25.7k Kotus heads × a curated set of frequent modifiers (in genitive and
+nominative linking forms), forming candidate compounds (<code>koiran-</code> + head, <code>työ-</code> + head…).</li>
+<li>For each candidate, <strong>ask Voikko to generate/validate the full paradigm</strong> (Voikko knows
+the compound boundary and the head’s inflection), keeping only forms Voikko confirms.</li>
+<li>This is the <code>finnish-testgen</code> skill generalized from one word to a compound matrix; output
+is the same ingest-compatible JSONL. Gate on Voikko agreement so synthetic ≠ wrong.</li>
+</ul>
+<h3 id="3-wiktionary-for-the-lexicalizedirregular-tail"><a class="header" href="#3-wiktionary-for-the-lexicalizedirregular-tail">3. Wiktionary for the lexicalized/irregular tail</a></h3>
+<p>For the modifier-inflecting and lexicalized compounds (numerals, fixed expressions), pull
+the explicit tables from fi.wiktionary via <code>finnish-testgen</code> and add them as exceptions /
+gold. Small set, high value, where rules and synthetics are least reliable.</p>
+<h3 id="acceptance-gate"><a class="header" href="#acceptance-gate">Acceptance gate</a></h3>
+<p>Extend the rule↔lookup parity harness with a <strong>compound parity</strong> metric: % of mined-corpus
+compound slots the segmentation+decline path reproduces, reported per split-confidence
+bucket. Ship when corpus-compound parity clears a documented threshold (target ≥ 98%, same
+bar as the simple-noun rule engine), and never regress it.</p>
+<h2 id="rollout"><a class="header" href="#rollout">Rollout</a></h2>
+<ol>
+<li>Heuristic final-component fallback — <strong>shipped</strong> (this PR).</li>
+<li>Ingest: keep Voikko-analysed compound forms as gold; build the corpus-compound parity
+harness (data + metric, no engine change).</li>
+<li>Synthetic compound matrix via Voikko; raise coverage; tune segmentation scoring.</li>
+<li>Modifier-inflection class + head-paradigm disambiguation from the 50/51 Kotus rows.</li>
+<li>Flip remaining “Out” wording once parity clears the gate.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-c22b7243.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>

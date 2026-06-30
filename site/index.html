@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>keinontolibrary — a Rust library that declines Finnish nouns</title>
+  <meta name="description" content="A fast, embeddable Rust library that declines Finnish nouns. Data-backed with a rule-based fallback over Kotus classes 1–51, validated against a ~400k-form corpus. Library, CLI, HTTP service, and a <10 MB container.">
+  <link rel="canonical" href="https://keinonto.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="keinontolibrary — a Rust library that declines Finnish nouns">
+  <meta property="og:description" content="Declines every Kotus 2024 nominal — 100% coverage, Voikko-verified. Rules + corpus + registry, not a lookup table. Embeddable Rust, CLI, HTTP, <10 MB container.">
+  <meta property="og:url" content="https://keinonto.com/">
+  <meta name="theme-color" content="#1a1a1a">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <span class="brand">keinontolibrary</span>
+    <nav>
+      <a href="/guide/">Docs</a>
+      <a href="https://github.com/timokoola/keinontolibrary">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>A Rust library that declines Finnish nouns.</h1>
+    <p class="lede">
+      Give it a noun lemma and a case; it returns the inflected form(s). Data-backed —
+      precomputed forms from a reference corpus collected over three years and labeled with
+      Voikko — with a rule-based fallback over the Kotus declension classes.
+    </p>
+    <pre class="hero-code"><code>decline("hevonen", Number::Plural, Case::Inessive) -> ["hevosissa"]</code></pre>
+  </section>
+
+  <section class="claims">
+    <h2>What it does</h2>
+    <ul class="claim-list">
+      <li>
+        <strong>Declines every declinable Kotus 2024 nominal.</strong>
+        100% coverage of declinable nominal rows, each form Voikko-verified. All 15 cases,
+        both numbers, multi-paradigm homonyms.
+      </li>
+      <li>
+        <strong>Rules + corpus + registry, not a lookup table.</strong>
+        A rule generator handles Kotus classes 1–49 with consonant gradation (~98%
+        rule↔corpus agreement); a Voikko-verified exception registry and overrides serve the
+        irregulars the rules don't.
+      </li>
+      <li>
+        <strong>Embeddable, in the shape you need.</strong>
+        A Rust crate, a CLI, an HTTP service, and a single-binary container under 10 MB.
+        Nominals only (substantives, adjectives, numerals, pronouns); verbs are out of scope.
+      </li>
+    </ul>
+  </section>
+
+  <section class="breakit">
+    <h2>The hard cases it gets right</h2>
+    <p class="sub">
+      Finnish declension is full of traps. These are the words people use to trip a naive
+      table — each form below is verified.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <code>vaaka → vaa'an, vaaoissa</code>
+        <p>k-deletion between like vowels is written with an apostrophe in the singular, but
+        the plural rounds the vowel and drops it.</p>
+      </div>
+      <div class="card">
+        <code>afääri → afääriä · country → countrya</code>
+        <p>Vowel harmony follows the last strong vowel; in English loans <em>y</em> doesn't
+        count as a front vowel.</p>
+      </div>
+      <div class="card">
+        <code>jokin → jossakin · kukaan → kenenkään</code>
+        <p>Some pronouns inflect the clitic on the inside; others keep it at the end
+        (<code>kumpikin → kummankin</code>).</p>
+      </div>
+      <div class="card">
+        <code>kuka → kenet</code>
+        <p>The accusative of <code>kuka</code> is suppletive — not <code>*kukan</code>.</p>
+      </div>
+      <div class="card">
+        <code>taika → taian</code>
+        <p>Not <code>*tajan</code>: <code>taika</code> isn't the compound <code>t&nbsp;+&nbsp;aika</code>.
+        Compound detection requires at least a two-letter first part.</p>
+      </div>
+      <div class="card">
+        <code>antigeeni → antigeenissä</code>
+        <p>A compound's harmony follows its last part, even when the spelling shows a back
+        vowel earlier.</p>
+      </div>
+    </div>
+    <p class="more"><a href="/guide/">Read why Finnish is hard →</a></p>
+  </section>
+
+  <section class="quickstart">
+    <h2>Quickstart</h2>
+
+    <div class="qs">
+      <h3>As a Rust crate</h3>
+      <pre data-copy><code># Cargo.toml — crates.io publish is coming; until then, depend on git:
+keinontolibrary = { git = "https://github.com/timokoola/keinontolibrary" }</code></pre>
+      <pre data-copy><code>use keinontolibrary_core::{Case, Number};
+use keinontolibrary_data::build_engine;
+
+let bundle = build_engine("data/artifact/keinontolibrary.bin", "data/overlay.jsonl")?;
+let forms = bundle.engine.decline("hevonen", Number::Plural, Case::Inessive)?;
+assert_eq!(forms.primary(), Some("hevosissa"));</code></pre>
+    </div>
+
+    <div class="qs">
+      <h3>From the terminal</h3>
+      <pre data-copy><code>cargo install --path crates/keinontolibrary-cli</code></pre>
+      <pre data-copy><code>keinontolibrary decline hevonen --number plural --case inessive
+keinontolibrary table talo               # the full paradigm
+keinontolibrary table parfait --format csv</code></pre>
+    </div>
+
+    <div class="qs">
+      <h3>As an HTTP service</h3>
+      <pre data-copy><code>docker run -p 8080:8080 keinontolibrary</code></pre>
+      <pre data-copy><code>curl 'localhost:8080/decline?word=hevonen&amp;number=plural&amp;case=inessive'
+curl 'localhost:8080/paradigm?word=talo'   # full table as JSON</code></pre>
+    </div>
+
+    <p class="more"><a href="/guide/">Full guides: embed, CLI, HTTP, build the artifact, contribute →</a></p>
+  </section>
+
+  <section class="elsewhere">
+    <h2>See it in the wild</h2>
+    <p>
+      <a href="https://humalapaikallissija.com">humalapaikallissija.com</a> is a toy built on
+      this library: type any Finnish noun and get its forms, with a full declension table per
+      word. If you want to browse declensions rather than embed them, start there.
+    </p>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>
+      <a href="https://github.com/timokoola/keinontolibrary">GitHub</a> ·
+      <a href="/guide/">Docs</a> ·
+      <a href="https://humalapaikallissija.com">humalapaikallissija</a>
+    </p>
+    <p class="fine">
+      Code MIT-licensed. Built on the <a href="https://kaino.kotus.fi/sanat/nykysuomi/">Kotus</a>
+      nominal list and verified with <a href="https://voikko.puimula.org/">Voikko</a>.
+      <code>keinonto</code> = the instructive case.
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Progressive enhancement: copy-to-clipboard on code blocks marked [data-copy].
+  for (const pre of document.querySelectorAll('pre[data-copy]')) {
+    const btn = document.createElement('button');
+    btn.className = 'copy';
+    btn.type = 'button';
+    btn.textContent = 'Copy';
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(pre.querySelector('code').innerText);
+        btn.textContent = 'Copied';
+        setTimeout(() => (btn.textContent = 'Copy'), 1200);
+      } catch { btn.textContent = 'Copy failed'; }
+    });
+    pre.appendChild(btn);
+  }
+</script>
+</body>
+</html>

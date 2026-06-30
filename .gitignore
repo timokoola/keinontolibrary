@@ -31,3 +31,8 @@ ingest-report.txt
 /qa/report.md
 /qa/coverage-misses.tsv
 __pycache__/
+
+# mdBook build output
+docs/book/
+/_site/
+/.cache/mdbook/

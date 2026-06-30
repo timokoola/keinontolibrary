@@ -1,0 +1,23 @@
+[book]
+title = "keinontolibrary"
+authors = ["Timo Koola"]
+description = "Guides for keinontolibrary — a Rust library that declines Finnish nouns."
+language = "en"
+src = "."
+
+[build]
+# Only files listed in SUMMARY.md are published; the rest of docs/ (plans, roadmap)
+# stay repo-internal and are ignored by the renderer.
+create-missing = false
+
+[output.html]
+default-theme = "rust"
+preferred-dark-theme = "ayu"
+git-repository-url = "https://github.com/timokoola/keinontolibrary"
+edit-url-template = "https://github.com/timokoola/keinontolibrary/edit/main/docs/{path}"
+site-url = "/guide/"
+no-section-label = true
+
+[output.html.fold]
+enable = true
+level = 1

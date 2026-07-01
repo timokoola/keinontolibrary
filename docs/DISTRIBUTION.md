@@ -95,17 +95,16 @@ build/fetch the artifact at first run — see [§ The data problem](#the-data-pr
 
 ---
 
-## The data problem (cross-cutting)
+## Packaging the data (cross-cutting)
 
-Every packaged install hits the same wall: the artifact embeds reference-corpus forms
-that **are not yet cleared for redistribution** (`LICENSING.md`). Until that's resolved,
-each channel uses one of:
+The artifact is cleared for redistribution (`LICENSING.md`), so a channel may **bundle it
+directly**. The remaining trade-off is package size, so a channel can alternatively use:
 
 1. **Fetch-on-first-run** — the package ships code; on first use it downloads the prebuilt
-   artifact from a release asset (once the data license allows hosting it). Cleanest UX.
+   artifact from a release asset. Smallest install.
 2. **Rule-engine-only build** — ship without the corpus lookup; the rule engine + registry
-   still cover the vast majority of forms (lower accuracy on the long tail, but fully
-   redistributable today). A feature flag could select this.
+   still cover the vast majority of forms (lower accuracy on the long tail). A feature flag
+   could select this.
 3. **Build-it-yourself** — the package provides `keinontolibrary ingest`; the user
    supplies sources. Fine for developers, poor for end users.
 

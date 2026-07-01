@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://keinonto.com/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="keinontolibrary — a Rust library that declines Finnish nouns">
-  <meta property="og:description" content="Declines every Kotus 2024 nominal — 100% coverage, Voikko-verified. Rules + corpus + registry, not a lookup table. Embeddable Rust, CLI, HTTP, <10 MB container.">
+  <meta property="og:description" content="Declines every Kotus 2024 nominal — 100% coverage, independently verified. Rules + corpus + registry, not a lookup table. Embeddable Rust, CLI, HTTP, <10 MB container.">
   <meta property="og:url" content="https://keinonto.com/">
   <meta name="theme-color" content="#1a1a1a">
   <link rel="stylesheet" href="style.css">
@@ -31,8 +31,8 @@
     <h1>A Rust library that declines Finnish nouns.</h1>
     <p class="lede">
       Give it a noun lemma and a case; it returns the inflected form(s). Data-backed —
-      precomputed forms from a reference corpus collected over three years and labeled with
-      Voikko — with a rule-based fallback over the Kotus declension classes.
+      precomputed forms from a reference corpus collected over three years — with a
+      rule-based fallback over the Kotus declension classes.
     </p>
     <pre class="hero-code"><code>decline("hevonen", Number::Plural, Case::Inessive) -> ["hevosissa"]</code></pre>
   </section>
@@ -42,15 +42,15 @@
     <ul class="claim-list">
       <li>
         <strong>Declines every declinable Kotus 2024 nominal.</strong>
-        100% coverage of declinable nominal rows, each form Voikko-verified. All 15 cases,
-        both numbers, multi-paradigm homonyms.
+        100% coverage of declinable nominal rows, each form independently verified. All 15
+        cases, both numbers, multi-paradigm homonyms.
       </li>
       <li>
         <strong>Rules + corpus + registry, not a lookup table.</strong>
         A rule generator handles the base Kotus classes 1–49 with consonant gradation (~98%
         rule↔corpus agreement); the compound classes tn 50–51 inflect through their
-        components; and a Voikko-verified exception registry plus overrides cover the
-        irregulars the rules don't. The whole Kotus 1–51 nominal range is in scope.
+        components; and a verified exception registry plus overrides cover the irregulars the
+        rules don't. The whole Kotus 1–51 nominal range is in scope.
       </li>
       <li>
         <strong>Embeddable, in the shape you need.</strong>
@@ -58,6 +58,7 @@
         Nominals only (substantives, adjectives, numerals, pronouns); verbs are out of scope.
       </li>
     </ul>
+    <p class="more"><a href="/guide/how-it-works.html">How it works — rules, corpus, and verification →</a></p>
   </section>
 
   <section class="breakit">

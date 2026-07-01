@@ -50,8 +50,9 @@ cp -R "$ROOT/site/." "$OUT/"
 # Docs live under /guide/ (matches docs/book.toml site-url and the landing-page links).
 mkdir -p "$OUT/guide"
 cp -R "$ROOT/docs/book/." "$OUT/guide/"
-# src="." makes mdBook copy book.toml into the output; don't publish it.
+# src="." makes mdBook copy book.toml + the theme dir into the output; don't publish them.
 rm -f "$OUT/guide/book.toml"
+rm -rf "$OUT/guide/theme"
 # GitHub Pages: serve files as-is (no Jekyll) + custom domain.
 touch "$OUT/.nojekyll"
 echo "keinonto.com" > "$OUT/CNAME"

@@ -1,6 +1,7 @@
 # Summary
 
 [Introduction](intro.md)
+[How it works](how-it-works.md)
 
 # Guides
 

@@ -1,0 +1,29 @@
+# Standalone crate (its own `[workspace]`) so PyO3 never leaks into the main workspace.
+# Path-depends on the workspace crates (which resolve their own inheritance from ../../).
+[workspace]
+
+[package]
+name = "keinontolibrary-py"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT"
+description = "Python bindings (PyO3) for keinontolibrary — decline Finnish nouns."
+repository = "https://github.com/timokoola/keinontolibrary"
+publish = false
+
+[lib]
+name = "_keinontolibrary"
+crate-type = ["cdylib"]
+
+[dependencies]
+keinontolibrary-core = { path = "../../crates/keinontolibrary-core", features = ["serde"] }
+keinontolibrary-data = { path = "../../crates/keinontolibrary-data" }
+
+[dependencies.pyo3]
+version = "0.23"
+features = ["extension-module", "abi3-py39"]
+
+[profile.release]
+strip = true
+lto = true

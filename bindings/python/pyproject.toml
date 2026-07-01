@@ -1,0 +1,38 @@
+[build-system]
+requires = ["maturin>=1.7,<2"]
+build-backend = "maturin"
+
+[project]
+name = "keinontolibrary"
+version = "0.1.0"
+description = "Decline Finnish nouns — a fast Rust engine with native Python bindings."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Timo Koola" }]
+keywords = ["finnish", "declension", "inflection", "nlp", "kotus", "morphology"]
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: 3",
+    "Topic :: Text Processing :: Linguistic",
+    "Natural Language :: Finnish",
+    "License :: OSI Approved :: MIT License",
+]
+
+[project.urls]
+Homepage = "https://keinonto.com"
+Source = "https://github.com/timokoola/keinontolibrary"
+
+[project.scripts]
+keinontolibrary = "keinontolibrary.__main__:main"
+
+[tool.maturin]
+# Mixed layout: Python package `keinontolibrary/` alongside the compiled extension.
+python-source = "."
+module-name = "keinontolibrary._keinontolibrary"
+features = ["pyo3/extension-module"]
+# Bundle the data-backed artifact + overlay into the wheel (copied in by build-wheel.sh).
+include = [
+    { path = "keinontolibrary/keinontolibrary.bin", format = "wheel" },
+    { path = "keinontolibrary/overlay.jsonl", format = "wheel" },
+]

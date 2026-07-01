@@ -36,3 +36,9 @@ __pycache__/
 docs/book/
 /_site/
 /.cache/mdbook/
+
+# python bindings build products
+/bindings/python/keinontolibrary/keinontolibrary.bin
+/bindings/python/keinontolibrary/overlay.jsonl
+/bindings/python/dist/
+/bindings/python/target/

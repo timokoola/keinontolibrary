@@ -5,10 +5,9 @@ name: Import accuracy reports
 
 on:
   schedule:
-    # Daily at 09:17 UTC — deep night across US time zones (~1-2 AM PT / 4-5 AM ET,
-    # year-round incl. DST), when the dominant source of GitHub Actions load is asleep.
-    # The :17 minute avoids the congested top of the hour, which GitHub delays under load.
-    # This import is low-priority, so a little scheduling slack is fine regardless.
+    # Daily at 09:17 UTC — off-peak. The :17 minute avoids the congested top of the hour
+    # (which GitHub delays under load). This import is low-priority, so scheduling slack
+    # is fine.
     - cron: "17 9 * * *"
   workflow_dispatch:
     inputs:

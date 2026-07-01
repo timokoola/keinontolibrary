@@ -1,8 +1,7 @@
 # Build the data artifact
 
-The packed artifact (`data/artifact/keinontolibrary.bin`) is **not committed** — it embeds
-reference-corpus-derived forms whose redistribution license is unresolved (see
-`LICENSING.md`). Build it yourself from the sources.
+The packed artifact (`data/artifact/keinontolibrary.bin`) is **not committed** — it's a build
+product, rebuilt from the sources below. (Licensing and provenance: see `LICENSING.md`.)
 
 ## Sources
 

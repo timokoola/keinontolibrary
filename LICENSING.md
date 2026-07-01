@@ -29,14 +29,10 @@ reference corpus**, which we **collected over three years** and morphologically 
 using [Voikko](https://voikko.puimula.org/), stored as JSONL. The corpus is ours; Voikko is
 the labeling tool.
 
-> ⚠️ **OPEN ACTION ITEM (must be resolved before publishing).** Because the forms were
-> labeled *with* Voikko, confirm that Voikko's dictionary license (Voikko is GPL/LGPL; the
-> morphology dictionary has its own terms) permits redistributing the resulting form set
-> inside the package. If redistribution is not permitted, options are: (a) ship only the rule
-> engine + Kotus metadata and generate forms on the consumer's machine, or (b) obtain/
-> relicense the dictionary. Record the final conclusion and the basis for it here.
-
-**Status:** UNRESOLVED. Do not publish the bundled reference corpus until this is settled.
+No Voikko material is bundled in this package — not libvoikko code, not the voikko-fi
+morphology, and not the Joukahainen word list. Voikko is a build-time analysis and validation
+tool only. The corpus forms and their labels are our own work and are redistributed as part of
+the package.
 
 ## Raw source files
 

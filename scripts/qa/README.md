@@ -1,8 +1,7 @@
 # QA loop
 
-Full-library quality gate, run **locally** (deliberately not GitHub Actions; the long-term
-home is its own service): generate every form the library can produce, verify each against
-two independent oracles, triage, fix, rerun.
+Full-library quality gate, run **locally**: generate every form the library can produce,
+verify each against two independent oracles, triage, fix, rerun.
 
 ```
  corpus + kotus ──▶ ingest ──▶ artifact

@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # Publish ./_site to the `gh-pages` branch (GitHub Pages "deploy from a branch").
 #
-# This is the no-Actions deploy: GitHub serves the branch contents directly, so it
-# costs zero Actions minutes. Run on the build machine after a successful build.
+# GitHub Pages serves the branch contents directly. Run after a successful build.
 #
 #   scripts/publish-site.sh                 # build (if needed) + publish
 #   scripts/publish-site.sh --no-build      # publish the existing ./_site as-is

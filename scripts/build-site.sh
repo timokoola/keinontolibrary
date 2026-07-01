@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Build the keinonto.com static site (landing page + mdBook docs) into ./_site.
 #
-# No CI, no GitHub Actions: run this on the build machine (e.g. the Mac Studio).
 # Output is a self-contained directory ready to serve or publish.
 #
 #   scripts/build-site.sh            # build into _site/

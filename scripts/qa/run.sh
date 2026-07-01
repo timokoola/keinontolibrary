@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# QA loop orchestrator — runs locally (by design: no GitHub Actions; later its own service).
+# QA loop orchestrator — runs locally.
 #
 #   scripts/qa/run.sh setup    one-time: venv + libvoikko (native lib via Homebrew)
 #   scripts/qa/run.sh sync     fetch the public Kotus list; pull the private reference

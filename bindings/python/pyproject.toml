@@ -31,8 +31,9 @@ keinontolibrary = "keinontolibrary.__main__:main"
 python-source = "."
 module-name = "keinontolibrary._keinontolibrary"
 features = ["pyo3/extension-module"]
-# Bundle the data-backed artifact + overlay into the wheel (copied in by build-wheel.sh).
+# Bundle the data-backed artifact + overlay into both the wheel and the sdist (copied in by
+# build-wheel.sh), so source installs on platforms without a prebuilt wheel work too.
 include = [
-    { path = "keinontolibrary/keinontolibrary.bin", format = "wheel" },
-    { path = "keinontolibrary/overlay.jsonl", format = "wheel" },
+    { path = "keinontolibrary/keinontolibrary.bin", format = ["sdist", "wheel"] },
+    { path = "keinontolibrary/overlay.jsonl", format = ["sdist", "wheel"] },
 ]

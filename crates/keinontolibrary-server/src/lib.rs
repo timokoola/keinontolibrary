@@ -378,6 +378,31 @@ mod tests {
     }
 
     #[tokio::test]
+    async fn admin_override_is_an_alias_of_add() {
+        // The module docs promise `/admin/override` and `/admin/add` are aliases (both
+        // create-or-replace an overlay entry). Guard the alias route so a handler/route
+        // change can't silently drop it.
+        let body = r#"{"lemma":"glonk","tn":1,"number":"singular","case":"inessive","variants":["glonkossa"]}"#;
+        let state = test_state();
+        let resp = app(state.clone())
+            .oneshot(
+                Request::post("/admin/override")
+                    .header("content-type", "application/json")
+                    .header("authorization", "Bearer secret")
+                    .body(Body::from(body))
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        assert_eq!(resp.status(), StatusCode::OK);
+        let f = state
+            .engine
+            .decline("glonk", Number::Singular, Case::Inessive)
+            .unwrap();
+        assert_eq!(f.primary(), Some("glonkossa"));
+    }
+
+    #[tokio::test]
     async fn admin_rejects_wrong_token() {
         let body =
             r#"{"lemma":"x","tn":1,"number":"singular","case":"inessive","variants":["xssa"]}"#;

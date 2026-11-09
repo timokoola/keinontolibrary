@@ -56,5 +56,22 @@ rm -rf "$OUT/guide/theme"
 touch "$OUT/.nojekyll"
 echo "keinonto.com" > "$OUT/CNAME"
 
+# sitemap.xml for search engines (robots.txt in site/ points here). Lists the
+# landing page and every guide page except mdBook's 404, print and toc pages.
+echo "writing sitemap.xml ..."
+{
+  echo '<?xml version="1.0" encoding="UTF-8"?>'
+  echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+  echo "  <url><loc>https://keinonto.com/</loc></url>"
+  (cd "$OUT" && find guide -name '*.html' ! -name 404.html ! -name print.html ! -name toc.html | LC_ALL=C sort) |
+    while read -r page; do
+      case "$page" in
+        guide/index.html) echo "  <url><loc>https://keinonto.com/guide/</loc></url>" ;;
+        *) echo "  <url><loc>https://keinonto.com/$page</loc></url>" ;;
+      esac
+    done
+  echo '</urlset>'
+} > "$OUT/sitemap.xml"
+
 echo "done -> $OUT"
 echo "preview: (cd $OUT && python3 -m http.server 8000)  then open http://localhost:8000"
